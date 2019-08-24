@@ -6,9 +6,10 @@
       </div>
     </a-row>
     <a-row type="flex" justify="center">
-      <a-button @click="addMessage">
-        AGREGAR MENSAJE
-      </a-button>
+      <form class="review-form" @submit.prevent="addMessage">
+        <input v-model="userMessage" placeholder="mensaje">
+        <input type="submit" value="Submit">
+      </form>
     </a-row>
   </div>
 </template>
@@ -23,6 +24,7 @@ export default {
   name: 'ChatMobile',
   data () {
     return {
+      userMessage: null,
       messages: []
     }
   },
@@ -41,13 +43,14 @@ export default {
           nextToken: null
         })
       )
-      console.log(result)
       this.messages = result.data.getMessages.items
     } catch (e) {
       console.log(e)
     }
 
-    API.graphql(graphqlOperation(onAddMessage, { hashKey: '123' })).subscribe({
+    API.graphql(graphqlOperation(onAddMessage, {
+      hashKey: '123'
+    })).subscribe({
       next: (eventData) => {
         const message = eventData.value.data.onAddMessage
         const result = [
@@ -55,22 +58,21 @@ export default {
           message
         ]
         this.messages = result
-        // console.log(message)
       }
     })
   },
   methods: {
     async addMessage () {
       try {
-        const result = await API.graphql(
+        await API.graphql(
           graphqlOperation(addMessage, {
             hashKey: '123',
-            rangeKey: '2019-08-30 22:42:00',
             author: 'fjbarrientosg@gmail.com',
-            content: 'tula'
+            authorName: 'Franco',
+            content: this.userMessage
           })
         )
-        console.log(result)
+        this.userMessage = null
       } catch (e) {
         console.log(e)
       }

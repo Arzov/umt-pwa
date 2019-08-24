@@ -11,6 +11,7 @@ export const getMessages = `
         hashKey
         rangeKey
         author
+        authorName
         content
       }
       nextToken
