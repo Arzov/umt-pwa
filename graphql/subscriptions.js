@@ -1,6 +1,6 @@
 export const onAddMessage = `
-  subscription onAddMessage {
-    onAddMessage {
+  subscription onAddMessage($hashKey: String!) {
+    onAddMessage(hashKey: $hashKey) {
       hashKey
       rangeKey
       author

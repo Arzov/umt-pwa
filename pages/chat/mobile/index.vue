@@ -47,7 +47,7 @@ export default {
       console.log(e)
     }
 
-    API.graphql(graphqlOperation(onAddMessage)).subscribe({
+    API.graphql(graphqlOperation(onAddMessage, { hashKey: '123' })).subscribe({
       next: (eventData) => {
         const message = eventData.value.data.onAddMessage
         const result = [
@@ -65,9 +65,9 @@ export default {
         const result = await API.graphql(
           graphqlOperation(addMessage, {
             hashKey: '123',
-            rangeKey: '2019-08-28 22:42:00',
+            rangeKey: '2019-08-30 22:42:00',
             author: 'fjbarrientosg@gmail.com',
-            content: 'chao'
+            content: 'tula'
           })
         )
         console.log(result)
