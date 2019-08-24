@@ -17,7 +17,10 @@ Amplify.configure({
       redirectSignOut: process.env.app.ROOT_URL,
       responseType: 'token'
     }
-  }
+  },
+  aws_appsync_graphqlEndpoint: process.env.aws.APPSYNC_URL,
+  aws_appsync_region: process.env.aws.APPSYNC_REGION,
+  aws_appsync_authenticationType: process.env.aws.APPSYNC_AUTH_TYPE
 })
 
 Vue.use(AmplifyPlugin, AmplifyModules)
