@@ -18,3 +18,25 @@ export const getMessages = `
     }
   }
 `
+
+export const getMatches = `
+  query getMatches(
+    $hashKey: String!
+    $nextToken: String
+  ) {
+    getMatches(
+      hashKey: $hashKey
+      nextToken: $nextToken
+    ) {
+      items {
+        hashKey
+        rangeKey
+        members
+        createdAt
+        expireAt
+        status
+      }
+      nextToken
+    }
+  }
+`
