@@ -1,9 +1,11 @@
 <template>
   <div id="page-chat-mobile">
     <a-row type="flex" justify="center">
-      <div v-for="(msg, index) in mapPosts" :key="index">
-        {{ msg.content }}
-      </div>
+      <ul>
+        <li v-for="(msg, idx) in mapPosts" :key="idx">
+          {{ msg.content }}
+        </li>
+      </ul>
     </a-row>
     <a-row type="flex" justify="center">
       <form class="review-form" @submit.prevent="addMessage">
@@ -39,17 +41,17 @@ export default {
     try {
       const result = await API.graphql(
         graphqlOperation(getMessages, {
-          hashKey: '123',
+          hashKey: this.$route.params.matchId,
           nextToken: null
         })
       )
-      this.messages = result.data.getMessages.items
+      this.messages = result.data.getMessages.items.reverse()
     } catch (e) {
       console.log(e)
     }
 
     API.graphql(graphqlOperation(onAddMessage, {
-      hashKey: '123'
+      hashKey: this.$route.params.matchId
     })).subscribe({
       next: (eventData) => {
         const message = eventData.value.data.onAddMessage
@@ -66,7 +68,7 @@ export default {
       try {
         await API.graphql(
           graphqlOperation(addMessage, {
-            hashKey: '123',
+            hashKey: this.$route.params.matchId,
             author: 'fjbarrientosg@gmail.com',
             authorName: 'Franco',
             content: this.userMessage

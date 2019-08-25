@@ -15,7 +15,8 @@ export const onAddMatch = `
     onAddMatch(hashKey: $hashKey) {
       hashKey
       rangeKey
-      members
+      matchId
+      invitedName
       createdAt
       expireAt
       status

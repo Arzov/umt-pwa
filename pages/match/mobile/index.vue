@@ -2,8 +2,8 @@
   <div id="page-match-mobile">
     <a-row type="flex" justify="center">
       <ul>
-        <li v-for="(match, index) in mapPosts" :key="index">
-          {{ match.rangeKey }}
+        <li v-for="(match, idx) in mapPosts" :key="idx" @click="toChat(match, idx)">
+          {{ match.invitedName }}
         </li>
       </ul>
     </a-row>
@@ -56,6 +56,12 @@ export default {
     })
   },
   methods: {
+    toChat (match, idx) {
+      this.$router.push({
+        name: process.env.routes.chat.name,
+        params: { matchId: match.matchId }
+      })
+    }
   }
 }
 </script>

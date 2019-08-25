@@ -31,7 +31,8 @@ export const getMatches = `
       items {
         hashKey
         rangeKey
-        members
+        invitedName
+        matchId
         createdAt
         expireAt
         status
