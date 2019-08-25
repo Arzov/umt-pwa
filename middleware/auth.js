@@ -4,8 +4,11 @@ export default async ({ app }) => {
   let signedIn = false
 
   await Auth.currentUserInfo()
-    .then(data => (signedIn = Boolean(data)))
-    .then(function () {
+    .then(function (data) {
+      signedIn = Boolean(data)
+      return data
+    })
+    .then(function (data) {
       const isInStart = (function (path) {
         switch (path) {
           case 'start':
@@ -16,7 +19,15 @@ export default async ({ app }) => {
       })(app.router.app.$route.name)
 
       if (signedIn) {
-        if (isInStart) { console.log('entrar') } // window.location.replace('/chat')
-      } else if (!isInStart) { console.log('salir') } // window.location.replace('/start')
+        if (isInStart) {
+          console.log('entrar')
+          // window.location.replace('/chat')
+        }
+      } else if (!isInStart) {
+        console.log('salir')
+        // window.location.replace('/start')
+      }
+
+      app.store.commit('updateUser', { key: 'userId', value: data.username })
     })
 }
