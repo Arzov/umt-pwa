@@ -33,7 +33,7 @@ export default {
     try {
       const result = await API.graphql(
         graphqlOperation(getMatches, {
-          hashKey: 'fjbarrientosg@gmail.com',
+          hashKey: this.$store.state.userId,
           nextToken: null
         })
       )
@@ -43,7 +43,7 @@ export default {
     }
 
     API.graphql(graphqlOperation(onAddMatch, {
-      hashKey: 'fjbarrientosg@gmail.com'
+      hashKey: this.$store.state.userId
     })).subscribe({
       next: (eventData) => {
         const match = eventData.value.data.onAddMatch

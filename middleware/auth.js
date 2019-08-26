@@ -49,5 +49,9 @@ export default ({ route, store, redirect }) => {
       }
 
       console.log('quedarse')
+      // Resetear al enpoint de la API de Umatch
+      API.configure({
+        aws_appsync_graphqlEndpoint: process.env.aws.APPSYNC_UMATCH_URL
+      })
     })
 }
