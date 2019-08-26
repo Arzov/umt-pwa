@@ -3,6 +3,10 @@
         "path": "/start",
         "name": "start"
     },
+    "home": {
+        "path": "/home",
+        "name": "home"
+    },
     "match": {
         "path": "/match",
         "name": "match"

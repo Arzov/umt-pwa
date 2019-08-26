@@ -3,7 +3,8 @@
     "COGNITO_USER_POOL_ID": "us-east-2_mM9pcTX5O",
     "COGNITO_USER_POOL_REGION": "us-east-2",
     "COGNITO_USER_POOL_DOMAIN": "arzov-dev.auth.us-east-2.amazoncognito.com",
-    "APPSYNC_URL": "https://3yby5v6ikbhbxpwk7i3vxb652u.appsync-api.us-east-2.amazonaws.com/graphql",
+    "APPSYNC_ARZOV_URL": "https://uenjdrjpfvfklhuhiarna6arda.appsync-api.us-east-2.amazonaws.com/graphql",
+    "APPSYNC_UMATCH_URL": "https://3yby5v6ikbhbxpwk7i3vxb652u.appsync-api.us-east-2.amazonaws.com/graphql",
     "APPSYNC_REGION": "us-east-2",
     "APPSYNC_AUTH_TYPE": "AMAZON_COGNITO_USER_POOLS"
 }

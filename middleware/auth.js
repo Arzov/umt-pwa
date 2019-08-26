@@ -1,9 +1,28 @@
-import { Auth } from 'aws-amplify'
+import { Auth, API, graphqlOperation } from 'aws-amplify'
+import { getUser } from '@/graphql/queries'
 
-export default async ({ app }) => {
+async function setUser (query, data, store) {
+  API.configure({
+    aws_appsync_graphqlEndpoint: process.env.aws.APPSYNC_ARZOV_URL
+  })
+
+  try {
+    const result = await API.graphql(graphqlOperation(query, {
+      hashKey: data.username
+    }))
+
+    store.commit('updateUser', { key: 'userId', value: result.data.getUser.hashKey })
+    store.commit('updateUser', { key: 'userFirstName', value: result.data.getUser.firstName })
+    store.commit('updateUser', { key: 'userLastName', value: result.data.getUser.lastName })
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export default ({ route, store, redirect }) => {
   let signedIn = false
 
-  await Auth.currentUserInfo()
+  Auth.currentUserInfo()
     .then(function (data) {
       signedIn = Boolean(data)
       return data
@@ -11,23 +30,24 @@ export default async ({ app }) => {
     .then(function (data) {
       const isInStart = (function (path) {
         switch (path) {
-          case 'start':
+          case process.env.routes.start.name:
             return true
           default:
             return false
         }
-      })(app.router.app.$route.name)
+      })(route.name)
 
       if (signedIn) {
         if (isInStart) {
           console.log('entrar')
-          // window.location.replace('/chat')
+          setUser(getUser, data, store)
+          redirect(process.env.routes.home.path)
         }
       } else if (!isInStart) {
         console.log('salir')
-        // window.location.replace('/start')
+        redirect(process.env.routes.start.path)
       }
 
-      app.store.commit('updateUser', { key: 'userId', value: data.username })
+      console.log('quedarse')
     })
 }
