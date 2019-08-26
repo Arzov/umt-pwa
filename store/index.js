@@ -1,3 +1,5 @@
+import createPersistedState from 'vuex-persistedstate'
+
 export const state = () => ({
   userId: null,
   userFirstName: null,
@@ -9,3 +11,7 @@ export const mutations = {
     state[key] = value
   }
 }
+
+export const plugins = [
+  createPersistedState()
+]
