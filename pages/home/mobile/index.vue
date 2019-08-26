@@ -6,6 +6,9 @@
     <a-button @click="toMatch">
       Matches
     </a-button>
+    <a-button @click="logOut">
+      Cerrar
+    </a-button>
   </div>
 </template>
 
@@ -17,6 +20,11 @@ export default {
       this.$router.push({
         name: process.env.routes.match.name
       })
+    },
+    logOut () {
+      this.$Amplify.Auth.signOut({ global: true })
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
     }
   }
 }
