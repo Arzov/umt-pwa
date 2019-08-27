@@ -81,7 +81,7 @@ export default {
         .catch(err => console.log(err))
     },
     codeVer () {
-      this.$Amplify.Auth.confirmSignUp('fjbarrientosg@gmail.com', '707896', {
+      this.$Amplify.Auth.confirmSignUp('fjbarrientosg@gmail.com', '608408', {
         forceAliasCreation: true
       }).then(data => console.log(data))
         .catch(err => console.log(err))

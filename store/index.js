@@ -3,7 +3,8 @@ import createPersistedState from 'vuex-persistedstate'
 export const state = () => ({
   userId: null,
   userFirstName: null,
-  userLastName: null
+  userLastName: null,
+  picture: null
 })
 
 export const mutations = {

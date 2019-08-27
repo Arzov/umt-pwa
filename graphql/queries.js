@@ -52,6 +52,7 @@ export const getUser = `
       hashKey
       firstName
       lastName
+      picture
     }
   }
 `

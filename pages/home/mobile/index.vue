@@ -1,7 +1,9 @@
 <template>
   <div id="page-home-mobile">
     <a-row type="flex" justify="center">
-      hola {{ this.$store.state.userId }}
+      hola
+      <a-avatar :src="this.$store.state.userPicture" size="large" />
+      {{ this.$store.state.userId }}
     </a-row>
     <a-button @click="toMatch">
       Matches
