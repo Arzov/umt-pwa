@@ -64,9 +64,9 @@ export default {
     })
   },
   methods: {
-    async addMessage () {
+    addMessage () {
       try {
-        await API.graphql(
+        API.graphql(
           graphqlOperation(addMessage, {
             hashKey: this.$route.params.matchId,
             author: this.$store.state.userId,

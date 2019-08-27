@@ -7,10 +7,11 @@ async function setUser (query, data, store) {
   })
 
   try {
+    console.log(data.username)
     const result = await API.graphql(graphqlOperation(query, {
-      hashKey: data.username
+      hashKey: data.username.includes('@') ? data.username : data.attributes.email
     }))
-
+    console.log(result)
     store.commit('updateUser', { key: 'userId', value: result.data.getUser.hashKey })
     store.commit('updateUser', { key: 'userFirstName', value: result.data.getUser.firstName })
     store.commit('updateUser', { key: 'userLastName', value: result.data.getUser.lastName })
