@@ -2,9 +2,7 @@ import { Auth, API, graphqlOperation } from 'aws-amplify'
 import { getUser } from '@/graphql/queries'
 
 async function setUser (query, data, store) {
-  API.configure({
-    aws_appsync_graphqlEndpoint: process.env.aws.APPSYNC_ARZOV_URL
-  })
+  API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
 
   try {
     const result = await API.graphql(graphqlOperation(query, {
@@ -42,6 +40,8 @@ export default ({ route, store, redirect }) => {
         if (isInStart) {
           console.log('entrar')
           setUser(getUser, data, store)
+          // Resetear al enpoint de la API de Umatch
+          API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
           redirect(process.env.routes.home.path)
         }
       } else if (!isInStart) {
@@ -50,9 +50,5 @@ export default ({ route, store, redirect }) => {
       }
 
       console.log('quedarse')
-      // Resetear al enpoint de la API de Umatch
-      API.configure({
-        aws_appsync_graphqlEndpoint: process.env.aws.APPSYNC_UMATCH_URL
-      })
     })
 }
