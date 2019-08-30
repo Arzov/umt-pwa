@@ -8,5 +8,6 @@
     "APPSYNC_REGION": "us-east-2",
     "APPSYNC_AUTH_TYPE": "AMAZON_COGNITO_USER_POOLS",
     "APIGATEWAY_UMATCH_NAME": "arv-umatch",
-    "APIGATEWAY_UMATCH_ENDPOINT": "https://ls7y0q0vbj.execute-api.us-east-2.amazonaws.com/dev"
+    "APIGATEWAY_UMATCH_ENDPOINT": "https://ls7y0q0vbj.execute-api.us-east-2.amazonaws.com/dev",
+    "LAMBDA_ARV_UMT_PUT_GEOLOCATION": "/arv-umt-put-geolocation"
 }

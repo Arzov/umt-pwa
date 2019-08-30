@@ -27,8 +27,8 @@ export default {
       })
     },
     findMatch () {
-      const apiName = 'dev'
-      const path = '/arv-umt-put-geolocation'
+      const apiName = process.env.aws.APIGATEWAY_UMATCH_NAME
+      const path = process.env.aws.LAMBDA_ARV_UMT_PUT_GEOLOCATION
       const myInit = {
         body: {
           hashKey: '-761030',

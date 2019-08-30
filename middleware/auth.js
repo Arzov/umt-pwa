@@ -1,6 +1,7 @@
 import { Auth, API, graphqlOperation } from 'aws-amplify'
 import { getUser } from '@/graphql/queries'
 
+// Funcion para obtener datos del usuario
 async function setUser (query, data, store) {
   API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
 
@@ -20,6 +21,14 @@ async function setUser (query, data, store) {
 
 export default ({ route, store, redirect }) => {
   let signedIn = false
+  const isInStart = (function (path) {
+    switch (path) {
+      case process.env.routes.start.name:
+        return true
+      default:
+        return false
+    }
+  })(route.name)
 
   Auth.currentUserInfo()
     .then(function (data) {
@@ -27,15 +36,6 @@ export default ({ route, store, redirect }) => {
       return data
     })
     .then(function (data) {
-      const isInStart = (function (path) {
-        switch (path) {
-          case process.env.routes.start.name:
-            return true
-          default:
-            return false
-        }
-      })(route.name)
-
       if (signedIn) {
         if (isInStart) {
           console.log('entrar')
