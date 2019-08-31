@@ -28,17 +28,15 @@ export default {
     },
     findMatch () {
       const apiName = process.env.aws.APIGATEWAY_UMATCH_NAME
-      const path = process.env.aws.LAMBDA_ARV_UMT_PUT_GEOLOCATION
-      const myInit = {
+      const path = process.env.aws.LAMBDA_ARV_UMT_SEARCH_GEOLOCATIONS
+      const params = {
         body: {
-          hashKey: '-761030',
-          userId: 'fjbarrientosg@gmail.com',
-          latitude: -33.4178023,
-          longitude: -70.6603118
+          hashKey: this.$store.state.userGeohash,
+          lastKey: null
         }
       }
 
-      this.$Amplify.API.post(apiName, path, myInit).then((response) => {
+      this.$Amplify.API.post(apiName, path, params).then((response) => {
         console.log(response)
       }).catch((error) => {
         console.log(error)

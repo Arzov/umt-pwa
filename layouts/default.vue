@@ -1,8 +1,17 @@
 <template>
   <div>
+    <PopUp />
     <nuxt />
   </div>
 </template>
+
+<script>
+import PopUp from '@/components/popUp'
+
+export default {
+  components: { PopUp }
+}
+</script>
 
 <style>
 html {

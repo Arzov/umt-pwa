@@ -8,9 +8,7 @@ import { getUser } from '@/graphql/queries'
  */
 async function setUser (query, data, store) {
   // Usar API de Arzov
-  API.configure({
-    aws_appsync_graphqlEndpoint: process.env.aws.APPSYNC_ARZOV_URL
-  })
+  API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
 
   try {
     const result = await API.graphql(graphqlOperation(query, {
@@ -53,19 +51,17 @@ export default ({ route, store, redirect }) => {
         // de Umatch
         console.log('entrar')
         setUser(getUser, data, store)
-        // redirect(process.env.routes.home.path)
+        API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL // Reiniciar endpoint de la API Umatch
+        redirect(process.env.routes.home.path)
 
       // Si no esta iniciada  y se encuentra en la app enviar a la vista Start
-      } else if (!isInStart) {
+      } else if (!signedIn && !isInStart) {
         console.log('salir')
-        // redirect(process.env.routes.start.path)
+        redirect(process.env.routes.start.path)
       }
 
       // El usuario se encuentra en la vista correcta independiente del estado
       // de la sesion
       console.log('quedarse')
-      API.configure({
-        aws_appsync_graphqlEndpoint: process.env.aws.APPSYNC_UMATCH_URL
-      })
     })
 }

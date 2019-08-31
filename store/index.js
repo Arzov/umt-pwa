@@ -5,9 +5,9 @@ export const state = () => ({
   userFirstName: null,
   userLastName: null,
   userPicture: null,
-  userGeoHash: null,
   userLatitude: null,
   userLongitude: null,
+  userGeohash: null,
   geoLocShow: false
 })
 
