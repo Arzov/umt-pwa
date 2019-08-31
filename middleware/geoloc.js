@@ -2,7 +2,7 @@
 import { API } from 'aws-amplify'
 
 // EXPORT
-export default ({ app, route, store, redirect }) => {
+export default ({ route, store, redirect }) => {
   // Validar si dispositivo soporta geolocalizacion
   if ('geolocation' in navigator) {
     // Obtener ubicacion del usuario
@@ -43,6 +43,7 @@ export default ({ app, route, store, redirect }) => {
     }, function (error) { // Error en la peticion de la ubicacion
       switch (error.code) {
         case error.PERMISSION_DENIED:
+          // Mostrar PopUp para que el usuario configure la ubicacion
           console.error('El usuario denego el permiso ubicacion.')
           store.commit('updateState', { key: 'geoLocShow', value: true })
           break

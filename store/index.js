@@ -14,6 +14,15 @@ export const state = () => ({
 export const mutations = {
   updateState (state, { key, value }) {
     state[key] = value
+  },
+  resetStates (state) {
+    /* eslint-disable no-unused-vars */
+    for (const key in state) {
+      if (state.hasOwnProperty(key)) {
+        state[key] = null
+      }
+    }
+    /* eslint-enable no-unused-vars */
   }
 }
 

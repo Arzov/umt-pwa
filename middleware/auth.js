@@ -6,7 +6,7 @@ import { getUser } from '@/graphql/queries'
 /**
  * Funcion para obtener datos del usuario una vez autenticado
  */
-async function setUser (query, data, store) {
+async function setUser (query, data, store, redirect) {
   // Usar API de Arzov
   API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
 
@@ -20,6 +20,10 @@ async function setUser (query, data, store) {
     store.commit('updateState', { key: 'userFirstName', value: result.data.getUser.firstName })
     store.commit('updateState', { key: 'userLastName', value: result.data.getUser.lastName })
     store.commit('updateState', { key: 'userPicture', value: result.data.getUser.picture })
+
+    // Reiniciar endpoint de la API Umatch
+    API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+    redirect(process.env.routes.home.path)
   } catch (e) {
     console.log(e)
   }
@@ -50,9 +54,7 @@ export default ({ route, store, redirect }) => {
         // Obtener datos del usuario, luego resetear la API al endpoint
         // de Umatch
         console.log('entrar')
-        setUser(getUser, data, store)
-        API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL // Reiniciar endpoint de la API Umatch
-        redirect(process.env.routes.home.path)
+        setUser(getUser, data, store, redirect)
 
       // Si no esta iniciada  y se encuentra en la app enviar a la vista Start
       } else if (!signedIn && !isInStart) {

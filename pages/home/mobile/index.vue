@@ -44,7 +44,10 @@ export default {
     },
     logOut () {
       this.$Amplify.Auth.signOut({ global: true })
-        .then(data => console.log(data))
+        .then((data) => {
+          this.$store.commit('resetStates')
+          console.log(data)
+        })
         .catch(err => console.log(err))
     }
   }
