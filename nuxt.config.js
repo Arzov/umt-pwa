@@ -62,7 +62,7 @@ export default {
   ** Router options
   */
   router: {
-      middleware: ['auth', 'geoloc'],
+      middleware: 'auth',
       extendRoutes(routes, resolve) {
           routes.push({
               name: 'custom',
