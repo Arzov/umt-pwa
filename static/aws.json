@@ -10,5 +10,6 @@
     "APIGATEWAY_UMATCH_NAME": "arv-umatch",
     "APIGATEWAY_UMATCH_ENDPOINT": "https://ls7y0q0vbj.execute-api.us-east-2.amazonaws.com/dev",
     "LAMBDA_ARV_UMT_PUT_GEOLOCATION": "/arv-umt-put-geolocation",
-    "LAMBDA_ARV_UMT_SEARCH_GEOLOCATIONS": "/arv-umt-search-geolocations"
+    "LAMBDA_ARV_UMT_SEARCH_MATCH": "/arv-umt-search-match",
+    "LAMBDA_ARV_UMT_UPDATE_USER": "/arv-umt-update-user"
 }

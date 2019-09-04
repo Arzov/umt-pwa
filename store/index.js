@@ -8,7 +8,7 @@ export const state = () => ({
   userLatitude: null,
   userLongitude: null,
   userGeohash: null,
-  geoLocShow: false
+  togglePopUp: false
 })
 
 export const mutations = {

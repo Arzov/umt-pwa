@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <a-button v-if="this.$store.state.geoLocShow">
+  <div v-if="this.$store.state.togglePopUp">
+    <a-button>
       PopUp
     </a-button>
   </div>

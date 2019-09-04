@@ -28,7 +28,7 @@ export default {
     },
     findMatch () {
       const apiName = process.env.aws.APIGATEWAY_UMATCH_NAME
-      const path = process.env.aws.LAMBDA_ARV_UMT_SEARCH_GEOLOCATIONS
+      const path = process.env.aws.LAMBDA_ARV_UMT_SEARCH_MATCH
       const params = {
         body: {
           hashKey: this.$store.state.userGeohash,

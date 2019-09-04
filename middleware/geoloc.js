@@ -8,7 +8,7 @@ export default ({ route, store, redirect }) => {
     // Obtener ubicacion del usuario
     navigator.geolocation.getCurrentPosition(function (position) {
       // Si habilito el permiso de ubicacion entonces quitar popup
-      store.commit('updateState', { key: 'geoLocShow', value: false })
+      store.commit('updateState', { key: 'togglePopUp', value: false })
 
       const isInHome = (function (path) {
         switch (path) {
@@ -45,7 +45,7 @@ export default ({ route, store, redirect }) => {
         case error.PERMISSION_DENIED:
           // Mostrar PopUp para que el usuario configure la ubicacion
           console.error('El usuario denego el permiso ubicacion.')
-          store.commit('updateState', { key: 'geoLocShow', value: true })
+          store.commit('updateState', { key: 'togglePopUp', value: true })
           break
         case error.POSITION_UNAVAILABLE:
           console.error('Ubicacion no disponible.')
