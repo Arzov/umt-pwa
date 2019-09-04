@@ -8,7 +8,7 @@ export default ({ route, store, redirect }) => {
     // Obtener ubicacion del usuario
     navigator.geolocation.getCurrentPosition(function (position) {
       // Si habilito el permiso de ubicacion entonces quitar popup
-      store.commit('updateState', { key: 'togglePopUp', value: false })
+      store.commit('popUp/updateState', { key: 'togglePopUp', value: false })
 
       const isInHome = (function (path) {
         switch (path) {
@@ -25,7 +25,7 @@ export default ({ route, store, redirect }) => {
         const path = process.env.aws.LAMBDA_ARV_UMT_PUT_GEOLOCATION
         const params = {
           body: {
-            userId: store.state.userId,
+            userId: store.state.user.userId,
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           }
@@ -33,9 +33,9 @@ export default ({ route, store, redirect }) => {
 
         // Llamada a Lambda para agregar posicion del usuario
         API.post(apiName, path, params).then((response) => {
-          store.commit('updateState', { key: 'userLatitude', value: position.coords.latitude })
-          store.commit('updateState', { key: 'userLongitude', value: position.coords.longitude })
-          store.commit('updateState', { key: 'userGeohash', value: response.data.Items[0].hashKey.N })
+          store.commit('user/updateState', { key: 'userLatitude', value: position.coords.latitude })
+          store.commit('user/updateState', { key: 'userLongitude', value: position.coords.longitude })
+          store.commit('user/updateState', { key: 'userGeohash', value: response.data.Items[0].hashKey.N })
         }).catch((error) => {
           console.log(error)
         })
@@ -45,7 +45,7 @@ export default ({ route, store, redirect }) => {
         case error.PERMISSION_DENIED:
           // Mostrar PopUp para que el usuario configure la ubicacion
           console.error('El usuario denego el permiso ubicacion.')
-          store.commit('updateState', { key: 'togglePopUp', value: true })
+          store.commit('popUp/updateState', { key: 'togglePopUp', value: true })
           break
         case error.POSITION_UNAVAILABLE:
           console.error('Ubicacion no disponible.')

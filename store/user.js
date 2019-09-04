@@ -1,5 +1,3 @@
-import createPersistedState from 'vuex-persistedstate'
-
 export const state = () => ({
   userId: null,
   userFirstName: null,
@@ -7,8 +5,7 @@ export const state = () => ({
   userPicture: null,
   userLatitude: null,
   userLongitude: null,
-  userGeohash: null,
-  togglePopUp: false
+  userGeohash: null
 })
 
 export const mutations = {
@@ -25,7 +22,3 @@ export const mutations = {
     /* eslint-enable no-unused-vars */
   }
 }
-
-export const plugins = [
-  createPersistedState()
-]

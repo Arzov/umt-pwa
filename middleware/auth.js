@@ -16,10 +16,10 @@ async function setUser (query, data, store, redirect) {
     }))
 
     // Guardar datos del usuario en el store
-    store.commit('updateState', { key: 'userId', value: result.data.getUser.hashKey })
-    store.commit('updateState', { key: 'userFirstName', value: result.data.getUser.firstName })
-    store.commit('updateState', { key: 'userLastName', value: result.data.getUser.lastName })
-    store.commit('updateState', { key: 'userPicture', value: result.data.getUser.picture })
+    store.commit('user/updateState', { key: 'userId', value: result.data.getUser.hashKey })
+    store.commit('user/updateState', { key: 'userFirstName', value: result.data.getUser.firstName })
+    store.commit('user/updateState', { key: 'userLastName', value: result.data.getUser.lastName })
+    store.commit('user/updateState', { key: 'userPicture', value: result.data.getUser.picture })
 
     // Reiniciar endpoint de la API Umatch
     API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL

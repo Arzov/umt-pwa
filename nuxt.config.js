@@ -35,7 +35,8 @@ export default {
     '@/plugins/antd-ui',
     '@/plugins/mask',
     '@/plugins/mq',
-    '@/plugins/aws'
+    '@/plugins/aws',
+    '@/plugins/storage'
   ],
   /*
   ** Nuxt.js dev-modules

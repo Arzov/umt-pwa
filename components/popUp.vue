@@ -1,5 +1,5 @@
 <template>
-  <div v-if="this.$store.state.togglePopUp">
+  <div v-if="this.$store.state.popUp.togglePopUp">
     <a-button>
       PopUp
     </a-button>

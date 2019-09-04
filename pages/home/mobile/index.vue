@@ -45,7 +45,7 @@ export default {
     logOut () {
       this.$Amplify.Auth.signOut({ global: true })
         .then((data) => {
-          this.$store.commit('resetStates')
+          this.$store.commit('user/resetStates')
           console.log(data)
         })
         .catch(err => console.log(err))
