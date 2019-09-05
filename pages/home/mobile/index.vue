@@ -2,8 +2,8 @@
   <div id="page-home-mobile">
     <a-row type="flex" justify="center">
       hola
-      <a-avatar :src="this.$store.state.userPicture" size="large" />
-      {{ this.$store.state.userId }}
+      <a-avatar :src="this.$store.state.user.picture" size="large" />
+      {{ this.$store.state.user.id }}
     </a-row>
     <a-button @click="toMatches">
       Matches
@@ -14,12 +14,16 @@
     <a-button @click="logOut">
       Cerrar
     </a-button>
+    <Geolocation />
   </div>
 </template>
 
 <script>
+import Geolocation from '@/components/geoloc'
+
 export default {
   name: 'HomeMobile',
+  components: { Geolocation },
   methods: {
     toMatches () {
       this.$router.push({
@@ -31,7 +35,7 @@ export default {
       const path = process.env.aws.LAMBDA_ARV_UMT_SEARCH_MATCH
       const params = {
         body: {
-          hashKey: this.$store.state.userGeohash,
+          hashKey: this.$store.state.user.geohash,
           lastKey: null
         }
       }

@@ -5,59 +5,62 @@ import { API } from 'aws-amplify'
 export default ({ route, store, redirect }) => {
   // Validar si dispositivo soporta geolocalizacion
   if ('geolocation' in navigator) {
-    // Obtener ubicacion del usuario
-    navigator.geolocation.getCurrentPosition(function (position) {
-      // Si habilito el permiso de ubicacion entonces quitar popup
-      store.commit('popUp/updateState', { key: 'togglePopUp', value: false })
-
-      const isInHome = (function (path) {
-        switch (path) {
-          case process.env.routes.home.name:
-            return true
-          default:
-            return false
-        }
-      })(route.name) // Indica si el usuario se encuentra en la vista Home o no
-
-      // Actualizar ubicacion solo si esta en la vista Home
-      if (isInHome) {
-        const apiName = process.env.aws.APIGATEWAY_UMATCH_NAME
-        const path = process.env.aws.LAMBDA_ARV_UMT_PUT_GEOLOCATION
-        const params = {
-          body: {
-            userId: store.state.user.userId,
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
+    // Si el usuario acepto el permiso de la geolocalizacion entonces se debe
+    // actualizar la posicion siempre y cuando el usuario se encuentre en la
+    // vista Home
+    if (store.state.user.allowGeoloc) {
+      // Obtener ubicacion del usuario
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const isInHome = (function (path) {
+          switch (path) {
+            case process.env.routes.home.name:
+              return true
+            default:
+              return false
           }
+        })(route.name) // Indica si el usuario se encuentra en la vista Home
+
+        // Actualizar ubicacion solo si esta en la vista Home
+        if (isInHome) {
+          const apiName = process.env.aws.APIGATEWAY_UMATCH_NAME
+          const path = process.env.aws.LAMBDA_ARV_UMT_PUT_GEOLOCATION
+          const params = {
+            body: {
+              userId: store.state.user.id,
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            }
+          }
+
+          // Llamada a Lambda para agregar posicion del usuario
+          API.post(apiName, path, params).then((response) => {
+            console.log(response)
+            store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
+            store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
+            store.commit('user/setState', { key: 'geohash', value: response.data.Items[0].hashKey.N })
+            store.commit('user/setState', { key: 'matchType', value: response.data.Items[0].matchType ? response.data.Items[0].matchType.S : null })
+          }).catch((error) => {
+            console.log(error)
+          })
         }
 
-        // Llamada a Lambda para agregar posicion del usuario
-        API.post(apiName, path, params).then((response) => {
-          store.commit('user/updateState', { key: 'userLatitude', value: position.coords.latitude })
-          store.commit('user/updateState', { key: 'userLongitude', value: position.coords.longitude })
-          store.commit('user/updateState', { key: 'userGeohash', value: response.data.Items[0].hashKey.N })
-        }).catch((error) => {
-          console.log(error)
-        })
-      }
-    }, function (error) { // Error en la peticion de la ubicacion
-      switch (error.code) {
-        case error.PERMISSION_DENIED:
-          // Mostrar PopUp para que el usuario configure la ubicacion
-          console.error('El usuario denego el permiso ubicacion.')
-          store.commit('popUp/updateState', { key: 'togglePopUp', value: true })
-          break
-        case error.POSITION_UNAVAILABLE:
-          console.error('Ubicacion no disponible.')
-          break
-        case error.TIMEOUT:
-          console.error('Termino de tiempo en requerimiento de ubicacion.')
-          break
-        case error.UNKNOWN_ERROR:
-          console.error('Error desconocido.')
-          break
-      }
-    })
+      // Error en la peticion de la ubicacion
+      }, function (error) {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            // Mostrar PopUp para que el usuario configure la ubicacion
+            store.commit('geoloc/setState', { key: 'toggle', value: true })
+            store.commit('geoloc/setState', { key: 'message', value: 'Ups denego el permiso' })
+            store.commit('geoloc/setState', { key: 'allowBtn', value: false })
+            store.commit('geoloc/setState', { key: 'resetBtn', value: true })
+            store.commit('user/setState', { key: 'allowGeoloc', value: false })
+            break
+          default:
+            console.log('Error desconocido.')
+            break
+        }
+      })
+    }
 
   // El dispositivo no soporta la geolocalizacion
   } else {

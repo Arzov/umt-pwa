@@ -1,15 +1,17 @@
 export const state = () => ({
-  userId: null,
-  userFirstName: null,
-  userLastName: null,
-  userPicture: null,
-  userLatitude: null,
-  userLongitude: null,
-  userGeohash: null
+  id: null,
+  firstName: null,
+  lastName: null,
+  picture: null,
+  latitude: null,
+  longitude: null,
+  geohash: null,
+  matchType: null,
+  allowGeoloc: false
 })
 
 export const mutations = {
-  updateState (state, { key, value }) {
+  setState (state, { key, value }) {
     state[key] = value
   },
   resetStates (state) {

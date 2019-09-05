@@ -16,10 +16,10 @@ async function setUser (query, data, store, redirect) {
     }))
 
     // Guardar datos del usuario en el store
-    store.commit('user/updateState', { key: 'userId', value: result.data.getUser.hashKey })
-    store.commit('user/updateState', { key: 'userFirstName', value: result.data.getUser.firstName })
-    store.commit('user/updateState', { key: 'userLastName', value: result.data.getUser.lastName })
-    store.commit('user/updateState', { key: 'userPicture', value: result.data.getUser.picture })
+    store.commit('user/setState', { key: 'id', value: result.data.getUser.hashKey })
+    store.commit('user/setState', { key: 'firstName', value: result.data.getUser.firstName })
+    store.commit('user/setState', { key: 'lastName', value: result.data.getUser.lastName })
+    store.commit('user/setState', { key: 'picture', value: result.data.getUser.picture })
 
     // Reiniciar endpoint de la API Umatch
     API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
@@ -31,7 +31,7 @@ async function setUser (query, data, store, redirect) {
 
 // EXPORT
 export default ({ route, store, redirect }) => {
-  let signedIn = false // Indica si el usuario se encuentra autenticado o no
+  let signedIn = false // Indica si el usuario se encuentra autenticado
   const isInStart = (function (path) {
     switch (path) {
       case process.env.routes.start.name:
@@ -39,7 +39,7 @@ export default ({ route, store, redirect }) => {
       default:
         return false
     }
-  })(route.name) // Indica si el usuario se encuentra en la vista Start o no
+  })(route.name) // Indica si el usuario se encuentra en la vista Start
 
   // Obtener sesion actual
   Auth.currentUserInfo()
@@ -56,7 +56,7 @@ export default ({ route, store, redirect }) => {
         console.log('entrar')
         setUser(getUser, data, store, redirect)
 
-      // Si no esta iniciada  y se encuentra en la app enviar a la vista Start
+      // Si no esta iniciada y se encuentra en la app enviar a la vista Start
       } else if (!signedIn && !isInStart) {
         console.log('salir')
         redirect(process.env.routes.start.path)

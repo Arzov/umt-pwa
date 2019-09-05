@@ -1,10 +1,9 @@
 export const state = () => ({
-  togglePopUp: false,
-  message: null
+  toggle: false
 })
 
 export const mutations = {
-  updateState (state, { key, value }) {
+  toggle (state, { key, value }) {
     state[key] = value
   }
 }
