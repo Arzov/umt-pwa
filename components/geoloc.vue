@@ -34,7 +34,7 @@ export default {
           vue.$store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
           vue.$store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
           vue.$store.commit('user/setState', { key: 'geohash', value: response.data.Items[0].hashKey.N })
-          vue.$store.commit('user/setState', { key: 'matchType', value: response.data.Items[0].matchType ? response.data.Items[0].matchType.S : null })
+          vue.$store.commit('user/setState', { key: 'matchType', value: response.data.Items[0].matchType.S })
           vue.$store.commit('user/setState', { key: 'allowGeoloc', value: true })
 
           // Si habilito el permiso de ubicacion entonces quitar popup

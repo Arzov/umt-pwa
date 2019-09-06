@@ -69,8 +69,8 @@ export default {
         API.graphql(
           graphqlOperation(addMessage, {
             hashKey: this.$route.params.matchId,
-            author: this.$store.state.userId,
-            authorName: this.$store.state.userFirstName,
+            author: this.$store.state.user.id,
+            authorName: this.$store.state.user.firstName,
             content: this.userMessage
           })
         )

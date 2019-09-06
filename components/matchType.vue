@@ -42,8 +42,8 @@ export default {
       }
 
       this.$Amplify.API.post(apiName, path, params).then((response) => {
-        console.log(response)
-        this.$store.commit('user/updateState', { key: 'matchType', value: option })
+        this.$store.commit('user/setState', { key: 'matchType', value: option })
+        this.$store.commit('matchType/setState', { key: 'toggle', value: false })
       }).catch((error) => {
         console.log(error)
       })

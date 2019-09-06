@@ -18,7 +18,7 @@ export const mutations = {
     /* eslint-disable no-unused-vars */
     for (const key in state) {
       if (state.hasOwnProperty(key)) {
-        state[key] = null
+        state[key] = key === 'allowGeoloc' ? state[key] : null
       }
     }
     /* eslint-enable no-unused-vars */

@@ -3,7 +3,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-  toggle (state, { key, value }) {
+  setState (state, { key, value }) {
     state[key] = value
   }
 }

@@ -9,9 +9,9 @@ export default ({ store, route }) => {
     }
   })(route.name) // Indica si el usuario se encuentra en la vista Start
 
-  if ((!store.state.user.matchType || store.state.user.matchType === ' ') && !isInStart && store.state.geoLocation.toggle) {
-    store.commit('matchType/toggle', { key: 'toggle', value: true })
+  if ((!store.state.user.matchType || store.state.user.matchType === ' ') && !isInStart && !store.state.geoloc.toggle) {
+    store.commit('matchType/setState', { key: 'toggle', value: true })
   } else if (isInStart) {
-    store.commit('matchType/toggle', { key: 'toggle', value: false })
+    store.commit('matchType/setState', { key: 'toggle', value: false })
   }
 }
