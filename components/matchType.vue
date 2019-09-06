@@ -37,6 +37,7 @@ export default {
         body: {
           hashKey: this.$store.state.user.geohash,
           rangeKey: this.$store.state.user.id,
+          inMatch: this.$store.state.user.inMatch,
           matchType: option
         }
       }

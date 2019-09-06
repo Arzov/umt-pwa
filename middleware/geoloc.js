@@ -37,6 +37,7 @@ export default ({ route, store, redirect }) => {
             store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
             store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
             store.commit('user/setState', { key: 'geohash', value: response.data.Items[0].hashKey.N })
+            store.commit('user/setState', { key: 'inMatch', value: response.data.Items[0].inMatch.BOOL })
             store.commit('user/setState', { key: 'matchType', value: response.data.Items[0].matchType.S })
           }).catch((error) => {
             console.log(error)
