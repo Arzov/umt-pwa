@@ -9,17 +9,3 @@ export const onAddMessage = `
     }
   }
 `
-
-export const onAddMatch = `
-  subscription onAddMatch($hashKey: String!) {
-    onAddMatch(hashKey: $hashKey) {
-      hashKey
-      rangeKey
-      matchId
-      invitedName
-      createdAt
-      expireAt
-      status
-    }
-  }
-`

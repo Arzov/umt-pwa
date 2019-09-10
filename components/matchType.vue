@@ -1,5 +1,5 @@
 <template>
-  <div v-if="this.$store.state.matchType.toggle">
+  <div v-if="(!this.$store.state.user.matchType || this.$store.state.user.matchType === ' ') && !this.$store.state.geoloc.toggle">
     <a-radio-group name="radioGroup" :default-value="0" @change="getOption">
       <a-radio :value="0">
         5v5
@@ -38,13 +38,13 @@ export default {
           hashKey: this.$store.state.user.geohash,
           rangeKey: this.$store.state.user.id,
           inMatch: this.$store.state.user.inMatch,
+          searching: false,
           matchType: option
         }
       }
 
       this.$Amplify.API.post(apiName, path, params).then((response) => {
         this.$store.commit('user/setState', { key: 'matchType', value: option })
-        this.$store.commit('matchType/setState', { key: 'toggle', value: false })
       }).catch((error) => {
         console.log(error)
       })

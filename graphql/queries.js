@@ -35,7 +35,7 @@ export const getMatches = `
         matchId
         createdAt
         expireAt
-        status
+        isExpired
       }
       nextToken
     }

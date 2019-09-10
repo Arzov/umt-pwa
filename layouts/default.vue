@@ -1,17 +1,15 @@
 <template>
   <div>
     <PopUp />
-    <MatchType />
     <nuxt />
   </div>
 </template>
 
 <script>
 import PopUp from '@/components/popUp'
-import MatchType from '@/components/matchType'
 
 export default {
-  components: { PopUp, MatchType }
+  components: { PopUp }
 }
 </script>
 
