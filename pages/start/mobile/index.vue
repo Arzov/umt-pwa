@@ -4,26 +4,10 @@
       <a-button @click="toLogin">
         Iniciar Sesión
       </a-button>
-      <a-button @click="toRegister">
-        Registrar
-      </a-button>
-      <a-divider>
-        O inicia con
-      </a-divider>
       <FacebookLogin />
       <GoogleLogin />
-      <!-- PRUEBAS -->
-      <a-button @click="logOut">
-        Cerrar
-      </a-button>
-      <a-button @click="registerTest">
-        registrar
-      </a-button>
-      <a-button @click="codeVer">
-        verificar
-      </a-button>
-      <a-button @click="login">
-        iniciar
+      <a-button @click="toRegister">
+        ¿No tienes cuenta? Regístrate.
       </a-button>
     </a-row>
   </div>
@@ -43,9 +27,9 @@ export default {
   },
   methods: {
     /**
-    * Metodo que re-direcciona a la vista Login.
-    * Emite evento de tipo TO_LOGIN.
-    */
+     * Metodo que re-direcciona a la vista Login.
+     * @return {Object} Evento de tipo TO_LOGIN.
+     */
     toLogin () {
       const params = {
         type: this.events.TO_LOGIN
@@ -53,45 +37,14 @@ export default {
       this.$emit('emit', params)
     },
     /**
-    * Metodo que re-direcciona a la vista Register.
-    * Emite evento de tipo TO_REGISTER.
-    */
+     * Metodo que re-direcciona a la vista Register.
+     * @return {Object} Evento de tipo TO_REGISTER.
+     */
     toRegister () {
       const params = {
         type: this.events.TO_REGISTER
       }
       this.$emit('emit', params)
-    },
-    // PRUEBA
-    logOut () {
-      this.$Amplify.Auth.signOut({ global: true })
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
-    },
-    registerTest () {
-      this.$Amplify.Auth.signUp({
-        username: 'fjbarrientosg@gmail.com',
-        password: '123456',
-        attributes: {
-          email: 'fjbarrientosg@gmail.com',
-          name: 'Franco'
-        }
-      })
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
-    },
-    codeVer () {
-      this.$Amplify.Auth.confirmSignUp('fjbarrientosg@gmail.com', '348115', {
-        forceAliasCreation: true
-      }).then(data => console.log(data))
-        .catch(err => console.log(err))
-    },
-    login () {
-      this.$Amplify.Auth.signIn({
-        username: 'fjbarrientosg@gmail.com',
-        password: '123456'
-      }).then(user => console.log(user))
-        .catch(err => console.log(err))
     }
   }
 }
