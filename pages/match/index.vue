@@ -53,7 +53,7 @@ export default {
   methods: {
     /**
      * Captura eventos generados por las vistas.
-     * @param  {Object} event Evento emitido por la vista.
+     * @param {Object} event Evento emitido por la vista.
      */
     onEmit (event) {
       switch (event.type) {

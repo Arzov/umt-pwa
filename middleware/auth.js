@@ -5,6 +5,10 @@ import { getUser } from '@/graphql/queries'
 // FUNCIONES
 /**
  * Funcion para obtener datos del usuario una vez autenticado
+ * @param {String}  query    Query graphql para obtener usuario.
+ * @param {Object}  data     Datos de la sesion del usuario.
+ * @param {Object}  store    Store de nuxt para almacenar los estados del usuario.
+ * @param {Object}  redirect Objeto de redireccionamiento de paginas.
  */
 async function setUser (query, data, store, redirect) {
   // Usar API de Arzov
@@ -12,7 +16,7 @@ async function setUser (query, data, store, redirect) {
 
   try {
     const result = await API.graphql(graphqlOperation(query, {
-      hashKey: data.username.includes('@') ? data.username : data.attributes.email
+      hashKey: data.idToken.payload.email
     }))
 
     // Guardar datos del usuario en el store
@@ -25,13 +29,13 @@ async function setUser (query, data, store, redirect) {
     API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
     redirect(process.env.routes.home.path)
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(e)
   }
 }
 
 // EXPORT
 export default ({ route, store, redirect }) => {
-  let signedIn = false // Indica si el usuario se encuentra autenticado
   const isInStart = (function (path) {
     switch (path) {
       case process.env.routes.start.name:
@@ -42,28 +46,23 @@ export default ({ route, store, redirect }) => {
   })(route.name) // Indica si el usuario se encuentra en la vista Start
 
   // Obtener sesion actual
-  Auth.currentUserInfo()
+  Auth.currentSession()
+    // Sesion iniciada
     .then(function (data) {
-      signedIn = Boolean(data) // Retorna la sesion
-      return data
-    })
-    .then(function (data) {
-      // Si la sesion esta iniciada y se encuentra en la vista Star enviar
-      // a la vista Home
-      if (signedIn && isInStart) {
-        // Obtener datos del usuario, luego resetear la API al endpoint
-        // de Umatch
-        console.log('entrar')
+      // Si se encuentra en la vista Star enviar a la vista Home
+      if (isInStart) {
+        // Obtener datos del usuario, luego reiniciar la API al endpoint de Umatch
         setUser(getUser, data, store, redirect)
+      }
+    })
 
-      // Si no esta iniciada y se encuentra en la app enviar a la vista Start
-      } else if (!signedIn && !isInStart) {
-        console.log('salir')
+    // No hay sesion y se encuentra en la app enviar a la vista Start
+    .catch(function (err) {
+      // eslint-disable-next-line no-console
+      console.log(err)
+
+      if (!isInStart) {
         redirect(process.env.routes.start.path)
       }
-
-      // El usuario se encuentra en la vista correcta independiente del estado
-      // de la sesion
-      console.log('quedarse')
     })
 }

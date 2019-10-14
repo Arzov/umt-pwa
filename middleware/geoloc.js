@@ -40,6 +40,7 @@ export default ({ route, store, redirect }) => {
             store.commit('user/setState', { key: 'inMatch', value: response.data.Items[0].inMatch.BOOL })
             store.commit('user/setState', { key: 'matchType', value: response.data.Items[0].matchType.S })
           }).catch((error) => {
+            // eslint-disable-next-line no-console
             console.log(error)
           })
         }
@@ -56,7 +57,8 @@ export default ({ route, store, redirect }) => {
             store.commit('user/setState', { key: 'allowGeoloc', value: false })
             break
           default:
-            console.log('Error desconocido.')
+            // eslint-disable-next-line no-console
+            console.log('¡Error desconocido!')
             break
         }
       })
@@ -65,6 +67,7 @@ export default ({ route, store, redirect }) => {
   // El dispositivo no soporta la geolocalizacion
   } else {
     // Deberia desplegarse el popup de que no es posible usar la app
-    console.log('La geolocalozacion no esta disponible!')
+    // eslint-disable-next-line no-console
+    console.log('¡La geolocalozacion no esta disponible en el dispositivo!')
   }
 }
