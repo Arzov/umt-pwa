@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-button @click="toFacebookLogin">
-      Facebook
+      Iniciar con Facebook
     </a-button>
   </div>
 </template>
@@ -10,6 +10,9 @@
 export default {
   name: 'FacebookLogin',
   methods: {
+    /**
+     * Autenticacion con Facebook.
+     */
     toFacebookLogin () {
       this.$Amplify.Auth.federatedSignIn({ provider: 'Facebook' })
     }

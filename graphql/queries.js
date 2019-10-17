@@ -35,9 +35,24 @@ export const getMatches = `
         matchId
         createdAt
         expireAt
-        status
+        isCanceled
       }
       nextToken
+    }
+  }
+`
+
+export const getUser = `
+  query getUser(
+    $hashKey: String!
+  ) {
+    getUser(
+      hashKey: $hashKey
+    ) {
+      hashKey
+      firstName
+      lastName
+      picture
     }
   }
 `

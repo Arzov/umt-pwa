@@ -35,7 +35,8 @@ export default {
     '@/plugins/antd-ui',
     '@/plugins/mask',
     '@/plugins/mq',
-    '@/plugins/aws'
+    '@/plugins/aws',
+    '@/plugins/storage'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -62,7 +63,7 @@ export default {
   ** Router options
   */
   router: {
-      middleware: 'auth',
+      middleware: ['auth', 'geoloc'],
       extendRoutes(routes, resolve) {
           routes.push({
               name: 'custom',

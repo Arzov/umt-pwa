@@ -18,9 +18,20 @@ Amplify.configure({
       responseType: 'token'
     }
   },
-  aws_appsync_graphqlEndpoint: process.env.aws.APPSYNC_URL,
-  aws_appsync_region: process.env.aws.APPSYNC_REGION,
-  aws_appsync_authenticationType: process.env.aws.APPSYNC_AUTH_TYPE
+  API: {
+    aws_appsync_graphqlEndpoint: process.env.aws.APPSYNC_UMATCH_URL,
+    aws_appsync_region: process.env.aws.APPSYNC_REGION,
+    aws_appsync_authenticationType: process.env.aws.APPSYNC_AUTH_TYPE,
+    endpoints: [
+      {
+        name: process.env.aws.APIGATEWAY_UMATCH_NAME,
+        endpoint: process.env.aws.APIGATEWAY_UMATCH_ENDPOINT,
+        custom_header: async () => {
+          return { Authorization: (await Amplify.Auth.currentSession()).idToken.jwtToken }
+        }
+      }
+    ]
+  }
 })
 
 Vue.use(AmplifyPlugin, AmplifyModules)

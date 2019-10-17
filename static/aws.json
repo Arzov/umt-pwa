@@ -1,9 +1,16 @@
 {
-    "COGNITO_USER_POOL_CLIENT_ID": "4ripilnk582qv0cbp77tdg4nus",
-    "COGNITO_USER_POOL_ID": "us-east-2_mM9pcTX5O",
+    "COGNITO_USER_POOL_CLIENT_ID": "15metijanb2iq6a016tqk832ek",
+    "COGNITO_USER_POOL_ID": "us-east-2_qutDL1uPU",
     "COGNITO_USER_POOL_REGION": "us-east-2",
-    "COGNITO_USER_POOL_DOMAIN": "arzov-dev.auth.us-east-2.amazoncognito.com",
-    "APPSYNC_URL": "https://3yby5v6ikbhbxpwk7i3vxb652u.appsync-api.us-east-2.amazonaws.com/graphql",
+    "COGNITO_USER_POOL_DOMAIN": "arzov-users-dev.auth.us-east-2.amazoncognito.com",
+    "APPSYNC_ARZOV_URL": "https://7elmil4bprd4ncyskhqvtbkpyy.appsync-api.us-east-2.amazonaws.com/graphql",
+    "APPSYNC_UMATCH_URL": "https://xet3zt2pjzeklbuvou6ydzzj5q.appsync-api.us-east-2.amazonaws.com/graphql",
     "APPSYNC_REGION": "us-east-2",
-    "APPSYNC_AUTH_TYPE": "AMAZON_COGNITO_USER_POOLS"
+    "APPSYNC_AUTH_TYPE": "AMAZON_COGNITO_USER_POOLS",
+    "APIGATEWAY_UMATCH_NAME": "arv-umt",
+    "APIGATEWAY_UMATCH_ENDPOINT": "https://gcos3tjt28.execute-api.us-east-2.amazonaws.com/dev",
+    "LAMBDA_ARV_UMT_PUT_GEOLOCATION": "/arv-umt-put-geolocation",
+    "LAMBDA_ARV_UMT_SEARCH_MATCH": "/arv-umt-search-match",
+    "LAMBDA_ARV_UMT_ADD_MATCH": "/arv-umt-add-match",
+    "LAMBDA_ARV_UMT_UPDATE_USER": "/arv-umt-update-user"
 }

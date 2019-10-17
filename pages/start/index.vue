@@ -10,9 +10,9 @@
 import StartMobile from './mobile'
 
 /**
-* Eventos que pueden emitir las vistas.
-* @type {{TO_LOGIN: string, TO_REGISTER: string}}
-*/
+ * Evento que pueden emitir las vistas.
+ * @type {{TO_LOGIN: string, TO_REGISTER: string}}
+ */
 const event = {
   TO_LOGIN: 'to_login',
   TO_REGISTER: 'to_register'
@@ -20,7 +20,6 @@ const event = {
 
 export default {
   name: 'Start',
-  layout: 'authentication',
   components: { StartMobile },
   data () {
     return {
@@ -29,23 +28,22 @@ export default {
   },
   methods: {
     /**
-    * Captura eventos generados por las vistas.
-    * @param event
-    */
+     * Captura eventos generados por las vistas.
+     * @param  {Object} event Evento emitido por la vista.
+     */
     onEmit (event) {
       switch (event.type) {
-        case this.event.TO_LOGIN: {
+        // Redireccionar a la vista Login
+        case this.event.TO_LOGIN:
           console.log('Login')
           // this.$router.push(process.env.routes.login.path)
           break
-        }
-      }
-      switch (event.type) {
-        case this.event.TO_REGISTER: {
+
+        // Redireccionar a la vista Register
+        case this.event.TO_REGISTER:
           console.log('Register')
           // this.$router.push(process.env.routes.register.path)
           break
-        }
       }
     }
   }
