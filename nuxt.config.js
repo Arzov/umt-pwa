@@ -1,3 +1,6 @@
+const routes = require('./static/routes')
+const aws = require('./static/aws')
+const app = require('./static/app')
 
 export default {
   mode: 'spa',
@@ -29,7 +32,10 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/antd-ui'
+    '@/plugins/antd-ui',
+    '@/plugins/mask',
+    '@/plugins/mq',
+    '@/plugins/aws'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -51,6 +57,27 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+  },
+  /*
+  ** Router options
+  */
+  router: {
+      middleware: 'auth',
+      extendRoutes(routes, resolve) {
+          routes.push({
+              name: 'custom',
+              path: '*',
+              redirect: '/start'
+          })
+      }
+  },
+  /*
+  ** Environment variables
+  */
+  env: {
+      routes,
+      aws,
+      app
   },
   /*
   ** Build configuration

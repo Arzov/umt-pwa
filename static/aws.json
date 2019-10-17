@@ -1,0 +1,6 @@
+{
+    "COGNITO_USER_POOL_CLIENT_ID": "4ripilnk582qv0cbp77tdg4nus",
+    "COGNITO_USER_POOL_ID": "us-east-2_mM9pcTX5O",
+    "COGNITO_USER_POOL_REGION": "us-east-2",
+    "COGNITO_USER_POOL_DOMAIN": "arzov-dev.auth.us-east-2.amazoncognito.com"
+}
