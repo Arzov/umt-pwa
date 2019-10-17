@@ -2,5 +2,13 @@
     "start": {
         "path": "/start",
         "name": "start"
+    },
+    "match": {
+        "path": "/match",
+        "name": "match"
+    },
+    "chat": {
+        "path": "/chat",
+        "name": "chat"
     }
 }
