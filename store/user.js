@@ -8,8 +8,10 @@ export const state = () => ({
   latitude: null,
   longitude: null,
   geohash: null,
-  matchType: null,
-  allowGeoloc: false
+  allowGeoloc: false,
+  matchFilter: null,
+  genderFilter: null,
+  ageFilter: null
 })
 
 export const mutations = {
@@ -20,7 +22,7 @@ export const mutations = {
     /* eslint-disable no-unused-vars */
     for (const key in state) {
       if (state.hasOwnProperty(key)) {
-        state[key] = key === 'allowGeoloc' || key === 'inMatch' ? state[key] : null
+        state[key] = key === 'allowGeoloc' ? state[key] : null
       }
     }
     /* eslint-enable no-unused-vars */

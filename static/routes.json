@@ -7,6 +7,10 @@
         "path": "/required_attr",
         "name": "required_attr"
     },
+    "required_filters": {
+        "path": "/required_filters",
+        "name": "required_filters"
+    },
     "home": {
         "path": "/home",
         "name": "home"

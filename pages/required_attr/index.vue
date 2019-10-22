@@ -20,10 +20,11 @@ import { updateUser } from '@/graphql/mutations'
 
 /**
  * Evento que pueden emitir las vistas.
- * @type {{UPDATE_USER: string}}
+ * @type {{UPDATE_USER: string, LOGOUT: string}}
  */
 const event = {
-  UPDATE_USER: 'update_user'
+  UPDATE_USER: 'update_user',
+  LOGOUT: 'logout'
 }
 
 // Usar API de Arzov
@@ -127,6 +128,12 @@ export default {
           } catch (e) {
             console.log(e)
           }
+          break
+
+        case this.event.LOGOUT:
+          this.$Amplify.Auth.signOut({ global: true })
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
           break
       }
     }
