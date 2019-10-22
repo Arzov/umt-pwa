@@ -1,6 +1,11 @@
 <template>
   <div id="page-required-filters-mobile">
     <a-row type="flex" justify="center">
+        <a-button @click="logout">
+          Salir
+        </a-button>
+      </a-row>
+    <a-row type="flex" justify="center">
       <a-radio-group name="radioGroup" :default-value="match" @change="getMatch">
         <a-radio v-for="match in matches" :key="'m' + match.value" :value="match.value">
           {{ match.name }}
@@ -65,6 +70,12 @@ export default {
         gender: this.gender,
         match: this.match,
         age: this.age
+      }
+      this.$emit('emit', params)
+    },
+    logout () {
+      const params = {
+        type: this.events.LOGOUT
       }
       this.$emit('emit', params)
     }

@@ -17,10 +17,11 @@ import RequiredFiltersMobile from './mobile'
 
 /**
  * Evento que pueden emitir las vistas.
- * @type {{UPDATE_USER: string}}
+ * @type {{UPDATE_USER: string, LOGOUT: string}}
  */
 const event = {
-  UPDATE_USER: 'update_user'
+  UPDATE_USER: 'update_user',
+  LOGOUT: 'logout'
 }
 
 export default {
@@ -54,13 +55,29 @@ export default {
       switch (event.type) {
         case this.event.UPDATE_USER:
           if (event.gender && event.match) {
+            const age = Array.from(event.age, x => String(x))
+
             // Guardar datos en el store del usuario
             this.$store.commit('user/setState', { key: 'matchFilter', value: event.match })
             this.$store.commit('user/setState', { key: 'genderFilter', value: event.gender })
-            this.$store.commit('user/setState', { key: 'ageFilter', value: event.age })
+            this.$store.commit('user/setState', { key: 'ageFilter', value: age })
+
+            // Enviar a Home
+            this.$router.push(process.env.routes.home.path)
           } else {
             console.log('Debe ingresar todos los datos!')
           }
+          break
+
+        case this.event.LOGOUT:
+          const router = this.$router
+
+          this.$Amplify.Auth.signOut({ global: true })
+            .then(function (data) {
+              console.log(data)
+              router.push(process.env.routes.start.path)
+            })
+            .catch(err => console.log(err))
           break
       }
     }

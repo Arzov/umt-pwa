@@ -117,6 +117,9 @@ export default {
                     // Guardar datos en el store del usuario
                     this.$store.commit('user/setState', { key: 'birthdate', value: birthdate })
                     this.$store.commit('user/setState', { key: 'gender', value: event.gender })
+
+                    // Enviar a Home
+                    this.$router.push(process.env.routes.home.path)
                   } catch (e) {
                     console.log(e)
                   }
@@ -131,8 +134,13 @@ export default {
           break
 
         case this.event.LOGOUT:
+          const router = this.$router
+
           this.$Amplify.Auth.signOut({ global: true })
-            .then(data => console.log(data))
+            .then(function (data) {
+              console.log(data)
+              router.push(process.env.routes.start.path)
+            })
             .catch(err => console.log(err))
           break
       }

@@ -11,17 +11,15 @@
       Buscar Encuentro
     </a-button>
     <Geolocation />
-    <MatchType />
   </div>
 </template>
 
 <script>
 import Geolocation from '@/components/geoloc'
-import MatchType from '@/components/matchType'
 
 export default {
   name: 'HomeMobile',
-  components: { Geolocation, MatchType },
+  components: { Geolocation },
   props: {
     events: {
       required: true

@@ -63,22 +63,22 @@ export default {
   ** Router options
   */
   router: {
-      middleware: ['auth', 'required_attr'], // , 'geoloc'],
-      extendRoutes(routes, resolve) {
-          routes.push({
-              name: 'custom',
-              path: '*',
-              redirect: '/start'
-          })
-      }
+    middleware: ['auth', 'required_attr', 'required_filters'], // , 'geoloc'],
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: 'custom',
+        path: '*',
+        redirect: '/start'
+      })
+    }
   },
   /*
   ** Environment variables
   */
   env: {
-      routes,
-      aws,
-      app
+    routes,
+    aws,
+    app
   },
   /*
   ** Build configuration
