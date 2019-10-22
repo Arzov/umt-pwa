@@ -2,13 +2,14 @@ export const state = () => ({
   id: null,
   firstName: null,
   lastName: null,
+  birthdate: null,
+  gender: null,
   picture: null,
   latitude: null,
   longitude: null,
   geohash: null,
   matchType: null,
-  allowGeoloc: false,
-  inMatch: false
+  allowGeoloc: false
 })
 
 export const mutations = {

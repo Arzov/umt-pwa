@@ -3,6 +3,10 @@
         "path": "/start",
         "name": "start"
     },
+    "required_attr": {
+        "path": "/required_attr",
+        "name": "required_attr"
+    },
     "home": {
         "path": "/home",
         "name": "home"

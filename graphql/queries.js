@@ -52,6 +52,8 @@ export const getUser = `
       hashKey
       firstName
       lastName
+      birthdate
+      gender
       picture
     }
   }
