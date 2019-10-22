@@ -1,7 +1,7 @@
 <template>
   <div>
     <mq-layout :mq="['mobile', 'tablet']">
-      <chat-mobile :events="event" :map-messages="mapMessage" @emit="onEmit($event)" />
+      <chat-mobile :events="events" :mapMessages="mapMessages" @emit="onEmit($events)" />
     </mq-layout>
   </div>
 </template>
@@ -17,7 +17,7 @@ import { onAddMessage } from '@/graphql/subscriptions'
  * Evento que pueden emitir las vistas.
  * @type {{ADD_MESSAGE: string}}
  */
-const event = {
+const events = {
   ADD_MESSAGE: 'add_message'
 }
 
@@ -26,12 +26,12 @@ export default {
   components: { ChatMobile },
   data () {
     return {
-      event,
+      events,
       messages: []
     }
   },
   computed: {
-    mapMessage () {
+    mapMessages () {
       return this.messages.map((msg, idx) => {
         return msg
       })
@@ -66,18 +66,18 @@ export default {
   methods: {
     /**
      * Captura eventos generados por las vistas.
-     * @param  {Object} event Evento emitido por la vista.
+     * @param  {Object} events Evento emitido por la vista.
      */
-    onEmit (event) {
-      switch (event.type) {
-        case this.event.ADD_MESSAGE:
+    onEmit (events) {
+      switch (events.type) {
+        case this.events.ADD_MESSAGE:
           try {
             API.graphql(
               graphqlOperation(addMessage, {
                 hashKey: this.$route.params.matchId,
                 author: this.$store.state.user.id,
                 authorName: this.$store.state.user.firstName,
-                content: event.userMessage
+                content: events.userMessage
               })
             )
           } catch (e) {

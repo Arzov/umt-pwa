@@ -19,3 +19,25 @@ export const addMessage = `
     }
   }
 `
+
+export const updateUser = `
+  mutation updateUser(
+    $hashKey: String!
+    $firstName: String,
+    $lastName: String,
+    $picture: String,
+    $birthdate: String,
+    $gender: String
+  ) {
+    updateUser(
+      hashKey: $hashKey
+      firstName: $firstName,
+      lastName: $lastName,
+      picture: $picture,
+      birthdate: $birthdate,
+      gender: $gender
+    ) {
+      hashKey
+    }
+  }
+`

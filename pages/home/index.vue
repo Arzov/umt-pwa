@@ -1,7 +1,7 @@
 <template>
   <div>
     <mq-layout :mq="['mobile', 'tablet']">
-      <home-mobile :events="event" @emit="onEmit($event)" />
+      <home-mobile :events="events" @emit="onEmit($events)" />
     </mq-layout>
   </div>
 </template>
@@ -13,7 +13,7 @@ import HomeMobile from './mobile'
  * Evento que pueden emitir las vistas.
  * @type {{TO_MATCH: string, FIND_MATCH: string}}
  */
-const event = {
+const events = {
   TO_MATCH: 'to_match',
   FIND_MATCH: 'find_match'
 }
@@ -23,21 +23,21 @@ export default {
   components: { HomeMobile },
   data () {
     return {
-      event
+      events
     }
   },
   methods: {
     /**
      * Captura eventos generados por las vistas.
-     * @param  {Object} event Evento emitido por la vista.
+     * @param  {Object} events Evento emitido por la vista.
      */
-    onEmit (event) {
-      switch (event.type) {
-        case this.event.TO_MATCH:
+    onEmit (events) {
+      switch (events.type) {
+        case this.events.TO_MATCH:
           this.$router.push(process.env.routes.match.path)
           break
 
-        case this.event.FIND_MATCH:
+        case this.events.FIND_MATCH:
           // Buscar rival
           const apiName = process.env.aws.APIGATEWAY_UMATCH_NAME
           let path = process.env.aws.LAMBDA_ARV_UMT_SEARCH_MATCH
