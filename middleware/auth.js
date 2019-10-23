@@ -35,9 +35,6 @@ async function setUser (query, data, store, redirect) {
 
 // EXPORT
 export default ({ route, store, redirect }) => {
-  // Usar API de Arzov
-  API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
-
   // Ruta actual
   const currentPath = route.name
 
@@ -47,6 +44,9 @@ export default ({ route, store, redirect }) => {
     .then(function (data) {
       // Si se encuentra en la vista Star enviar a la vista Home
       if (currentPath === process.env.routes.start.name) {
+        // Usar API de Arzov
+        API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
+
         setUser(getUser, data, store, redirect)
       }
     })
