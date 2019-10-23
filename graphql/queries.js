@@ -58,3 +58,24 @@ export const getUser = `
     }
   }
 `
+
+export const getUsers = `
+  query getUsers(
+    $rangeKey: String!
+    $nextToken: String
+  ) {
+    getUsers(
+      rangeKey: $rangeKey
+      nextToken: $nextToken
+    ) {
+      items {
+        hashKey
+        rangeKey
+        genderFilter
+        matchFilter
+        ageFilter
+      }
+      nextToken
+    }
+  }
+`

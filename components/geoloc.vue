@@ -25,7 +25,10 @@ export default {
           body: {
             userId: vue.$store.state.user.id,
             latitude: position.coords.latitude,
-            longitude: position.coords.longitude
+            longitude: position.coords.longitude,
+            genderFilter: vue.$store.state.user.genderFilter,
+            matchFilter: vue.$store.state.user.matchFilter,
+            ageFilter: vue.$store.state.user.ageFilter
           }
         }
 
@@ -34,8 +37,9 @@ export default {
           vue.$store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
           vue.$store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
           vue.$store.commit('user/setState', { key: 'geohash', value: response.data.Items[0].hashKey.N })
-          vue.$store.commit('user/setState', { key: 'inMatch', value: response.data.Items[0].inMatch.BOOL })
-          vue.$store.commit('user/setState', { key: 'matchType', value: response.data.Items[0].matchType.S })
+          vue.$store.commit('user/setState', { key: 'genderFilter', value: response.data.Items[0].genderFilter.S })
+          vue.$store.commit('user/setState', { key: 'matchFilter', value: response.data.Items[0].matchFilter.S })
+          vue.$store.commit('user/setState', { key: 'ageFilter', value: response.data.Items[0].ageFilter.NS })
           vue.$store.commit('user/setState', { key: 'allowGeoloc', value: true })
 
           // Si habilito el permiso de ubicacion entonces quitar popup
@@ -49,13 +53,14 @@ export default {
       }, function (error) {
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            // Mostrar PopUp para que el usuario configure la ubicacion
+            // Mostrar popup para que el usuario configure la ubicacion
             vue.$store.commit('geoloc/setState', { key: 'toggle', value: true })
             vue.$store.commit('geoloc/setState', { key: 'message', value: 'Ups denego el permiso' })
             vue.$store.commit('geoloc/setState', { key: 'allowBtn', value: false })
             vue.$store.commit('geoloc/setState', { key: 'resetBtn', value: true })
             vue.$store.commit('user/setState', { key: 'allowGeoloc', value: false })
             break
+
           default:
             console.log('Error desconocido.')
             break

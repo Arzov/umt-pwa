@@ -5,30 +5,25 @@ import { API } from 'aws-amplify'
 export default ({ route, store, redirect }) => {
   // Validar si dispositivo soporta geolocalizacion
   if ('geolocation' in navigator) {
-    // Si el usuario acepto el permiso de la geolocalizacion entonces se debe
-    // actualizar la posicion siempre y cuando el usuario se encuentre en la
-    // vista Home
+    // El usuario acepto el permiso de geolocalizacion
     if (store.state.user.allowGeoloc) {
       // Obtener ubicacion del usuario
       navigator.geolocation.getCurrentPosition(function (position) {
-        const isInHome = (function (path) {
-          switch (path) {
-            case process.env.routes.home.name:
-              return true
-            default:
-              return false
-          }
-        })(route.name) // Indica si el usuario se encuentra en la vista Home
+        // Ruta actual
+        const currentPath = route.name
 
         // Actualizar ubicacion solo si esta en la vista Home
-        if (isInHome) {
+        if (currentPath === process.env.routes.home.name) {
           const apiName = process.env.aws.APIGATEWAY_UMATCH_NAME
           const path = process.env.aws.LAMBDA_ARV_UMT_PUT_GEOLOCATION
           const params = {
             body: {
               userId: store.state.user.id,
               latitude: position.coords.latitude,
-              longitude: position.coords.longitude
+              longitude: position.coords.longitude,
+              genderFilter: store.state.user.genderFilter,
+              matchFilter: store.state.user.matchFilter,
+              ageFilter: store.state.user.ageFilter
             }
           }
 
@@ -37,25 +32,26 @@ export default ({ route, store, redirect }) => {
             store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
             store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
             store.commit('user/setState', { key: 'geohash', value: response.data.Items[0].hashKey.N })
-            store.commit('user/setState', { key: 'inMatch', value: response.data.Items[0].inMatch.BOOL })
-            store.commit('user/setState', { key: 'matchType', value: response.data.Items[0].matchType.S })
-          }).catch((error) => {
-            // eslint-disable-next-line no-console
-            console.log(error)
-          })
+            store.commit('user/setState', { key: 'genderFilter', value: response.data.Items[0].genderFilter.S })
+            store.commit('user/setState', { key: 'matchFilter', value: response.data.Items[0].matchFilter.S })
+            store.commit('user/setState', { key: 'ageFilter', value: response.data.Items[0].ageFilter.NS })
+
+          // eslint-disable-next-line no-console
+          }).catch(e => console.log(e))
         }
 
       // Error en la peticion de la ubicacion
       }, function (error) {
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            // Mostrar PopUp para que el usuario configure la ubicacion
+            // Mostrar popup para que el usuario configure la ubicacion
             store.commit('geoloc/setState', { key: 'toggle', value: true })
             store.commit('geoloc/setState', { key: 'message', value: 'Ups denego el permiso' })
             store.commit('geoloc/setState', { key: 'allowBtn', value: false })
             store.commit('geoloc/setState', { key: 'resetBtn', value: true })
             store.commit('user/setState', { key: 'allowGeoloc', value: false })
             break
+
           default:
             // eslint-disable-next-line no-console
             console.log('¡Error desconocido!')
@@ -68,6 +64,6 @@ export default ({ route, store, redirect }) => {
   } else {
     // Deberia desplegarse el popup de que no es posible usar la app
     // eslint-disable-next-line no-console
-    console.log('¡La geolocalozacion no esta disponible en el dispositivo!')
+    console.log('La geolocalozacion no esta disponible en el dispositivo!')
   }
 }

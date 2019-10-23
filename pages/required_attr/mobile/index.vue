@@ -1,6 +1,11 @@
 <template>
   <div id="page-required-attr-mobile">
     <a-row>
+      <a-row type="flex" justify="center">
+        <a-button @click="logout">
+          Salir
+        </a-button>
+      </a-row>
       <a-select placeholder="Día" style="width: 100px" @change="getBirthDay">
         <a-select-option v-for="day in days" :key="'d' + day" :value="day">
           {{ day }}
@@ -80,6 +85,12 @@ export default {
         birthDay: this.birthDay,
         birthMonth: this.birthMonth,
         birthYear: this.birthYear
+      }
+      this.$emit('emit', params)
+    },
+    logout () {
+      const params = {
+        type: this.events.LOGOUT
       }
       this.$emit('emit', params)
     }
