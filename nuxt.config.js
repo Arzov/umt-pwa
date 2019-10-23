@@ -1,3 +1,4 @@
+/* eslint-disable nuxt/no-cjs-in-config */
 const routes = require('./static/routes')
 const aws = require('./static/aws')
 const app = require('./static/app')
@@ -63,7 +64,7 @@ export default {
   ** Router options
   */
   router: {
-    middleware: ['auth', 'required_attr', 'required_filters'], // , 'geoloc'],
+    middleware: ['auth', 'geoloc'],
     extendRoutes (routes, resolve) {
       routes.push({
         name: 'custom',

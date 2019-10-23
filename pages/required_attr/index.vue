@@ -138,7 +138,6 @@ export default {
 
           this.$Amplify.Auth.signOut({ global: true })
             .then(function (data) {
-              console.log(data)
               router.push(process.env.routes.start.path)
             })
             .catch(err => console.log(err))

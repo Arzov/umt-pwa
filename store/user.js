@@ -8,10 +8,10 @@ export const state = () => ({
   latitude: null,
   longitude: null,
   geohash: null,
-  allowGeoloc: false,
   matchFilter: null,
   genderFilter: null,
-  ageFilter: null
+  ageFilter: null,
+  allowGeoloc: false
 })
 
 export const mutations = {

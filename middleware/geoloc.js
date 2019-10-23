@@ -35,10 +35,9 @@ export default ({ route, store, redirect }) => {
             store.commit('user/setState', { key: 'genderFilter', value: response.data.Items[0].genderFilter.S })
             store.commit('user/setState', { key: 'matchFilter', value: response.data.Items[0].matchFilter.S })
             store.commit('user/setState', { key: 'ageFilter', value: response.data.Items[0].ageFilter.NS })
-          }).catch((error) => {
-            // eslint-disable-next-line no-console
-            console.log(error)
-          })
+
+          // eslint-disable-next-line no-console
+          }).catch(e => console.log(e))
         }
 
       // Error en la peticion de la ubicacion
