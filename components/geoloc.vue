@@ -24,6 +24,12 @@
 </template>
 
 <script>
+import { API, graphqlOperation } from 'aws-amplify'
+import { addUserLocation } from '@/graphql/mutations'
+
+// Usar API de Umatch
+API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+
 export default {
   name: 'Geolocation',
   methods: {
@@ -32,35 +38,29 @@ export default {
 
       // Obtener ubicacion del usuario
       navigator.geolocation.getCurrentPosition(function (position) {
-        const apiName = process.env.aws.APIGATEWAY_UMATCH_NAME
-        const path = process.env.aws.LAMBDA_ARV_UMT_PUT_GEOLOCATION
+        // Parametros para graphql
         const params = {
-          body: {
-            userId: vue.$store.state.user.id,
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            genderFilter: vue.$store.state.user.genderFilter,
-            matchFilter: vue.$store.state.user.matchFilter,
-            ageFilter: vue.$store.state.user.ageFilter
-          }
+          userId: vue.$store.state.user.id,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          genderFilter: vue.$store.state.user.genderFilter,
+          matchFilter: vue.$store.state.user.matchFilter,
+          ageFilter: vue.$store.state.user.ageFilter
         }
 
-        // Llamada a Lambda para agregar posicion del usuario
-        vue.$Amplify.API.post(apiName, path, params).then((response) => {
-          vue.$store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
-          vue.$store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
-          vue.$store.commit('user/setState', { key: 'geohash', value: response.data.Items[0].hashKey.N })
-          vue.$store.commit('user/setState', { key: 'genderFilter', value: response.data.Items[0].genderFilter.S })
-          vue.$store.commit('user/setState', { key: 'matchFilter', value: response.data.Items[0].matchFilter.S })
-          vue.$store.commit('user/setState', { key: 'ageFilter', value: response.data.Items[0].ageFilter.NS })
-          vue.$store.commit('user/setState', { key: 'allowGeoloc', value: true })
+        // Agregar posicion del usuario
+        API.graphql(graphqlOperation(addUserLocation, params))
+          .then((response) => {
+            vue.$store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
+            vue.$store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
+            vue.$store.commit('user/setState', { key: 'geohash', value: response.hashKey })
+            vue.$store.commit('user/setState', { key: 'allowGeoloc', value: true })
 
-          // Si habilito el permiso de ubicacion entonces quitar popup
-          vue.$store.commit('geoloc/setState', { key: 'toggle', value: false })
-        }).catch((error) => {
-          console.log(error)
-        })
-        // }
+            // Ocultar popup
+            vue.$store.commit('geoloc/setState', { key: 'toggle', value: false })
+          })
+          // eslint-disable-next-line no-console
+          .catch(e => console.log(e))
 
       // Error en la peticion de la ubicacion
       }, function (error) {

@@ -1,5 +1,6 @@
 // LIBRERIAS
-import { API } from 'aws-amplify'
+import { API, graphqlOperation } from 'aws-amplify'
+import { addUserLocation } from '@/graphql/mutations'
 
 // EXPORT
 export default ({ route, store, redirect }) => {
@@ -12,32 +13,29 @@ export default ({ route, store, redirect }) => {
         // Ruta actual
         const currentPath = route.name
 
-        // Actualizar ubicacion solo si esta en la vista Home
         if (currentPath === process.env.routes.home.name) {
-          const apiName = process.env.aws.APIGATEWAY_UMATCH_NAME
-          const path = process.env.aws.LAMBDA_ARV_UMT_PUT_GEOLOCATION
+          // Usar API de Umatch
+          API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+
+          // Parametros para graphql
           const params = {
-            body: {
-              userId: store.state.user.id,
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              genderFilter: store.state.user.genderFilter,
-              matchFilter: store.state.user.matchFilter,
-              ageFilter: store.state.user.ageFilter
-            }
+            userId: store.state.user.id,
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            genderFilter: store.state.user.genderFilter,
+            matchFilter: store.state.user.matchFilter,
+            ageFilter: store.state.user.ageFilter
           }
 
-          // Llamada a Lambda para agregar posicion del usuario
-          API.post(apiName, path, params).then((response) => {
-            store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
-            store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
-            store.commit('user/setState', { key: 'geohash', value: response.data.Items[0].hashKey.N })
-            store.commit('user/setState', { key: 'genderFilter', value: response.data.Items[0].genderFilter.S })
-            store.commit('user/setState', { key: 'matchFilter', value: response.data.Items[0].matchFilter.S })
-            store.commit('user/setState', { key: 'ageFilter', value: response.data.Items[0].ageFilter.NS })
-
-          // eslint-disable-next-line no-console
-          }).catch(e => console.log(e))
+          // Agregar posicion del usuario
+          API.graphql(graphqlOperation(addUserLocation, params))
+            .then((response) => {
+              store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
+              store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
+              store.commit('user/setState', { key: 'geohash', value: response.hashKey })
+            })
+            // eslint-disable-next-line no-console
+            .catch(e => console.log(e))
         }
 
       // Error en la peticion de la ubicacion
