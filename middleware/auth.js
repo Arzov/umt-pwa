@@ -1,6 +1,6 @@
 // LIBRERIAS
 import { Auth, API, Hub, graphqlOperation } from 'aws-amplify'
-import { getUser, getUsers } from '@/graphql/queries'
+import { getUser, getUmatchUser } from '@/graphql/queries'
 
 // FUNCIONES
 function authValidation (route, store, redirect) {
@@ -31,13 +31,13 @@ function authValidation (route, store, redirect) {
             API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
             // Obtener datos Umatch del usuario
-            API.graphql(graphqlOperation(getUsers, { rangeKey: store.state.user.id }))
+            API.graphql(graphqlOperation(getUmatchUser, { rangeKey: store.state.user.id }))
               .then(function (result) {
                 // Guardar filtros si existen desde DynamoDB
-                if (result.data.getUsers.items.length) {
-                  store.commit('user/setState', { key: 'matchFilter', value: result.data.getUsers.items[0].matchFilter })
-                  store.commit('user/setState', { key: 'genderFilter', value: result.data.getUsers.items[0].genderFilter })
-                  store.commit('user/setState', { key: 'ageFilter', value: result.data.getUsers.items[0].ageFilter })
+                if (result.data.getUser.items.length) {
+                  store.commit('user/setState', { key: 'matchFilter', value: result.data.getUser.items[0].matchFilter })
+                  store.commit('user/setState', { key: 'genderFilter', value: result.data.getUser.items[0].genderFilter })
+                  store.commit('user/setState', { key: 'ageFilter', value: result.data.getUser.items[0].ageFilter })
                 }
 
                 // Redireccionar a Home

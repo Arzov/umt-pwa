@@ -59,12 +59,12 @@ export const getUser = `
   }
 `
 
-export const getUsers = `
-  query getUsers(
+export const getUmatchUser = `
+  query getUser(
     $rangeKey: String!
     $nextToken: String
   ) {
-    getUsers(
+    getUser(
       rangeKey: $rangeKey
       nextToken: $nextToken
     ) {
