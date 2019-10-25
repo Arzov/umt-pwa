@@ -2,18 +2,39 @@
 import { API, graphqlOperation } from 'aws-amplify'
 import { addUserLocation } from '@/graphql/mutations'
 
+// FUNCIONES
+function getDistanceFromLatLonInKm (lat1, lon1, lat2, lon2) {
+  const R = 6371 // Radius of the earth in km
+  const p = Math.PI / 180
+  const dLat = (lat2 - lat1) * p
+  const dLon = (lon2 - lon1) * p
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * p) * Math.cos(lat2 * p) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2)
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  const d = R * c // Distance in km
+  return d
+}
+
 // EXPORT
-export default ({ route, store, redirect }) => {
+export default ({ store }) => {
   // Validar si dispositivo soporta geolocalizacion
   if ('geolocation' in navigator) {
     // El usuario acepto el permiso de geolocalizacion
     if (store.state.user.allowGeoloc) {
-      // Actualizar la ubicacion cada vez que entra al Home
+      // Actualizar la ubicacion si el usuario se mueve mas de 10km
       navigator.geolocation.getCurrentPosition(function (position) {
-        // Ruta actual
-        const currentPath = route.name
+        // Distancia desplazada
+        const moveDistance = getDistanceFromLatLonInKm(
+          position.coords.latitude,
+          position.coords.longitude,
+          store.state.user.latitude,
+          store.state.user.longitude
+        )
 
-        if (currentPath === process.env.routes.home.name) {
+        if (moveDistance >= 10) {
           // Usar API de Umatch
           API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
