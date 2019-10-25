@@ -1,8 +1,6 @@
 export const state = () => ({
   toggle: true,
-  message: 'Permitir ubicacion',
-  allowBtn: true,
-  resetBtn: false
+  allow: true
 })
 
 export const mutations = {
@@ -11,8 +9,6 @@ export const mutations = {
   },
   resetStates (state) {
     state.toggle = true
-    state.message = 'Permitir ubicacion'
-    state.allowBtn = true
-    state.resetBtn = false
+    state.allow = true
   }
 }

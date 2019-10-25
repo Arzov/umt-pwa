@@ -7,7 +7,7 @@ export default ({ route, store, redirect }) => {
   if ('geolocation' in navigator) {
     // El usuario acepto el permiso de geolocalizacion
     if (store.state.user.allowGeoloc) {
-      // Obtener ubicacion del usuario
+      // Actualizar la ubicacion cada vez que entra al Home
       navigator.geolocation.getCurrentPosition(function (position) {
         // Ruta actual
         const currentPath = route.name
@@ -46,9 +46,7 @@ export default ({ route, store, redirect }) => {
           case error.PERMISSION_DENIED:
             // Mostrar popup para que el usuario configure la ubicacion
             store.commit('geoloc/setState', { key: 'toggle', value: true })
-            store.commit('geoloc/setState', { key: 'message', value: 'Ups denego el permiso' })
-            store.commit('geoloc/setState', { key: 'allowBtn', value: false })
-            store.commit('geoloc/setState', { key: 'resetBtn', value: true })
+            store.commit('geoloc/setState', { key: 'allow', value: false })
             store.commit('user/setState', { key: 'allowGeoloc', value: false })
             break
 

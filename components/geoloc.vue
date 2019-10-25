@@ -1,12 +1,25 @@
 <template>
   <div v-if="this.$store.state.geoloc.toggle">
-    {{ this.$store.state.geoloc.message }}
-    <a-button v-if="this.$store.state.geoloc.allowBtn" @click="getPosition">
-      Aceptar
-    </a-button>
-    <a-button v-if="this.$store.state.geoloc.resetBtn" @click="resetStates">
-      Aceptar
-    </a-button>
+    <a-row v-if="this.$store.state.geoloc.allow">
+      <h1><b>Comparte tu ubicación</b></h1>
+      Umatch utiliza tu ubicación para encontrar rivales cercanos. Presiona el botón "Aceptar" y luego debes permitir el acceso a la ubicación, de lo contrario no podrás usar la aplicación.
+      <a-button @click="getPosition">
+        Aceptar
+      </a-button>
+      <a-button @click="logout">
+        Cerrar sesión
+      </a-button>
+    </a-row>
+    <a-row v-else>
+      <h1><b>¡Ubicación denegada!</b></h1>
+      Necesitas habilitar la ubicación para utilizar la aplicación. Debes configurar tu navegador.
+      <a-button>
+        Configurar
+      </a-button>
+      <a-button @click="resetStates">
+        Atrás
+      </a-button>
+    </a-row>
   </div>
 </template>
 
@@ -55,9 +68,7 @@ export default {
           case error.PERMISSION_DENIED:
             // Mostrar popup para que el usuario configure la ubicacion
             vue.$store.commit('geoloc/setState', { key: 'toggle', value: true })
-            vue.$store.commit('geoloc/setState', { key: 'message', value: 'Ups denego el permiso' })
-            vue.$store.commit('geoloc/setState', { key: 'allowBtn', value: false })
-            vue.$store.commit('geoloc/setState', { key: 'resetBtn', value: true })
+            vue.$store.commit('geoloc/setState', { key: 'allow', value: false })
             vue.$store.commit('user/setState', { key: 'allowGeoloc', value: false })
             break
 
@@ -69,6 +80,9 @@ export default {
     },
     resetStates () {
       this.$store.commit('geoloc/resetStates')
+    },
+    logout () {
+      this.$Amplify.Auth.signOut({ global: true })
     }
   }
 }
