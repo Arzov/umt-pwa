@@ -1,15 +1,14 @@
 // LIBRERIAS
-import { Auth, API, graphqlOperation } from 'aws-amplify'
+import { Auth, API, Hub, graphqlOperation } from 'aws-amplify'
 import { getUser, getUsers } from '@/graphql/queries'
 
-// EXPORT
-export default ({ route, store, redirect }) => {
+// FUNCIONES
+function authValidation (route, store, redirect) {
   // Ruta actual
   const currentPath = route.name
 
   // Obtener sesion actual
   Auth.currentSession()
-
     // Sesion iniciada
     .then(function (data) {
       // Si se encuentra en Star enviar a Home
@@ -96,4 +95,22 @@ export default ({ route, store, redirect }) => {
         redirect(process.env.routes.start.path)
       }
     })
+}
+
+// EXPORT
+export default ({ route, store, redirect }) => {
+  // Escuchar evento cuando se inicia o se cierra sesion
+  Hub.listen('auth', ({ payload: { event, data } }) => {
+    switch (event) {
+      case 'signIn':
+        authValidation(route, store, redirect)
+        break
+      case 'signOut':
+        store.commit('user/resetStates')
+        redirect(process.env.routes.start.path)
+        break
+    }
+  })
+
+  authValidation(route, store, redirect)
 }

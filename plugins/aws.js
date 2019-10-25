@@ -15,7 +15,7 @@ Amplify.configure({
       ],
       redirectSignIn: process.env.app.ROOT_URL,
       redirectSignOut: process.env.app.ROOT_URL,
-      responseType: 'token'
+      responseType: 'code'
     }
   },
   API: {

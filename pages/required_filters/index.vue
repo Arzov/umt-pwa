@@ -70,13 +70,7 @@ export default {
           break
 
         case this.event.LOGOUT:
-          const router = this.$router
-
           this.$Amplify.Auth.signOut({ global: true })
-            .then(function (data) {
-              router.push(process.env.routes.start.path)
-            })
-            .catch(err => console.log(err))
           break
       }
     }

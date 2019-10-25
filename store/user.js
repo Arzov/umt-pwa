@@ -19,12 +19,18 @@ export const mutations = {
     state[key] = value
   },
   resetStates (state) {
-    /* eslint-disable no-unused-vars */
-    for (const key in state) {
-      if (state.hasOwnProperty(key)) {
-        state[key] = key === 'allowGeoloc' ? state[key] : null
-      }
-    }
-    /* eslint-enable no-unused-vars */
+    state.id = null
+    state.firstName = null
+    state.lastName = null
+    state.birthdate = null
+    state.gender = null
+    state.picture = null
+    state.latitude = null
+    state.longitude = null
+    state.geohash = null
+    state.matchFilter = null
+    state.genderFilter = null
+    state.ageFilter = null
+    state.allowGeoloc = false
   }
 }
