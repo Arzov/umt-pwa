@@ -60,7 +60,8 @@ export default {
             // Guardar datos en el store del usuario
             this.$store.commit('user/setState', { key: 'matchFilter', value: event.match })
             this.$store.commit('user/setState', { key: 'genderFilter', value: event.gender })
-            this.$store.commit('user/setState', { key: 'ageFilter', value: age })
+            this.$store.commit('user/setState', { key: 'ageMinFilter', value: age[0] })
+            this.$store.commit('user/setState', { key: 'ageMaxFilter', value: age[1] })
 
             // Enviar a Home
             this.$router.push(process.env.routes.home.path)

@@ -45,7 +45,8 @@ export default ({ store }) => {
             longitude: position.coords.longitude,
             genderFilter: store.state.user.genderFilter,
             matchFilter: store.state.user.matchFilter,
-            ageFilter: store.state.user.ageFilter
+            ageMinFilter: store.state.user.ageMinFilter,
+            ageMaxFilter: store.state.user.ageMaxFilter
           }
 
           // Agregar posicion del usuario

@@ -73,7 +73,8 @@ export const getUmatchUser = `
         rangeKey
         genderFilter
         matchFilter
-        ageFilter
+        ageMinFilter
+        ageMaxFilter
       }
       nextToken
     }

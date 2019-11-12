@@ -37,7 +37,8 @@ function authValidation (route, store, redirect) {
                 if (result.data.getUser.items.length) {
                   store.commit('user/setState', { key: 'matchFilter', value: result.data.getUser.items[0].matchFilter })
                   store.commit('user/setState', { key: 'genderFilter', value: result.data.getUser.items[0].genderFilter })
-                  store.commit('user/setState', { key: 'ageFilter', value: result.data.getUser.items[0].ageFilter })
+                  store.commit('user/setState', { key: 'ageMinFilter', value: result.data.getUser.items[0].ageMinFilter })
+                  store.commit('user/setState', { key: 'ageMaxFilter', value: result.data.getUser.items[0].ageMaxFilter })
                 }
 
                 // Redireccionar a Home

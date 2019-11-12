@@ -45,7 +45,8 @@ export default {
           longitude: position.coords.longitude,
           genderFilter: vue.$store.state.user.genderFilter,
           matchFilter: vue.$store.state.user.matchFilter,
-          ageFilter: vue.$store.state.user.ageFilter
+          ageMinFilter: vue.$store.state.user.ageMinFilter,
+          ageMaxFilter: vue.$store.state.user.ageMaxFilter
         }
 
         // Agregar posicion del usuario
