@@ -20,6 +20,7 @@ const event = {
 
 export default {
   name: 'Home',
+  layout: 'app',
   components: { HomeMobile },
   data () {
     return {
