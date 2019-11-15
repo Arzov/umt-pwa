@@ -54,7 +54,7 @@ export default ({ store }) => {
             .then((response) => {
               store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
               store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
-              store.commit('user/setState', { key: 'geohash', value: response.hashKey })
+              store.commit('user/setState', { key: 'geohash', value: response.data.addUserLocation.hashKey })
             })
             // eslint-disable-next-line no-console
             .catch(e => console.log(e))

@@ -12,6 +12,7 @@ export const state = () => ({
   genderFilter: null,
   ageMinFilter: null,
   ageMaxFilter: null,
+  matchNextToken: null,
   allowGeoloc: false
 })
 
@@ -33,6 +34,7 @@ export const mutations = {
     state.genderFilter = null
     state.ageMinFilter = null
     state.ageMaxFilter = null
+    state.matchNextToken = null
     state.allowGeoloc = false
   }
 }

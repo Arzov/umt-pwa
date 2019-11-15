@@ -54,7 +54,7 @@ export default {
           .then((response) => {
             vue.$store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
             vue.$store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
-            vue.$store.commit('user/setState', { key: 'geohash', value: response.hashKey })
+            vue.$store.commit('user/setState', { key: 'geohash', value: response.data.addUserLocation.hashKey })
             vue.$store.commit('user/setState', { key: 'allowGeoloc', value: true })
 
             // Ocultar popup

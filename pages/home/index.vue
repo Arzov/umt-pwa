@@ -1,22 +1,41 @@
 <template>
   <div>
     <mq-layout :mq="['mobile', 'tablet']">
-      <home-mobile :events="event" @emit="onEmit($event)" />
+      <home-mobile :getDistance="getDistance" :usersFound="userFound" :events="event" @emit="onEmit($event)" />
     </mq-layout>
   </div>
 </template>
 
 <script>
+import { API, graphqlOperation } from 'aws-amplify'
 import HomeMobile from './mobile'
+import { searchMatch } from '@/graphql/queries'
 
 /**
  * Evento que pueden emitir las vistas.
- * @type {{TO_MATCH: string, FIND_MATCH: string}}
+ * @type {{SEARCH_MATCH: string}}
  */
 const event = {
-  TO_MATCH: 'to_match',
-  FIND_MATCH: 'find_match'
+  SEARCH_MATCH: 'SEARCH_MATCH'
 }
+
+function getDistance (lat1, lon1, lat2, lon2) {
+  const R = 6371 // Radius of the earth in km
+  const p = Math.PI / 180
+  const dLat = (lat2 - lat1) * p
+  const dLon = (lon2 - lon1) * p
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * p) * Math.cos(lat2 * p) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2)
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  const d = R * c // Distance in km
+  return d
+}
+
+// Usar API de Umatch
+API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
 export default {
   name: 'Home',
@@ -24,93 +43,33 @@ export default {
   components: { HomeMobile },
   data () {
     return {
-      event
+      event,
+      userFound: [],
+      getDistance
     }
   },
-  methods: {
-    /**
-     * Captura eventos generados por las vistas.
-     * @param  {Object} event Evento emitido por la vista.
-     */
-    onEmit (event) {
-      switch (event.type) {
-        case this.event.TO_MATCH:
-          this.$router.push(process.env.routes.match.path)
-          break
+  async mounted () {
+    try {
+      // Obtener usuarios cercanos para hacer match
+      const result = await API.graphql(
+        graphqlOperation(searchMatch, {
+          hashKey: this.$store.state.user.geohash,
+          nextToken: this.$store.state.user.matchNextToken,
+          birthdate: this.$store.state.user.birthdate,
+          matchFilter: this.$store.state.user.matchFilter,
+          genderFilter: this.$store.state.user.genderFilter,
+          rangeKey: this.$store.state.user.id,
+          ageMinFilter: this.$store.state.user.ageMinFilter,
+          ageMaxFilter: this.$store.state.user.ageMaxFilter,
+          gender: this.$store.state.user.gender
+        })
+      )
 
-        case this.event.FIND_MATCH:
-          // Buscar rival
-          const apiName = process.env.aws.APIGATEWAY_UMATCH_NAME
-          let path = process.env.aws.LAMBDA_ARV_UMT_SEARCH_MATCH
-          let params = {
-            body: {
-              hashKey: this.$store.state.user.geohash,
-              rangeKey: this.$store.state.user.id,
-              matchType: this.$store.state.user.matchType,
-              name: this.$store.state.user.firstName
-            }
-          }
-
-          this.$Amplify.API.post(apiName, path, params)
-            .then((response) => {
-              console.log('1 Buscar')
-              console.log(response)
-
-              switch (response.status) {
-                case 'SEARCHING_MATCH':
-                  // Agregar match
-                  path = process.env.aws.LAMBDA_ARV_UMT_ADD_MATCH
-                  params = {
-                    body: {
-                      hashKey: this.$store.state.user.geohash,
-                      rangeKey: this.$store.state.user.id,
-                      matchType: this.$store.state.user.matchType
-                    }
-                  }
-
-                  this.$Amplify.API.post(apiName, path, params)
-                    .then((response) => {
-                      console.log('2 Agregar')
-                      console.log(response)
-
-                      // Actualizar estado del usuario inMatch = true
-                      path = process.env.aws.LAMBDA_ARV_UMT_UPDATE_USER
-                      params = {
-                        body: {
-                          hashKey: this.$store.state.user.geohash,
-                          rangeKey: this.$store.state.user.id,
-                          matchType: this.$store.state.user.matchType,
-                          searching: false,
-                          inMatch: true
-                        }
-                      }
-
-                      this.$Amplify.API.post(apiName, path, params)
-                        .then((response) => {
-                          this.$store.commit('user/setState', {
-                            key: 'inMatch',
-                            value: true
-                          })
-                        })
-                        .catch((error) => {
-                          console.log(error)
-                        })
-                    })
-                    .catch((error) => {
-                      console.log(error)
-                    })
-                  break
-
-                default:
-                  console.log('Error desconocido.')
-                  break
-              }
-            })
-            .catch((error) => {
-              console.log(error)
-            })
-          break
-      }
+      this.$store.commit('user/setState', { key: 'matchNextToken', value: result.data.searchMatch.nextToken })
+      this.userFound = result.data.searchMatch.items
+      console.log(result)
+    } catch (e) {
+      console.log(e)
     }
   }
 }
