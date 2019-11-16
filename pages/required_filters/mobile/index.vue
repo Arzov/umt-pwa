@@ -1,29 +1,29 @@
 <template>
   <div id="page-required-filters-mobile">
     <a-row type="flex" justify="center">
-        <a-button @click="logout">
-          Salir
-        </a-button>
-      </a-row>
+      <a-button @click="logout">
+        Salir
+      </a-button>
+    </a-row>
     <a-row type="flex" justify="center">
       <a-radio-group name="radioGroup" :default-value="match" @change="getMatch">
-        <a-radio v-for="match in matches" :key="'m' + match.value" :value="match.value">
+        <a-radio v-for="match in matchOptions" :key="'m' + match.value" :value="match.value">
           {{ match.name }}
         </a-radio>
       </a-radio-group>
     </a-row>
     <a-row type="flex" justify="center">
       <a-radio-group name="radioGroup" :default-value="gender" @change="getGender">
-        <a-radio v-for="gender in genders" :key="'g' + gender.value" :value="gender.value">
+        <a-radio v-for="gender in genderOptions" :key="'g' + gender.value" :value="gender.value">
           {{ gender.name }}
         </a-radio>
       </a-radio-group>
     </a-row>
     <a-row>
-      <a-slider range :defaultValue="ages.default" :min="ages.min" :max="ages.max" @change="getAge" />
+      <a-slider range :default-value="ageRange.default" :min="ageRange.min" :max="ageRange.max" @change="getAge" />
     </a-row>
     <a-row type="flex" justify="center">
-      <a-button @click="updateUser">
+      <a-button @click="saveFilters">
         Continuar
       </a-button>
     </a-row>
@@ -34,16 +34,16 @@
 export default {
   name: 'RequiredFiltersMobile',
   props: {
-    events: {
+    event: {
       required: true
     },
-    matches: {
+    matchOptions: {
       required: true
     },
-    genders: {
+    genderOptions: {
       required: true
     },
-    ages: {
+    ageRange: {
       required: true
     }
   },
@@ -51,31 +51,51 @@ export default {
     return {
       gender: false,
       match: false,
-      age: this.ages.default
+      age: this.ageRange.default
     }
   },
   methods: {
-    getMatch (e) {
-      this.match = e.target.value
+    /**
+     * Metodo que obtiene el filtro de tipo de match seleccionado.
+     * @param  {Object} option Opcion seleccionada por el usuario.
+     */
+    getMatch (option) {
+      this.match = option.target.value
     },
-    getGender (e) {
-      this.gender = e.target.value
+    /**
+     * Metodo que obtiene el filtro de sexo seleccionado.
+     * @param  {Object} option Opcion seleccionada por el usuario.
+     */
+    getGender (option) {
+      this.gender = option.target.value
     },
+    /**
+     * Metodo que obtiene el filtro de rango etario seleccionado.
+     * @param  {number[]} value Rango de edad seleccionado.
+     */
     getAge (value) {
       this.age = value
     },
-    updateUser () {
+    /**
+     * Metodo guarda los filtros seleccionados.
+     * @return {Object} Evento de tipo SAVE_FILTERS.
+     */
+    saveFilters () {
       const params = {
-        type: this.events.UPDATE_USER,
+        type: this.event.SAVE_FILTERS,
         gender: this.gender,
         match: this.match,
         age: this.age
       }
       this.$emit('emit', params)
     },
+    /**
+     * Metodo para cerrar sesion.
+     * @return {Object} Evento de tipo LOGOUT.
+     */
     logout () {
       const params = {
-        type: this.events.LOGOUT
+        type: this.event.LOGOUT
       }
       this.$emit('emit', params)
     }

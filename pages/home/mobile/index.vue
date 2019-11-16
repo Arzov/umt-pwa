@@ -31,7 +31,7 @@ export default {
   name: 'HomeMobile',
   components: { Geolocation },
   props: {
-    events: {
+    event: {
       required: true
     },
     usersFound: {
@@ -49,9 +49,13 @@ export default {
           firstName: user.firstName,
           age: user.age,
           picture: user.picture,
-          distance: Math.round(this.getDistance(user.geoJson[1], user.geoJson[0], this.$store.state.user.latitude, this.$store.state.user.longitude))
+          distance: Math.round(this.getDistance(
+            user.geoJson[1],
+            user.geoJson[0],
+            this.$store.getters['user/userData'].coordinates.latitude,
+            this.$store.getters['user/userData'].coordinates.longitude
+          ))
         }
-
         return userEdited
       })
     }
@@ -63,7 +67,7 @@ export default {
      */
     searchMatch () {
       const params = {
-        type: this.events.SEARCH_MATCH
+        type: this.event.SEARCH_MATCH
       }
       this.$emit('emit', params)
     }

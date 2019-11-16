@@ -15,7 +15,7 @@
 export default {
   name: 'LoginMobile',
   props: {
-    events: {
+    event: {
       required: true
     }
   },
@@ -29,7 +29,7 @@ export default {
 
     login () {
       const params = {
-        type: this.events.LOGIN,
+        type: this.event.LOGIN,
         data: {
           username: this.email,
           password: this.password

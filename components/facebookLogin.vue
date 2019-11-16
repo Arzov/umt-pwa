@@ -14,7 +14,7 @@ export default {
      * Autenticacion con Facebook.
      */
     toFacebookLogin () {
-      this.$Amplify.Auth.federatedSignIn({ provider: 'Facebook' })
+      this.$AWS.Auth.federatedSignIn({ provider: 'Facebook' })
     }
   }
 }

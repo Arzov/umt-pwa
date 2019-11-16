@@ -21,7 +21,7 @@ export default {
   name: 'StartMobile',
   components: { FacebookLogin, GoogleLogin },
   props: {
-    events: {
+    event: {
       required: true
     }
   },
@@ -32,7 +32,7 @@ export default {
      */
     toLogin () {
       const params = {
-        type: this.events.TO_LOGIN
+        type: this.event.TO_LOGIN
       }
       this.$emit('emit', params)
     },
@@ -42,7 +42,7 @@ export default {
      */
     toRegister () {
       const params = {
-        type: this.events.TO_REGISTER
+        type: this.event.TO_REGISTER
       }
       this.$emit('emit', params)
     }

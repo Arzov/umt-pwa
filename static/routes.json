@@ -7,9 +7,13 @@
         "path": "/login",
         "name": "login"
     },
-    "required_attr": {
-        "path": "/required_attr",
-        "name": "required_attr"
+    "register": {
+        "path": "/register",
+        "name": "register"
+    },
+    "required_attributes": {
+        "path": "/required_attributes",
+        "name": "required_attributes"
     },
     "required_filters": {
         "path": "/required_filters",

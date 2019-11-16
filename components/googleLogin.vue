@@ -14,7 +14,7 @@ export default {
      * Autenticacion con Google.
      */
     toGoogleLogin () {
-      this.$Amplify.Auth.federatedSignIn({ provider: 'Google' })
+      this.$AWS.Auth.federatedSignIn({ provider: 'Google' })
     }
   }
 }

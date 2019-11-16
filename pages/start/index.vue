@@ -1,7 +1,7 @@
 <template>
   <div>
     <mq-layout :mq="['mobile', 'tablet']">
-      <start-mobile :events="event" @emit="onEmit($event)" />
+      <start-mobile :event="event" @emit="onEmit($event)" />
     </mq-layout>
   </div>
 </template>
@@ -35,7 +35,6 @@ export default {
       switch (event.type) {
         // Redireccionar a la vista Login
         case this.event.TO_LOGIN:
-          console.log('Login')
           this.$router.push(process.env.routes.login.path)
           break
 

@@ -1,71 +1,49 @@
-// LIBRERIAS
-import { Auth, API, Hub, graphqlOperation } from 'aws-amplify'
-import { getUser, getUmatchUser } from '@/graphql/queries'
-
 // FUNCIONES
-function authValidation (route, store, redirect) {
+function authValidation (app, route, store, redirect) {
   // Ruta actual
   const currentPath = route.name
 
+  // Rutas
+  const path = {
+    home_path: process.env.routes.home.path,
+    start: process.env.routes.start.name,
+    start_path: process.env.routes.start.path,
+    login: process.env.routes.login.name,
+    register: process.env.routes.register.name,
+    required_attributes: process.env.routes.required_attributes.name,
+    required_attributes_path: process.env.routes.required_attributes.path,
+    required_filters: process.env.routes.required_filters.name,
+    required_filters_path: process.env.routes.required_filters.path
+  }
+
   // Obtener sesion actual
-  Auth.currentSession()
+  app.$AWS.Auth.currentSession()
     // Sesion iniciada
-    .then(function (data) {
+    .then((data) => {
       // Si se encuentra en Star enviar a Home
-      if (currentPath === process.env.routes.start.name) {
-        // Usar API de Arzov
-        API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
-
+      if (currentPath === path.start || currentPath === path.login || currentPath === path.register) {
         // Obtener datos del usuario
-        API.graphql(graphqlOperation(getUser, { hashKey: data.idToken.payload.email }))
-          .then((result) => {
-            // Guardar datos del usuario en el store
-            store.commit('user/setState', { key: 'id', value: result.data.getUser.hashKey })
-            store.commit('user/setState', { key: 'firstName', value: result.data.getUser.firstName })
-            store.commit('user/setState', { key: 'lastName', value: result.data.getUser.lastName })
-            store.commit('user/setState', { key: 'birthdate', value: result.data.getUser.birthdate })
-            store.commit('user/setState', { key: 'gender', value: result.data.getUser.gender })
-            store.commit('user/setState', { key: 'picture', value: result.data.getUser.picture })
-
-            // Usar API de Umatch
-            API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
-
-            // Obtener datos Umatch del usuario
-            API.graphql(graphqlOperation(getUmatchUser, { rangeKey: store.state.user.id }))
-              .then(function (result) {
-                // Guardar filtros si existen desde DynamoDB
-                if (result.data.getUser.items.length) {
-                  store.commit('user/setState', { key: 'matchFilter', value: result.data.getUser.items[0].matchFilter })
-                  store.commit('user/setState', { key: 'genderFilter', value: result.data.getUser.items[0].genderFilter })
-                  store.commit('user/setState', { key: 'ageMinFilter', value: result.data.getUser.items[0].ageMinFilter })
-                  store.commit('user/setState', { key: 'ageMaxFilter', value: result.data.getUser.items[0].ageMaxFilter })
-                }
-
-                // Redireccionar a Home
-                redirect(process.env.routes.home.path)
-              })
-              // eslint-disable-next-line no-console
-              .catch(e => console.log(e))
-          })
-          // eslint-disable-next-line no-console
-          .catch(e => console.log(e))
+        store.dispatch('user/fetchUserData', data)
 
       // Esta dentro de la app
       } else {
+        // Datos del usuario
+        const userData = store.getters['user/userData']
+
         /**
          * Revisar atributos obligatorios (fecha de nacimiento y sexo)
          */
 
         // No existen atributos
-        if (store.state.user.birthdate === ' ') {
-          // Si no esta en la vista RequiredAttr entonces redireccionar
-          if (currentPath !== process.env.routes.required_attr.name) {
-            redirect(process.env.routes.required_attr.path)
+        if (userData.birthdate === ' ' || userData.gender === ' ') {
+          // Si no esta en la vista RequiredAttributes entonces redireccionar
+          if (currentPath !== path.required_attributes) {
+            redirect(path.required_attributes_path)
           }
 
         // Los atributos existen y esta en RequiredAttr entonces ir a Home
-        } else if (currentPath === process.env.routes.required_attr.name) {
-          redirect(process.env.routes.home.path)
+        } else if (currentPath === path.required_attributes) {
+          redirect(path.home_path)
         }
 
         /**
@@ -73,15 +51,15 @@ function authValidation (route, store, redirect) {
          */
 
         // No existen filtros
-        if (!store.state.user.matchFilter) {
+        if (!userData.matchFilter || !userData.genderFilter || !userData.ageMinFilter || !userData.ageMaxFilter) {
           // Reenviar a RequiredFilters siempre y cuando no se este en la vista de filtros o atributos
-          if (currentPath !== process.env.routes.required_filters.name && currentPath !== process.env.routes.required_attr.name) {
-            redirect(process.env.routes.required_filters.path)
+          if (currentPath !== path.required_filters && currentPath !== path.required_attributes) {
+            redirect(path.required_filters_path)
           }
 
         // Los filtros existen y esta en RequiredFilters entonces ir a Home
-        } else if (currentPath === process.env.routes.required_filters.name) {
-          redirect(process.env.routes.home.path)
+        } else if (currentPath === path.required_filters) {
+          redirect(path.home_path)
         }
       }
     })
@@ -92,26 +70,26 @@ function authValidation (route, store, redirect) {
       console.log(err)
 
       // Si se encuentra en la app entonces enviar a Start
-      if (currentPath !== process.env.routes.start.name) {
-        redirect(process.env.routes.start.path)
+      if (currentPath !== path.start && currentPath !== path.login && currentPath !== path.register) {
+        redirect(path.start_path)
       }
     })
 }
 
 // EXPORT
-export default ({ route, store, redirect }) => {
+export default ({ app, route, store, redirect }) => {
   // Escuchar evento cuando se inicia o se cierra sesion
-  Hub.listen('auth', ({ payload: { event, data } }) => {
+  app.$AWS.Hub.listen('auth', ({ payload: { event, data } }) => {
     switch (event) {
       case 'signIn':
-        authValidation(route, store, redirect)
+        authValidation(app, route, store, redirect)
         break
       case 'signOut':
-        store.commit('user/resetStates')
+        store.dispatch('user/resetStates')
         redirect(process.env.routes.start.path)
         break
     }
   })
 
-  authValidation(route, store, redirect)
+  authValidation(app, route, store, redirect)
 }

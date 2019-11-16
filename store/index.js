@@ -1,8 +1,8 @@
 import Vuex from 'vuex'
-import login from './login/login'
-import user from './user/user'
-import geoloc from './geoloc/geoloc'
-import popup from './popup/popUp'
+import login from './modules/login'
+import user from './modules/user'
+import geoloc from './modules/geoloc'
+import home from './modules/home'
 
 const store = () => {
   return new Vuex.Store({
@@ -10,7 +10,7 @@ const store = () => {
       login,
       user,
       geoloc,
-      popup
+      home
     }
   })
 }

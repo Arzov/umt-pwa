@@ -1,7 +1,7 @@
 <template>
   <div>
     <mq-layout :mq="['mobile', 'tablet']">
-      <login-mobile :events="event" @emit="onEmit($event)" />
+      <login-mobile :event="event" @emit="onEmit($event)" />
     </mq-layout>
   </div>
 </template>

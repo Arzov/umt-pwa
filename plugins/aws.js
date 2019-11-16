@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Amplify, * as AmplifyModules from 'aws-amplify'
+import { Hub, graphqlOperation } from 'aws-amplify'
 import { AmplifyPlugin } from 'aws-amplify-vue'
 
 Amplify.configure({
@@ -37,5 +38,12 @@ Amplify.configure({
 Vue.use(AmplifyPlugin, AmplifyModules)
 
 export default (ctx, inject) => {
-  inject('Amplify', Amplify)
+  const AWS = {
+    Auth: Amplify.Auth,
+    API: Amplify.API,
+    Query: graphqlOperation,
+    Hub
+  }
+
+  inject('AWS', AWS)
 }

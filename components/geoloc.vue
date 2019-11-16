@@ -24,12 +24,6 @@
 </template>
 
 <script>
-import { API, graphqlOperation } from 'aws-amplify'
-import { addUserLocation } from '@/graphql/mutations'
-
-// Usar API de Umatch
-API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
-
 export default {
   name: 'Geolocation',
   methods: {
@@ -39,7 +33,7 @@ export default {
       // Obtener ubicacion del usuario
       navigator.geolocation.getCurrentPosition(function (position) {
         // Parametros para graphql
-        const userData = vue.$store.getters['user/userInfoGraphAPI']
+        const userData = vue.$store.getters['user/userData']
 
         const params = {
           userId: userData.id,
@@ -47,32 +41,25 @@ export default {
           longitude: position.coords.longitude,
           genderFilter: userData.genderFilter,
           matchFilter: userData.matchFilter,
-          ageMinFilter: vue.$store.state.user.ageMinFilter,
-          ageMaxFilter: vue.$store.state.user.ageMaxFilter
+          ageMinFilter: userData.ageMinFilter,
+          ageMaxFilter: userData.ageMaxFilter,
+          isSavePosition: true
         }
 
-        // Agregar posicion del usuario
-        API.graphql(graphqlOperation(addUserLocation, params))
-          .then((response) => {
-            vue.$store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
-            vue.$store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
-            vue.$store.commit('user/setState', { key: 'geohash', value: response.data.addUserLocation.hashKey })
-            vue.$store.commit('user/setState', { key: 'allowGeoloc', value: true })
-
-            // Ocultar popup
-            vue.$store.commit('geoloc/setState', { key: 'toggle', value: false })
-          })
-          // eslint-disable-next-line no-console
-          .catch(e => console.log(e))
+        vue.$store.dispatch('user/updatePosition', params)
 
       // Error en la peticion de la ubicacion
       }, function (error) {
         switch (error.code) {
           case error.PERMISSION_DENIED:
+            // Parametros para dispatch
+            const params = {
+              toggle: true,
+              allow: false
+            }
+
             // Mostrar popup para que el usuario configure la ubicacion
-            vue.$store.commit('geoloc/setState', { key: 'toggle', value: true })
-            vue.$store.commit('geoloc/setState', { key: 'allow', value: false })
-            vue.$store.commit('user/setState', { key: 'allowGeoloc', value: false })
+            vue.$store.dispatch('geoloc/update', params)
             break
 
           default:
@@ -82,10 +69,10 @@ export default {
       })
     },
     resetStates () {
-      this.$store.commit('geoloc/resetStates')
+      this.$store.dispatch('geoloc/resetStates')
     },
     logout () {
-      this.$Amplify.Auth.signOut({ global: true })
+      this.$AWS.Auth.signOut({ global: true })
     }
   }
 }

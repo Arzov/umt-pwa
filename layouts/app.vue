@@ -1,6 +1,5 @@
 <template>
   <div>
-    <PopUp />
     <Header />
     <nuxt />
     <Navbar />
@@ -8,12 +7,11 @@
 </template>
 
 <script>
-import PopUp from '@/components/popUp'
 import Navbar from '@/components/navbar'
 import Header from '@/components/header'
 
 export default {
-  components: { PopUp, Navbar, Header }
+  components: { Navbar, Header }
 }
 </script>
 
