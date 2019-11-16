@@ -1,7 +1,7 @@
 <template>
-  <div v-if="this.$store.state.popUp.togglePopUp">
+  <div v-if="this.$store.getters['popup/togglePopUp']">
     <a-button>
-      {{ this.$store.state.popUp.message }}
+      {{ this.$store.getters['popup/message'] }}
     </a-button>
   </div>
 </template>

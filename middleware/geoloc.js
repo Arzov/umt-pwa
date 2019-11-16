@@ -23,15 +23,17 @@ export default ({ store }) => {
   // Validar si dispositivo soporta geolocalizacion
   if ('geolocation' in navigator) {
     // El usuario acepto el permiso de geolocalizacion
-    if (store.state.user.allowGeoloc) {
+    if (store.getters['user/allowGeoloc']) {
       // Actualizar la ubicacion si el usuario se mueve mas de 10km
       navigator.geolocation.getCurrentPosition(function (position) {
         // Distancia desplazada
+        const coordinates = store.getters['user/coordinates']
+
         const moveDistance = getDistanceFromLatLonInKm(
           position.coords.latitude,
           position.coords.longitude,
-          store.state.user.latitude,
-          store.state.user.longitude
+          coordinates.latitude,
+          coordinates.longitude
         )
 
         if (moveDistance >= 10) {
@@ -39,13 +41,15 @@ export default ({ store }) => {
           API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
           // Parametros para graphql
+          const userData = store.getters['user/userInfoGraphAPI']
+
           const params = {
-            userId: store.state.user.id,
+            userId: userData.id,
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            genderFilter: store.state.user.genderFilter,
-            matchFilter: store.state.user.matchFilter,
-            ageFilter: store.state.user.ageFilter
+            genderFilter: userData.genderFilter,
+            matchFilter: userData.matchFilter,
+            ageFilter: userData.ageFilter
           }
 
           // Agregar posicion del usuario

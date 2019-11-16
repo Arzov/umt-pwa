@@ -1,4 +1,4 @@
-export const state = () => ({
+const state = () => ({
   id: null,
   firstName: null,
   lastName: null,
@@ -14,7 +14,23 @@ export const state = () => ({
   allowGeoloc: false
 })
 
-export const mutations = {
+const getters = {
+  allowGeoloc: state => state.allowGeoloc,
+  coordinates: state => ({ latitude: state.latitude, longitude: state.longitude }),
+  userInfoGraphAPI (state) {
+    return {
+      id: state.user.id,
+      genderFilter: state.user.genderFilter,
+      matchFilter: state.user.matchFilter,
+      ageFilter: state.user.ageFilter
+    }
+  }
+}
+
+const actions = {
+}
+
+const mutations = {
   setState (state, { key, value }) {
     state[key] = value
   },
@@ -33,4 +49,12 @@ export const mutations = {
     state.ageFilter = null
     state.allowGeoloc = false
   }
+}
+
+export default {
+  namespaced: true,
+  state,
+  getters,
+  actions,
+  mutations
 }
