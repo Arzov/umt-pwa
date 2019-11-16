@@ -1,8 +1,5 @@
 <template>
   <div id="page-home-mobile">
-    <a-row type="flex" justify="center">
-      <b>INICIO</b>
-    </a-row>
     <a-row type="flex" justify="center" v-if="this.mapUsers.length">
       <a-card hoverable style="width: 240px">
         <img
@@ -19,6 +16,9 @@
     </a-row>
     <a-row type="flex" justify="center" v-else>
       ¡No hay usuarios cercanos! Inténtalo más tarde.
+      <a-button @click="searchMatch">
+        Buscar
+      </a-button>
     </a-row>
     <Geolocation />
   </div>
@@ -59,11 +59,11 @@ export default {
   methods: {
     /**
      * Metodo que busca un encuentro con algun equipo rival.
-     * @return {Object} Evento de tipo FIND_MATCH.
+     * @return {Object} Evento de tipo SEARCH_MATCH.
      */
-    findMatch () {
+    searchMatch () {
       const params = {
-        type: this.events.FIND_MATCH
+        type: this.events.SEARCH_MATCH
       }
       this.$emit('emit', params)
     }

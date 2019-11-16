@@ -71,6 +71,37 @@ export default {
     } catch (e) {
       console.log(e)
     }
+  },
+  methods: {
+    /**
+     * Captura eventos generados por las vistas.
+     * @param {Object} event Evento emitido por la vista.
+     */
+    onEmit (event) {
+      switch (event.type) {
+        case this.event.SEARCH_MATCH:
+          // Obtener usuarios cercanos para hacer match
+          API.graphql(
+            graphqlOperation(searchMatch, {
+              hashKey: this.$store.state.user.geohash,
+              nextToken: this.$store.state.user.matchNextToken,
+              birthdate: this.$store.state.user.birthdate,
+              matchFilter: this.$store.state.user.matchFilter,
+              genderFilter: this.$store.state.user.genderFilter,
+              rangeKey: this.$store.state.user.id,
+              ageMinFilter: this.$store.state.user.ageMinFilter,
+              ageMaxFilter: this.$store.state.user.ageMaxFilter,
+              gender: this.$store.state.user.gender
+            })
+          )
+            .then((result) => {
+              this.$store.commit('user/setState', { key: 'matchNextToken', value: result.data.searchMatch.nextToken })
+              this.userFound = result.data.searchMatch.items
+            })
+            .catch(e => console.log(e))
+          break
+      }
+    }
   }
 }
 </script>
