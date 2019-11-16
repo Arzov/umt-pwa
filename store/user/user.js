@@ -10,7 +10,9 @@ const state = () => ({
   geohash: null,
   matchFilter: null,
   genderFilter: null,
-  ageFilter: null,
+  ageMinFilter: null,
+  ageMaxFilter: null,
+  matchNextToken: null,
   allowGeoloc: false
 })
 
@@ -46,7 +48,9 @@ const mutations = {
     state.geohash = null
     state.matchFilter = null
     state.genderFilter = null
-    state.ageFilter = null
+    state.ageMinFilter = null
+    state.ageMaxFilter = null
+    state.matchNextToken = null
     state.allowGeoloc = false
   }
 }

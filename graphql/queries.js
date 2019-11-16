@@ -59,12 +59,12 @@ export const getUser = `
   }
 `
 
-export const getUsers = `
-  query getUsers(
+export const getUmatchUser = `
+  query getUser(
     $rangeKey: String!
     $nextToken: String
   ) {
-    getUsers(
+    getUser(
       rangeKey: $rangeKey
       nextToken: $nextToken
     ) {
@@ -73,7 +73,43 @@ export const getUsers = `
         rangeKey
         genderFilter
         matchFilter
-        ageFilter
+        ageMinFilter
+        ageMaxFilter
+      }
+      nextToken
+    }
+  }
+`
+
+export const searchMatch = `
+  query searchMatch(
+    $hashKey: String!
+    $nextToken: String
+    $birthdate: String
+    $matchFilter: String
+    $genderFilter: String
+    $rangeKey: String
+    $ageMinFilter: Int
+    $ageMaxFilter: Int
+    $gender: String
+  ) {
+    searchMatch(
+      hashKey: $hashKey
+      nextToken: $nextToken
+      birthdate: $birthdate
+      matchFilter: $matchFilter
+      genderFilter: $genderFilter
+      rangeKey: $rangeKey
+      ageMinFilter: $ageMinFilter
+      ageMaxFilter: $ageMaxFilter
+      gender: $gender
+    ) {
+      items {
+        hashKey
+        firstName
+        age
+        picture
+        geoJson
       }
       nextToken
     }
