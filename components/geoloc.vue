@@ -1,6 +1,6 @@
 <template>
-  <div v-if="this.$store.state.geoloc.toggle">
-    <a-row v-if="this.$store.state.geoloc.allow">
+  <div v-if="this.$store.getters['geoloc/toggle']">
+    <a-row v-if="this.$store.getters['geoloc/allow']">
       <h1><b>Comparte tu ubicación</b></h1>
       Umatch utiliza tu ubicación para encontrar rivales cercanos. Presiona el botón "Aceptar" y luego debes permitir el acceso a la ubicación, de lo contrario no podrás usar la aplicación.
       <a-button @click="getPosition">
@@ -39,13 +39,15 @@ export default {
       // Obtener ubicacion del usuario
       navigator.geolocation.getCurrentPosition(function (position) {
         // Parametros para graphql
+        const userData = vue.$store.getters['user/userInfoGraphAPI']
+
         const params = {
-          userId: vue.$store.state.user.id,
+          userId: userData.id,
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          genderFilter: vue.$store.state.user.genderFilter,
-          matchFilter: vue.$store.state.user.matchFilter,
-          ageFilter: vue.$store.state.user.ageFilter
+          genderFilter: userData.genderFilter,
+          matchFilter: userData.matchFilter,
+          ageFilter: userData.ageFilter
         }
 
         // Agregar posicion del usuario

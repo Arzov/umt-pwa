@@ -36,7 +36,7 @@ export default {
         // Redireccionar a la vista Login
         case this.event.TO_LOGIN:
           console.log('Login')
-          // this.$router.push(process.env.routes.login.path)
+          this.$router.push(process.env.routes.login.path)
           break
 
         // Redireccionar a la vista Register

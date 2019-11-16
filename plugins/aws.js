@@ -35,3 +35,7 @@ Amplify.configure({
 })
 
 Vue.use(AmplifyPlugin, AmplifyModules)
+
+export default (ctx, inject) => {
+  inject('Amplify', Amplify)
+}
