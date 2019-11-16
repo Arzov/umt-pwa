@@ -1,15 +1,25 @@
 <template>
   <div id="page-home-mobile">
-    <a-row type="flex" justify="center">
-      <b>INICIO</b>
-      <a-avatar :src="this.$store.state.user.picture" size="large" />
+    <a-row type="flex" justify="center" v-if="this.mapUsers.length">
+      <a-card hoverable style="width: 240px">
+        <img
+          alt="example"
+          :src="this.mapUsers[0].picture"
+          slot="cover"
+        />
+        <a-card-meta :title="this.mapUsers[0].firstName + ' ' + this.mapUsers[0].age">
+          <template slot="description">
+            A {{ this.mapUsers[0].distance }} kilómetros de distancia
+          </template>
+        </a-card-meta>
+      </a-card>
     </a-row>
-    <a-button @click="toMatches">
-      Encuentros
-    </a-button>
-    <a-button @click="findMatch">
-      Buscar Encuentro
-    </a-button>
+    <a-row type="flex" justify="center" v-else>
+      ¡No hay usuarios cercanos! Inténtalo más tarde.
+      <a-button @click="searchMatch">
+        Buscar
+      </a-button>
+    </a-row>
     <Geolocation />
   </div>
 </template>
@@ -23,31 +33,37 @@ export default {
   props: {
     events: {
       required: true
+    },
+    usersFound: {
+      required: true
+    },
+    getDistance: {
+      required: true
     }
   },
-  data () {
-    return {
-      lastKey: null
+  computed: {
+    mapUsers () {
+      return this.usersFound.map((user, idx) => {
+        const userEdited = {
+          hashKey: user.hashKey,
+          firstName: user.firstName,
+          age: user.age,
+          picture: user.picture,
+          distance: Math.round(this.getDistance(user.geoJson[1], user.geoJson[0], this.$store.state.user.latitude, this.$store.state.user.longitude))
+        }
+
+        return userEdited
+      })
     }
   },
   methods: {
     /**
-     * Metodo que re-direcciona a la vista Match.
-     * @return {Object} Evento de tipo TO_MATCH.
-     */
-    toMatches () {
-      const params = {
-        type: this.events.TO_MATCH
-      }
-      this.$emit('emit', params)
-    },
-    /**
      * Metodo que busca un encuentro con algun equipo rival.
-     * @return {Object} Evento de tipo FIND_MATCH.
+     * @return {Object} Evento de tipo SEARCH_MATCH.
      */
-    findMatch () {
+    searchMatch () {
       const params = {
-        type: this.events.FIND_MATCH
+        type: this.events.SEARCH_MATCH
       }
       this.$emit('emit', params)
     }

@@ -48,7 +48,8 @@ export const addUserLocation = `
     $longitude: Float!
     $userId: String!
     $genderFilter: String!
-    $ageFilter: [String]!
+    $ageMinFilter: Int!
+    $ageMaxFilter: Int!
     $matchFilter: String!
   ) {
     addUserLocation(
@@ -56,13 +57,15 @@ export const addUserLocation = `
       longitude: $longitude
       userId: $userId
       genderFilter: $genderFilter
-      ageFilter: $ageFilter
+      ageMinFilter: $ageMinFilter
+      ageMaxFilter: $ageMaxFilter
       matchFilter: $matchFilter
     ) {
       hashKey
       rangeKey
       geoJson
-      ageFilter
+      ageMinFilter
+      ageMaxFilter
       matchFilter
       genderFilter
     }

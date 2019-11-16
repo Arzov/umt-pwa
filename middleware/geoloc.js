@@ -45,7 +45,8 @@ export default ({ store }) => {
             longitude: position.coords.longitude,
             genderFilter: store.state.user.genderFilter,
             matchFilter: store.state.user.matchFilter,
-            ageFilter: store.state.user.ageFilter
+            ageMinFilter: store.state.user.ageMinFilter,
+            ageMaxFilter: store.state.user.ageMaxFilter
           }
 
           // Agregar posicion del usuario
@@ -53,7 +54,7 @@ export default ({ store }) => {
             .then((response) => {
               store.commit('user/setState', { key: 'latitude', value: position.coords.latitude })
               store.commit('user/setState', { key: 'longitude', value: position.coords.longitude })
-              store.commit('user/setState', { key: 'geohash', value: response.hashKey })
+              store.commit('user/setState', { key: 'geohash', value: response.data.addUserLocation.hashKey })
             })
             // eslint-disable-next-line no-console
             .catch(e => console.log(e))
