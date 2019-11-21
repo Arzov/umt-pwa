@@ -12,10 +12,11 @@ import getDistance from '@/utils/functions'
 
 /**
  * Evento que pueden emitir las vistas.
- * @type {{SEARCH_MATCH: string}}
+ * @type {{SEARCH_MATCH: string, ADD_MATCH: string}}
  */
 const event = {
-  SEARCH_MATCH: 'SEARCH_MATCH'
+  SEARCH_MATCH: 'search_match',
+  ADD_MATCH: 'add_match'
 }
 
 export default {
@@ -46,6 +47,11 @@ export default {
         // Buscar usuarios rivales cercanos
         case this.event.SEARCH_MATCH:
           this.$store.dispatch('home/searchMatch')
+          break
+        
+        // Enviar solicitud de match
+        case this.event.ADD_MATCH:
+          this.$store.dispatch('home/addMatch', event)
           break
       }
     }

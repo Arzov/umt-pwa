@@ -1,7 +1,7 @@
 <template>
   <div>
     <mq-layout :mq="['mobile', 'tablet']">
-      <match-mobile :events="events" :mapMatches="mapMatches" @emit="onEmit($events)" />
+      <match-mobile :event="event" :mapMatches="mapMatches" @emit="onEmit($event)" />
     </mq-layout>
   </div>
 </template>
@@ -15,7 +15,7 @@ import { getMatches } from '@/graphql/queries'
  * Evento que pueden emitir las vistas.
  * @type {{TO_CHAT: string}}
  */
-const events = {
+const event = {
   TO_CHAT: 'to_chat'
 }
 
@@ -24,7 +24,7 @@ export default {
   components: { MatchMobile },
   data () {
     return {
-      events,
+      event,
       matches: []
     }
   },
@@ -53,15 +53,15 @@ export default {
   methods: {
     /**
      * Captura eventos generados por las vistas.
-     * @param {Object} events Evento emitido por la vista.
+     * @param {Object} event Evento emitido por la vista.
      */
-    onEmit (events) {
-      switch (events.type) {
+    onEmit (event) {
+      switch (event.type) {
         // Redireccionar al chat del encuentro seleccionado
-        case this.events.TO_CHAT:
+        case this.event.TO_CHAT:
           this.$router.push({
             name: process.env.routes.chat.name,
-            params: { matchId: events.match.matchId }
+            params: { matchId: event.match.matchId }
           })
           break
       }

@@ -14,7 +14,7 @@
 export default {
   name: 'MatchMobile',
   props: {
-    events: {
+    event: {
       required: true
     },
     mapMatches: {
@@ -28,7 +28,7 @@ export default {
      */
     toChat (match, idx) {
       const params = {
-        type: this.events.TO_CHAT,
+        type: this.event.TO_CHAT,
         match
       }
       this.$emit('emit', params)

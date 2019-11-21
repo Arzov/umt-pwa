@@ -1,4 +1,5 @@
 import { searchMatch } from '@/graphql/queries'
+import { addMatch } from '@/graphql/mutations'
 
 const state = () => ({
   usersFound: [],
@@ -36,6 +37,33 @@ const actions = {
         }
 
         context.commit('setState', { params })
+      })
+      // eslint-disable-next-line no-console
+      .catch(e => console.log(e))
+  },
+  addMatch (context, data) {
+    // Usar API de Umatch
+    this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+
+    // Obtener usuarios cercanos para hacer match
+    this.$AWS.API.graphql(
+      this.$AWS.Query(addMatch, {
+        hashKey: context.rootState.user.id,
+        rangeKey: data.rangeKey,
+        geohash: context.rootState.user.geohash,
+        creatorName: context.rootState.user.firstName,
+        invitedName: data.invitedName,
+        creatorPicture: context.rootState.user.picture,
+        invitedPicture: data.invitedPicture,
+        matchFilter: context.rootState.user.matchFilter,
+        genderFilter: context.rootState.user.genderFilter,
+        ageMinFilter: context.rootState.user.ageMinFilter,
+        ageMaxFilter: context.rootState.user.ageMaxFilter
+      })
+    )
+      .then((result) => {
+        console.log(result)
+        context.dispatch('searchMatch')
       })
       // eslint-disable-next-line no-console
       .catch(e => console.log(e))

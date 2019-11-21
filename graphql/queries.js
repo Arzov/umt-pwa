@@ -35,7 +35,6 @@ export const getMatches = `
         matchId
         createdAt
         expireAt
-        isCanceled
       }
       nextToken
     }
