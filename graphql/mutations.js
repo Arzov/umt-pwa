@@ -71,3 +71,35 @@ export const addUserLocation = `
     }
   }
 `
+
+export const addMatch = `
+  mutation addMatch(
+    $hashKey: String!
+    $rangeKey: String!
+    $geohash: Int!
+    $creatorName: String!
+    $invitedName: String!
+    $creatorPicture: String!
+    $invitedPicture: String!
+    $matchFilter: String!
+    $genderFilter: String!
+    $ageMinFilter: Int!
+    $ageMaxFilter: Int!
+  ) {
+    addMatch(
+      hashKey: $hashKey
+      rangeKey: $rangeKey
+      geohash: $geohash
+      creatorName: $creatorName
+      invitedName: $invitedName
+      creatorPicture: $creatorPicture
+      invitedPicture: $invitedPicture
+      matchFilter: $matchFilter
+      genderFilter: $genderFilter
+      ageMinFilter: $ageMinFilter
+      ageMaxFilter: $ageMaxFilter
+    ) {
+      matchId
+    }
+  }
+`

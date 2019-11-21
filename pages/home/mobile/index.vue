@@ -10,6 +10,12 @@
         <a-card-meta :title="this.mapUsers[0].firstName + ' ' + this.mapUsers[0].age">
           <template slot="description">
             A {{ this.mapUsers[0].distance }} kilómetros de distancia
+            <a-button @click="searchMatch">
+              cancelar
+            </a-button>
+            <a-button @click="addMatch">
+              aceptar
+            </a-button>
           </template>
         </a-card-meta>
       </a-card>
@@ -68,6 +74,19 @@ export default {
     searchMatch () {
       const params = {
         type: this.event.SEARCH_MATCH
+      }
+      this.$emit('emit', params)
+    },
+    /**
+     * Metodo que envia solicitud de match al rival.
+     * @return {Object} Evento de tipo ADD_MATCH.
+     */
+    addMatch () {
+      const params = {
+        type: this.event.ADD_MATCH,
+        invitedName: this.mapUsers[0].firstName,
+        invitedPicture: this.mapUsers[0].picture,
+        rangeKey: this.mapUsers[0].hashKey
       }
       this.$emit('emit', params)
     }
