@@ -1,11 +1,14 @@
 <template>
   <div id="page-match-mobile">
-    <a-row type="flex" justify="center">
+    <a-row v-if="matchesList.length" type="flex" justify="center">
       <ul>
-        <li v-for="(match, idx) in mapMatches" :key="idx" @click="toChat(match, idx)">
-          {{ match.invitedName }}
+        <li v-for="(match, idx) in matchesList" :key="idx" @click="toChat(match, idx)">
+          <a-avatar :src="match.adversaryPicture" size="large" /> {{ match.adversaryName }}
         </li>
       </ul>
+    </a-row>
+    <a-row v-else type="flex" justify="center">
+      No hay solicitudes
     </a-row>
   </div>
 </template>
@@ -17,7 +20,7 @@ export default {
     event: {
       required: true
     },
-    mapMatches: {
+    matchesList: {
       required: true
     }
   },

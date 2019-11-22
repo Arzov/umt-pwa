@@ -84,8 +84,8 @@ export default {
     addMatch () {
       const params = {
         type: this.event.ADD_MATCH,
-        invitedName: this.mapUsers[0].firstName,
-        invitedPicture: this.mapUsers[0].picture,
+        adversaryName: this.mapUsers[0].firstName,
+        adversaryPicture: this.mapUsers[0].picture,
         rangeKey: this.mapUsers[0].hashKey
       }
       this.$emit('emit', params)

@@ -78,9 +78,9 @@ export const addMatch = `
     $rangeKey: String!
     $geohash: Int!
     $creatorName: String!
-    $invitedName: String!
     $creatorPicture: String!
-    $invitedPicture: String!
+    $adversaryName: String!
+    $adversaryPicture: String!
     $matchFilter: String!
     $genderFilter: String!
     $ageMinFilter: Int!
@@ -91,9 +91,9 @@ export const addMatch = `
       rangeKey: $rangeKey
       geohash: $geohash
       creatorName: $creatorName
-      invitedName: $invitedName
       creatorPicture: $creatorPicture
-      invitedPicture: $invitedPicture
+      adversaryName: $adversaryName
+      adversaryPicture: $adversaryPicture
       matchFilter: $matchFilter
       genderFilter: $genderFilter
       ageMinFilter: $ageMinFilter

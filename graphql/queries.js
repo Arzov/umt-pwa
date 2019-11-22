@@ -31,7 +31,8 @@ export const getMatches = `
       items {
         hashKey
         rangeKey
-        invitedName
+        adversaryName
+        adversaryPicture
         matchId
         createdAt
         expireAt
