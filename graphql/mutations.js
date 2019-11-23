@@ -103,3 +103,21 @@ export const addMatch = `
     }
   }
 `
+
+export const updateMatch = `
+  mutation updateMatch(
+    $hashKey: String!
+    $rangeKey: String!
+    $matchId: String!
+    $userStatus: String!
+  ) {
+    updateMatch(
+      hashKey: $hashKey
+      rangeKey: $rangeKey
+      matchId: $matchId
+      userStatus: $userStatus
+    ) {
+      matchStatus
+    }
+  }
+`

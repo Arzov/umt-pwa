@@ -34,6 +34,7 @@ export const getMatches = `
         adversaryName
         adversaryPicture
         matchId
+        matchStatus
         createdAt
         expireAt
       }

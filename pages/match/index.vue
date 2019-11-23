@@ -11,10 +11,11 @@ import MatchMobile from './mobile'
 
 /**
  * Evento que pueden emitir las vistas.
- * @type {{TO_CHAT: string}}
+ * @type {{TO_CHAT: string, UPDATE_MATCH: string}}
  */
 const event = {
-  TO_CHAT: 'to_chat'
+  TO_CHAT: 'to_chat',
+  UPDATE_MATCH: 'update_match'
 }
 
 export default {
@@ -47,6 +48,11 @@ export default {
             name: process.env.routes.chat.name,
             params: { matchId: event.match.matchId }
           })
+          break
+        
+        // Actualizar el estado del match
+        case this.event.UPDATE_MATCH:
+          this.$store.dispatch('match/updateMatch', event)
           break
       }
     }
