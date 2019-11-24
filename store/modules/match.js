@@ -1,5 +1,6 @@
 import { getMatches } from '@/graphql/queries'
 import { updateMatch } from '@/graphql/mutations'
+import { onUpdateMatch } from '@/graphql/subscriptions'
 
 const state = () => ({
   matchesList: [],
@@ -69,11 +70,24 @@ const actions = {
       })
     )
       .then((result) => {
-        console.log(result)
-        context.dispatch('getMatches')
+        // context.dispatch('getMatches')
       })
       // eslint-disable-next-line no-console
       .catch(e => console.log(e))
+  },
+  async onUpdateMatch (context) {
+    // Usar API de Umatch
+    this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+
+    this.$AWS.API.graphql(this.$AWS.Query(onUpdateMatch, {
+      matchId: "franco.barrientos@arzov.com#fjbarrientosg@gmail.com"
+    }))
+      .subscribe({
+        next: (eventData) => {
+          console.log(eventData)
+          // context.dispatch('getMatches')
+        }
+      })
   },
   resetStates (context) {
     context.commit('resetStates')

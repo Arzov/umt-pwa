@@ -9,3 +9,11 @@ export const onAddMessage = `
     }
   }
 `
+
+export const onUpdateMatch = `
+  subscription onUpdateMatch($matchId: String!) {
+    onUpdateMatch(matchId: $matchId) {
+      matchStatus
+    }
+  }
+`

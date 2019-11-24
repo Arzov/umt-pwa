@@ -2,7 +2,7 @@
   <div id="page-chat-mobile">
     <a-row type="flex" justify="center">
       <ul>
-        <li v-for="(msg, idx) in mapMessages" :key="idx">
+        <li v-for="(msg, idx) in messagesList" :key="idx">
           {{ msg.content }}
         </li>
       </ul>
@@ -25,10 +25,10 @@ export default {
     }
   },
   props: {
-    events: {
+    event: {
       required: true
     },
-    mapMessages: {
+    messagesList: {
       required: true
     }
   },
@@ -39,7 +39,7 @@ export default {
      */
     addMessage () {
       const params = {
-        type: this.events.ADD_MESSAGE,
+        type: this.event.ADD_MESSAGE,
         userMessage: this.userMessage
       }
       this.userMessage = null

@@ -32,6 +32,9 @@ export default {
       return this.$store.getters['match/matchesList']
     }
   },
+  async fetch ({ store }) {
+    await store.dispatch('match/onUpdateMatch')
+  },
   mounted () {
     this.$store.dispatch('match/getMatches')
   },
@@ -44,10 +47,8 @@ export default {
       switch (event.type) {
         // Redireccionar al chat del encuentro seleccionado
         case this.event.TO_CHAT:
-          this.$router.push({
-            name: process.env.routes.chat.name,
-            params: { matchId: event.match.matchId }
-          })
+          this.$store.dispatch('chat/setMatchId', { matchId: event.match.matchId })
+          this.$router.push(process.env.routes.chat.name)
           break
         
         // Actualizar el estado del match
