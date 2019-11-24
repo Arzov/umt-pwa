@@ -32,11 +32,9 @@ export default {
       return this.$store.getters['match/matchesList']
     }
   },
-  async fetch ({ store }) {
-    await store.dispatch('match/onUpdateMatch')
-  },
-  mounted () {
+  async mounted () {
     this.$store.dispatch('match/getMatches')
+    this.$store.dispatch('match/onUpdateMatch')
   },
   methods: {
     /**

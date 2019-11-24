@@ -75,7 +75,7 @@ const actions = {
       // eslint-disable-next-line no-console
       .catch(e => console.log(e))
   },
-  async onUpdateMatch (context) {
+  onUpdateMatch (context) {
     // Usar API de Umatch
     this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
