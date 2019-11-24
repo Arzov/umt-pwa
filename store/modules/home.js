@@ -52,9 +52,9 @@ const actions = {
         rangeKey: data.rangeKey,
         geohash: context.rootState.user.geohash,
         creatorName: context.rootState.user.firstName,
-        invitedName: data.invitedName,
         creatorPicture: context.rootState.user.picture,
-        invitedPicture: data.invitedPicture,
+        adversaryName: data.adversaryName,
+        adversaryPicture: data.adversaryPicture,
         matchFilter: context.rootState.user.matchFilter,
         genderFilter: context.rootState.user.genderFilter,
         ageMinFilter: context.rootState.user.ageMinFilter,
@@ -62,7 +62,6 @@ const actions = {
       })
     )
       .then((result) => {
-        console.log(result)
         context.dispatch('searchMatch')
       })
       // eslint-disable-next-line no-console

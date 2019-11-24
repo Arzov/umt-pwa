@@ -1,22 +1,21 @@
 <template>
   <div>
     <mq-layout :mq="['mobile', 'tablet']">
-      <match-mobile :event="event" :mapMatches="mapMatches" @emit="onEmit($event)" />
+      <match-mobile :event="event" :matchesList="matchesList" @emit="onEmit($event)" />
     </mq-layout>
   </div>
 </template>
 
 <script>
-import { API, graphqlOperation } from 'aws-amplify'
 import MatchMobile from './mobile'
-import { getMatches } from '@/graphql/queries'
 
 /**
  * Evento que pueden emitir las vistas.
- * @type {{TO_CHAT: string}}
+ * @type {{TO_CHAT: string, UPDATE_MATCH: string}}
  */
 const event = {
-  TO_CHAT: 'to_chat'
+  TO_CHAT: 'to_chat',
+  UPDATE_MATCH: 'update_match'
 }
 
 export default {
@@ -24,31 +23,18 @@ export default {
   components: { MatchMobile },
   data () {
     return {
-      event,
-      matches: []
+      event
     }
   },
   computed: {
     // Listado de encuentros
-    mapMatches () {
-      return this.matches.map((match, idx) => {
-        return match
-      })
+    matchesList () {
+      return this.$store.getters['match/matchesList']
     }
   },
   async mounted () {
-    try {
-      // Obtener listado de encuentros del usuario
-      const result = await API.graphql(
-        graphqlOperation(getMatches, {
-          hashKey: this.$store.state.user.id,
-          nextToken: null
-        })
-      )
-      this.matches = result.data.getMatches.items
-    } catch (e) {
-      console.log(e)
-    }
+    this.$store.dispatch('match/getMatches')
+    this.$store.dispatch('match/onUpdateMatch')
   },
   methods: {
     /**
@@ -59,10 +45,13 @@ export default {
       switch (event.type) {
         // Redireccionar al chat del encuentro seleccionado
         case this.event.TO_CHAT:
-          this.$router.push({
-            name: process.env.routes.chat.name,
-            params: { matchId: event.match.matchId }
-          })
+          this.$store.dispatch('chat/setMatchId', { matchId: event.match.matchId })
+          this.$router.push(process.env.routes.chat.name)
+          break
+        
+        // Actualizar el estado del match
+        case this.event.UPDATE_MATCH:
+          this.$store.dispatch('match/updateMatch', event)
           break
       }
     }
