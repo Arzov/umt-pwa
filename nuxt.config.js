@@ -2,7 +2,7 @@ const routes = require('./static/routes')
 const aws = require('./static/aws')
 const app = require('./static/app')
 
-export default {
+module.exports = {
     mode: 'spa',
     /*
     ** Headers of the page

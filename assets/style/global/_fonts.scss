@@ -1,0 +1,61 @@
+/*
+ * Font Mixin
+ */
+@function str-replace($string, $search, $replace: "") {
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+}
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+    $src: null;
+
+    $extmods: (
+        eot: "?",
+        svg: "#" + str-replace($name, " ", "_")
+    );
+
+    $formats: (
+        otf: "opentype",
+        ttf: "truetype"
+    );
+
+    @each $ext in $exts {
+        $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+        $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+        $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+    }
+
+    @font-face {
+        font-family: quote($name);
+        font-style: $style;
+        font-weight: $weight;
+        src: $src;
+    }
+}
+
+/*
+ * Font-face
+ */
+@include font-face('PublicSans-Regular', '../fonts/PublicSans-Regular', normal, normal, ttf);
+@include font-face('PublicSans-Black', '../fonts/PublicSans-Black', black, normal, ttf);
+@include font-face('PublicSans-BlackItalic', '../fonts/PublicSans-BlackItalic', black, italic, ttf);
+@include font-face('PublicSans-Bold', '../fonts/PublicSans-Bold', bold, normal, ttf);
+@include font-face('PublicSans-BoldItalic', '../fonts/PublicSans-BoldItalic', bold, italic, ttf);
+@include font-face('PublicSans-ExtraBold', '../fonts/PublicSans-ExtraBold', 900, normal, ttf);
+@include font-face('PublicSans-ExtraBoldItalic', '../fonts/PublicSans-ExtraBoldItalic', 900, italic, ttf);
+@include font-face('PublicSans-ExtraLight', '../fonts/PublicSans-ExtraLight', 200, normal, ttf);
+@include font-face('PublicSans-ExtraLightItalic', '../fonts/PublicSans-ExtraLightItalic', 200, italic, ttf);
+@include font-face('PublicSans-Italic', '../fonts/PublicSans-Italic', normal, italic, ttf);
+@include font-face('PublicSans-Light', '../fonts/PublicSans-Light', 300, normal, ttf);
+@include font-face('PublicSans-LightItalic', '../fonts/PublicSans-LightItalic', 300, italic, ttf);
+@include font-face('PublicSans-Medium', '../fonts/PublicSans-Medium', 400, normal, ttf);
+@include font-face('PublicSans-MediumItalic', '../fonts/PublicSans-MediumItalic', 400, italic, ttf);
+@include font-face('PublicSans-SemiBold', '../fonts/PublicSans-SemiBold', 700, normal, ttf);
+@include font-face('PublicSans-SemiBoldItalic', '../fonts/PublicSans-SemiBoldItalic', 700, italic, ttf);
+@include font-face('PublicSans-Thin', '../fonts/PublicSans-Thin', 100, normal, ttf);
+@include font-face('PublicSans-ThinItalic', '../fonts/PublicSans-ThinItalic', 100, normal, ttf);
