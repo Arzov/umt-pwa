@@ -21,17 +21,17 @@ const actions = {
     this.$AWS.API.graphql(
       this.$AWS.Query(getMatches, {
         hashKey: context.rootState.user.id,
-        nextToken: context.state.matchNextToken,
+        nextToken: context.state.matchNextToken
       })
     )
       .then((result) => {
         const params = {
           matchNextToken: result.data.getMatches.nextToken,
-          matchesList: 
+          matchesList:
             result.data.getMatches.items.map((match, idx) => {
               let isCreator = false
 
-              if (context.rootState.user.id == match.matchId.split('#')[0]) {
+              if (context.rootState.user.id === match.matchId.split('#')[0]) {
                 isCreator = true
               }
 
@@ -44,7 +44,7 @@ const actions = {
                 matchStatus: match.matchStatus,
                 createdAt: match.createdAt,
                 expireAt: match.expireAt,
-                isCreator: isCreator
+                isCreator
               }
 
               return matchEdited
@@ -80,7 +80,7 @@ const actions = {
     this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
     this.$AWS.API.graphql(this.$AWS.Query(onUpdateMatch, {
-      matchId: "franco.barrientos@arzov.com#fjbarrientosg@gmail.com"
+      matchId: 'franco.barrientos@arzov.com#fjbarrientosg@gmail.com'
     }))
       .subscribe({
         next: (eventData) => {
