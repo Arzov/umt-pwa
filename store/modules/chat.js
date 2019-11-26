@@ -24,7 +24,7 @@ const actions = {
       this.$AWS.API.graphql(
         this.$AWS.Query(getMessages, {
           hashKey: context.state.matchId,
-          nextToken: context.state.messageNextToken,
+          nextToken: context.state.messageNextToken
         })
       )
         .then((result) => {
