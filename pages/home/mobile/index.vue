@@ -1,15 +1,15 @@
 <template>
     <div id="page-home-mobile">
-        <a-row v-if="this.mapUsers.length" type="flex" justify="center">
+        <a-row v-if="mapUsers.length" type="flex" justify="center">
             <a-card hoverable style="width: 240px">
                 <img
                     slot="cover"
                     alt="example"
-                    :src="this.mapUsers[0].picture"
+                    :src="mapUsers[0].picture"
                 >
-                <a-card-meta :title="this.mapUsers[0].firstName + ' ' + this.mapUsers[0].age">
+                <a-card-meta :title="mapUsers[0].firstName + ' ' + mapUsers[0].age">
                     <template slot="description">
-                        A {{ this.mapUsers[0].distance }} kilómetros de distancia
+                        A {{ mapUsers[0].distance }} kilómetros de distancia
                         <a-button @click="searchMatch">
                             cancelar
                         </a-button>
