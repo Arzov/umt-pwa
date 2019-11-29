@@ -31,6 +31,7 @@ const actions = {
       })
     )
       .then((result) => {
+        console.log(result)
         const params = {
           matchNextToken: result.data.searchMatch.nextToken,
           usersFound: result.data.searchMatch.items
