@@ -1,7 +1,12 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <match-mobile :event="event" :matches-list="matchesList" @emit="onEmit($event)" />
+            <match-mobile
+                :event="event"
+                :activeMatches="activeMatches"
+                :requestMatches="requestMatches"
+                @emit="onEmit($event)"
+            />
         </mq-layout>
     </div>
 </template>
@@ -27,9 +32,25 @@
             }
         },
         computed: {
-            // Listado de encuentros
-            matchesList () {
-                return this.$store.getters['match/matchesList']
+            // Listado de encuentros activos
+            activeMatches () {
+                return this.$store.getters['match/matchesList'].map((match, idx) => {
+                    if (match.matchStatus === 'A') {
+                        return match
+                    }
+                }).filter((el) => {
+                    return el != null
+                })
+            },
+            // Solicitudes pendientes
+            requestMatches () {
+                return this.$store.getters['match/matchesList'].map((match, idx) => {
+                    if (match.matchStatus !== 'A') {
+                        return match
+                    }
+                }).filter((el) => {
+                    return el != null
+                })
             }
         },
         async mounted () {
