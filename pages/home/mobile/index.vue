@@ -16,7 +16,7 @@
                             :src="item.picture"
                         />
                     </a-list-item-meta>
-                    <a-button @click="addMatch(item.hashKey, item.firstName, item.picture)">
+                    <a-button @click="addMatch(item.hashKey, item.firstName, item.picture, index)">
                         aceptar
                     </a-button>
                 </a-list-item>
@@ -86,7 +86,7 @@
              * Metodo que envia solicitud de match al rival.
              * @return {Object} Evento de tipo ADD_MATCH.
              */
-            addMatch (rangeKey, firstName, picture) {
+            addMatch (rangeKey, firstName, picture, index) {
                 const params = {
                     type: this.event.ADD_MATCH,
                     adversaryName: firstName,
@@ -94,6 +94,7 @@
                     rangeKey
                 }
                 this.$emit('emit', params)
+                this.usersFound.splice(index, 1)
             }
         }
     }

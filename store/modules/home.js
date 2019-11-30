@@ -63,7 +63,7 @@ const actions = {
       })
     )
       .then((result) => {
-        context.dispatch('searchMatch')
+        // context.dispatch('searchMatch')
       })
       // eslint-disable-next-line no-console
       .catch(e => console.log(e))
