@@ -18,6 +18,12 @@
     }
 
     export default {
+        middleware ({ store, redirect }) {
+            // Si se entra a la vista chat sin un matchId se devuelve a la pagina home
+            if (!store.state.chat.matchId) {
+                return redirect('/home')
+            }
+        },
         name: 'Chat',
         components: { ChatMobile },
         data () {
