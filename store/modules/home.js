@@ -31,7 +31,6 @@ const actions = {
       })
     )
       .then((result) => {
-        console.log(result)
         const params = {
           matchNextToken: result.data.searchMatch.nextToken,
           usersFound: result.data.searchMatch.items
@@ -63,7 +62,6 @@ const actions = {
       })
     )
       .then((result) => {
-        // context.dispatch('searchMatch')
       })
       // eslint-disable-next-line no-console
       .catch(e => console.log(e))
