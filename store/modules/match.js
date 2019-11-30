@@ -31,7 +31,7 @@ const actions = {
             result.data.getMatches.items.map((match, idx) => {
               let isCreator = false
 
-              if (context.rootState.user.id == match.matchId.split('#')[0]) {
+              if (context.rootState.user.id === match.matchId.split('#')[0]) {
                 isCreator = true
               }
 

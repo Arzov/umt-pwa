@@ -7,15 +7,15 @@
         </a-row>
         <a-row type="flex" justify="center">
             <a-radio-group name="radioGroup" :default-value="match" @change="getMatch">
-                <a-radio v-for="match in matchOptions" :key="'m' + match.value" :value="match.value">
-                    {{ match.name }}
+                <a-radio v-for="m in matchOptions" :key="'m' + m.value" :value="m.value">
+                    {{ m.name }}
                 </a-radio>
             </a-radio-group>
         </a-row>
         <a-row type="flex" justify="center">
             <a-radio-group name="radioGroup" :default-value="gender" @change="getGender">
-                <a-radio v-for="gender in genderOptions" :key="'g' + gender.value" :value="gender.value">
-                    {{ gender.name }}
+                <a-radio v-for="g in genderOptions" :key="'g' + g.value" :value="g.value">
+                    {{ g.name }}
                 </a-radio>
             </a-radio-group>
         </a-row>

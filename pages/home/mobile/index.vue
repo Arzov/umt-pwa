@@ -1,24 +1,29 @@
 <template>
     <div id="page-home-mobile">
-        <a-row v-if="this.mapUsers.length" type="flex" justify="center">
-            <a-card hoverable style="width: 240px">
-                <img
-                    slot="cover"
-                    alt="example"
-                    :src="this.mapUsers[0].picture"
-                >
-                <a-card-meta :title="this.mapUsers[0].firstName + ' ' + this.mapUsers[0].age">
-                    <template slot="description">
-                        A {{ this.mapUsers[0].distance }} kilómetros de distancia
-                        <a-button @click="searchMatch">
-                            cancelar
-                        </a-button>
-                        <a-button @click="addMatch">
-                            aceptar
-                        </a-button>
-                    </template>
-                </a-card-meta>
-            </a-card>
+        <a-row type="flex" justify="center">
+            RIVALES DISPONIBLES
+        </a-row>
+        <a-row v-if="mapUsers.length" type="flex" justify="center">
+            <a-list class="demo-loadmore-list" item-layout="horizontal" :data-source="mapUsers">
+                <a-list-item slot="renderItem" slot-scope="item, index">
+                    <a-list-item-meta
+                        :description="'A ' + item.distance + ' kilómetros de distancia'"
+                        :key="index"
+                    >
+                        <a slot="title" href="https://vue.ant.design/">{{ item.firstName + ' ' + item.age }}</a>
+                        <a-avatar
+                            slot="avatar"
+                            :src="item.picture"
+                        />
+                    </a-list-item-meta>
+                    <a-button @click="addMatch(item.hashKey, item.firstName, item.picture, index)">
+                        aceptar
+                    </a-button>
+                </a-list-item>
+            </a-list>
+            <a-button @click="searchMatch">
+                Seguir Buscando
+            </a-button>
         </a-row>
         <a-row v-else type="flex" justify="center">
             ¡No hay usuarios cercanos! Inténtalo más tarde.
@@ -81,14 +86,15 @@
              * Metodo que envia solicitud de match al rival.
              * @return {Object} Evento de tipo ADD_MATCH.
              */
-            addMatch () {
+            addMatch (rangeKey, firstName, picture, index) {
                 const params = {
                     type: this.event.ADD_MATCH,
-                    adversaryName: this.mapUsers[0].firstName,
-                    adversaryPicture: this.mapUsers[0].picture,
-                    rangeKey: this.mapUsers[0].hashKey
+                    adversaryName: firstName,
+                    adversaryPicture: picture,
+                    rangeKey
                 }
                 this.$emit('emit', params)
+                this.usersFound.splice(index, 1)
             }
         }
     }
