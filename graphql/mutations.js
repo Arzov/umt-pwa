@@ -117,7 +117,7 @@ export const updateMatch = `
       matchId: $matchId
       userStatus: $userStatus
     ) {
-      matchStatus
+      rangeKey
     }
   }
 `
