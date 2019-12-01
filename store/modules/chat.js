@@ -54,7 +54,6 @@ const actions = {
       })
     )
       .then((result) => {
-        // context.dispatch('getMatches')
       })
       // eslint-disable-next-line no-console
       .catch(e => console.log(e))
