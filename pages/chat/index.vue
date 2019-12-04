@@ -33,7 +33,15 @@
         },
         computed: {
             messagesList () {
-                return this.$store.getters['chat/messagesList']
+                return this.$store.getters['chat/messagesList'].map((msg, idx) => {
+                    return {
+                        hashKey: msg.hashKey,
+                        rangeKey: msg.rangeKey,
+                        author: msg.author,
+                        authorName: msg.authorName,
+                        content: msg.content
+                    }
+                })
             }
         },
         async mounted () {

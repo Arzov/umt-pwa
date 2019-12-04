@@ -3,7 +3,7 @@
         <a-row type="flex" justify="center">
             <ul>
                 <li v-for="(msg, idx) in messagesList" :key="idx">
-                    {{ msg.content }}
+                    {{ msg.content }} {{ msg.rangeKey }}
                 </li>
             </ul>
         </a-row>
