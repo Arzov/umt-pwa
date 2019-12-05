@@ -41,7 +41,7 @@
                     // Redireccionar a la vista Register
                     case this.event.TO_REGISTER:
                         console.log('Register')
-                        // this.$router.push(process.env.routes.register.path)
+                        this.$router.push(process.env.routes.register.path)
                         break
                 }
             }
