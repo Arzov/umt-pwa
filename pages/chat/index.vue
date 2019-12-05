@@ -10,6 +10,28 @@
     import moment from 'moment'
     import ChatMobile from './mobile'
 
+    moment.updateLocale('en', {
+        calendar: {
+            sameDay: '[Today] HH:mm',
+            nextDay: 'DD/MM/YYYY HH:mm',
+            nextWeek: 'DD/MM/YYYY HH:mm',
+            lastDay: '[Yesterday] HH:mm',
+            lastWeek: 'DD/MM/YYYY HH:mm',
+            sameElse: 'DD/MM/YYYY HH:mm'
+        }
+    })
+    moment.updateLocale('es', {
+        calendar: {
+            sameDay: '[Hoy] HH:mm',
+            nextDay: 'DD/MM/YYYY HH:mm',
+            nextWeek: 'DD/MM/YYYY HH:mm',
+            lastDay: '[Ayer] HH:mm',
+            lastWeek: 'DD/MM/YYYY HH:mm',
+            sameElse: 'DD/MM/YYYY HH:mm'
+        }
+    })
+    moment.locale('es')
+
     /**
      * Evento que pueden emitir las vistas.
      * @type {{ADD_MESSAGE: string}}
@@ -38,7 +60,7 @@
                 return this.$store.getters['chat/messagesList'].map((msg, idx) => {
                     return {
                         hashKey: msg.hashKey,
-                        rangeKey: moment(msg.rangeKey.split('#')[0]).format().slice(11, 16),
+                        rangeKey: moment(msg.rangeKey.split('#')[0]).calendar(),
                         author: msg.author,
                         authorName: msg.authorName,
                         content: msg.content
@@ -58,7 +80,9 @@
             onEmit (event) {
                 switch (event.type) {
                     case this.event.ADD_MESSAGE:
-                        this.$store.dispatch('chat/addMessage', event)
+                        if (event.userMessage) {
+                            this.$store.dispatch('chat/addMessage', event)
+                        }
                         break
                 }
             }
