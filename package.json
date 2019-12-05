@@ -17,6 +17,7 @@
     "ant-design-vue": "^1.4.x",
     "aws-amplify": "^1.1.36",
     "aws-amplify-vue": "^0.2.14",
+    "moment": "^2.24.0",
     "nuxt": "^2.0.0",
     "vue-mq": "^1.0.1",
     "vue-the-mask": "^0.11.1",

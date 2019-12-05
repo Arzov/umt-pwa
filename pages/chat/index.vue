@@ -1,13 +1,36 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <chat-mobile :event="event" :messages-list="messagesList" @emit="onEmit($event)" />
+            <chat-mobile :event="event" :messages-list="messagesList" :matchInfo="matchInfo" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>
 
 <script>
+    import moment from 'moment'
     import ChatMobile from './mobile'
+
+    moment.updateLocale('en', {
+        calendar: {
+            sameDay: '[Today] HH:mm',
+            nextDay: 'DD/MM/YYYY HH:mm',
+            nextWeek: 'DD/MM/YYYY HH:mm',
+            lastDay: '[Yesterday] HH:mm',
+            lastWeek: 'DD/MM/YYYY HH:mm',
+            sameElse: 'DD/MM/YYYY HH:mm'
+        }
+    })
+    moment.updateLocale('es', {
+        calendar: {
+            sameDay: '[Hoy] HH:mm',
+            nextDay: 'DD/MM/YYYY HH:mm',
+            nextWeek: 'DD/MM/YYYY HH:mm',
+            lastDay: '[Ayer] HH:mm',
+            lastWeek: 'DD/MM/YYYY HH:mm',
+            sameElse: 'DD/MM/YYYY HH:mm'
+        }
+    })
+    moment.locale('es')
 
     /**
      * Evento que pueden emitir las vistas.
@@ -20,7 +43,7 @@
     export default {
         middleware ({ store, redirect }) {
             // Si se entra a la vista chat sin un matchId se devuelve a la pagina home
-            if (!store.state.chat.matchId) {
+            if (!store.state.chat.matchInfo.matchId) {
                 return redirect('/home')
             }
         },
@@ -28,12 +51,21 @@
         components: { ChatMobile },
         data () {
             return {
-                event
+                event,
+                matchInfo: this.$store.getters['chat/matchInfo']
             }
         },
         computed: {
             messagesList () {
-                return this.$store.getters['chat/messagesList']
+                return this.$store.getters['chat/messagesList'].map((msg, idx) => {
+                    return {
+                        hashKey: msg.hashKey,
+                        rangeKey: moment(msg.rangeKey.split('#')[0]).calendar(),
+                        author: msg.author,
+                        authorName: msg.authorName,
+                        content: msg.content
+                    }
+                })
             }
         },
         async mounted () {
@@ -48,7 +80,9 @@
             onEmit (event) {
                 switch (event.type) {
                     case this.event.ADD_MESSAGE:
-                        this.$store.dispatch('chat/addMessage', event)
+                        if (event.userMessage) {
+                            this.$store.dispatch('chat/addMessage', event)
+                        }
                         break
                 }
             }

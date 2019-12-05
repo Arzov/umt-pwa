@@ -66,7 +66,7 @@
                 switch (event.type) {
                     // Redireccionar al chat del encuentro seleccionado
                     case this.event.TO_CHAT:
-                        this.$store.dispatch('chat/setMatchId', { matchId: event.match.matchId })
+                        this.$store.dispatch('chat/setMatchInfo', { matchInfo: event.match })
                         this.$router.push(process.env.routes.chat.name)
                         break
         

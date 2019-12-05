@@ -1,9 +1,18 @@
 <template>
     <div id="page-chat-mobile">
         <a-row type="flex" justify="center">
+            <a-avatar :src="matchInfo.adversaryPicture" size="large" />
+            {{ matchInfo.adversaryName }}
+            <a-button>
+                <nuxt-link to="/match">
+                    cancelar
+                </nuxt-link>
+            </a-button>
+        </a-row>
+        <a-row type="flex" justify="center">
             <ul>
                 <li v-for="(msg, idx) in messagesList" :key="idx">
-                    {{ msg.content }}
+                    {{ msg.content }} {{ msg.rangeKey }}
                 </li>
             </ul>
         </a-row>
@@ -24,6 +33,9 @@
                 required: true
             },
             messagesList: {
+                required: true
+            },
+            matchInfo: {
                 required: true
             }
         },

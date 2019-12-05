@@ -3,12 +3,12 @@
         <a-row type="flex" justify="center">
             RIVALES DISPONIBLES
         </a-row>
-        <a-row v-if="mapUsers.length" type="flex" justify="center">
-            <a-list class="demo-loadmore-list" item-layout="horizontal" :data-source="mapUsers">
+        <a-row v-if="usersFound.length" type="flex" justify="center">
+            <a-list class="demo-loadmore-list" item-layout="horizontal" :data-source="usersFound">
                 <a-list-item slot="renderItem" slot-scope="item, index">
                     <a-list-item-meta
-                        :description="'A ' + item.distance + ' kilómetros de distancia'"
                         :key="index"
+                        :description="'A ' + item.distance + ' kilómetros de distancia'"
                     >
                         <a slot="title" href="https://vue.ant.design/">{{ item.firstName + ' ' + item.age }}</a>
                         <a-avatar
@@ -47,28 +47,6 @@
             },
             usersFound: {
                 required: true
-            },
-            getDistance: {
-                required: true
-            }
-        },
-        computed: {
-            mapUsers () {
-                return this.usersFound.map((user, idx) => {
-                    const userEdited = {
-                        hashKey: user.hashKey,
-                        firstName: user.firstName,
-                        age: user.age,
-                        picture: user.picture,
-                        distance: Math.round(this.getDistance(
-                            user.geoJson[1],
-                            user.geoJson[0],
-                            this.$store.getters['user/userData'].coordinates.latitude,
-                            this.$store.getters['user/userData'].coordinates.longitude
-                        ))
-                    }
-                    return userEdited
-                })
             }
         },
         methods: {
@@ -89,12 +67,12 @@
             addMatch (rangeKey, firstName, picture, index) {
                 const params = {
                     type: this.event.ADD_MATCH,
+                    index,
                     adversaryName: firstName,
                     adversaryPicture: picture,
                     rangeKey
                 }
                 this.$emit('emit', params)
-                this.usersFound.splice(index, 1)
             }
         }
     }
