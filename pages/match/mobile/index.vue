@@ -1,6 +1,14 @@
 <template>
     <div id="page-match-mobile">
         <div>
+            <a-row type="flex" justify="center">
+                ENCUENTROS
+                <a-button>
+                    <nuxt-link to="/home">
+                        cancelar
+                    </nuxt-link>
+                </a-button>
+            </a-row>
             <a-tabs default-active-key="1">
                 <a-tab-pane key="1" tab="ACTIVOS">
                     <a-row v-if="activeMatches.length" type="flex" justify="center">

@@ -1,7 +1,7 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <home-mobile :get-distance="getDistance" :users-found="usersFound" :event="event" @emit="onEmit($event)" />
+            <home-mobile :users-found="usersFoundMap" :event="event" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>
@@ -26,12 +26,26 @@
         data () {
             return {
                 event,
-                getDistance
+                usersFound: this.$store.getters['home/usersFound']
             }
         },
         computed: {
-            usersFound () {
-                return this.$store.getters['home/usersFound']
+            usersFoundMap () {
+                return this.usersFound.map((user, idx) => {
+                    const userEdited = {
+                        hashKey: user.hashKey,
+                        firstName: user.firstName,
+                        age: user.age,
+                        picture: user.picture,
+                        distance: Math.round(getDistance(
+                            user.geoJson[1],
+                            user.geoJson[0],
+                            this.$store.getters['user/userData'].coordinates.latitude,
+                            this.$store.getters['user/userData'].coordinates.longitude
+                        ))
+                    }
+                    return userEdited
+                })
             }
         },
         mounted () {
@@ -52,6 +66,7 @@
                     // Enviar solicitud de match
                     case this.event.ADD_MATCH:
                         this.$store.dispatch('home/addMatch', event)
+                        this.usersFound.splice(event.index, 1)
                         break
                 }
             }
