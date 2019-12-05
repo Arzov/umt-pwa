@@ -1,12 +1,13 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <chat-mobile :event="event" :messages-list="messagesList" @emit="onEmit($event)" />
+            <chat-mobile :event="event" :messages-list="messagesList" :matchInfo="matchInfo" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>
 
 <script>
+    import moment from 'moment'
     import ChatMobile from './mobile'
 
     /**
@@ -20,7 +21,7 @@
     export default {
         middleware ({ store, redirect }) {
             // Si se entra a la vista chat sin un matchId se devuelve a la pagina home
-            if (!store.state.chat.matchId) {
+            if (!store.state.chat.matchInfo.matchId) {
                 return redirect('/home')
             }
         },
@@ -28,7 +29,8 @@
         components: { ChatMobile },
         data () {
             return {
-                event
+                event,
+                matchInfo: this.$store.getters['chat/matchInfo']
             }
         },
         computed: {
@@ -36,7 +38,7 @@
                 return this.$store.getters['chat/messagesList'].map((msg, idx) => {
                     return {
                         hashKey: msg.hashKey,
-                        rangeKey: msg.rangeKey,
+                        rangeKey: moment(msg.rangeKey.split('#')[0]).format().slice(11, 16),
                         author: msg.author,
                         authorName: msg.authorName,
                         content: msg.content
