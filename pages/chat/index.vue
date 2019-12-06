@@ -1,7 +1,7 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <chat-mobile :event="event" :messages-list="messagesList" :matchInfo="matchInfo" @emit="onEmit($event)" />
+            <chat-mobile :event="event" :messages-list="messagesList" :match-info="matchInfo" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>

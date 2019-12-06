@@ -28,7 +28,6 @@
             onEmit (event) {
                 switch (event.type) {
                     case this.event.REGISTER:
-                        console.log('REGISTER')
                         this.$store.dispatch('user/register', event.data)
                         break
                     case this.event.TERMINOS:

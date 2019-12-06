@@ -1,5 +1,7 @@
 import { addUserLocation, updateUser } from '@/graphql/mutations'
 import { getUser, getUmatchUser } from '@/graphql/queries'
+import validationBirthdate from '@/utils/validationBirthdate'
+import validationEmail from '@/utils/validationEmail'
 
 const state = () => ({
     id: null,
@@ -188,19 +190,52 @@ const actions = {
         }
     },
     register (ctx, data) {
-        const birthdate = String(data.birthdate.year) + '-' + data.birthdate.month + '-' + data.birthdate.day
-        this.$AWS.Auth.signUp({
-            username: data.email,
-            password: data.password,
-            attributes: {
-                email: data.email,
-                name: data.name,
-                birthdate,
-                gender: data.gender
+        const validationFields = Boolean(
+            data.name &&
+            data.birthdate &&
+            data.email &&
+            data.password &&
+            data.gender
+        )
+
+        // Validar que todos los campos esten completos
+        if (validationFields) {
+            // Validar edad
+            const validBirthdate = validationBirthdate(data.birthdate)
+            const birthdate = String(data.birthdate.year) + '-' + data.birthdate.month + '-' + data.birthdate.day
+
+            if (validBirthdate.status) {
+                // Validar email
+                const validEmail = validationEmail(data.email)
+
+                if (validEmail) {
+                    // Validar password
+                    if (data.password.length >= 6) {
+                        this.$AWS.Auth.signUp({
+                            username: data.email.toLowerCase(),
+                            password: data.password,
+                            attributes: {
+                                email: data.email,
+                                name: data.name,
+                                birthdate,
+                                gender: data.gender
+                            }
+                        })
+                            .then(result => console.log(result))
+                            .catch(err => console.log(err))
+                    } else {
+                        console.log('Contraseña debe tener al menos 6 caracteres!')
+                    }
+                } else {
+                    console.log('Email inválido!')
+                }
+            } else {
+                console.log(validBirthdate.msg)
             }
-        })
-            .then(result => console.log(result))
-            .catch(err => console.log(err))
+        } else {
+            // eslint-disable-next-line no-console
+            console.log('Debe ingresar todos los datos!')
+        }
     },
     resetStates (context) {
         context.commit('resetStates')

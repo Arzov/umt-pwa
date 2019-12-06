@@ -53,14 +53,6 @@
                 }
 
                 this.$emit('emit', params)
-                this.clearInputs()
-            },
-            clearInputs () {
-                this.name = undefined
-                this.email = undefined
-                this.password = undefined
-                this.birthdate = undefined
-                this.gender = undefined
             }
         }
     }
