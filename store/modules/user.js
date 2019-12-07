@@ -211,6 +211,7 @@ const actions = {
                 if (validEmail) {
                     // Validar password
                     if (data.password.length >= 6) {
+                        // Registrar
                         this.$AWS.Auth.signUp({
                             username: data.email.toLowerCase(),
                             password: data.password,
@@ -221,8 +222,30 @@ const actions = {
                                 gender: data.gender
                             }
                         })
-                            .then(result => console.log(result))
-                            .catch(err => console.log(err))
+                            .then((result) => {
+                                console.log(result)
+                                // Enviar a verificar codigo
+                                // this.$router.push(process.env.routes.verification.path)
+                            })
+                            .catch((err) => {
+                                console.log(err)
+                                switch (err.code) {
+                                    // Problema con trigger lambda PreSignUp
+                                    case 'UserLambdaValidationException':
+                                        console.log(err.message.split('#')[1])
+                                        break
+                                    
+                                    // Usuario ya existe
+                                    case 'UsernameExistsException':
+                                        console.log(err.message)
+                                        break
+                                    
+                                    // Error desconocido
+                                    default:
+                                        console.log('¡Error desconocido!')
+                                        break
+                                }
+                            })
                     } else {
                         console.log('Contraseña debe tener al menos 6 caracteres!')
                     }

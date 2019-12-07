@@ -8,7 +8,7 @@
 
 <script>
     import HomeMobile from './mobile'
-    import getDistance from '@/utils/functions'
+    import getDistance from '@/utils/getDistance'
 
     /**
      * Evento que pueden emitir las vistas.
