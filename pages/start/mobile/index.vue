@@ -6,7 +6,7 @@
             </a-button>
             <FacebookLogin />
             <GoogleLogin />
-            <a-button @click="toRegister">
+            <a-button type="link" @click="toRegister">
                 ¿No tienes cuenta? Regístrate.
             </a-button>
         </a-row>
