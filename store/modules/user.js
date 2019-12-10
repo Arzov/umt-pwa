@@ -294,6 +294,18 @@ const actions = {
             console.log('Debe ingresar todos los datos!')
         }
     },
+    resendCode (ctx, data) {
+        // Reenviar codigo
+        this.$AWS.Auth.resendSignUp(
+            ctx.state.id
+        )
+            .then((data) => {
+                console.log('Codigo enviado a ' + ctx.state.id + '!')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    },
     resetStates (context) {
         context.commit('resetStates')
     }

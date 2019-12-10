@@ -7,6 +7,9 @@
             <a-button @click="verify">
                 Enviar
             </a-button>
+            <a-button type="link" @click="resendCode">
+                Reenviar código
+            </a-button>
         </a-row>
     </div>
 </template>
@@ -33,6 +36,13 @@
                 const params = {
                     type: this.event.VERIFY,
                     code: this.code
+                }
+
+                this.$emit('emit', params)
+            },
+            resendCode () {
+                const params = {
+                    type: this.event.RESEND_CODE
                 }
 
                 this.$emit('emit', params)

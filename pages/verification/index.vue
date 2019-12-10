@@ -10,7 +10,8 @@
     import VerificationMobile from './mobile'
 
     const event = {
-        VERIFY: 'verify'
+        VERIFY: 'verify',
+        RESEND_CODE: 'resend_code'
     }
 
     export default {
@@ -26,8 +27,11 @@
             onEmit (event) {
                 switch (event.type) {
                     case this.event.VERIFY:
-                        console.log(event)
                         this.$store.dispatch('user/verification', event)
+                        break
+                    
+                    case this.event.RESEND_CODE:
+                        this.$store.dispatch('user/resendCode')
                         break
                 }
             }
