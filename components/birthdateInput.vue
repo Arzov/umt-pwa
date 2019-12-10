@@ -7,7 +7,7 @@
         </a-select>
         <a-select placeholder="Mes" style="width: 100px" @change="setMonth">
             <a-select-option v-for="month in monthOptions" :key="'m' + month.value" :value="month.value">
-                {{ month.name }}
+                {{ month.key }}
             </a-select-option>
         </a-select>
         <a-select placeholder="Año" style="width: 100px" @change="setYear">
@@ -25,18 +25,18 @@
         data () {
             return {
                 monthOptions: [
-                    { name: 'Enero', value: '01' },
-                    { name: 'Febrero', value: '02' },
-                    { name: 'Marzo', value: '03' },
-                    { name: 'Abril', value: '04' },
-                    { name: 'Mayo', value: '05' },
-                    { name: 'Junio', value: '06' },
-                    { name: 'Julio', value: '07' },
-                    { name: 'Agosto', value: '08' },
-                    { name: 'Septiembre', value: '09' },
-                    { name: 'Octubre', value: '10' },
-                    { name: 'Noviembre', value: '11' },
-                    { name: 'Diciembre', value: '12' }
+                    { key: 'Enero', value: '01' },
+                    { key: 'Febrero', value: '02' },
+                    { key: 'Marzo', value: '03' },
+                    { key: 'Abril', value: '04' },
+                    { key: 'Mayo', value: '05' },
+                    { key: 'Junio', value: '06' },
+                    { key: 'Julio', value: '07' },
+                    { key: 'Agosto', value: '08' },
+                    { key: 'Septiembre', value: '09' },
+                    { key: 'Octubre', value: '10' },
+                    { key: 'Noviembre', value: '11' },
+                    { key: 'Diciembre', value: '12' }
                 ],
                 birthdate: {
                     day: undefined,

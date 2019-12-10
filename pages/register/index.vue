@@ -11,8 +11,7 @@
 
     const event = {
         REGISTER: 'register',
-        TERMINOS: 'terminos',
-        CANCEL: 'cancel'
+        TERMS: 'terms'
     }
 
     export default {
@@ -28,13 +27,10 @@
             onEmit (event) {
                 switch (event.type) {
                     case this.event.REGISTER:
-                        console.log('REGISTER')
                         this.$store.dispatch('user/register', event.data)
                         break
-                    case this.event.TERMINOS:
-                        break
-                    case this.event.CANCEL:
-                        console.log('Cancel')
+
+                    case this.event.TERMS:
                         break
                 }
             }

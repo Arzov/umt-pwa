@@ -1,4 +1,4 @@
-import getDistance from '@/utils/functions'
+import getDistance from '@/utils/getDistance'
 
 // EXPORT
 export default ({ store }) => {

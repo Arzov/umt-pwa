@@ -2,7 +2,7 @@
     <div>
         <a-radio-group name="radioGroup" @change="setGender">
             <a-radio v-for="gender in genderOptions" :key="'g' + gender.value" :value="gender.value">
-                {{ gender.name }}
+                {{ gender.key }}
             </a-radio>
         </a-radio-group>
     </div>
@@ -15,8 +15,8 @@
         data () {
             return {
                 genderOptions: [
-                    { name: 'Masculino', value: 'M' },
-                    { name: 'Femenino', value: 'F' }
+                    { key: 'Masculino', value: 'M' },
+                    { key: 'Femenino', value: 'F' }
                 ]
             }
         },

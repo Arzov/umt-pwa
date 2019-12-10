@@ -3,8 +3,8 @@
         <mq-layout :mq="['mobile', 'tablet']">
             <match-mobile
                 :event="event"
-                :activeMatches="activeMatches"
-                :requestMatches="requestMatches"
+                :active-matches="activeMatches"
+                :request-matches="requestMatches"
                 @emit="onEmit($event)"
             />
         </mq-layout>
