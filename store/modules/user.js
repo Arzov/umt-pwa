@@ -16,7 +16,8 @@ const state = () => ({
     matchFilter: null,
     genderFilter: null,
     ageMinFilter: null,
-    ageMaxFilter: null
+    ageMaxFilter: null,
+    toVerify: false
 })
 
 const getters = {
@@ -33,7 +34,8 @@ const getters = {
             ageMinFilter: state.ageMinFilter,
             ageMaxFilter: state.ageMaxFilter,
             geohash: state.geohash,
-            coordinates: { latitude: state.latitude, longitude: state.longitude }
+            coordinates: { latitude: state.latitude, longitude: state.longitude },
+            toVerify: state.toVerify
         }
     }
 }
@@ -209,12 +211,17 @@ const actions = {
                             }
                         })
                             .then((result) => {
-                                console.log(result)
+                                const params = {
+                                    id: data.email,
+                                    toVerify: true
+                                }
+        
+                                ctx.commit('setState', { params })
+
                                 // Enviar a verificar codigo
-                                // this.$router.push(process.env.routes.verification.path)
+                                this.$router.push(process.env.routes.verification.path)
                             })
                             .catch((err) => {
-                                console.log(err)
                                 switch (err.code) {
                                     // Problema con trigger lambda PreSignUp
                                     case 'UserLambdaValidationException':
@@ -246,6 +253,59 @@ const actions = {
             console.log('Debe ingresar todos los datos!')
         }
     },
+    verification (ctx, data) {
+        if (data.code) {
+            // Verificar codigo
+            this.$AWS.Auth.confirmSignUp(
+                ctx.state.id,
+                data.code,
+                {
+                    forceAliasCreation: true
+                }
+            )
+                .then((data) => {
+                    const params = {
+                        id: null,
+                        toVerify: false
+                    }
+
+                    ctx.commit('setState', { params })
+                    this.$router.push(process.env.routes.login.path)
+                })
+                .catch((err) => {
+                    switch (err.code) {
+                        // Codigo invalido
+                        case 'CodeMismatchException':
+                            console.log(err.message)
+                            break
+                        
+                        // Caracter invalido ingresado
+                        case 'InvalidParameterException':
+                            console.log(err.message)
+                            break
+                        
+                        // Error desconocido
+                        default:
+                            console.log('¡Error desconocido!')
+                            break
+                    }
+                })
+        } else {
+            console.log('Debe ingresar todos los datos!')
+        }
+    },
+    resendCode (ctx, data) {
+        // Reenviar codigo
+        this.$AWS.Auth.resendSignUp(
+            ctx.state.id
+        )
+            .then((data) => {
+                console.log('Codigo enviado a ' + ctx.state.id + '!')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    },
     resetStates (context) {
         context.commit('resetStates')
     }
@@ -272,6 +332,7 @@ const mutations = {
         state.genderFilter = null
         state.ageMinFilter = null
         state.ageMaxFilter = null
+        state.toVerify = false
     }
 }
 

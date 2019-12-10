@@ -11,6 +11,10 @@
         "path": "/register",
         "name": "register"
     },
+    "verification": {
+        "path": "/verification",
+        "name": "verification"
+    },
     "required_attributes": {
         "path": "/required_attributes",
         "name": "required_attributes"
