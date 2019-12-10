@@ -128,61 +128,47 @@ const actions = {
         }
     },
     saveAttributes (context, data) {
+        const validationFields = Boolean(
+            data.birthdate &&
+            data.gender
+        )
+
         // Validar que todos los campos esten completos
-        if (data.gender && data.birthDay && data.birthMonth && data.birthYear) {
-            // Revisar que la fecha de nacimiento sea la correcta
-            const birthdate = String(data.birthYear) + '-' + data.birthMonth + '-' + data.birthDay
-            const validBirthdate = new Date(data.birthYear, (+data.birthMonth - 1), data.birthDay)
+        if (validationFields) {
+            // Validar edad
+            const validBirthdate = validationBirthdate(data.birthdate)
+            const birthdate = String(data.birthdate.year) + '-' + data.birthdate.month + '-' + data.birthdate.day
 
-            // Fecha invalida (solo se valida mes de febrero donde podria haber error)
-            if (validBirthdate.getMonth() !== (+data.birthMonth - 1)) {
-                // eslint-disable-next-line no-console
-                console.log('Debe ingresar una fecha valida!')
+            if (validBirthdate.status) {
+                // Usar API de Arzov
+                this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
 
-                // Fecha valida
-            } else {
-                // Validar mayoria de edad (18 anos)
-                const today = new Date()
-                const m = today.getMonth() - validBirthdate.getMonth()
-                let age = today.getFullYear() - validBirthdate.getFullYear()
-
-                // Calculo de edad correcta
-                if (m < 0 || (m === 0 && today.getDate() < validBirthdate.getDate())) {
-                    age--
-                }
-
-                if (age < 18) {
-                    // eslint-disable-next-line no-console
-                    console.log('Debe ser mayor de 18 anos!')
-                } else {
-                    // Usar API de Arzov
-                    this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
-
-                    // Actualizar datos del usuario
-                    this.$AWS.API.graphql(
-                        this.$AWS.Query(updateUser, {
-                            hashKey: context.state.id,
-                            firstName: context.state.firstName,
-                            lastName: context.state.lastName,
-                            picture: context.state.picture,
+                // Actualizar datos del usuario
+                this.$AWS.API.graphql(
+                    this.$AWS.Query(updateUser, {
+                        hashKey: context.state.id,
+                        firstName: context.state.firstName,
+                        lastName: context.state.lastName,
+                        picture: context.state.picture,
+                        birthdate,
+                        gender: data.gender
+                    })
+                )
+                    .then((result) => {
+                        const params = {
                             birthdate,
                             gender: data.gender
-                        })
-                    )
-                        .then((result) => {
-                            const params = {
-                                birthdate,
-                                gender: data.gender
-                            }
+                        }
 
-                            context.commit('setState', { params })
+                        context.commit('setState', { params })
 
-                            // Enviar a Home
-                            this.$router.push(process.env.routes.home.path)
-                        })
-                        // eslint-disable-next-line no-console
-                        .catch(e => console.log(e))
-                }
+                        // Enviar a Home
+                        this.$router.push(process.env.routes.home.path)
+                    })
+                    // eslint-disable-next-line no-console
+                    .catch(e => console.log(e))
+            } else {
+                console.log(validBirthdate.msg)
             }
         } else {
             // eslint-disable-next-line no-console
