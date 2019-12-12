@@ -10,8 +10,7 @@
     import LoginMobile from './mobile'
 
     const event = {
-        LOGIN: 'login',
-        CANCEL: 'cancel'
+        LOGIN: 'login'
     }
 
     export default {
@@ -27,12 +26,7 @@
             onEmit (event) {
                 switch (event.type) {
                     case this.event.LOGIN:
-                        console.log('LOGIN')
                         this.$store.dispatch('login/signIn', event.data)
-                        break
-
-                    case this.event.CANCEL:
-                        console.log('Cancel')
                         break
                 }
             }

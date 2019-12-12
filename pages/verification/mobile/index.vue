@@ -1,6 +1,13 @@
 <template>
     <div id="page-verification-mobile">
         <a-row type="flex" justify="center">
+            <a-button>
+                <nuxt-link to="/start">
+                    cancelar
+                </nuxt-link>
+            </a-button>
+        </a-row>
+        <a-row type="flex" justify="center">
             Ingresa tu código de verificación
             {{ userData.id }}
             <a-input v-model="code" placeholder="Codigo verificacion" />
