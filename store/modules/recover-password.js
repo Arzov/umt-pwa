@@ -6,9 +6,8 @@ const mutations = {
 
 const actions = {
   recoverPassword (ctx, data) {
-    console.log(data)
     if (data.username) {
-      this.$AWS.Auth.forgotPassword(data)
+      this.$AWS.Auth.forgotPassword(data.username)
       .then((user) => {
         // eslint-disable-next-line no-console
         console.log(user)
@@ -17,12 +16,9 @@ const actions = {
         // this.$router.push(process.env.routes.home.path)
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err)
-
         switch (err.code) {
           // Usuario invalido
-          case 'SerializationException':
+          case 'UserNotFoundException':
               console.log(err.message)
               break
           
