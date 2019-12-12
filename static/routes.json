@@ -15,6 +15,10 @@
         "path": "/verification",
         "name": "verification"
     },
+    "recover_password": {
+        "path": "/recover_password",
+        "name": "recover_password"
+    },
     "required_attributes": {
         "path": "/required_attributes",
         "name": "required_attributes"

@@ -13,6 +13,9 @@
             <a-button @click="login">
                 Iniciar Sesión
             </a-button>
+            <a-button type="link" @click="toRecoverPassword">
+                ¿Olvidaste tu contraseña?
+            </a-button>
         </a-row>
     </div>
 </template>
@@ -41,6 +44,13 @@
                         username: this.email,
                         password: this.password
                     }
+                }
+
+                this.$emit('emit', params)
+            },
+            toRecoverPassword () {
+                const params = {
+                    type: this.event.TO_RECOVER_PASSWORD
                 }
 
                 this.$emit('emit', params)

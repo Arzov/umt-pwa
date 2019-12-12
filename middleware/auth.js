@@ -14,7 +14,8 @@ function authValidation (app, route, store, redirect) {
     required_attributes_path: process.env.routes.required_attributes.path,
     required_filters: process.env.routes.required_filters.name,
     required_filters_path: process.env.routes.required_filters.path,
-    verification: process.env.routes.verification.name
+    verification: process.env.routes.verification.name,
+    recover_password: process.env.routes.recover_password.name
   }
 
   // Obtener sesion actual
@@ -22,7 +23,7 @@ function authValidation (app, route, store, redirect) {
     // Sesion iniciada
     .then((data) => {
       // Si se encuentra en Star enviar a Home
-      if (currentPath === path.start || currentPath === path.login || currentPath === path.register || currentPath === path.verification) {
+      if (currentPath === path.start || currentPath === path.login || currentPath === path.register || currentPath === path.verification || currentPath === path.recover_password) {
         // Obtener datos del usuario
         store.dispatch('user/fetchUserData', data)
 
@@ -71,7 +72,7 @@ function authValidation (app, route, store, redirect) {
       console.log(err)
 
       // Si se encuentra en la app entonces enviar a Start
-      if (currentPath !== path.start && currentPath !== path.login && currentPath !== path.register) {
+      if (currentPath !== path.start && currentPath !== path.login && currentPath !== path.register && currentPath !== path.recover_password) {
         // Datos del usuario
         const userData = store.getters['user/userData']
 

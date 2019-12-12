@@ -10,7 +10,8 @@
     import LoginMobile from './mobile'
 
     const event = {
-        LOGIN: 'login'
+        LOGIN: 'login',
+        TO_RECOVER_PASSWORD: 'to_recover_password'
     }
 
     export default {
@@ -27,6 +28,10 @@
                 switch (event.type) {
                     case this.event.LOGIN:
                         this.$store.dispatch('login/signIn', event.data)
+                        break
+                    
+                    case this.event.TO_RECOVER_PASSWORD:
+                        this.$router.push(process.env.routes.recover_password.path)
                         break
                 }
             }
