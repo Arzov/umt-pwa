@@ -6,6 +6,7 @@ import home from './modules/home'
 import match from './modules/match'
 import chat from './modules/chat'
 import recoverPassword from './modules/recover-password'
+import resetPassword from './modules/reset-password'
 
 const store = () => {
   return new Vuex.Store({
@@ -16,7 +17,8 @@ const store = () => {
       home,
       match,
       chat,
-      recoverPassword
+      recoverPassword,
+      resetPassword
     }
   })
 }
