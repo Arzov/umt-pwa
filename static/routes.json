@@ -19,6 +19,10 @@
         "path": "/recover_password",
         "name": "recover_password"
     },
+    "reset_password": {
+        "path": "/reset_password",
+        "name": "reset_password"
+    },
     "required_attributes": {
         "path": "/required_attributes",
         "name": "required_attributes"

@@ -12,8 +12,14 @@ const actions = {
         // eslint-disable-next-line no-console
         console.log(user)
 
+        const params = {
+          id: data.username
+        }
+
+        ctx.commit('user/setState', { params }, { root: true })
+
         // eslint-disable-next-line no-unused-expressions
-        // this.$router.push(process.env.routes.home.path)
+        this.$router.push(process.env.routes.reset_password.path)
       })
       .catch((err) => {
         switch (err.code) {
