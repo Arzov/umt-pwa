@@ -1,29 +1,30 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <required-filters-mobile :event="event" @emit="onEmit($event)" />
+            <profile-mobile :userData="userData" :event="event" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>
 
 <script>
-    import RequiredFiltersMobile from './mobile'
+    import ProfileMobile from './mobile'
 
     /**
      * Evento que pueden emitir las vistas.
-     * @type {{SAVE_FILTERS: string, LOGOUT: string}}
+     * @type {{SAVE_PROFILE: string, LOGOUT: string}}
      */
     const event = {
-        SAVE_FILTERS: 'save_filters',
+        SAVE_PROFILE: 'save_profile',
         LOGOUT: 'logout'
     }
 
     export default {
-        name: 'RequiredFilters',
-        components: { RequiredFiltersMobile },
+        name: 'Profile',
+        components: { ProfileMobile },
         data () {
             return {
-                event
+                event,
+                userData: this.$store.getters['user/userData']
             }
         },
         methods: {
@@ -34,8 +35,8 @@
             onEmit (event) {
                 switch (event.type) {
                     // Guardar filtros seleccionados
-                    case this.event.SAVE_FILTERS:
-                        this.$store.dispatch('user/saveFilters', event)
+                    case this.event.SAVE_PROFILE:
+                        this.$store.dispatch('profile/saveProfile', event.data)
                         break
 
                     // Cerrar sesion

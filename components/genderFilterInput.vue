@@ -10,13 +10,13 @@
 
 <script>
     export default {
-        name: 'GenderInput',
+        name: 'GenderFilterInput',
         props: ['value'],
         data () {
             return {
                 genderOptions: [
-                    { key: 'Masculino', value: 'M' },
-                    { key: 'Femenino', value: 'F' }
+                    { key: 'Hombres', value: 'M' },
+                    { key: 'Mujeres', value: 'F' }
                 ]
             }
         },
