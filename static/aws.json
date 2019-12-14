@@ -6,11 +6,5 @@
     "APPSYNC_ARZOV_URL": "https://7elmil4bprd4ncyskhqvtbkpyy.appsync-api.us-east-2.amazonaws.com/graphql",
     "APPSYNC_UMATCH_URL": "https://xet3zt2pjzeklbuvou6ydzzj5q.appsync-api.us-east-2.amazonaws.com/graphql",
     "APPSYNC_REGION": "us-east-2",
-    "APPSYNC_AUTH_TYPE": "AMAZON_COGNITO_USER_POOLS",
-    "APIGATEWAY_UMATCH_NAME": "arv-umt",
-    "APIGATEWAY_UMATCH_ENDPOINT": "https://gcos3tjt28.execute-api.us-east-2.amazonaws.com/dev",
-    "LAMBDA_ARV_UMT_PUT_GEOLOCATION": "/arv-umt-put-geolocation",
-    "LAMBDA_ARV_UMT_SEARCH_MATCH": "/arv-umt-search-match",
-    "LAMBDA_ARV_UMT_ADD_MATCH": "/arv-umt-add-match",
-    "LAMBDA_ARV_UMT_UPDATE_USER": "/arv-umt-update-user"
+    "APPSYNC_AUTH_TYPE": "AMAZON_COGNITO_USER_POOLS"
 }

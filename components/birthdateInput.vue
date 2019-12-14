@@ -1,16 +1,16 @@
 <template>
     <div>
-        <a-select placeholder="Día" style="width: 100px" @change="setDay">
+        <a-select placeholder="Día" style="width: 100px" :defaultValue="birthdate.day" @change="setDay">
             <a-select-option v-for="day in dayOptions" :key="'d' + day" :value="day">
                 {{ day }}
             </a-select-option>
         </a-select>
-        <a-select placeholder="Mes" style="width: 100px" @change="setMonth">
+        <a-select placeholder="Mes" style="width: 100px" :defaultValue="birthdate.month" @change="setMonth">
             <a-select-option v-for="month in monthOptions" :key="'m' + month.value" :value="month.value">
                 {{ month.key }}
             </a-select-option>
         </a-select>
-        <a-select placeholder="Año" style="width: 100px" @change="setYear">
+        <a-select placeholder="Año" style="width: 100px" :defaultValue="birthdate.year" @change="setYear">
             <a-select-option v-for="year in yearOptions" :key="'y' + year" :value="year">
                 {{ year }}
             </a-select-option>
@@ -39,9 +39,9 @@
                     { key: 'Diciembre', value: '12' }
                 ],
                 birthdate: {
-                    day: undefined,
-                    month: undefined,
-                    year: undefined
+                    day: this.value.day,
+                    month: this.value.month,
+                    year: this.value.year
                 }
             }
         },

@@ -31,6 +31,10 @@
         "path": "/required_filters",
         "name": "required_filters"
     },
+    "profile": {
+        "path": "/profile",
+        "name": "profile"
+    },
     "home": {
         "path": "/home",
         "name": "home"

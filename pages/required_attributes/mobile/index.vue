@@ -31,7 +31,11 @@
         },
         data () {
             return {
-                birthdate: undefined,
+                birthdate: {
+                    day: undefined,
+                    month: undefined,
+                    year: undefined
+                },
                 gender: undefined
             }
         },
