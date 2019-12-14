@@ -1,5 +1,6 @@
 import { searchMatch } from '@/graphql/queries'
 import { addMatch } from '@/graphql/mutations'
+import getDistance from '@/utils/getDistance'
 
 const state = () => ({
   usersFound: [],
@@ -33,7 +34,21 @@ const actions = {
       .then((result) => {
         const params = {
           matchNextToken: result.data.searchMatch.nextToken,
-          usersFound: result.data.searchMatch.items
+          usersFound: result.data.searchMatch.items.map((user, idx) => {
+            const userEdited = {
+                hashKey: user.hashKey,
+                firstName: user.firstName,
+                age: user.age,
+                picture: user.picture,
+                distance: Math.round(getDistance(
+                    user.geoJson[1],
+                    user.geoJson[0],
+                    context.rootState.user.latitude,
+                    context.rootState.user.longitude
+                ))
+            }
+            return userEdited
+          })
         }
 
         context.commit('setState', { params })

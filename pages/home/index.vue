@@ -1,14 +1,13 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <home-mobile :users-found="usersFoundMap" :event="event" @emit="onEmit($event)" />
+            <home-mobile :usersFound="usersFound" :event="event" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>
 
 <script>
     import HomeMobile from './mobile'
-    import getDistance from '@/utils/getDistance'
 
     /**
      * Evento que pueden emitir las vistas.
@@ -29,27 +28,16 @@
                 usersFound: this.$store.getters['home/usersFound']
             }
         },
-        computed: {
-            usersFoundMap () {
-                return this.usersFound.map((user, idx) => {
-                    const userEdited = {
-                        hashKey: user.hashKey,
-                        firstName: user.firstName,
-                        age: user.age,
-                        picture: user.picture,
-                        distance: Math.round(getDistance(
-                            user.geoJson[1],
-                            user.geoJson[0],
-                            this.$store.getters['user/userData'].coordinates.latitude,
-                            this.$store.getters['user/userData'].coordinates.longitude
-                        ))
-                    }
-                    return userEdited
-                })
-            }
-        },
         mounted () {
             this.$store.dispatch('home/searchMatch')
+
+            // Refrescar listado de usuarios cuando se haga una busqueda
+            this.$store.watch(
+                (state, getters) => getters['home/usersFound'],
+                (newValue, oldValue) => {
+                    this.usersFound = newValue
+                }
+            )
         },
         methods: {
             /**
