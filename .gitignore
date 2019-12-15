@@ -89,3 +89,11 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Don't commit build files
+node_modules
+dist
+.nuxt
+.awspublish
+deploy_dev.sh
+deploy_prd.sh
