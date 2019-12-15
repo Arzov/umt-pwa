@@ -42,7 +42,11 @@
                 name: undefined,
                 email: undefined,
                 password: undefined,
-                birthdate: undefined,
+                birthdate: {
+                    day: undefined,
+                    month: undefined,
+                    year: undefined
+                },
                 gender: undefined
             }
         },
