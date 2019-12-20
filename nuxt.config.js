@@ -1,6 +1,7 @@
 const routes = require('./static/routes')
 const aws = require('./static/aws')
 const app = require('./static/app')
+const gcp = require('./static/gcp')
 
 export default {
     mode: 'spa',
@@ -36,6 +37,7 @@ export default {
         '@/plugins/mask',
         '@/plugins/mq',
         '@/plugins/aws',
+        '@/plugins/gcp',
         '@/plugins/storage'
     ],
     /*
@@ -76,9 +78,10 @@ export default {
     ** Environment variables
     */
     env: {
-        routes,
+        app,
         aws,
-        app
+        gcp,
+        routes
     },
     /*
     ** Build configuration
