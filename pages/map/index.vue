@@ -1,7 +1,7 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <map-mobile :event="event" @emit="onEmit($event)" />
+            <map-mobile :userData="userData" :event="event" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>
@@ -14,7 +14,8 @@
         components: { MapMobile },
         data () {
             return {
-                event
+                event,
+                userData: this.$store.getters['user/userData']
             }
         },
         methods: {
@@ -36,5 +37,4 @@
 </script>
 
 <style scoped>
-
 </style>

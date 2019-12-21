@@ -17,6 +17,12 @@ export default {
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        ],
+        script: [
+            {
+                src: 'https://maps.googleapis.com/maps/api/js?key=' + gcp.GCP_API_KEY,
+                body: true
+            }
         ]
     },
     /*
@@ -37,7 +43,6 @@ export default {
         '@/plugins/mask',
         '@/plugins/mq',
         '@/plugins/aws',
-        '@/plugins/gcp',
         '@/plugins/storage'
     ],
     /*
@@ -80,7 +85,6 @@ export default {
     env: {
         app,
         aws,
-        gcp,
         routes
     },
     /*

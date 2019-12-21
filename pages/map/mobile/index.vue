@@ -8,14 +8,7 @@
             </a-button>
         </a-row>
         <a-row>
-            <gmap-map :center="center" :map-type-id="mapTypeId" :zoom="15">
-                <gmap-marker
-                    v-for="(item, index) in markers"
-                    :key="index"
-                    :position="item.position"
-                    @click="center = item.position"
-                />
-            </gmap-map>
+            <div id="map" class="google-map" />
         </a-row>
     </div>
 </template>
@@ -26,25 +19,49 @@
         props: {
             event: {
                 required: true
+            },
+            userData: {
+                required: true
             }
         },
         data () {
             return {
-                center: { lat: -3.350235, lng: 111.995865 },
-                mapTypeId: 'terrain',
-                markers: [
-                    { position: { lat: -0.48585, lng: 117.1466 } },
-                    { position: { lat: -6.9127778, lng: 107.6205556 } }
-                ]
+            }
+        },
+        mounted () {
+            // eslint-disable-next-line
+            let map = new window.google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: this.userData.coordinates.latitude,
+                    lng: this.userData.coordinates.longitude
+                },
+                zoom: 16,
+                disableDefaultUI: true
+            })
+
+            // Marcadores de canchas
+            let markers = [
+                {
+                    position: { lat: this.userData.coordinates.latitude, lng: this.userData.coordinates.longitude }
+                },
+                {
+                    position: { lat: -33.4178484, lng: -70.6591775 }
+                }
+            ]
+
+            for (let i = 0; i < markers.length; i++) {
+                // eslint-disable-next-line
+                const marker = new window.google.maps.Marker({
+                    position: markers[i].position,
+                    map
+                })
             }
         }
     }
 </script>
 
 <style scoped>
-    .vue-map-container {
+    .google-map {
         height: 700px;
-        max-width: 992px;
-        width: 100%;
     }
 </style>
