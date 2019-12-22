@@ -1,6 +1,7 @@
 const routes = require('./static/routes')
 const aws = require('./static/aws')
 const app = require('./static/app')
+const gcp = require('./static/gcp')
 
 export default {
     mode: 'spa',
@@ -16,6 +17,12 @@ export default {
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        ],
+        script: [
+            {
+                src: 'https://maps.googleapis.com/maps/api/js?key=' + gcp.GCP_API_KEY,
+                body: true
+            }
         ]
     },
     /*
@@ -76,9 +83,9 @@ export default {
     ** Environment variables
     */
     env: {
-        routes,
+        app,
         aws,
-        app
+        routes
     },
     /*
     ** Build configuration

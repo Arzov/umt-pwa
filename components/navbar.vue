@@ -11,8 +11,8 @@
             </nuxt-link>
         </a-breadcrumb-item>
         <a-breadcrumb-item>
-            <nuxt-link to="/court">
-                Court
+            <nuxt-link to="/map">
+                Map
             </nuxt-link>
         </a-breadcrumb-item>
     </a-breadcrumb>
