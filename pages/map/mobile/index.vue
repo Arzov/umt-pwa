@@ -9,6 +9,9 @@
         </a-row>
         <a-row>
             <div id="map" class="google-map" />
+            <a-button @click="toCenter">
+                centrar
+            </a-button>
         </a-row>
     </div>
 </template>
@@ -26,11 +29,12 @@
         },
         data () {
             return {
+                map: undefined
             }
         },
         mounted () {
             // eslint-disable-next-line
-            let map = new window.google.maps.Map(document.getElementById('map'), {
+            this.map = new window.google.maps.Map(document.getElementById('map'), {
                 center: {
                     lat: this.userData.coordinates.latitude,
                     lng: this.userData.coordinates.longitude
@@ -53,7 +57,15 @@
                 // eslint-disable-next-line
                 const marker = new window.google.maps.Marker({
                     position: markers[i].position,
-                    map
+                    map: this.map
+                })
+            }
+        },
+        methods: {
+            toCenter () {
+                this.map.panTo({
+                    lat: this.userData.coordinates.latitude,
+                    lng: this.userData.coordinates.longitude
                 })
             }
         }
