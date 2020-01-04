@@ -1,7 +1,7 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <home-mobile :usersFound="usersFound" :event="event" @emit="onEmit($event)" />
+            <home-mobile :users-found="usersFound" :event="event" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>
@@ -20,7 +20,6 @@
 
     export default {
         name: 'Home',
-        layout: 'app',
         components: { HomeMobile },
         data () {
             return {

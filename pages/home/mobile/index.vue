@@ -1,6 +1,14 @@
 <template>
     <div id="page-home-mobile">
         <a-row type="flex" justify="center">
+            <b>INICIO</b>
+            <a-button>
+                <nuxt-link to="/profile">
+                    perfil
+                </nuxt-link>
+            </a-button>
+        </a-row>
+        <a-row type="flex" justify="center">
             RIVALES DISPONIBLES
         </a-row>
         <a-row v-if="usersFound.length" type="flex" justify="center">
@@ -31,6 +39,23 @@
                 Buscar
             </a-button>
         </a-row>
+        <a-breadcrumb>
+            <a-breadcrumb-item>
+                <nuxt-link to="/home">
+                    Home
+                </nuxt-link>
+            </a-breadcrumb-item>
+            <a-breadcrumb-item>
+                <nuxt-link to="/match">
+                    Match
+                </nuxt-link>
+            </a-breadcrumb-item>
+            <a-breadcrumb-item>
+                <nuxt-link to="/map">
+                    Map
+                </nuxt-link>
+            </a-breadcrumb-item>
+        </a-breadcrumb>
         <Geolocation />
     </div>
 </template>
