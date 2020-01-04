@@ -1,9 +1,10 @@
 <template>
-    <div>
-        <a-button @click="toGoogleLogin">
-            Iniciar con Google
-        </a-button>
-    </div>
+    <a-button u-button u-type="secondary" u-size="large" block @click="toGoogleLogin">
+        <div>
+            <img src="@/assets/images/SVG/google-icon.svg" alt="">
+            <div>Iniciar con Google</div>
+        </div>
+    </a-button>
 </template>
 
 <script>

@@ -1,0 +1,236 @@
+/*
+ * Globals
+ */
+/*
+ * DOM
+ */
+html {
+  font-size: unset !important;
+}
+
+body {
+  background-color: #000000;
+}
+
+/*
+ * Primary
+ */
+/*
+ * Button's Colors
+ */
+/*
+ * Font Mixin
+ */
+/*
+ * Font-face
+ */
+@font-face {
+  font-family: "PublicSans-Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/PublicSans-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-Black";
+  font-style: normal;
+  font-weight: black;
+  src: url("../fonts/PublicSans-Black.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-BlackItalic";
+  font-style: italic;
+  font-weight: black;
+  src: url("../fonts/PublicSans-BlackItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-Bold";
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/PublicSans-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-BoldItalic";
+  font-style: italic;
+  font-weight: bold;
+  src: url("../fonts/PublicSans-BoldItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-ExtraBold";
+  font-style: normal;
+  font-weight: 900;
+  src: url("../fonts/PublicSans-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-ExtraBoldItalic";
+  font-style: italic;
+  font-weight: 900;
+  src: url("../fonts/PublicSans-ExtraBoldItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-ExtraLight";
+  font-style: normal;
+  font-weight: 200;
+  src: url("../fonts/PublicSans-ExtraLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-ExtraLightItalic";
+  font-style: italic;
+  font-weight: 200;
+  src: url("../fonts/PublicSans-ExtraLightItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-Italic";
+  font-style: italic;
+  font-weight: normal;
+  src: url("../fonts/PublicSans-Italic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-Light";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/PublicSans-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-LightItalic";
+  font-style: italic;
+  font-weight: 300;
+  src: url("../fonts/PublicSans-LightItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-Medium";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/PublicSans-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-MediumItalic";
+  font-style: italic;
+  font-weight: 400;
+  src: url("../fonts/PublicSans-MediumItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-SemiBold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/PublicSans-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-SemiBoldItalic";
+  font-style: italic;
+  font-weight: 700;
+  src: url("../fonts/PublicSans-SemiBoldItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-Thin";
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/PublicSans-Thin.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PublicSans-ThinItalic";
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/PublicSans-ThinItalic.ttf") format("truetype");
+}
+/*
+ * Positions
+ */
+#page-start-mobile, #layout-auth {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/*
+ * Layouts
+ */
+/*
+ * Components
+ */
+/*
+ * Buttons Sizes
+ */
+/*
+ * Buttons
+ */
+*[u-button] {
+  border: none;
+  border-radius: 3px;
+  opacity: 1;
+  height: unset;
+  transition-duration: 0.3s;
+}
+*[u-button]:hover, *[u-button]:active {
+  transition-duration: 0.3s;
+}
+*[u-button][u-size=large] {
+  font-size: 0.95rem;
+  height: 3rem;
+  padding: 2px 12px;
+  font-family: "PublicSans-SemiBold", serif;
+}
+*[u-button][u-size=large] > div {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+*[u-button][u-size=large] > div img {
+  height: 1.7rem;
+}
+*[u-button][u-size=large] > div *:nth-child(2) {
+  padding-right: 1.7rem;
+}
+*[u-button][u-type=primary] {
+  background: linear-gradient(112deg, #4f32d3 0%, #ad64e6 100%) !important;
+  color: white;
+}
+*[u-button][u-type=primary]:hover, *[u-button][u-type=primary]:active {
+  opacity: 0.9;
+}
+*[u-button][u-type=secondary] {
+  background: linear-gradient(112deg, #0150c5 0%, #0bc8f4 100%) !important;
+  color: white;
+}
+*[u-button][u-type=secondary]:hover, *[u-button][u-type=secondary]:active {
+  opacity: 0.9;
+}
+
+*[u-anchor] {
+  color: #0bc8f4;
+}
+*[u-anchor]:hover, *[u-anchor]:active {
+  color: rgba(11, 200, 244, 0.4);
+}
+*[u-anchor][u-size=large] {
+  font-size: 0.95rem;
+  font-family: "PublicSans-Regular", serif;
+}
+
+/*
+ * Pages
+ */
+#page-start-mobile {
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  padding: 8px;
+}
+#page-start-mobile > div:nth-child(1) img {
+  width: 40%;
+  margin: 30px 0;
+}
+#page-start-mobile > div:nth-child(2) > button {
+  margin: 4px 0;
+}
+#page-start-mobile > div:nth-child(2) > a {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+#page-start-mobile > div:nth-child(3) img {
+  height: 20px;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+/*# sourceMappingURL=app.css.map */

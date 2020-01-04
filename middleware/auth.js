@@ -47,14 +47,12 @@ function authValidation (app, route, store, redirect) {
         // No existen atributos
         if (userData.birthdate === ' ' || userData.gender === ' ') {
           // Si no esta en la vista RequiredAttributes entonces redireccionar
-          if (currentPath !== path.required_attributes) {
+          if (currentPath !== path.required_attributes)
             redirect(path.required_attributes_path)
-          }
 
         // Los atributos existen y esta en RequiredAttr entonces ir a Home
-        } else if (currentPath === path.required_attributes) {
+        } else if (currentPath === path.required_attributes)
           redirect(path.home_path)
-        }
 
         /**
          * Revisar filtros obligatorios (tramo de edad, tipo de match y sexo)
@@ -63,14 +61,12 @@ function authValidation (app, route, store, redirect) {
         // No existen filtros
         if (!userData.matchFilter || !userData.genderFilter || !userData.ageMinFilter || !userData.ageMaxFilter) {
           // Reenviar a RequiredFilters siempre y cuando no se este en la vista de filtros o atributos
-          if (currentPath !== path.required_filters && currentPath !== path.required_attributes) {
+          if (currentPath !== path.required_filters && currentPath !== path.required_attributes)
             redirect(path.required_filters_path)
-          }
 
         // Los filtros existen y esta en RequiredFilters entonces ir a Home
-        } else if (currentPath === path.required_filters) {
+        } else if (currentPath === path.required_filters)
           redirect(path.home_path)
-        }
       }
     })
 

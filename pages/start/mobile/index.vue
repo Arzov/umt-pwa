@@ -1,14 +1,25 @@
 <template>
     <div id="page-start-mobile">
+        <a-row type="flex" justify="center" align="top">
+            <img src="./../../../assets/images/SVG/umatch_logo_wordmark_white.svg" alt="">
+        </a-row>
+
         <a-row type="flex" justify="center">
-            <a-button @click="toLogin">
+            <a-button u-button u-type="primary" u-size="large" block @click="toLogin">
                 Iniciar Sesión
             </a-button>
+
             <FacebookLogin />
+
             <GoogleLogin />
-            <a-button type="link" @click="toRegister">
+
+            <a u-anchor u-size="large" @click="toRegister">
                 ¿No tienes cuenta? Regístrate.
-            </a-button>
+            </a>
+        </a-row>
+
+        <a-row type="flex" justify="center">
+            <img src="./../../../assets/images/SVG/arzov_logo_wordmark_mono_white.svg" alt="">
         </a-row>
     </div>
 </template>

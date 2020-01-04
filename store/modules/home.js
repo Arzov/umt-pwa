@@ -3,13 +3,13 @@ import { addMatch } from '@/graphql/mutations'
 import getDistance from '@/utils/getDistance'
 
 const state = () => ({
-  usersFound: [],
-  matchNextToken: null
+    usersFound: [],
+    matchNextToken: null
 })
 
 const getters = {
-  usersFound: state => state.usersFound,
-  matchNextToken: state => state.matchNextToken
+    usersFound: state => state.usersFound,
+    matchNextToken: state => state.matchNextToken
 }
 
 const actions = {
@@ -92,22 +92,22 @@ const actions = {
 }
 
 const mutations = {
-  setState (state, { params }) {
-    // eslint-disable-next-line no-unused-vars
-    for (const key in params) {
-      state[key] = params[key]
+    setState (state, { params }) {
+        // eslint-disable-next-line no-unused-vars
+        for (const key in params) {
+            state[key] = params[key]
+        }
+    },
+    resetStates (state) {
+        state.usersFound = []
+        state.matchNextToken = null
     }
-  },
-  resetStates (state) {
-    state.usersFound = []
-    state.matchNextToken = null
-  }
 }
 
 export default {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations
+    namespaced: true,
+    state,
+    getters,
+    actions,
+    mutations
 }

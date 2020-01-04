@@ -1,0 +1,79 @@
+/*
+ * Buttons Sizes
+ */
+$button-font-size-large: 0.95rem;
+
+/*
+ * Buttons
+ */
+*[u-button] {
+    border: none;
+    border-radius: 3px;
+    opacity: 1;
+    height: unset;
+    transition-duration: 0.3s;
+
+    &:hover,
+    &:active {
+        transition-duration: 0.3s;
+    }
+
+    // Sizes
+    &[u-size='large'] {
+        font-size: $button-font-size-large;
+        height: 3rem;
+        padding: 2px 12px;
+        font-family: 'PublicSans-SemiBold', serif;
+
+        & > div {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+
+            img {
+                height: 1.7rem;
+            }
+
+            *:nth-child(2) {
+                padding-right: 1.7rem;
+            }
+        }
+    }
+
+    // Primary Button
+    &[u-type='primary'] {
+        background: $button-background-primary !important;
+        color: $button-color-primary;
+
+        &:hover,
+        &:active {
+            opacity: 0.9;
+        }
+    }
+
+    // Secondary Button
+    &[u-type='secondary'] {
+        background: $button-background-secondary !important;
+        color: $button-color-secondary;
+
+        &:hover,
+        &:active {
+            opacity: 0.9;
+        }
+    }
+}
+
+*[u-anchor] {
+    color: $button-color-anchor;
+
+    &:hover,
+    &:active {
+        color: rgba($button-color-anchor, 0.4);
+    }
+
+    // Sizes
+    &[u-size='large'] {
+        font-size: $button-font-size-large;
+        font-family: 'PublicSans-Regular', serif;
+    }
+}
