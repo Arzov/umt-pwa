@@ -1,61 +1,82 @@
 <template>
     <div id="page-match-mobile">
-        <a-row v-if="matchesList.length" type="flex" justify="center">
-            <ul>
-                <li v-for="(match, idx) in matchesList" :key="idx">
-                    <div v-if="match.isCreator">
-                        <div v-if="match.matchStatus === 'A'" @click="toChat(match, idx)">
-                            <a-avatar :src="match.adversaryPicture" size="large" />
-                            {{ match.adversaryName }}
-                        </div>
-                        <div v-else-if="match.matchStatus === 'P'">
-                            <a-avatar :src="match.adversaryPicture" size="large" />
-                            {{ match.adversaryName }}
-                            Pendiente
-                            <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'C')">
-                                Cancelar
-                            </a-button>
-                        </div>
-                        <div v-else-if="match.matchStatus === 'D'">
-                            <a-avatar :src="match.adversaryPicture" size="large" />
-                            {{ match.adversaryName }}
-                            Rechazado
-                            <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'C')">
-                                Cancelar
-                            </a-button>
-                        </div>
-                    </div>
-                    <div v-else>
-                        <div v-if="match.matchStatus === 'A'" @click="toChat(match, idx)">
-                            <a-avatar :src="match.adversaryPicture" size="large" />
-                            {{ match.adversaryName }}
-                        </div>
-                        <div v-else-if="match.matchStatus === 'P'">
-                            <a-avatar :src="match.adversaryPicture" size="large" />
-                            {{ match.adversaryName }}
-                            Pendiente
-                            <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'D')">
-                                Rechazar
-                            </a-button>
-                            <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'A')">
-                                Aceptar
-                            </a-button>
-                        </div>
-                        <div v-else-if="match.matchStatus === 'D'">
-                            <a-avatar :src="match.adversaryPicture" size="large" />
-                            {{ match.adversaryName }}
-                            Rechazado
-                            <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'C')">
-                                Cancelar
-                            </a-button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </a-row>
-        <a-row v-else type="flex" justify="center">
-            No hay solicitudes
-        </a-row>
+        <div>
+            <a-row type="flex" justify="center">
+                ENCUENTROS
+                <a-button>
+                    <nuxt-link to="/home">
+                        cancelar
+                    </nuxt-link>
+                </a-button>
+            </a-row>
+            <a-tabs default-active-key="1">
+                <a-tab-pane key="1" tab="ACTIVOS">
+                    <a-row v-if="activeMatches.length" type="flex" justify="center">
+                        <ul>
+                            <li v-for="(match, idx) in activeMatches" :key="idx">
+                                <div @click="toChat(match, idx)">
+                                    <a-avatar :src="match.adversaryPicture" size="large" />
+                                    {{ match.adversaryName }}
+                                </div>
+                            </li>
+                        </ul>
+                    </a-row>
+                    <a-row v-else type="flex" justify="center">
+                        No hay solicitudes
+                    </a-row>
+                </a-tab-pane>
+                <a-tab-pane key="2" tab="SOLICITUDES" force-render>
+                    <a-row v-if="requestMatches.length" type="flex" justify="center">
+                        <ul>
+                            <li v-for="(match, idx) in requestMatches" :key="idx">
+                                <div v-if="match.isCreator">
+                                    <div v-if="match.matchStatus === 'P'">
+                                        <a-avatar :src="match.adversaryPicture" size="large" />
+                                        {{ match.adversaryName }}
+                                        Solicitud enviada
+                                        <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'C')">
+                                            Cancelar
+                                        </a-button>
+                                    </div>
+                                    <div v-else-if="match.matchStatus === 'D'">
+                                        <a-avatar :src="match.adversaryPicture" size="large" />
+                                        {{ match.adversaryName }}
+                                        Solicitud rechazada
+                                        <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'C')">
+                                            Cancelar
+                                        </a-button>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    <div v-if="match.matchStatus === 'P'">
+                                        <a-avatar :src="match.adversaryPicture" size="large" />
+                                        {{ match.adversaryName }}
+                                        Aceptar solicitud
+                                        <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'D')">
+                                            Rechazar
+                                        </a-button>
+                                        <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'A')">
+                                            Aceptar
+                                        </a-button>
+                                    </div>
+                                    <div v-else-if="match.matchStatus === 'D'">
+                                        <a-avatar :src="match.adversaryPicture" size="large" />
+                                        {{ match.adversaryName }}
+                                        Solicitud rechazada
+                                        <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'C')">
+                                            Cancelar
+                                        </a-button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </a-row>
+                    <a-row v-else type="flex" justify="center">
+                        No hay solicitudes
+                    </a-row>
+                </a-tab-pane>
+            </a-tabs>
+        </div>
     </div>
 </template>
 
@@ -66,7 +87,10 @@
             event: {
                 required: true
             },
-            matchesList: {
+            activeMatches: {
+                required: true
+            },
+            requestMatches: {
                 required: true
             }
         },

@@ -1,35 +1,44 @@
 {
-    "name": "Umatch",
-    "version": "1.0.0",
-    "description": "Proyecto Umatch, app de Arzov",
-    "author": "Arzov",
-    "private": true,
-    "scripts": {
-        "dev": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3000 nuxt",
-        "build": "nuxt build",
-        "start": "nuxt start",
-        "generate": "nuxt generate",
-        "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
-    },
-    "dependencies": {
-        "@nuxtjs/axios": "^5.3.6",
-        "@nuxtjs/pwa": "^3.0.0-0",
-        "ant-design-vue": "^1.4.x",
-        "aws-amplify": "^1.1.36",
-        "aws-amplify-vue": "^0.2.14",
-        "cross-env": "^6.0.3",
-        "express": "^4.17.1",
-        "nuxt": "^2.0.0",
-        "vue-mq": "^1.0.1",
-        "vue-the-mask": "^0.11.1",
-        "vuex-persistedstate": "^2.5.4"
-    },
-    "devDependencies": {
-        "@nuxtjs/eslint-config": "^1.0.1",
-        "@nuxtjs/eslint-module": "^1.0.0",
-        "babel-eslint": "^10.0.1",
-        "eslint": "^6.1.0",
-        "eslint-plugin-nuxt": ">=0.4.2",
-        "nodemon": "^2.0.1"
-    }
+  "name": "umatch",
+  "version": "1.0.0",
+  "description": "Proyecto Umatch, app de Arzov",
+  "author": "Arzov",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3000 nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "ant-design-vue": "^1.4.x",
+    "aws-amplify": "^1.1.36",
+    "aws-amplify-vue": "^0.2.14",
+    "moment": "^2.24.0",
+    "nuxt": "^2.0.0",
+    "vue-mq": "^1.0.1",
+    "vue-the-mask": "^0.11.1",
+    "vuex-persistedstate": "^2.5.4"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^1.0.1",
+    "@nuxtjs/eslint-module": "^1.0.0",
+    "babel-eslint": "^10.0.1",
+    "concurrent-transform": "^1.0.0",
+    "eslint": "^6.1.0",
+    "eslint-plugin-nuxt": ">=0.4.2",
+    "gulp": "^4.0.2",
+    "gulp-awspublish": "^4.0.1",
+    "gulp-cloudfront-invalidate-aws-publish": "^1.0.0",
+    "@vue/test-utils": "^1.0.0-beta.27",
+    "babel-jest": "^24.1.0",
+    "jest": "^24.1.0",
+    "vue-jest": "^4.0.0-0",
+    "cross-env": "^6.0.3",
+    "nodemon": "^2.0.1"
+  }
 }

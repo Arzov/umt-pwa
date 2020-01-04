@@ -1,10 +1,20 @@
 <template>
     <div id="page-login-mobile">
         <a-row type="flex" justify="center">
+            <a-button>
+                <nuxt-link to="/start">
+                    cancelar
+                </nuxt-link>
+            </a-button>
+        </a-row>
+        <a-row type="flex" justify="center">
             <a-input v-model="email" placeholder="Correo electrónico" type="email" />
             <a-input-password v-model="password" placeholder="Contraseña" />
             <a-button @click="login">
                 Iniciar Sesión
+            </a-button>
+            <a-button type="link" @click="toRecoverPassword">
+                ¿Olvidaste tu contraseña?
             </a-button>
         </a-row>
     </div>
@@ -34,6 +44,13 @@
                         username: this.email,
                         password: this.password
                     }
+                }
+
+                this.$emit('emit', params)
+            },
+            toRecoverPassword () {
+                const params = {
+                    type: this.event.TO_RECOVER_PASSWORD
                 }
 
                 this.$emit('emit', params)

@@ -3,10 +3,6 @@
         <mq-layout :mq="['mobile', 'tablet']">
             <required-attributes-mobile
                 :event="event"
-                :gender-options="genderOptions"
-                :day-options="dayOptions"
-                :month-options="monthOptions"
-                :year-options="yearOptions"
                 @emit="onEmit($event)"
             />
         </mq-layout>
@@ -30,38 +26,7 @@
         components: { RequiredAttributesMobile },
         data () {
             return {
-                event,
-                genderOptions: [
-                    { name: 'Masculino', value: 'M' },
-                    { name: 'Femenino', value: 'F' }
-                ],
-                monthOptions: [
-                    { name: 'Enero', value: '01' },
-                    { name: 'Febrero', value: '02' },
-                    { name: 'Marzo', value: '03' },
-                    { name: 'Abril', value: '04' },
-                    { name: 'Mayo', value: '05' },
-                    { name: 'Junio', value: '06' },
-                    { name: 'Julio', value: '07' },
-                    { name: 'Agosto', value: '08' },
-                    { name: 'Septiembre', value: '09' },
-                    { name: 'Octubre', value: '10' },
-                    { name: 'Noviembre', value: '11' },
-                    { name: 'Diciembre', value: '12' }
-                ]
-            }
-        },
-        computed: {
-            dayOptions () {
-                return Array.from({ length: 31 }, (value, index) => {
-                    const d = 1 + index
-
-                    if (d < 10) { return '0' + String(d) } else return String(d)
-                })
-            },
-            yearOptions () {
-                const year = new Date().getFullYear()
-                return Array.from({ length: year - 1899 }, (value, index) => 1900 + index).reverse()
+                event
             }
         },
         methods: {

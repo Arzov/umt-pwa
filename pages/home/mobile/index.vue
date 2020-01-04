@@ -1,24 +1,37 @@
 <template>
     <div id="page-home-mobile">
-        <a-row v-if="this.mapUsers.length" type="flex" justify="center">
-            <a-card hoverable style="width: 240px">
-                <img
-                    slot="cover"
-                    alt="example"
-                    :src="this.mapUsers[0].picture"
-                >
-                <a-card-meta :title="this.mapUsers[0].firstName + ' ' + this.mapUsers[0].age">
-                    <template slot="description">
-                        A {{ this.mapUsers[0].distance }} kilómetros de distancia
-                        <a-button @click="searchMatch">
-                            cancelar
-                        </a-button>
-                        <a-button @click="addMatch">
-                            aceptar
-                        </a-button>
-                    </template>
-                </a-card-meta>
-            </a-card>
+        <a-row type="flex" justify="center">
+            <b>INICIO</b>
+            <a-button>
+                <nuxt-link to="/profile">
+                    perfil
+                </nuxt-link>
+            </a-button>
+        </a-row>
+        <a-row type="flex" justify="center">
+            RIVALES DISPONIBLES
+        </a-row>
+        <a-row v-if="usersFound.length" type="flex" justify="center">
+            <a-list class="demo-loadmore-list" item-layout="horizontal" :data-source="usersFound">
+                <a-list-item slot="renderItem" slot-scope="item, index">
+                    <a-list-item-meta
+                        :key="index"
+                        :description="'A ' + item.distance + ' kilómetros de distancia'"
+                    >
+                        <a slot="title" href="https://vue.ant.design/">{{ item.firstName + ' ' + item.age }}</a>
+                        <a-avatar
+                            slot="avatar"
+                            :src="item.picture"
+                        />
+                    </a-list-item-meta>
+                    <a-button @click="addMatch(item.hashKey, item.firstName, item.picture, index)">
+                        aceptar
+                    </a-button>
+                </a-list-item>
+            </a-list>
+            <a-button @click="searchMatch">
+                Seguir Buscando
+            </a-button>
         </a-row>
         <a-row v-else type="flex" justify="center">
             ¡No hay usuarios cercanos! Inténtalo más tarde.
@@ -26,6 +39,23 @@
                 Buscar
             </a-button>
         </a-row>
+        <a-breadcrumb>
+            <a-breadcrumb-item>
+                <nuxt-link to="/home">
+                    Home
+                </nuxt-link>
+            </a-breadcrumb-item>
+            <a-breadcrumb-item>
+                <nuxt-link to="/match">
+                    Match
+                </nuxt-link>
+            </a-breadcrumb-item>
+            <a-breadcrumb-item>
+                <nuxt-link to="/map">
+                    Map
+                </nuxt-link>
+            </a-breadcrumb-item>
+        </a-breadcrumb>
         <Geolocation />
     </div>
 </template>
@@ -42,28 +72,6 @@
             },
             usersFound: {
                 required: true
-            },
-            getDistance: {
-                required: true
-            }
-        },
-        computed: {
-            mapUsers () {
-                return this.usersFound.map((user, idx) => {
-                    const userEdited = {
-                        hashKey: user.hashKey,
-                        firstName: user.firstName,
-                        age: user.age,
-                        picture: user.picture,
-                        distance: Math.round(this.getDistance(
-                            user.geoJson[1],
-                            user.geoJson[0],
-                            this.$store.getters['user/userData'].coordinates.latitude,
-                            this.$store.getters['user/userData'].coordinates.longitude
-                        ))
-                    }
-                    return userEdited
-                })
             }
         },
         methods: {
@@ -81,12 +89,13 @@
              * Metodo que envia solicitud de match al rival.
              * @return {Object} Evento de tipo ADD_MATCH.
              */
-            addMatch () {
+            addMatch (rangeKey, firstName, picture, index) {
                 const params = {
                     type: this.event.ADD_MATCH,
-                    adversaryName: this.mapUsers[0].firstName,
-                    adversaryPicture: this.mapUsers[0].picture,
-                    rangeKey: this.mapUsers[0].hashKey
+                    index,
+                    adversaryName: firstName,
+                    adversaryPicture: picture,
+                    rangeKey
                 }
                 this.$emit('emit', params)
             }

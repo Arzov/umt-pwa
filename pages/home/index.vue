@@ -1,14 +1,13 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <home-mobile :get-distance="getDistance" :users-found="usersFound" :event="event" @emit="onEmit($event)" />
+            <home-mobile :users-found="usersFound" :event="event" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>
 
 <script>
     import HomeMobile from './mobile'
-    import getDistance from '@/utils/functions'
 
     /**
      * Evento que pueden emitir las vistas.
@@ -21,21 +20,23 @@
 
     export default {
         name: 'Home',
-        layout: 'app',
         components: { HomeMobile },
         data () {
             return {
                 event,
-                getDistance
-            }
-        },
-        computed: {
-            usersFound () {
-                return this.$store.getters['home/usersFound']
+                usersFound: this.$store.getters['home/usersFound']
             }
         },
         mounted () {
             this.$store.dispatch('home/searchMatch')
+
+            // Refrescar listado de usuarios cuando se haga una busqueda
+            this.$store.watch(
+                (state, getters) => getters['home/usersFound'],
+                (newValue, oldValue) => {
+                    this.usersFound = newValue
+                }
+            )
         },
         methods: {
             /**
@@ -52,6 +53,7 @@
                     // Enviar solicitud de match
                     case this.event.ADD_MATCH:
                         this.$store.dispatch('home/addMatch', event)
+                        this.usersFound.splice(event.index, 1)
                         break
                 }
             }

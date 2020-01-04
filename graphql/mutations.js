@@ -117,7 +117,29 @@ export const updateMatch = `
       matchId: $matchId
       userStatus: $userStatus
     ) {
-      matchStatus
+      rangeKey
+    }
+  }
+`
+
+export const updateUmatchUser = `
+  mutation updateUser(
+    $hashKey: String!
+    $rangeKey: String!
+    $genderFilter: String!
+    $ageMinFilter: Int!
+    $ageMaxFilter: Int!
+    $matchFilter: String!
+  ) {
+    updateUser(
+      hashKey: $hashKey
+      rangeKey: $rangeKey
+      genderFilter: $genderFilter
+      ageMinFilter: $ageMinFilter
+      ageMaxFilter: $ageMaxFilter
+      matchFilter: $matchFilter
+    ) {
+      hashKey
     }
   }
 `

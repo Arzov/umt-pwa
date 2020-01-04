@@ -1,4 +1,4 @@
-import getDistance from '@/utils/functions'
+import getDistance from '@/utils/getDistance'
 
 // EXPORT
 export default ({ store }) => {
@@ -9,7 +9,7 @@ export default ({ store }) => {
 
     // El usuario acepto el permiso de geolocalizacion
     if (!store.getters['geoloc/toggle']) {
-      // Actualizar la ubicacion si el usuario se mueve mas de 10km
+      // Actualizar la ubicacion si el usuario se mueve mas de 5km
       navigator.geolocation.getCurrentPosition(function (position) {
         // Distancia desplazada
         const moveDistance = getDistance(
@@ -19,7 +19,7 @@ export default ({ store }) => {
           userData.coordinates.longitude
         )
 
-        if (moveDistance >= 10) {
+        if (moveDistance >= 5) {
           // Parametros para graphql
           const params = {
             userId: userData.id,

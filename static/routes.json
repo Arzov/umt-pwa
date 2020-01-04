@@ -11,6 +11,18 @@
         "path": "/register",
         "name": "register"
     },
+    "verification": {
+        "path": "/verification",
+        "name": "verification"
+    },
+    "recover_password": {
+        "path": "/recover_password",
+        "name": "recover_password"
+    },
+    "reset_password": {
+        "path": "/reset_password",
+        "name": "reset_password"
+    },
     "required_attributes": {
         "path": "/required_attributes",
         "name": "required_attributes"
@@ -18,6 +30,10 @@
     "required_filters": {
         "path": "/required_filters",
         "name": "required_filters"
+    },
+    "profile": {
+        "path": "/profile",
+        "name": "profile"
     },
     "home": {
         "path": "/home",

@@ -31,10 +31,10 @@
              * @return {Object} Evento de tipo TO_LOGIN.
              */
             toLogin () {
-                /* const params = {
+                const params = {
                     type: this.event.TO_LOGIN
                 }
-                this.$emit('emit', params) */
+                this.$emit('emit', params)
             },
             /**
              * Metodo que re-direcciona a la vista Register.

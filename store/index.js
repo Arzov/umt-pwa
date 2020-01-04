@@ -5,6 +5,9 @@ import geoloc from './modules/geoloc'
 import home from './modules/home'
 import match from './modules/match'
 import chat from './modules/chat'
+import profile from './modules/profile'
+import recoverPassword from './modules/recover-password'
+import resetPassword from './modules/reset-password'
 
 const store = () => {
   return new Vuex.Store({
@@ -14,7 +17,10 @@ const store = () => {
       geoloc,
       home,
       match,
-      chat
+      chat,
+      profile,
+      recoverPassword,
+      resetPassword
     }
   })
 }

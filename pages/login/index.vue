@@ -11,7 +11,7 @@
 
     const event = {
         LOGIN: 'login',
-        CANCEL: 'cancel'
+        TO_RECOVER_PASSWORD: 'to_recover_password'
     }
 
     export default {
@@ -27,12 +27,11 @@
             onEmit (event) {
                 switch (event.type) {
                     case this.event.LOGIN:
-                        console.log('LOGIN')
                         this.$store.dispatch('login/signIn', event.data)
                         break
-
-                    case this.event.CANCEL:
-                        console.log('Cancel')
+                    
+                    case this.event.TO_RECOVER_PASSWORD:
+                        this.$router.push(process.env.routes.recover_password.path)
                         break
                 }
             }

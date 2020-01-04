@@ -11,9 +11,9 @@ export const onAddMessage = `
 `
 
 export const onUpdateMatch = `
-  subscription onUpdateMatch($matchId: String!) {
-    onUpdateMatch(matchId: $matchId) {
-      matchStatus
+  subscription onUpdateMatch($rangeKey: String!) {
+    onUpdateMatch(rangeKey: $rangeKey) {
+      rangeKey
     }
   }
 `
