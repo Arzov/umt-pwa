@@ -17,35 +17,35 @@ const actions = {
         // Usar API de Umatch
         this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
-    // Obtener usuarios cercanos para hacer match
-    this.$AWS.API.graphql(
-      this.$AWS.Query(getMatches, {
-        hashKey: context.rootState.user.id,
-        nextToken: context.state.matchNextToken
-      })
-    )
-      .then((result) => {
-        const params = {
-          matchNextToken: result.data.getMatches.nextToken,
-          matchesList:
-            result.data.getMatches.items.map((match, idx) => {
-              let isCreator = false
+        // Obtener usuarios cercanos para hacer match
+        this.$AWS.API.graphql(
+            this.$AWS.Query(getMatches, {
+                hashKey: context.rootState.user.id,
+                nextToken: context.state.matchNextToken
+            })
+        )
+            .then((result) => {
+                const params = {
+                    matchNextToken: result.data.getMatches.nextToken,
+                    matchesList:
+                        result.data.getMatches.items.map((match, idx) => {
+                            let isCreator = false
 
-              if (context.rootState.user.id === match.matchId.split('#')[0]) {
-                isCreator = true
-              }
+                            if (context.rootState.user.id === match.matchId.split('#')[0]) {
+                                isCreator = true
+                            }
 
-              const matchEdited = {
-                hashKey: match.hashKey,
-                rangeKey: match.rangeKey,
-                adversaryName: match.adversaryName,
-                adversaryPicture: match.adversaryPicture,
-                matchId: match.matchId,
-                matchStatus: match.matchStatus,
-                createdAt: match.createdAt,
-                expireAt: match.expireAt,
-                isCreator
-              }
+                            const matchEdited = {
+                                hashKey: match.hashKey,
+                                rangeKey: match.rangeKey,
+                                adversaryName: match.adversaryName,
+                                adversaryPicture: match.adversaryPicture,
+                                matchId: match.matchId,
+                                matchStatus: match.matchStatus,
+                                createdAt: match.createdAt,
+                                expireAt: match.expireAt,
+                                isCreator
+                            }
 
                             return matchEdited
                         })
@@ -79,37 +79,18 @@ const actions = {
         // Usar API de Umatch
         this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
-    // Actualizar el match
-    this.$AWS.API.graphql(
-      this.$AWS.Query(updateMatch, {
-        hashKey: data.hashKey,
-        rangeKey: data.rangeKey,
-        matchId: data.matchId,
-        userStatus: data.userStatus
-      })
-    )
-      .then((result) => {
-        context.dispatch('getMatches')
-      })
-      // eslint-disable-next-line no-console
-      .catch(e => console.log(e))
-  },
-  onUpdateMatch (context) {
-    // Usar API de Umatch
-    this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
-
-    this.$AWS.API.graphql(this.$AWS.Query(onUpdateMatch, {
-      rangeKey: context.rootState.user.id
-    }))
-      .subscribe({
-        next: (eventData) => {
-          context.dispatch('getMatches')
-        }
-      })
-  },
-  resetStates (context) {
-    context.commit('resetStates')
-  }
+        this.$AWS.API.graphql(this.$AWS.Query(onUpdateMatch, {
+            rangeKey: context.rootState.user.id
+        }))
+            .subscribe({
+                next: (eventData) => {
+                    context.dispatch('getMatches')
+                }
+            })
+    },
+    resetStates (context) {
+        context.commit('resetStates')
+    }
 }
 
 const mutations = {
