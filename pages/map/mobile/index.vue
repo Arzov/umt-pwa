@@ -25,6 +25,9 @@
             },
             userData: {
                 required: true
+            },
+            position: {
+                required: true
             }
         },
         data () {
@@ -35,10 +38,7 @@
         mounted () {
             // eslint-disable-next-line
             this.map = new window.google.maps.Map(document.getElementById('map'), {
-                center: {
-                    lat: this.userData.coordinates.latitude,
-                    lng: this.userData.coordinates.longitude
-                },
+                center: this.position,
                 zoom: 16,
                 disableDefaultUI: true
             })
