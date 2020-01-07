@@ -116,3 +116,37 @@ export const searchMatch = `
     }
   }
 `
+
+export const getCourts = `
+  query getCourts(
+    $hashKey: Int!
+    $matchType: String!
+    $nextToken: String
+  ) {
+    getCourts(
+      hashKey: $hashKey
+      matchType: $matchType
+      nextToken: $nextToken
+    ) {
+      items {
+        hashKey
+        rangeKey
+        matchType
+        name
+        website
+        email
+        phone
+        information
+        benefits
+        schedule
+        payCondition
+        prices
+        geoJson
+        partner
+        active
+        address
+      }
+      nextToken
+    }
+  }
+`

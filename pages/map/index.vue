@@ -1,7 +1,7 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <map-mobile :user-data="userData" :position="position" :event="event" @emit="onEmit($event)" />
+            <map-mobile :user-data="userData" :position="position" :courts-list="courtsList" :event="event" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>
@@ -39,23 +39,12 @@
             return {
                 event,
                 userData: this.$store.getters['user/userData'],
-                position: this.$store.getters['map/position']
+                position: this.$store.getters['map/position'],
+                courtsList: this.$store.getters['map/courtsList']
             }
         },
-        methods: {
-            /**
-             * Captura eventos generados por las vistas.
-             * @param  {Object} event Evento emitido por la vista.
-             */
-            onEmit (event) {
-                switch (event.type) {
-                    case this.event.ADD_MESSAGE:
-                        if (event.userMessage) {
-                            // this.$store.dispatch('chat/addMessage', event)
-                        }
-                        break
-                }
-            }
+        async beforeMount () {
+            this.$store.dispatch('map/fetchCourts')
         }
     }
 </script>
