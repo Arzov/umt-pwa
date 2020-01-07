@@ -42,20 +42,8 @@
                 position: this.$store.getters['map/position']
             }
         },
-        methods: {
-            /**
-             * Captura eventos generados por las vistas.
-             * @param  {Object} event Evento emitido por la vista.
-             */
-            onEmit (event) {
-                switch (event.type) {
-                    case this.event.ADD_MESSAGE:
-                        if (event.userMessage) {
-                            // this.$store.dispatch('chat/addMessage', event)
-                        }
-                        break
-                }
-            }
+        async beforeMount () {
+            this.$store.dispatch('map/fetchCourts')
         }
     }
 </script>
