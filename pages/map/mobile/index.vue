@@ -28,6 +28,9 @@
             },
             position: {
                 required: true
+            },
+            courtsList: {
+                required: true
             }
         },
         data () {
@@ -44,22 +47,29 @@
             })
 
             // Marcadores de canchas
-            let markers = [
-                {
-                    position: { lat: this.userData.coordinates.latitude, lng: this.userData.coordinates.longitude }
-                },
-                {
-                    position: { lat: -33.4178484, lng: -70.6591775 }
-                }
-            ]
-
-            for (let i = 0; i < markers.length; i++) {
-                // eslint-disable-next-line
+            this.courtsList.map((x) => {
+                // eslint-disable-next-line no-unused-vars
                 const marker = new window.google.maps.Marker({
-                    position: markers[i].position,
+                    position: { lat: x.geoJson[1], lng: x.geoJson[0] },
+                    label: {
+                        color: 'black',
+                        fontWeight: 'bold',
+                        text: x.name
+                    },
+                    icon: {
+                        labelOrigin: new window.google.maps.Point(0, 0),
+                        url: 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi-dotless2_hdpi.png',
+                        scaledSize: new window.google.maps.Size(30, 45)
+                    },
                     map: this.map
                 })
-            }
+            })
+
+            // eslint-disable-next-line no-unused-vars
+            const currentMarker = new window.google.maps.Marker({
+                position: { lat: this.userData.coordinates.latitude, lng: this.userData.coordinates.longitude },
+                map: this.map
+            })
         },
         methods: {
             toCenter () {
