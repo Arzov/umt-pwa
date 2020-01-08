@@ -1,0 +1,18 @@
+
+#page-login {
+    &-mobile {
+        @extend %absolute-full;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        padding: 8px;
+
+        // Titulo
+        & > div:nth-child(1) h2 {
+            background: linear-gradient(5deg, $color-pink 39%, $color-purple 39%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'PublicSans-Black', serif;
+            font-style: italic;
+        }
+    }
+}

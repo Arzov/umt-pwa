@@ -1,11 +1,11 @@
 /*
  * Globals
  */
-@import "global/dom";
 @import "global/colors";
 @import "global/fonts";
 @import "global/positions";
 @import "global/layouts";
+@import "global/dom";
 
 /*
  * Components
@@ -16,3 +16,4 @@
  * Pages
  */
 @import "pages/start";
+@import "pages/login";

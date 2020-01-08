@@ -6,10 +6,10 @@
         block
         @click="toFacebookLogin"
     >
-        <div>
+        <span>
             <img src="@/assets/images/SVG/facebook-icon.svg" alt="">
-            <div>Iniciar con Facebook</div>
-        </div>
+            Iniciar con Facebook
+        </span>
     </a-button>
 </template>
 

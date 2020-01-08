@@ -1,20 +1,25 @@
 /*
  * Primary
  */
-$color-pink: #ad64e6;
+$color-white: white;
+$color-black: #151515;
+$color-pink: #bd9aff;
 $color-blue: #0150c5;
 $color-light-blue: #0bc8f4;
-$color-purple: #4f32d3;
+$color-purple: #6457e3;
+$color-green: #05d66e;
 
 /*
  * Button's Colors
  */
 $button-background-primary: linear-gradient(112deg, $color-purple 0%, $color-pink 100%);
 $button-background-primary-active: linear-gradient(112deg, $color-pink 0%, $color-purple 100%);
-$button-color-primary: white;
+$button-color-primary: $color-white;
 
-$button-background-secondary: linear-gradient(112deg, $color-blue 0%, $color-light-blue 100%);
-$button-background-secondary-active: linear-gradient(112deg, $color-light-blue 0%, $color-blue 100%);
-$button-color-secondary: white;
+$button-background-secondary: transparent;
+$button-background-secondary-active: transparent;
+$button-border-secondary: $color-white;
+$button-color-secondary: $color-white;
 
-$button-color-anchor: $color-light-blue;
+$button-color-anchor: $color-white;
+$button-color-anchor-special: $color-green;

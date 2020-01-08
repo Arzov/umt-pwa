@@ -6,5 +6,47 @@ html {
 }
 
 body {
-    background-color: #000000;
+    background-color: $color-black;
+    font-size: unset !important;
+}
+
+h1, h2, h3, h4, h5, h6, p, label, a, span {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 1.9em;
+}
+
+h2 {
+    font-size: 1.7em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+h4 {
+    font-size: 1.3em;
+}
+
+h5 {
+    font-size: 1.1em;
+}
+
+h6 {
+    font-size: 0.9em;
+}
+
+p, label {
+    font-size: 0.9em;
+}
+
+a {
+    font-size: 0.9em;
+}
+
+span {
+    font-size: 0.9em;
 }

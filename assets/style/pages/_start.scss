@@ -8,12 +8,14 @@
 
         // Logo Umatch
         & > div:nth-child(1) img {
-            width: 40%;
-            margin: 30px 0;
+            width: 50%;
+            margin: 100px 0;
         }
 
         // Botones
         & > div:nth-child(2) {
+            padding: 0 30px;
+
             // Botones
             & > button {
                 margin: 4px 0;
@@ -28,9 +30,35 @@
 
         // Logo Arzov
         & > div:nth-child(3) img {
-            height: 20px;
-            opacity: 0.8;
-            margin-bottom: 10px;
+            height: 15px;
+            margin-bottom: 20px;
         }
     }
+}
+
+/* during entering and leaving : */
+.start-enter-active, .start-leave-active {
+    position:absolute;
+    max-width:725.328px; /*make sur our content keep it's original width*/
+    transition: all .2s ease;
+}
+
+/* entering start */
+.start-enter {
+    left: -100%;
+}
+
+/* entering end */
+.start-enter-to {
+    left: 0;
+}
+
+/* leaving start */
+.start-leave {
+    opacity: 1;
+}
+
+/* leaving end */
+.start-leave-to {
+    opacity: 0;
 }

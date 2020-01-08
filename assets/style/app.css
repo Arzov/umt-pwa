@@ -2,17 +2,6 @@
  * Globals
  */
 /*
- * DOM
- */
-html {
-  font-size: unset !important;
-}
-
-body {
-  background-color: #000000;
-}
-
-/*
  * Primary
  */
 /*
@@ -135,7 +124,7 @@ body {
 /*
  * Positions
  */
-#page-start-mobile, #layout-auth {
+#page-login-mobile, #page-start-mobile, #layout-auth {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -147,6 +136,59 @@ body {
  * Layouts
  */
 /*
+ * DOM
+ */
+html {
+  font-size: unset !important;
+}
+
+body {
+  background-color: #151515;
+  font-size: unset !important;
+}
+
+h1, h2, h3, h4, h5, h6, p, label, a, span {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 1.9em;
+}
+
+h2 {
+  font-size: 1.7em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.3em;
+}
+
+h5 {
+  font-size: 1.1em;
+}
+
+h6 {
+  font-size: 0.9em;
+}
+
+p, label {
+  font-size: 0.9em;
+}
+
+a {
+  font-size: 0.9em;
+}
+
+span {
+  font-size: 0.9em;
+}
+
+/*
  * Components
  */
 /*
@@ -156,56 +198,95 @@ body {
  * Buttons
  */
 *[u-button] {
-  border: none;
-  border-radius: 3px;
+  position: relative;
+  border-radius: 2px;
   opacity: 1;
+  padding: 8px 14px;
   height: unset;
+  transition-property: opacity;
   transition-duration: 0.3s;
+  transition-timing-function: ease-in;
+  /*
+   * Types
+   */
+  /*
+   * Sizes
+   */
+}
+*[u-button]:active span {
+  position: static !important;
 }
 *[u-button]:hover, *[u-button]:active {
+  transition-property: opacity;
   transition-duration: 0.3s;
-}
-*[u-button][u-size=large] {
-  font-size: 0.95rem;
-  height: 3rem;
-  padding: 2px 12px;
-  font-family: "PublicSans-SemiBold", serif;
-}
-*[u-button][u-size=large] > div {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-}
-*[u-button][u-size=large] > div img {
-  height: 1.7rem;
-}
-*[u-button][u-size=large] > div *:nth-child(2) {
-  padding-right: 1.7rem;
+  transition-timing-function: ease-out;
 }
 *[u-button][u-type=primary] {
-  background: linear-gradient(112deg, #4f32d3 0%, #ad64e6 100%) !important;
+  border: none;
+  background: linear-gradient(112deg, #6457e3 0%, #bd9aff 100%) !important;
   color: white;
 }
 *[u-button][u-type=primary]:hover, *[u-button][u-type=primary]:active {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 *[u-button][u-type=secondary] {
-  background: linear-gradient(112deg, #0150c5 0%, #0bc8f4 100%) !important;
+  border: solid 2px white;
+  background-clip: padding-box;
+  background: transparent !important;
   color: white;
 }
 *[u-button][u-type=secondary]:hover, *[u-button][u-type=secondary]:active {
-  opacity: 0.9;
+  opacity: 0.8;
+}
+*[u-button][u-size=regular] {
+  font-size: 1em;
+}
+*[u-button][u-size=regular] span img {
+  position: absolute;
+  left: 20px;
+  top: 15%;
+  height: 70%;
+}
+*[u-button][u-size=large] {
+  font-size: 1em;
+}
+*[u-button][u-size=large] span img {
+  position: absolute;
+  left: 20px;
+  top: 15%;
+  height: 70%;
 }
 
+/*
+ * Anchor Sizes
+ */
+/*
+ * Anchor
+ */
 *[u-anchor] {
-  color: #0bc8f4;
+  color: white;
+  font-size: 0.9em;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
 }
 *[u-anchor]:hover, *[u-anchor]:active {
-  color: rgba(11, 200, 244, 0.4);
+  color: rgba(255, 255, 255, 0.4);
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
 }
 *[u-anchor][u-size=large] {
-  font-size: 0.95rem;
-  font-family: "PublicSans-Regular", serif;
+  font-size: 0.9em;
+}
+*[u-anchor] u-a {
+  color: #05d66e;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
+  pointer-events: fill;
+}
+*[u-anchor] u-a:hover, *[u-anchor] u-a:active {
+  color: rgba(5, 214, 110, 0.4);
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
 }
 
 /*
@@ -217,8 +298,11 @@ body {
   padding: 8px;
 }
 #page-start-mobile > div:nth-child(1) img {
-  width: 40%;
-  margin: 30px 0;
+  width: 50%;
+  margin: 100px 0;
+}
+#page-start-mobile > div:nth-child(2) {
+  padding: 0 30px;
 }
 #page-start-mobile > div:nth-child(2) > button {
   margin: 4px 0;
@@ -228,9 +312,49 @@ body {
   margin-bottom: 40px;
 }
 #page-start-mobile > div:nth-child(3) img {
-  height: 20px;
-  opacity: 0.8;
-  margin-bottom: 10px;
+  height: 15px;
+  margin-bottom: 20px;
+}
+
+/* during entering and leaving : */
+.start-enter-active, .start-leave-active {
+  position: absolute;
+  max-width: 725.328px;
+  /*make sur our content keep it's original width*/
+  transition: all 0.2s ease;
+}
+
+/* entering start */
+.start-enter {
+  left: -100%;
+}
+
+/* entering end */
+.start-enter-to {
+  left: 0;
+}
+
+/* leaving start */
+.start-leave {
+  opacity: 1;
+}
+
+/* leaving end */
+.start-leave-to {
+  opacity: 0;
+}
+
+#page-login-mobile {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 8px;
+}
+#page-login-mobile > div:nth-child(1) h2 {
+  background: linear-gradient(5deg, #bd9aff 39%, #6457e3 39%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "PublicSans-Black", serif;
+  font-style: italic;
 }
 
 /*# sourceMappingURL=app.css.map */

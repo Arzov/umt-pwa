@@ -1,79 +1,132 @@
 /*
  * Buttons Sizes
  */
-$button-font-size-large: 0.95rem;
+$button-font-size-regular: 1em;
+$button-font-size-large: 1em;
 
 /*
  * Buttons
  */
 *[u-button] {
-    border: none;
-    border-radius: 3px;
+    position: relative;
+    border-radius: 2px;
     opacity: 1;
+    padding: 8px 14px;
     height: unset;
+    transition-property: opacity;
     transition-duration: 0.3s;
+    transition-timing-function: ease-in;
 
-    &:hover,
+    // Evita que icono se corra por position absolute
     &:active {
-        transition-duration: 0.3s;
-    }
-
-    // Sizes
-    &[u-size='large'] {
-        font-size: $button-font-size-large;
-        height: 3rem;
-        padding: 2px 12px;
-        font-family: 'PublicSans-SemiBold', serif;
-
-        & > div {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            align-items: center;
-
-            img {
-                height: 1.7rem;
-            }
-
-            *:nth-child(2) {
-                padding-right: 1.7rem;
-            }
+        span {
+            position: static !important;
         }
     }
 
-    // Primary Button
+    &:hover,
+    &:active {
+        transition-property: opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-out;
+    }
+
+    /*
+     * Types
+     */
     &[u-type='primary'] {
+        border: none;
         background: $button-background-primary !important;
         color: $button-color-primary;
 
         &:hover,
         &:active {
-            opacity: 0.9;
+            opacity: 0.8;
         }
     }
 
-    // Secondary Button
     &[u-type='secondary'] {
+        border: solid 2px $button-border-secondary;
+        background-clip: padding-box;
         background: $button-background-secondary !important;
         color: $button-color-secondary;
 
         &:hover,
         &:active {
-            opacity: 0.9;
+            opacity: 0.8;
+        }
+    }
+
+    /*
+     * Sizes
+     */
+    &[u-size='regular'] {
+        font-size: $button-font-size-regular;
+
+        span {
+            img {
+                position: absolute;
+                left: 20px;
+                top: 15%;
+                height: 70%;
+            }
+        }
+    }
+
+    &[u-size='large'] {
+        font-size: $button-font-size-large;
+
+        span {
+            img {
+                position: absolute;
+                left: 20px;
+                top: 15%;
+                height: 70%;
+            }
         }
     }
 }
 
+
+/*
+ * Anchor Sizes
+ */
+$anchor-font-size-regular: 0.9em;
+$anchor-font-size-large: 0.9em;
+
+/*
+ * Anchor
+ */
 *[u-anchor] {
     color: $button-color-anchor;
+    font-size: $anchor-font-size-regular;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
 
     &:hover,
     &:active {
         color: rgba($button-color-anchor, 0.4);
+        transition-duration: 0.3s;
+        transition-timing-function: ease-out;
     }
 
     // Sizes
     &[u-size='large'] {
-        font-size: $button-font-size-large;
-        font-family: 'PublicSans-Regular', serif;
+        font-size: $anchor-font-size-large;
+    }
+
+    // Styles
+    u-a {
+        color: $button-color-anchor-special;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in;
+        pointer-events: fill;
+
+        &:hover,
+        &:active {
+            color: rgba($button-color-anchor-special, 0.4);
+            transition-duration: 0.3s;
+            transition-timing-function: ease-out;
+        }
     }
 }

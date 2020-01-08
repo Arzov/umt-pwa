@@ -20,6 +20,7 @@
 
     export default {
         name: 'Start',
+        layout: 'auth',
         components: { StartMobile },
         data () {
             return {

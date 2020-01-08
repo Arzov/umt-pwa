@@ -1,12 +1,12 @@
 <template>
     <div id="page-start-mobile">
         <a-row type="flex" justify="center" align="top">
-            <img src="./../../../assets/images/SVG/umatch_logo_wordmark_white.svg" alt="">
+            <img src="./../../../assets/images/SVG/umatch_logo.svg" alt="">
         </a-row>
 
         <a-row type="flex" justify="center">
             <a-button u-button u-type="primary" u-size="large" block @click="toLogin">
-                Iniciar Sesión
+                Iniciar sesión
             </a-button>
 
             <FacebookLogin />
@@ -14,7 +14,7 @@
             <GoogleLogin />
 
             <a u-anchor u-size="large" @click="toRegister">
-                ¿No tienes cuenta? Regístrate.
+                ¿No tienes cuenta? <u-a>Regístrate.</u-a>
             </a>
         </a-row>
 
