@@ -1,16 +1,20 @@
 /*
  * Globals
  */
+ @import "global/sizes";
 @import "global/colors";
 @import "global/fonts";
 @import "global/positions";
 @import "global/layouts";
 @import "global/dom";
+@import "global/antd";
+@import "global/umatch-ui";
 
 /*
  * Components
  */
 @import "components/buttons";
+@import "components/inputs";
 
 /*
  * Pages

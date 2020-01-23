@@ -1,0 +1,18 @@
+{
+    "email": {
+        "required": true,
+        "placeholder": "Ingresa tu correo electrónico",
+        "help": "Texto de ayuda.",
+        "decorator": [
+            "email",
+            {
+                "required": true,
+                "help": "Texto de ayuda."
+            }
+        ]
+    },
+
+    "password": {
+
+    }
+}

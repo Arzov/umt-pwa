@@ -116,11 +116,12 @@ $anchor-font-size-large: 0.9em;
     }
 
     // Styles
-    u-a {
+    *[u-a] {
         color: $button-color-anchor-special;
         transition-duration: 0.3s;
         transition-timing-function: ease-in;
         pointer-events: fill;
+        font-size: 1em;
 
         &:hover,
         &:active {

@@ -3,16 +3,69 @@
     &-mobile {
         @extend %absolute-full;
         display: grid;
-        grid-template-rows: auto 1fr auto;
-        padding: 8px;
+        grid-template-rows: auto auto 1fr;
 
-        // Titulo
-        & > div:nth-child(1) h2 {
-            background: linear-gradient(5deg, $color-pink 39%, $color-purple 39%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-family: 'PublicSans-Black', serif;
-            font-style: italic;
+        // Barra de titulo
+        & > div:nth-child(1) {
+            position: relative;
+            padding: $padding-default-page;
+            background-color: $color-grey;
+
+            // Icon
+            & > div:nth-child(1) {
+                width: fit-content;
+                display: flex;
+                
+                a {
+                    z-index: 2;
+                }
+
+                .back-icon {
+                    width: 3.5em;
+                }
+            }
+
+            // Titulo
+            & > div:nth-child(2) {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                z-index: 1;
+                text-transform: uppercase;
+
+                * {
+                    color: $color-white;
+                    font-weight: 700 !important;
+                }
+    
+                *:nth-child(1) {
+                    font-weight: 600;
+                    margin-bottom: 0;
+                }
+            }            
+
+            // Borde inferior
+            .border-bottom {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 2px;
+                width: 100%;
+                background: linear-gradient(to right, $color-pink 0%, $color-purple 50%, $color-cian 100%);
+            }
+        }
+
+        // Formulario
+        & > div:nth-child(2) {
+            background-color: $color-grey;
+            margin: $padding-default-page;
+            padding: 10px 30px 60px 30px;
+        }
+
+        .row-margin-top {
+            margin-top: 1.2em;
         }
     }
 }

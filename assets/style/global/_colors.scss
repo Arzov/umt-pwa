@@ -3,11 +3,11 @@
  */
 $color-white: white;
 $color-black: #151515;
-$color-pink: #bd9aff;
-$color-blue: #0150c5;
-$color-light-blue: #0bc8f4;
+$color-grey: #242728;
 $color-purple: #6457e3;
-$color-green: #05d66e;
+$color-pink: #ad64e6;
+$color-blue: #0271c4;
+$color-cian: #0cecf2;
 
 /*
  * Button's Colors
@@ -22,4 +22,12 @@ $button-border-secondary: $color-white;
 $button-color-secondary: $color-white;
 
 $button-color-anchor: $color-white;
-$button-color-anchor-special: $color-green;
+$button-color-anchor-special: $color-cian;
+
+/*
+ * Input Colors
+ */
+$input-color-text: $color-white;
+$input-color-caret: $color-white;
+$input-color-border: $color-white;
+$input-color-shadow: rgba($color-white, 0.1);

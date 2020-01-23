@@ -14,7 +14,7 @@
             <GoogleLogin />
 
             <a u-anchor u-size="large" @click="toRegister">
-                ¿No tienes cuenta? <u-a>Regístrate.</u-a>
+                ¿No tienes cuenta? <span u-a>Regístrate.</span>
             </a>
         </a-row>
 

@@ -4,7 +4,7 @@
         @extend %absolute-full;
         display: grid;
         grid-template-rows: 1fr auto auto;
-        padding: 8px;
+        padding: $padding-default-page;
 
         // Logo Umatch
         & > div:nth-child(1) img {
@@ -14,7 +14,7 @@
 
         // Botones
         & > div:nth-child(2) {
-            padding: 0 30px;
+            padding: 0 20px;
 
             // Botones
             & > button {
@@ -31,7 +31,7 @@
         // Logo Arzov
         & > div:nth-child(3) img {
             height: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
     }
 }
