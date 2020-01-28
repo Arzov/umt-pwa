@@ -148,7 +148,7 @@
 /*
  * Positions
  */
-#layout-auth, #page-start-mobile, #page-login-mobile, #page-recover-password-mobile {
+#layout-auth, #page-start-mobile, #page-login-mobile, #page-recover-password-mobile, #page-reset-password-mobile {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -584,6 +584,23 @@ span {
 }
 
 #page-recover-password-mobile .row-margin-top {
+  margin-top: 1.2em;
+}
+
+#page-reset-password-mobile {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto auto 1fr;
+      grid-template-rows: auto auto 1fr;
+}
+
+#page-reset-password-mobile > div:nth-child(2) {
+  background-color: #242728;
+  margin: 20px;
+  padding: 10px 30px 60px 30px;
+}
+
+#page-reset-password-mobile .row-margin-top {
   margin-top: 1.2em;
 }
 /*# sourceMappingURL=app.css.map */

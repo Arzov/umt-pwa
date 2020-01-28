@@ -1,7 +1,11 @@
-const email = require('./decorators/email.js')
-const password = require('./decorators/password.js')
+import email from './decorators/email.js'
+import password from './decorators/password.js'
+import newPassword from './decorators/new-password.js'
+import code from './decorators/code.js'
 
-module.exports = {
+export default {
     email,
-    password
+    password,
+    newPassword,
+    code
 }
