@@ -1,33 +1,21 @@
 <template>
     <div id="page-login-mobile">
-        <div>
-            <div>
-                <nuxt-link to="/start">
-                    <img src="./../../../assets/icons/arrow-left.svg" alt="" class="back-icon">
-                </nuxt-link>
-            </div>
-
-            <a-row type="flex" justify="center" align="middle">
-                <h6>Inicio de Sesión</h6>
-            </a-row>
-
-            <div class="border-bottom" />
-        </div>
+        <header-title-mobile to="/start" title="Inicio de Sesión" />
         
         <div>
             <a-form :form="formLogin" @submit="login($event)">
                 <a-row type="flex" justify="center" u-input-row>
-                    <u-input title="correo electrónico">
-                        <a-form-item :required="inputConfig.email.required" :extra="inputConfig.email.extra">
-                            <a-input v-decorator="inputConfig.email.decorator" :placeholder="inputConfig.email.placeholder" />
+                    <u-input :title="decorator.email.title">
+                        <a-form-item :required="decorator.email.required" :extra="decorator.email.extra">
+                            <a-input v-decorator="decorator.email.decorator" :placeholder="decorator.email.placeholder" />
                         </a-form-item>
                     </u-input>
                 </a-row>
 
                 <a-row type="flex" justify="center" u-input-row>
-                    <u-input title="contraseña">
-                        <a-form-item :required="inputConfig.password.required" :extra="inputConfig.password.extra">
-                            <a-input-password v-decorator="inputConfig.password.decorator" :placeholder="inputConfig.password.placeholder" />
+                    <u-input :title="decorator.password.title">
+                        <a-form-item :required="decorator.password.required" :extra="decorator.password.extra">
+                            <a-input-password v-decorator="decorator.password.decorator" :placeholder="decorator.password.placeholder" />
                         </a-form-item>
                     </u-input>
                 </a-row>
@@ -49,12 +37,13 @@
 </template>
 
 <script>
-    import inputConfig from './../forms/login.json'
-    import UInput from '@/components/UInput'
+    import decorator from '@/static/decorator'
+    import UInput from '@/components/uInput'
+    import HeaderTitleMobile from '@/components/headerTitleMobile'
 
     export default {
         name: 'LoginMobile',
-        components: { UInput },
+        components: { UInput, HeaderTitleMobile },
         props: {
             event: {
                 required: true
@@ -62,9 +51,7 @@
         },
         data () {
             return {
-                inputConfig,
-                email: '',
-                password: '',
+                decorator,
                 formLogin: this.$form.createForm(this)
             }
         },

@@ -148,7 +148,7 @@
 /*
  * Positions
  */
-#layout-auth, #page-start-mobile, #page-login-mobile {
+#layout-auth, #page-start-mobile, #page-login-mobile, #page-recover-password-mobile {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -437,6 +437,59 @@ span {
   margin-bottom: 0;
 }
 
+#component-header-title-mobile {
+  position: relative;
+  padding: 20px;
+  background-color: #242728;
+}
+
+#component-header-title-mobile > div:nth-child(1) {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#component-header-title-mobile > div:nth-child(1) a {
+  z-index: 2;
+}
+
+#component-header-title-mobile > div:nth-child(1) .back-icon {
+  width: 3.5em;
+}
+
+#component-header-title-mobile > div:nth-child(2) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  text-transform: uppercase;
+}
+
+#component-header-title-mobile > div:nth-child(2) * {
+  color: white;
+  font-weight: 700 !important;
+}
+
+#component-header-title-mobile > div:nth-child(2) *:nth-child(1) {
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+#component-header-title-mobile .border-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: -webkit-gradient(linear, left top, right top, from(#ad64e6), color-stop(50%, #6457e3), to(#0cecf2));
+  background: linear-gradient(to right, #ad64e6 0%, #6457e3 50%, #0cecf2 100%);
+}
+
 /*
  * Pages
  */
@@ -507,59 +560,6 @@ span {
       grid-template-rows: auto auto 1fr;
 }
 
-#page-login-mobile > div:nth-child(1) {
-  position: relative;
-  padding: 20px;
-  background-color: #242728;
-}
-
-#page-login-mobile > div:nth-child(1) > div:nth-child(1) {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-#page-login-mobile > div:nth-child(1) > div:nth-child(1) a {
-  z-index: 2;
-}
-
-#page-login-mobile > div:nth-child(1) > div:nth-child(1) .back-icon {
-  width: 3.5em;
-}
-
-#page-login-mobile > div:nth-child(1) > div:nth-child(2) {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  text-transform: uppercase;
-}
-
-#page-login-mobile > div:nth-child(1) > div:nth-child(2) * {
-  color: white;
-  font-weight: 700 !important;
-}
-
-#page-login-mobile > div:nth-child(1) > div:nth-child(2) *:nth-child(1) {
-  font-weight: 600;
-  margin-bottom: 0;
-}
-
-#page-login-mobile > div:nth-child(1) .border-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background: -webkit-gradient(linear, left top, right top, from(#ad64e6), color-stop(50%, #6457e3), to(#0cecf2));
-  background: linear-gradient(to right, #ad64e6 0%, #6457e3 50%, #0cecf2 100%);
-}
-
 #page-login-mobile > div:nth-child(2) {
   background-color: #242728;
   margin: 20px;
@@ -567,6 +567,23 @@ span {
 }
 
 #page-login-mobile .row-margin-top {
+  margin-top: 1.2em;
+}
+
+#page-recover-password-mobile {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto auto 1fr;
+      grid-template-rows: auto auto 1fr;
+}
+
+#page-recover-password-mobile > div:nth-child(2) {
+  background-color: #242728;
+  margin: 20px;
+  padding: 10px 30px 60px 30px;
+}
+
+#page-recover-password-mobile .row-margin-top {
   margin-top: 1.2em;
 }
 /*# sourceMappingURL=app.css.map */
