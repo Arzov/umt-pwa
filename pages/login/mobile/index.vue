@@ -15,18 +15,20 @@
         </div>
         
         <div>
-            <a-form :form="formLogin" @submit="login">
+            <a-form :form="formLogin" @submit="login($event)">
                 <a-row type="flex" justify="center" u-input-row>
                     <u-input title="correo electrónico">
-                        <a-form-item :required="inputConfig.email.required" extra="Texto de prueba">
-                            <a-input v-decorator="inputConfig.email.decorator" :placeholder="inputConfig.email.placeholder" type="email" />
+                        <a-form-item :required="inputConfig.email.required" :extra="inputConfig.email.extra">
+                            <a-input v-decorator="inputConfig.email.decorator" :placeholder="inputConfig.email.placeholder" />
                         </a-form-item>
                     </u-input>
                 </a-row>
 
                 <a-row type="flex" justify="center" u-input-row>
                     <u-input title="contraseña">
-                        <a-input-password v-model="password" placeholder="Ingresa tu contraseña" />
+                        <a-form-item :required="inputConfig.password.required" :extra="inputConfig.password.extra">
+                            <a-input-password v-decorator="inputConfig.password.decorator" :placeholder="inputConfig.password.placeholder" />
+                        </a-form-item>
                     </u-input>
                 </a-row>
 
@@ -67,16 +69,19 @@
             }
         },
         methods: {
-            login () {
-                const params = {
-                    type: this.event.LOGIN,
-                    data: {
-                        username: this.email,
-                        password: this.password
-                    }
-                }
+            login (event) {
+                event.preventDefault()
 
-                this.$emit('emit', params)
+                this.formLogin.validateFields((error, data) => {
+                    if (!error) {
+                        const params = {
+                            type: this.event.LOGIN,
+                            data
+                        }
+
+                        this.$emit('emit', params)
+                    }
+                })
             },
 
             toRecoverPassword () {

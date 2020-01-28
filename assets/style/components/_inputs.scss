@@ -9,7 +9,7 @@
         color: $input-color-text;
         text-transform: uppercase;
         font-weight: 600;
-        font-size: 0.6em;
+        font-size: 0.7em;
         position: absolute;
         top: -2px;
         left: 0;
@@ -24,7 +24,7 @@
         transition-duration: 0.2s;
         caret-color: $input-color-caret;
         color: $input-color-text;
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: $font-umatch;
 
         &:hover,
         &:active,
@@ -59,13 +59,45 @@
         color: $input-color-text;
     }
 
-    // Caso a-form-item
-    .ant-row {
-        margin-bottom: 0;
+    // Control del input para formularios
+    .ant-form-item-control {
+
+        // Texto de ayuda
+        .ant-form-extra {
+            color: rgba($input-color-text, 0.8);
+            font-family: $font-umatch;
+            font-size: 0.9em;
+        }
+
+        // En caso de error (no coincide regla)
+        &.has-error{
+
+            input {
+                border: solid 2px $input-color-border-error;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    border: solid 2px $input-color-border-error !important;
+                    box-shadow: none;
+                    border-right-width: 2px !important;
+                }
+            }
+
+            .ant-form-explain {
+                color: $input-color-text-error;
+                font-family: $font-umatch;
+                font-size: 1em;
+            }
+
+            .ant-form-extra {
+                color: rgba($input-color-text, 0.6)
+            }
+        }
     }
 
-    .ant-form-extra {
-        color: $input-color-text;
-        font-family: 'Source Sans Pro', sans-serif;
+    // Caso a-form-item, quita margen
+    .ant-row {
+        margin-bottom: 0;
     }
 }

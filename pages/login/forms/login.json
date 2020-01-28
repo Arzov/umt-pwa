@@ -2,17 +2,31 @@
     "email": {
         "required": true,
         "placeholder": "Ingresa tu correo electrónico",
-        "help": "Texto de ayuda.",
+        "extra": "",
         "decorator": [
-            "email",
+            "username",
             {
-                "required": true,
-                "help": "Texto de ayuda."
+                "initialValue": null,
+                "rules": [
+                    { "required": true, "message": "Ingrese un correo electrónico." },
+                    { "type": "email", "message": "Ingrese un correo válido." }
+                ]
             }
         ]
     },
 
     "password": {
-
+        "required": true,
+        "placeholder": "Ingresa tu contraseña",
+        "extra": "",
+        "decorator": [
+            "password",
+            {
+                "initialValue": null,
+                "rules": [
+                    { "required": true, "message": "Ingrese una contraseña." }
+                ]
+            }
+        ]
     }
 }

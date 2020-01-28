@@ -325,7 +325,7 @@ span {
 }
 
 *[u-anchor][u-size='large'] {
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 *[u-anchor] *[u-a] {
@@ -358,7 +358,7 @@ span {
   color: white;
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 0.6em;
+  font-size: 0.7em;
   position: absolute;
   top: -2px;
   left: 0;
@@ -374,7 +374,7 @@ span {
           transition-duration: 0.2s;
   caret-color: white;
   color: white;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 *[u-input] input:hover, *[u-input] input:active, *[u-input] input:focus {
@@ -406,13 +406,35 @@ span {
   color: white;
 }
 
-*[u-input] .ant-row {
-  margin-bottom: 0;
+*[u-input] .ant-form-item-control .ant-form-extra {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 0.9em;
 }
 
-*[u-input] .ant-form-extra {
-  color: white;
-  font-family: 'Source Sans Pro', sans-serif;
+*[u-input] .ant-form-item-control.has-error input {
+  border: solid 2px #ad64e6;
+}
+
+*[u-input] .ant-form-item-control.has-error input:hover, *[u-input] .ant-form-item-control.has-error input:active, *[u-input] .ant-form-item-control.has-error input:focus {
+  border: solid 2px #ad64e6 !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-right-width: 2px !important;
+}
+
+*[u-input] .ant-form-item-control.has-error .ant-form-explain {
+  color: #ad64e6;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 1em;
+}
+
+*[u-input] .ant-form-item-control.has-error .ant-form-extra {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+*[u-input] .ant-row {
+  margin-bottom: 0;
 }
 
 /*
