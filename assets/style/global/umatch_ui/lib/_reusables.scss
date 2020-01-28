@@ -1,0 +1,72 @@
+/*
+ * Positions
+ */
+ %absolute-full {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/*
+ * Inputs
+ */
+ %input-label {
+    color: $input-color-text;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.7em;
+    position: absolute;
+    top: -2px;
+    left: 0;
+    transform: translateY(-100%);
+ }
+
+ %input-text {
+    background: none;
+    border: $input-border;
+    padding: $input-padding;
+    transition-duration: 0.2s;
+    caret-color: $input-color-caret;
+    color: $input-color-text;
+    font-family: $font-umatch;
+
+    &:hover,
+    &:active,
+    &:focus {
+        border-color: $input-color-border;
+        box-shadow: $input-box-shadow;
+        transition-duration: 0.2s;
+        border-right-width: $input-border-width !important;
+    }
+ }
+
+ %input-error-status {
+   border: $input-border-error;
+   box-shadow: none;
+   border-right-width: $input-border-width !important;
+
+   &:hover,
+   &:active,
+   &:focus {
+       border: $input-border-error !important;
+       box-shadow: none;
+       border-right-width: $input-border-width !important;
+   }
+ }
+
+ /*
+  * Form control
+  */
+ %form-has-error {
+   .ant-form-explain {
+      color: $input-color-text-error;
+      font-family: $font-umatch;
+      font-size: 1em;
+   }
+
+   .ant-form-extra {
+      color: rgba($input-color-text, 0.6)
+   }
+ }

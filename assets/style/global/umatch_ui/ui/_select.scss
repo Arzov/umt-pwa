@@ -1,0 +1,82 @@
+*[u-select] {
+    position: relative;
+    width: 100%;
+
+    & > label {
+        @extend %input-label;
+    }
+
+    .ant-select {
+        width: 100%;
+
+        & > div {
+            @extend %input-text;
+            position: relative;
+
+            & > div {
+                @extend %absolute-full;
+                margin: 0;
+                display: flex;
+                align-items: center;
+
+                // Placeholder
+                & > div {
+                    padding: 0 25px 0 20px;
+                    padding-right: 25px !important;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .ant-select-arrow {
+            right: 11px !important;
+        }
+    }
+
+    // Icono interior del input
+    svg {
+        color: $input-color-text;
+    }
+
+    // Control del input para formularios
+    .ant-form-item-control {
+
+        // Texto de ayuda
+        .ant-form-extra {
+            color: rgba($input-color-text, 0.8);
+            font-family: $font-umatch;
+            font-size: 0.9em;
+        }
+
+        // En caso de error (no coincide regla)
+        &.has-error{
+
+            .ant-select > div {
+                @extend %input-error-status;
+            }
+
+            @extend %form-has-error;
+        }
+    }
+}
+
+// Antd override
+.ant-select-dropdown {
+    background-color: $color-white;
+    border-radius: 2px;
+
+    .ant-select-dropdown-menu-item {
+        font-family: $font-umatch;
+        font-size: 1em;
+
+        &-active {
+            background-color: $color-purple;
+            color: $color-white;
+            border-radius: 2px;
+        }
+
+        &:hover {
+            background-color: rgba($color-purple, 0.6);
+        }
+    }
+}

@@ -1,5 +1,5 @@
 <template>
-    <div u-input>
+    <div u-radio-group>
         <label>{{ title }}</label>
         <slot />
     </div>
@@ -7,7 +7,7 @@
 
 <script>
     export default {
-        name: 'UInput',
+        name: 'URadioGroup',
         props: {
             title: {
                 required: false,

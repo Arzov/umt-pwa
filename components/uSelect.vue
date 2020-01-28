@@ -1,5 +1,5 @@
 <template>
-    <div u-input>
+    <div u-select>
         <label>{{ title }}</label>
         <slot />
     </div>
@@ -7,7 +7,7 @@
 
 <script>
     export default {
-        name: 'UInput',
+        name: 'USelect',
         props: {
             title: {
                 required: false,

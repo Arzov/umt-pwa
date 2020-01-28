@@ -1,0 +1,16 @@
+#component-birthdate-input,
+*[component-birthdate-input] {
+    position: relative;
+    width: 100%;
+
+    & > label {
+        @extend %input-label;
+    }
+
+    & > div {
+        line-height: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        grid-gap: 6px;
+    }
+}

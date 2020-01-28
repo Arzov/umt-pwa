@@ -2,7 +2,7 @@
  * Globals
  */
 /*
- * Padding
+ * Library
  */
 /*
  * Primary
@@ -14,141 +14,15 @@
  * Input Colors
  */
 /*
- * Font Mixin
+ * Fonts
  */
 /*
- * Font-face
+ * Styles: Input
  */
-@font-face {
-  font-family: "PublicSans-Regular";
-  font-style: normal;
-  font-weight: normal;
-  src: url("../fonts/PublicSans-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-Black";
-  font-style: normal;
-  font-weight: black;
-  src: url("../fonts/PublicSans-Black.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-BlackItalic";
-  font-style: italic;
-  font-weight: black;
-  src: url("../fonts/PublicSans-BlackItalic.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-Bold";
-  font-style: normal;
-  font-weight: bold;
-  src: url("../fonts/PublicSans-Bold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-BoldItalic";
-  font-style: italic;
-  font-weight: bold;
-  src: url("../fonts/PublicSans-BoldItalic.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-ExtraBold";
-  font-style: normal;
-  font-weight: 900;
-  src: url("../fonts/PublicSans-ExtraBold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-ExtraBoldItalic";
-  font-style: italic;
-  font-weight: 900;
-  src: url("../fonts/PublicSans-ExtraBoldItalic.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-ExtraLight";
-  font-style: normal;
-  font-weight: 200;
-  src: url("../fonts/PublicSans-ExtraLight.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-ExtraLightItalic";
-  font-style: italic;
-  font-weight: 200;
-  src: url("../fonts/PublicSans-ExtraLightItalic.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-Italic";
-  font-style: italic;
-  font-weight: normal;
-  src: url("../fonts/PublicSans-Italic.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-Light";
-  font-style: normal;
-  font-weight: 300;
-  src: url("../fonts/PublicSans-Light.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-LightItalic";
-  font-style: italic;
-  font-weight: 300;
-  src: url("../fonts/PublicSans-LightItalic.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-Medium";
-  font-style: normal;
-  font-weight: 400;
-  src: url("../fonts/PublicSans-Medium.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-MediumItalic";
-  font-style: italic;
-  font-weight: 400;
-  src: url("../fonts/PublicSans-MediumItalic.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-SemiBold";
-  font-style: normal;
-  font-weight: 700;
-  src: url("../fonts/PublicSans-SemiBold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-SemiBoldItalic";
-  font-style: italic;
-  font-weight: 700;
-  src: url("../fonts/PublicSans-SemiBoldItalic.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-Thin";
-  font-style: normal;
-  font-weight: 100;
-  src: url("../fonts/PublicSans-Thin.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans-ThinItalic";
-  font-style: normal;
-  font-weight: 100;
-  src: url("../fonts/PublicSans-ThinItalic.ttf") format("truetype");
-}
-
 /*
  * Positions
  */
-#layout-auth, #page-start-mobile, #page-login-mobile, #page-recover-password-mobile, #page-reset-password-mobile {
+*[u-select] .ant-select > div > div, #layout-auth, #page-start-mobile, #page-login-mobile, #page-recover-password-mobile, #page-reset-password-mobile, #page-register-mobile {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -157,67 +31,97 @@
 }
 
 /*
- * Layouts
+ * Inputs
  */
+*[u-input] > label, *[u-select] > label, *[u-radio-group] > label, #component-birthdate-input > label,
+*[component-birthdate-input] > label {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.7em;
+  position: absolute;
+  top: -2px;
+  left: 0;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+}
+
+*[u-input] input, *[u-select] .ant-select > div {
+  background: none;
+  border: solid 2px white;
+  padding: 20px;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+  caret-color: white;
+  color: white;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+*[u-input] input:hover, *[u-select] .ant-select > div:hover, *[u-input] input:active, *[u-select] .ant-select > div:active, *[u-input] input:focus, *[u-select] .ant-select > div:focus {
+  border-color: white;
+  -webkit-box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.2);
+          box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.2);
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+  border-right-width: 2px !important;
+}
+
+*[u-form-custom-item] .has-error .ant-select > div, *[u-input] .ant-form-item-control.has-error input, *[u-select] .ant-form-item-control.has-error .ant-select > div {
+  border: solid 2px #ad64e6;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-right-width: 2px !important;
+}
+
+*[u-form-custom-item] .has-error .ant-select > div:hover, *[u-input] .ant-form-item-control.has-error input:hover, *[u-select] .ant-form-item-control.has-error .ant-select > div:hover, *[u-form-custom-item] .has-error .ant-select > div:active, *[u-input] .ant-form-item-control.has-error input:active, *[u-select] .ant-form-item-control.has-error .ant-select > div:active, *[u-form-custom-item] .has-error .ant-select > div:focus, *[u-input] .ant-form-item-control.has-error input:focus, *[u-select] .ant-form-item-control.has-error .ant-select > div:focus {
+  border: solid 2px #ad64e6 !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-right-width: 2px !important;
+}
+
 /*
- * DOM
- */
-html {
-  font-size: unset !important;
+  * Form control
+  */
+*[u-form-custom-item] .has-error .ant-form-explain, *[u-input] .ant-form-item-control.has-error .ant-form-explain, *[u-select] .ant-form-item-control.has-error .ant-form-explain {
+  color: #ad64e6;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 1em;
 }
 
-body {
-  background-color: #151515;
-  font-size: unset !important;
+*[u-form-custom-item] .has-error .ant-form-extra, *[u-input] .ant-form-item-control.has-error .ant-form-extra, *[u-select] .ant-form-item-control.has-error .ant-form-extra {
+  color: rgba(255, 255, 255, 0.6);
 }
 
-h1, h2, h3, h4, h5, h6, p, label, a, span {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: bold;
-}
-
-h1 {
-  font-size: 1.9em;
-}
-
-h2 {
-  font-size: 1.7em;
-}
-
-h3 {
-  font-size: 1.5em;
-}
-
-h4 {
-  font-size: 1.3em;
-}
-
-h5 {
-  font-size: 1.1em;
-}
-
-h6 {
-  font-size: 0.9em;
-}
-
-p, label {
-  font-size: 0.9em;
-}
-
-a {
-  font-size: 0.9em;
-}
-
-span {
-  font-size: 0.9em;
-}
-
+/*
+* Attributes
+*/
 *[u-input-row] {
   margin-top: 2em;
 }
 
+*[u-form-custom-item] {
+  width: 100%;
+  margin-bottom: 0;
+  font-size: unset;
+}
+
+*[u-form-custom-item] .ant-form-item-control-wrapper,
+*[u-form-custom-item] .ant-form-item-children,
+*[u-form-custom-item] .ant-form-item-control {
+  font-size: unset;
+}
+
+*[u-form-custom-item] .ant-form-item-control {
+  line-height: 1.5;
+}
+
+*[u-form-custom-item] .has-error .ant-form-explain {
+  font-size: 0.9em;
+}
+
 /*
- * Components
+ * UI
  */
 /*
  * Buttons Sizes
@@ -354,38 +258,6 @@ span {
   width: 100%;
 }
 
-*[u-input] > label {
-  color: white;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 0.7em;
-  position: absolute;
-  top: -2px;
-  left: 0;
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
-}
-
-*[u-input] input {
-  background: none;
-  border: solid 2px white;
-  padding: 20px;
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-  caret-color: white;
-  color: white;
-  font-family: "Source Sans Pro", sans-serif;
-}
-
-*[u-input] input:hover, *[u-input] input:active, *[u-input] input:focus {
-  border-color: white;
-  -webkit-box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.1);
-          box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.1);
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-  border-right-width: 2px !important;
-}
-
 *[u-input] .ant-input-password:hover, *[u-input] .ant-input-password:active, *[u-input] .ant-input-password:focus {
   border-color: white;
   outline: none;
@@ -395,8 +267,8 @@ span {
 
 *[u-input] .ant-input-password:hover input, *[u-input] .ant-input-password:active input, *[u-input] .ant-input-password:focus input {
   border-color: white !important;
-  -webkit-box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.1);
-          box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.1);
+  -webkit-box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.2);
+          box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.2);
   -webkit-transition-duration: 0.2s;
           transition-duration: 0.2s;
   border-right-width: 2px !important;
@@ -412,31 +284,344 @@ span {
   font-size: 0.9em;
 }
 
-*[u-input] .ant-form-item-control.has-error input {
-  border: solid 2px #ad64e6;
-}
-
-*[u-input] .ant-form-item-control.has-error input:hover, *[u-input] .ant-form-item-control.has-error input:active, *[u-input] .ant-form-item-control.has-error input:focus {
-  border: solid 2px #ad64e6 !important;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  border-right-width: 2px !important;
-}
-
-*[u-input] .ant-form-item-control.has-error .ant-form-explain {
-  color: #ad64e6;
-  font-family: "Source Sans Pro", sans-serif;
-  font-size: 1em;
-}
-
-*[u-input] .ant-form-item-control.has-error .ant-form-extra {
-  color: rgba(255, 255, 255, 0.6);
-}
-
 *[u-input] .ant-row {
   margin-bottom: 0;
 }
 
+*[u-select] {
+  position: relative;
+  width: 100%;
+}
+
+*[u-select] .ant-select {
+  width: 100%;
+}
+
+*[u-select] .ant-select > div {
+  position: relative;
+}
+
+*[u-select] .ant-select > div > div {
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+*[u-select] .ant-select > div > div > div {
+  padding: 0 25px 0 20px;
+  padding-right: 25px !important;
+  font-weight: 500;
+}
+
+*[u-select] .ant-select .ant-select-arrow {
+  right: 11px !important;
+}
+
+*[u-select] svg {
+  color: white;
+}
+
+*[u-select] .ant-form-item-control .ant-form-extra {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 0.9em;
+}
+
+.ant-select-dropdown {
+  background-color: white;
+  border-radius: 2px;
+}
+
+.ant-select-dropdown .ant-select-dropdown-menu-item {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 1em;
+}
+
+.ant-select-dropdown .ant-select-dropdown-menu-item-active {
+  background-color: #6457e3;
+  color: white;
+  border-radius: 2px;
+}
+
+.ant-select-dropdown .ant-select-dropdown-menu-item:hover {
+  background-color: rgba(100, 87, 227, 0.6);
+}
+
+*[u-radio-group] {
+  position: relative;
+  width: 100%;
+}
+
+*[u-radio-group] > div {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(120px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-gap: 6px;
+}
+
+*[u-radio-group] > div > label {
+  height: 44px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  border: solid 2px white;
+  border-radius: 2px;
+  color: white;
+  display: -ms-grid;
+  display: grid;
+  cursor: pointer;
+  -ms-grid-columns: 1fr auto;
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "label radio";
+}
+
+*[u-radio-group] > div > label > span:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: radio;
+  padding: 5px 11px 5px 5px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+*[u-radio-group] > div > label > span:nth-child(1)::after {
+  border: none;
+}
+
+*[u-radio-group] > div > label > span:nth-child(1).ant-radio-checked .ant-radio-inner {
+  background-color: white;
+}
+
+*[u-radio-group] > div > label > span:nth-child(1) .ant-radio-inner {
+  background: none;
+  border: solid 2px white;
+  width: 14px;
+  height: 14px;
+}
+
+*[u-radio-group] > div > label > span:nth-child(1) .ant-radio-inner::after {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+}
+
+*[u-radio-group] > div > label > span:nth-child(2) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: label;
+  padding: 5px 5px 5px 20px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+/*
+ * Padding
+ */
+/*
+ * Font Mixin
+ */
+/*
+ * Font-face
+ */
+@font-face {
+  font-family: "PublicSans-Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/PublicSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-Black";
+  font-style: normal;
+  font-weight: black;
+  src: url("../fonts/PublicSans-Black.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-BlackItalic";
+  font-style: italic;
+  font-weight: black;
+  src: url("../fonts/PublicSans-BlackItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-Bold";
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/PublicSans-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-BoldItalic";
+  font-style: italic;
+  font-weight: bold;
+  src: url("../fonts/PublicSans-BoldItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-ExtraBold";
+  font-style: normal;
+  font-weight: 900;
+  src: url("../fonts/PublicSans-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-ExtraBoldItalic";
+  font-style: italic;
+  font-weight: 900;
+  src: url("../fonts/PublicSans-ExtraBoldItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-ExtraLight";
+  font-style: normal;
+  font-weight: 200;
+  src: url("../fonts/PublicSans-ExtraLight.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-ExtraLightItalic";
+  font-style: italic;
+  font-weight: 200;
+  src: url("../fonts/PublicSans-ExtraLightItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-Italic";
+  font-style: italic;
+  font-weight: normal;
+  src: url("../fonts/PublicSans-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-Light";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/PublicSans-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-LightItalic";
+  font-style: italic;
+  font-weight: 300;
+  src: url("../fonts/PublicSans-LightItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-Medium";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/PublicSans-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-MediumItalic";
+  font-style: italic;
+  font-weight: 400;
+  src: url("../fonts/PublicSans-MediumItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-SemiBold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/PublicSans-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-SemiBoldItalic";
+  font-style: italic;
+  font-weight: 700;
+  src: url("../fonts/PublicSans-SemiBoldItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-Thin";
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/PublicSans-Thin.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PublicSans-ThinItalic";
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/PublicSans-ThinItalic.ttf") format("truetype");
+}
+
+/*
+ * Layouts
+ */
+/*
+ * DOM
+ */
+html {
+  font-size: unset !important;
+}
+
+body {
+  background-color: #151515;
+  font-size: unset !important;
+}
+
+h1, h2, h3, h4, h5, h6, p, label, a, span {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 1.9em;
+}
+
+h2 {
+  font-size: 1.7em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.3em;
+}
+
+h5 {
+  font-size: 1.1em;
+}
+
+h6 {
+  font-size: 0.9em;
+}
+
+p, label {
+  font-size: 0.9em;
+}
+
+a {
+  font-size: 0.9em;
+}
+
+span {
+  font-size: 0.9em;
+}
+
+.ant-form {
+  font-size: unset;
+}
+
+/*
+ * Components
+ */
 #component-header-title-mobile {
   position: relative;
   padding: 20px;
@@ -488,6 +673,26 @@ span {
   width: 100%;
   background: -webkit-gradient(linear, left top, right top, from(#ad64e6), color-stop(50%, #6457e3), to(#0cecf2));
   background: linear-gradient(to right, #ad64e6 0%, #6457e3 50%, #0cecf2 100%);
+}
+
+#component-birthdate-input,
+*[component-birthdate-input] {
+  position: relative;
+  width: 100%;
+}
+
+#component-birthdate-input > div,
+*[component-birthdate-input] > div {
+  line-height: 0;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(90px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  grid-gap: 6px;
+}
+
+#component-gender-input {
+  width: 100%;
 }
 
 /*
@@ -601,6 +806,23 @@ span {
 }
 
 #page-reset-password-mobile .row-margin-top {
+  margin-top: 1.2em;
+}
+
+#page-register-mobile {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto auto 1fr;
+      grid-template-rows: auto auto 1fr;
+}
+
+#page-register-mobile > div:nth-child(2) {
+  background-color: #242728;
+  margin: 20px;
+  padding: 10px 30px 60px 30px;
+}
+
+#page-register-mobile .row-margin-top {
   margin-top: 1.2em;
 }
 /*# sourceMappingURL=app.css.map */

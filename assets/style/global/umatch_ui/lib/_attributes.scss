@@ -1,0 +1,37 @@
+/*
+* Attributes
+*/
+*[u-input-row] {
+    margin-top: 2em;
+}
+
+*[u-form-custom-item] {
+    width: 100%;
+    margin-bottom: 0;
+    font-size: unset;
+
+    .ant-form-item-control-wrapper,
+    .ant-form-item-children,
+    .ant-form-item-control {
+        font-size: unset;
+    }
+
+    .ant-form-item-control {
+        line-height: 1.5;
+    }
+
+    .has-error {
+
+        .ant-select {
+            & > div {
+                @extend %input-error-status; 
+            }
+        }
+
+        @extend %form-has-error;
+
+        .ant-form-explain {
+            font-size: 0.9em;
+        }
+    }
+}

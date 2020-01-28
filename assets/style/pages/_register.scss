@@ -1,0 +1,18 @@
+#page-register {
+    &-mobile {
+        @extend %absolute-full;
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+
+        // Formulario
+        & > div:nth-child(2) {
+            background-color: $color-grey;
+            margin: $padding-default-page;
+            padding: 10px 30px 60px 30px;
+        }
+
+        .row-margin-top {
+            margin-top: 1.2em;
+        }
+    }
+}
