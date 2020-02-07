@@ -90,10 +90,7 @@
             },
 
             triggerChange (changedValue) {
-                this.$emit('change', {
-                    birthdate: this.birthdate,
-                    changed: changedValue
-                })
+                this.$emit('change', this.birthdate)
             }
         }
     }

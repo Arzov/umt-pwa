@@ -23,7 +23,7 @@
                 <a-row type="flex" justify="center" u-input-row>
                     <u-input :title="decorator.password.title">
                         <a-form-item :required="decorator.password.required" :extra="decorator.password.extra">
-                            <a-input v-decorator="decorator.password.decorator" :placeholder="decorator.password.placeholder" />
+                            <a-input-password v-decorator="decorator.password.decorator" :placeholder="decorator.password.placeholder" />
                         </a-form-item>
                     </u-input>
                 </a-row>
@@ -73,31 +73,26 @@
             return {
                 decorator,
                 formRegister: this.$form.createForm(this),
-                name: undefined,
-                email: undefined,
-                password: undefined,
-                birthdate: {
-                    day: undefined,
-                    month: undefined,
-                    year: undefined
-                },
                 gender: 'M'
             }
         },
         methods: {
-            register () {
-                const params = {
-                    type: this.event.REGISTER,
-                    data: {
-                        name: this.name,
-                        email: this.email,
-                        password: this.password,
-                        birthdate: this.birthdate,
-                        gender: this.gender
-                    }
-                }
+            register (event) {
+                event.preventDefault()
 
-                this.$emit('emit', params)
+                this.formRegister.validateFields((error, data) => {
+                    if (!error) {
+                        const params = {
+                            type: this.event.REGISTER,
+                            data: {
+                                ...data,
+                                gender: this.gender
+                            }
+                        }
+
+                        this.$emit('emit', params)
+                    }
+                })
             }
         }
     }

@@ -5,9 +5,9 @@
         <div>
             <a-form :form="formLogin" @submit="login($event)">
                 <a-row type="flex" justify="center" u-input-row>
-                    <u-input :title="decorator.email.title">
-                        <a-form-item :required="decorator.email.required" :extra="decorator.email.extra">
-                            <a-input v-decorator="decorator.email.decorator" :placeholder="decorator.email.placeholder" />
+                    <u-input :title="decorator.username.title">
+                        <a-form-item :required="decorator.username.required" :extra="decorator.username.extra">
+                            <a-input v-decorator="decorator.username.decorator" :placeholder="decorator.username.placeholder" />
                         </a-form-item>
                     </u-input>
                 </a-row>

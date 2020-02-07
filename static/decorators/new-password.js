@@ -1,4 +1,6 @@
-module.exports = {
+import passwordRules from './password'
+
+export default {
     title: 'contraseña nueva',
     required: true,
     placeholder: 'Ingresa tu nueva contraseña',
@@ -7,9 +9,7 @@ module.exports = {
         'password',
         {
             initialValue: undefined,
-            rules: [
-                { required: true, message: 'Ingrese una contraseña.' }
-            ]
+            rules: passwordRules
         }
     ]
 }

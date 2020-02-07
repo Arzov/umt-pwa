@@ -23,7 +23,6 @@
             }
         },
         methods: {
-
             onEmit (event) {
                 switch (event.type) {
                     case this.event.REGISTER:

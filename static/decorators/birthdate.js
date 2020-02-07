@@ -1,10 +1,12 @@
 import validationBirthdate from '@/utils/validationBirthdate'
 
 function checkDate (rule, value, callback) {
-    let response = validationBirthdate(value.birthdate)
+    let response = validationBirthdate(value)
 
     if (!response.status)
         callback(response.msg)
+    else
+        callback()
 }
 
 export default {

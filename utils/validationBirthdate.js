@@ -8,7 +8,7 @@ export default function validationBirthdate (birthdate) {
 
   // Fecha invalida (solo se valida mes de febrero donde podria haber error)
   if (validBirthdate.getMonth() !== (+birthdate.month - 1)) {
-      result.msg = 'Debe ingresar una fecha valida!'
+      result.msg = 'Debe ingresar una fecha valida.'
 
       return result
 
@@ -25,7 +25,7 @@ export default function validationBirthdate (birthdate) {
       }
 
       if (age < 18) {
-          result.msg = 'Debe ser mayor de 18 anos!'
+          result.msg = 'Debe ser mayor de 18 años.'
 
           return result
       } else {

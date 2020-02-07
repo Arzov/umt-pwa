@@ -1,7 +1,4 @@
-export const emailRules = [
-    { required: true, message: 'Ingrese un correo electrónico.' },
-    { type: 'email', message: 'Ingrese un correo válido.' }
-]
+import { emailRules } from './email'
 
 export default {
     title: 'correo electrónico',
@@ -9,7 +6,7 @@ export default {
     placeholder: 'Ingresa tu correo electrónico',
     extra: '',
     decorator: [
-        'email',
+        'username',
         {
             initialValue: undefined,
             rules: emailRules
