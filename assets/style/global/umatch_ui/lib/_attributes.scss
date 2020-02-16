@@ -2,7 +2,11 @@
 * Attributes
 */
 *[u-input-row] {
-    margin-top: 2em;
+    margin-top: 2rem;
+}
+
+*[u-button-row] {
+    margin-top: 1.2rem;
 }
 
 *[u-form-custom-item] {
@@ -32,6 +36,24 @@
 
         .ant-form-explain {
             font-size: 0.9em;
+        }
+
+        *[component-code-input] {
+            input {
+                border: none !important;
+                border-bottom: 2px solid $input-color-text-error !important;
+
+                &:hover {
+                    border: none !important;
+                    border-bottom: 2px solid $input-color-text-error !important;
+                }
+
+                &:active,
+                &:focus {
+                    border: none !important;
+                    border-bottom: 2px solid $input-color-border !important;
+                }
+            }
         }
     }
 }

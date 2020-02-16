@@ -38,13 +38,13 @@
                     <gender-input v-model="gender" />
                 </a-row>
 
-                <a-row type="flex" justify="center" class="row-margin-top">
-                    <a-button u-button u-type="primary" u-size="large" html-type="submit" block>
+                <a-row type="flex" justify="center" u-button-row>
+                    <a-button u-button u-type="primary" html-type="submit" block>
                         Registrar
                     </a-button>
                 </a-row>
 
-                <a-row type="flex" justify="center" class="row-margin-top">
+                <a-row type="flex" justify="center" u-button-row>
                     <a u-anchor u-size="large">
                         Términos y condiciones
                     </a>

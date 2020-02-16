@@ -5,7 +5,7 @@
         </a-row>
 
         <a-row type="flex" justify="center">
-            <a-button u-button u-type="primary" u-size="large" block @click="toLogin">
+            <a-button u-button u-type="primary" block @click="toLogin">
                 Iniciar sesión
             </a-button>
 
@@ -13,7 +13,7 @@
 
             <GoogleLogin />
 
-            <a u-anchor u-size="large" @click="toRegister">
+            <a u-anchor @click="toRegister">
                 ¿No tienes cuenta? <span u-a>Regístrate.</span>
             </a>
         </a-row>

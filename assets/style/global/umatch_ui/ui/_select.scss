@@ -1,6 +1,7 @@
 *[u-select] {
     position: relative;
     width: 100%;
+    font-size: 1rem;
 
     & > label {
         @extend %input-label;
@@ -8,6 +9,7 @@
 
     .ant-select {
         width: 100%;
+        font-size: 1em;
 
         & > div {
             @extend %input-text;
@@ -39,35 +41,19 @@
     }
 
     // Control del input para formularios
-    .ant-form-item-control {
-
-        // Texto de ayuda
-        .ant-form-extra {
-            color: rgba($input-color-text, 0.8);
-            font-family: $font-umatch;
-            font-size: 0.9em;
-        }
-
-        // En caso de error (no coincide regla)
-        &.has-error{
-
-            .ant-select > div {
-                @extend %input-error-status;
-            }
-
-            @extend %form-has-error;
-        }
-    }
+    @extend %form-item-control;
 }
 
 // Antd override
 .ant-select-dropdown {
     background-color: $color-white;
     border-radius: 2px;
+    font-size: 1rem;
 
     .ant-select-dropdown-menu-item {
         font-family: $font-umatch;
         font-size: 1em;
+        padding: 1em 0.8em;
 
         &-active {
             background-color: $color-purple;

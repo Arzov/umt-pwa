@@ -16,6 +16,7 @@
 
     export default {
         name: 'Register',
+        layout: 'auth',
         components: { RegisterMobile },
         data () {
             return {

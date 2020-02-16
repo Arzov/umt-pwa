@@ -1,13 +1,14 @@
 /*
  * DOM
  */
-html {
-    font-size: unset !important;
-}
-
+html,
 body {
     background-color: $color-black;
-    font-size: unset !important;
+    font-size: 14px !important;
+}
+
+input {
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, p, label, a, span {
@@ -16,37 +17,37 @@ h1, h2, h3, h4, h5, h6, p, label, a, span {
 }
 
 h1 {
-    font-size: 1.9em;
+    font-size: 1.9rem;
 }
 
 h2 {
-    font-size: 1.7em;
+    font-size: 1.7rem;
 }
 
 h3 {
-    font-size: 1.5em;
+    font-size: 1.5rem;
 }
 
 h4 {
-    font-size: 1.3em;
+    font-size: 1.3rem;
 }
 
 h5 {
-    font-size: 1.1em;
+    font-size: 1.1rem;
 }
 
 h6 {
-    font-size: 0.9em;
+    font-size: 1rem;
 }
 
 p, label {
-    font-size: 0.9em;
+    font-size: 1rem;
 }
 
 a {
-    font-size: 0.9em;
+    font-size: 1rem;
 }
 
 span {
-    font-size: 0.9em;
+    font-size: 1rem;
 }

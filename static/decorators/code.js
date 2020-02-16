@@ -1,3 +1,12 @@
+function checkCode (rule, value, callback) {
+    let error = 'Ingrese un código válido.'
+
+    if (value.length < 6) {
+        callback(error)
+    } else
+        callback()
+}
+
 module.exports = {
     title: 'código',
     required: true,
@@ -8,7 +17,7 @@ module.exports = {
         {
             initialValue: undefined,
             rules: [
-                { required: true, message: 'Ingrese el código recibido en su correo.' }
+                { validator: checkCode }
             ]
         }
     ]

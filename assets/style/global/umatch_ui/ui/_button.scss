@@ -1,10 +1,4 @@
 /*
- * Buttons Sizes
- */
-$button-font-size-regular: 1em;
-$button-font-size-large: 1em;
-
-/*
  * Buttons
  */
 *[u-button] {
@@ -13,6 +7,7 @@ $button-font-size-large: 1em;
     opacity: 1;
     padding: 8px 14px;
     height: unset;
+    font-size: 1rem;
     transition-property: opacity;
     transition-duration: 0.3s;
     transition-timing-function: ease-in;
@@ -57,49 +52,22 @@ $button-font-size-large: 1em;
         }
     }
 
-    /*
-     * Sizes
-     */
-    &[u-size='regular'] {
-        font-size: $button-font-size-regular;
-
-        span {
-            img {
-                position: absolute;
-                left: 20px;
-                top: 15%;
-                height: 70%;
-            }
-        }
-    }
-
-    &[u-size='large'] {
-        font-size: $button-font-size-large;
-
-        span {
-            img {
-                position: absolute;
-                left: 20px;
-                top: 15%;
-                height: 70%;
-            }
+    span {
+        img {
+            position: absolute;
+            left: 20px;
+            top: 15%;
+            height: 70%;
         }
     }
 }
-
-
-/*
- * Anchor Sizes
- */
-$anchor-font-size-regular: 0.9em;
-$anchor-font-size-large: 0.8em;
 
 /*
  * Anchor
  */
 *[u-anchor] {
     color: $button-color-anchor;
-    font-size: $anchor-font-size-regular;
+    font-size: 1rem;
     transition-duration: 0.3s;
     transition-timing-function: ease-in;
 
@@ -108,11 +76,6 @@ $anchor-font-size-large: 0.8em;
         color: rgba($button-color-anchor, 0.4);
         transition-duration: 0.3s;
         transition-timing-function: ease-out;
-    }
-
-    // Sizes
-    &[u-size='large'] {
-        font-size: $anchor-font-size-large;
     }
 
     // Styles

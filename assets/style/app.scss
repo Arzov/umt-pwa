@@ -1,12 +1,12 @@
 /*
  * Globals
  */
- @import "global/umatch_ui/index";
- @import "global/sizes";
+@import "global/sizes";
 @import "global/fonts";
 @import "global/layouts";
-@import "global/dom";
 @import "global/antd";
+@import "global/umatch_ui/index";
+@import "global/dom";
 
 /*
  * Components
@@ -14,6 +14,7 @@
 @import "components/header-title";
 @import "components/birthdate-input";
 @import "components/gender-input";
+@import "components/code-input";
 
 /*
  * Pages
@@ -23,3 +24,4 @@
 @import "pages/recover-password";
 @import "pages/reset-password";
 @import "pages/register";
+@import "pages/verification";

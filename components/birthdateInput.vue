@@ -4,7 +4,7 @@
 
         <div class="row">
             <u-select>
-                <a-select placeholder="Día" @change="setDay">
+                <a-select :dropdown-match-select-width="false" placeholder="Día" @change="setDay">
                     <a-select-option v-for="day in dayOptions" :key="'d' + day" :value="day">
                         {{ day }}
                     </a-select-option>
@@ -12,7 +12,7 @@
             </u-select>
             
             <u-select>
-                <a-select placeholder="Mes" @change="setMonth">
+                <a-select :dropdown-match-select-width="false" placeholder="Mes" @change="setMonth">
                     <a-select-option v-for="month in monthOptions" :key="'m' + month.value" :value="month.value">
                         {{ month.key }}
                     </a-select-option>
@@ -20,7 +20,7 @@
             </u-select>
 
             <u-select>
-                <a-select placeholder="Año" @change="setYear">
+                <a-select :dropdown-match-select-width="false" placeholder="Año" @change="setYear">
                     <a-select-option v-for="year in yearOptions" :key="'y' + year" :value="year">
                         {{ year }}
                     </a-select-option>

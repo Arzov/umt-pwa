@@ -20,14 +20,14 @@
                     </u-input>
                 </a-row>
 
-                <a-row type="flex" justify="center" class="row-margin-top">
+                <a-row type="flex" justify="center" u-button-row>
                     <a-button u-button u-type="primary" u-size="large" html-type="submit" block>
                         Iniciar Sesión
                     </a-button>
                 </a-row>
             </a-form>
 
-            <a-row type="flex" justify="center" class="row-margin-top">
+            <a-row type="flex" justify="center" u-button-row>
                 <a u-anchor u-size="large" @click="toRecoverPassword">
                     ¿Olvidaste tu contraseña? <span u-a>Recupérala.</span>
                 </a>

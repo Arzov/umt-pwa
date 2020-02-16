@@ -1,6 +1,7 @@
 *[u-radio-group] {
     position: relative;
     width: 100%;
+    font-size: 1rem;
     
     & > label {
         @extend %input-label;
@@ -10,8 +11,10 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
         grid-gap: 6px;
+        font-size: 1em;
 
         & > label {
+            font-size: 1em;
             height: 44px;
             box-sizing: border-box;
             margin: 0;
@@ -25,7 +28,7 @@
 
             & > span:nth-child(1) {
                 grid-area: radio;
-                padding: 5px 11px 5px 5px;
+                padding: 0.3em 1em 0.3em 0.3em;
                 align-self: center;
 
                 &::after {
@@ -55,7 +58,7 @@
 
             & > span:nth-child(2) {
                 grid-area: label;
-                padding: 5px 5px 5px 20px;
+                padding: 0.3em 0.3em 0.3em 1em;
                 align-self: center;
                 font-weight: 500;
                 font-size: 1em;

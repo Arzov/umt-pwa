@@ -45,7 +45,8 @@ export default {
         '@/plugins/mask',
         '@/plugins/mq',
         '@/plugins/aws',
-        '@/plugins/storage'
+        '@/plugins/storage',
+        '@/plugins/umatch-ui'
     ],
     /*
     ** Nuxt.js dev-modules
