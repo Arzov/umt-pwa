@@ -8,6 +8,7 @@ import chat from './modules/chat'
 import profile from './modules/profile'
 import recoverPassword from './modules/recover-password'
 import resetPassword from './modules/reset-password'
+import navigation from './modules/navigation'
 
 const store = () => {
   return new Vuex.Store({
@@ -20,7 +21,8 @@ const store = () => {
       chat,
       profile,
       recoverPassword,
-      resetPassword
+      resetPassword,
+      navigation
     }
   })
 }

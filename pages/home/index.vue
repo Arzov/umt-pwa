@@ -20,6 +20,7 @@
 
     export default {
         name: 'Home',
+        layout: 'home',
         components: { HomeMobile },
         data () {
             return {

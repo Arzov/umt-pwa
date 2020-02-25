@@ -4,3 +4,19 @@
 #layout-auth {
     @extend %absolute-full;
 }
+
+#layout-home {
+    @extend %absolute-full;
+
+    & > div:nth-child(1) {
+        @extend %absolute-full;
+        display: grid;
+        grid-template-rows: 1fr auto;
+
+        & > *:nth-child(1) {
+            overflow: auto;
+            padding: $padding-default-page;
+            position: relative;
+        }
+    }
+}

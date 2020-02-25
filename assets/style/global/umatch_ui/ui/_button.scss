@@ -8,7 +8,7 @@
     padding: 8px 14px;
     height: unset;
     font-size: 1rem;
-    transition-property: opacity;
+    transition-property: opacity color border;
     transition-duration: 0.3s;
     transition-timing-function: ease-in;
 
@@ -49,6 +49,27 @@
         &:hover,
         &:active {
             opacity: 0.8;
+        }
+    }
+
+    &[u-type='rounded'] {
+        padding: 2px 10px;
+        border: solid 1.4px $button-border-rounded;
+        border-radius: 25px;
+        background-clip: padding-box;
+        background: $button-background-rounded;
+        color: $button-color-rounded;
+        text-transform: uppercase;
+
+        span {
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        &:hover,
+        &:active {
+            border: solid 1.4px $button-border-rounded-active;
+            color: $button-color-rounded-active;
         }
     }
 

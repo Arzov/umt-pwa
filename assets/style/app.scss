@@ -15,6 +15,9 @@
 @import "components/birthdate-input";
 @import "components/gender-input";
 @import "components/code-input";
+@import "components/footer-navbar";
+@import "components/profile-image";
+@import "components/user-search-card";
 
 /*
  * Pages
@@ -25,3 +28,4 @@
 @import "pages/reset-password";
 @import "pages/register";
 @import "pages/verification";
+@import "pages/home";
