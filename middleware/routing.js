@@ -1,4 +1,4 @@
 // EXPORT
 export default ({ route, store }) => {
-    store.commit('navigation/setState', route)
+    store.commit('navigation/setName', route)
 }

@@ -54,9 +54,6 @@
                 userData: this.$store.getters['user/userData']
             }
         },
-        mounted () {
-            console.log(this.usersFound)
-        },
         methods: {
             /**
              * Metodo que busca un encuentro con algun equipo rival.

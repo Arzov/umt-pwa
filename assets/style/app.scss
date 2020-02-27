@@ -18,6 +18,8 @@
 @import "components/footer-navbar";
 @import "components/profile-image";
 @import "components/user-search-card";
+@import "components/user-active-match-card";
+@import "components/user-request-match-card";
 
 /*
  * Pages
@@ -29,3 +31,4 @@
 @import "pages/register";
 @import "pages/verification";
 @import "pages/home";
+@import "pages/match";

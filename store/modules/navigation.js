@@ -1,10 +1,18 @@
 const state = () => ({
-    name: undefined
+    name: undefined,
+    title: undefined,
+    toUrl: undefined
 })
 
 const mutations = {
-    setState (state, { name }) {
+    setName (state, { name }) {
         state['name'] = name
+    },
+    setTitle (state, value) {
+        state['title'] = value
+    },
+    setUrl (state, value) {
+        state['toUrl'] = value
     }
 }
 

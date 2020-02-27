@@ -1,31 +1,38 @@
 <template>
     <div id="page-match-mobile">
-        <div>
-            <a-row type="flex" justify="center">
-                ENCUENTROS
-                <a-button>
-                    <nuxt-link to="/home">
-                        cancelar
-                    </nuxt-link>
-                </a-button>
-            </a-row>
-            <a-tabs default-active-key="1">
-                <a-tab-pane key="1" tab="ACTIVOS">
-                    <a-row v-if="activeMatches.length" type="flex" justify="center">
-                        <ul>
-                            <li v-for="(match, idx) in activeMatches" :key="idx">
-                                <div @click="toChat(match, idx)">
-                                    <a-avatar :src="match.adversaryPicture" size="large" />
-                                    {{ match.adversaryName }}
-                                </div>
-                            </li>
-                        </ul>
-                    </a-row>
-                    <a-row v-else type="flex" justify="center">
-                        No hay solicitudes
-                    </a-row>
-                </a-tab-pane>
-                <a-tab-pane key="2" tab="SOLICITUDES" force-render>
+        <u-tabs :tabs="['ACTIVOS', 'SOLICITUDES']">
+            <div>
+                <div v-if="activeMatches.length">
+                    <user-active-match-card v-for="(user, index) in activeMatches" :key="index" :user-data="user" :index="index" @click="toChat(user, index)" />
+                </div>
+
+                <a-row v-else type="flex" justify="center">
+                    <h6>No hay solicitudes</h6>
+                </a-row>
+            </div>
+
+            <div>
+                <div v-if="requestMatches.length">
+                    <user-request-match-card v-for="(user, index) in requestMatches" :key="index" :user-data="user" :index="index" />
+                </div>
+
+                <a-row v-else type="flex" justify="center">
+                    No hay solicitudes
+                </a-row>
+            </div>
+        </u-tabs>
+
+        <a-tabs style="display: none" default-active-key="1" class="tabs">
+            <a-tab-pane key="1" tab="ACTIVOS">
+                <div />
+            </a-tab-pane>
+
+            <a-tab-pane key="2" tab="SOLICITUDES" force-render>
+                <div>
+                    <div v-if="requestMatches.length">
+                        <user-request-match-card v-for="(user, index) in requestMatches" :key="index" :user-data="user" :index="index" />
+                    </div>
+
                     <a-row v-if="requestMatches.length" type="flex" justify="center">
                         <ul>
                             <li v-for="(match, idx) in requestMatches" :key="idx">
@@ -74,15 +81,19 @@
                     <a-row v-else type="flex" justify="center">
                         No hay solicitudes
                     </a-row>
-                </a-tab-pane>
-            </a-tabs>
-        </div>
+                </div>
+            </a-tab-pane>
+        </a-tabs>
     </div>
 </template>
 
 <script>
+    import UserActiveMatchCard from '@/components/userActiveMatchCard'
+    import UserRequestMatchCard from '@/components/userRequestMatchCard'
+
     export default {
         name: 'MatchMobile',
+        components: { UserActiveMatchCard, UserRequestMatchCard },
         props: {
             event: {
                 required: true

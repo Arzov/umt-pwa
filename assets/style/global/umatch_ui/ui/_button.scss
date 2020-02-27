@@ -7,7 +7,7 @@
     opacity: 1;
     padding: 8px 14px;
     height: unset;
-    font-size: 1rem;
+    font-size: $label-size;
     transition-property: opacity color border;
     transition-duration: 0.3s;
     transition-timing-function: ease-in;
@@ -58,12 +58,11 @@
         border-radius: 25px;
         background-clip: padding-box;
         background: $button-background-rounded;
-        color: $button-color-rounded;
         text-transform: uppercase;
 
         span {
             font-size: 0.8rem;
-            font-weight: 700;
+            color: $button-color-rounded;
         }
 
         &:hover,
@@ -74,6 +73,8 @@
     }
 
     span {
+        font-weight: 700;
+
         img {
             position: absolute;
             left: 20px;
@@ -88,7 +89,8 @@
  */
 *[u-anchor] {
     color: $button-color-anchor;
-    font-size: 1rem;
+    font-size: $a-size;
+    font-weight: 600;
     transition-duration: 0.3s;
     transition-timing-function: ease-in;
 
@@ -113,5 +115,9 @@
             transition-duration: 0.3s;
             transition-timing-function: ease-out;
         }
+    }
+
+    span {
+        font-weight: 600;
     }
 }

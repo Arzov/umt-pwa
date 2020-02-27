@@ -1,0 +1,12 @@
+#page-match {
+    &-mobile {
+        @extend %absolute-full;
+        padding: $padding-default-page;
+        overflow: hidden !important;
+
+        #component-user-active-match-card,
+        #component-user-request-match-card {
+            margin-bottom: 10px;
+        }
+    }
+}

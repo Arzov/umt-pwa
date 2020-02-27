@@ -20,3 +20,24 @@
         }
     }
 }
+
+#layout-default {
+    @extend %absolute-full;
+
+    & > div:nth-child(1) {
+        @extend %absolute-full;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+
+        // Content
+        & > *:nth-child(2) {
+            overflow: hidden;
+            padding: $padding-default-page;
+            position: relative;
+
+            & > div > div {
+                overflow: auto;
+            }
+        }
+    }
+}
