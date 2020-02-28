@@ -22,7 +22,11 @@
             }
         }
     
-        .last-message {
-            align-self: flex-start;
+        .button-area {
+            display: flex;
+
+            button {
+                margin-left: 10px;
+            }
         }
 }

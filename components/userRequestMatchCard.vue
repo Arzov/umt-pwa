@@ -24,8 +24,36 @@
             </h5>
         </div>
 
-        <div class="last-message">
-            <h6>Hoy 18:20</h6>
+        <div class="button-area">
+            <a-button
+                v-if="showAccept"
+                u-button
+                u-type="circle"
+                u-color="hot"
+                icon="check"
+                value="A"
+                @click="onClick"
+            />
+
+            <a-button
+                v-if="showCancel"
+                u-button
+                u-type="circle"
+                u-color="cold"
+                icon="close"
+                value="C"
+                @click="onClick"
+            />
+
+            <a-button
+                v-if="showRefuse"
+                u-button
+                u-type="circle"
+                u-color="cold"
+                icon="close"
+                value="D"
+                @click="onClick"
+            />
         </div>
     </div>
 </template>
@@ -45,9 +73,39 @@
                 required: true
             }
         },
+        data () {
+            return {
+                params: {},
+                showCancel: false,
+                showAccept: false,
+                showRefuse: false
+            }
+        },
+        mounted () {
+            this.params = {
+                hashKey: this.userData.hashKey,
+                rangeKey: this.userData.rangeKey,
+                matchId: this.userData.matchId,
+                userStatus: undefined
+            }
+
+            if (this.userData.isCreator) {
+                this.showCancel = true
+            } else if (this.userData.matchStatus === 'P') {
+                this.showAccept = true
+                this.showRefuse = true
+            } else if (this.userData.matchStatus === 'D') {
+                this.showCancel = true
+            }
+        },
         methods: {
-            onClick () {
-                this.$emit('click')
+            onClick (event) {
+                this.$emit('submit', {
+                    ...this.params,
+                    userStatus: event.target.value
+                })
+
+                event.stopPropagation()
             }
         }
     }

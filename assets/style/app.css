@@ -401,6 +401,48 @@
   color: #ad64e6;
 }
 
+*[u-button][u-type='circle'] {
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  width: 2rem;
+  height: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+*[u-button][u-type='circle'] i {
+  height: 1rem;
+  width: 1rem;
+}
+
+*[u-button][u-type='circle'] svg {
+  color: #242728;
+}
+
+*[u-button][u-type='circle'][u-color='cold'] {
+  background: linear-gradient(245deg, #0cecf2, #0271c4 65%);
+}
+
+*[u-button][u-type='circle'][u-color='hot'] {
+  background: linear-gradient(245deg, #ad64e6, #6457e3 65%);
+}
+
+*[u-button][u-type='circle']:hover, *[u-button][u-type='circle']:active {
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  opacity: 0.5;
+}
+
 *[u-button] span {
   font-weight: 700;
 }
@@ -1068,9 +1110,14 @@ span {
   font-weight: 300;
 }
 
-#component-user-request-match-card .last-message {
-  -ms-flex-item-align: start;
-      align-self: flex-start;
+#component-user-request-match-card .button-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#component-user-request-match-card .button-area button {
+  margin-left: 10px;
 }
 
 /*
