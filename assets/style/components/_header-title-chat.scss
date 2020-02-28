@@ -1,0 +1,69 @@
+#component-header-title-chat {
+    &-mobile {
+        font-size: $h6-size;
+        position: relative;
+        padding: $padding-default-page;
+        background-color: $color-grey;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 8px;
+
+        // Avatar
+        .image {
+            display: inline-block;
+        }
+
+        // Nombre
+        & > div:nth-child(2) {
+            text-transform: uppercase;
+
+            * {
+                color: $color-white;
+                font-weight: 700 !important;
+                margin-bottom: 0;
+            }
+        }
+
+        // Cerrar
+        .close-button-wrapper {
+            height: 3.6rem;
+            width: 3.6rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            a {
+                width: 60%;
+                height: 60%;
+
+                i {
+                    width: 100%;
+                        height: 100%;
+    
+                    svg {
+                        width: 100%;
+                        height: 100%;
+                        color: $color-white;
+                        transition: color 0.3s;
+    
+                        &:hover,
+                        &:active {
+                            color: rgba($color-white, 0.5);
+                            transition: color 0.3s;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Borde inferior
+        .border-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 100%;
+            background: linear-gradient(to right, $color-pink 0%, $color-purple 50%, $color-cian 100%);
+        }
+    }
+}

@@ -1,6 +1,16 @@
 <template>
     <div id="page-chat-mobile">
-        <a-row type="flex" justify="center">
+        <header-title-chat-mobile :user-data="matchInfo" />
+
+        <div class="chat-content">
+            <chat-message />
+            
+            <chat-message />
+        </div>
+
+        <chat-message-input />
+
+        <!-- <a-row type="flex" justify="center">
             <a-avatar :src="matchInfo.adversaryPicture" size="large" />
             {{ matchInfo.adversaryName }}
             <a-button>
@@ -21,13 +31,18 @@
                 <input v-model="userMessage" placeholder="mensaje">
                 <input type="submit" value="Submit">
             </form>
-        </a-row>
+        </a-row> -->
     </div>
 </template>
 
 <script>
+    import HeaderTitleChatMobile from '@/components/headerTitleChatMobile'
+    import ChatMessageInput from '@/components/chatMessageInput'
+    import ChatMessage from '@/components/chatMessage'
+
     export default {
         name: 'ChatMobile',
+        components: { HeaderTitleChatMobile, ChatMessageInput, ChatMessage },
         props: {
             event: {
                 required: true
@@ -43,6 +58,9 @@
             return {
                 userMessage: null
             }
+        },
+        mounted () {
+            console.log(this.matchInfo)
         },
         methods: {
             /**

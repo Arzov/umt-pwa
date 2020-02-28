@@ -20,6 +20,9 @@
 @import "components/user-search-card";
 @import "components/user-active-match-card";
 @import "components/user-request-match-card";
+@import "components/chat-message";
+@import "components/header-title-chat";
+@import "components/chat-message-input";
 
 /*
  * Pages
@@ -32,3 +35,4 @@
 @import "pages/verification";
 @import "pages/home";
 @import "pages/match";
+@import "pages/chat";

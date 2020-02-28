@@ -48,6 +48,7 @@
             }
         },
         name: 'Chat',
+        layout: 'empty',
         components: { ChatMobile },
         data () {
             return {
