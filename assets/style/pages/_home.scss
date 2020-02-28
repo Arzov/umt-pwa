@@ -1,0 +1,53 @@
+#page-home {
+    &-mobile {
+        @extend %absolute-full;
+        padding: $padding-default-page;
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+
+        .profile {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            margin-bottom: 40px;
+
+            .text {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                h3 {
+                    color: $input-color-text;
+                    font-weight: 400;
+                    margin-bottom: 0;
+    
+                    &:nth-child(1) {
+                        margin-bottom: -6px;
+                    }
+    
+                    &:nth-child(2) {
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+
+        .title-rivals {
+            color: $color-white;
+            margin-bottom: 20px;
+        }
+
+        .rivals {
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+
+            & > * {
+                margin-bottom: 10px;
+            }
+        }
+
+        .button-row {
+            margin-top: 20px;
+        }
+    }
+}

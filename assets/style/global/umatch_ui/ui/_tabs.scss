@@ -1,0 +1,48 @@
+#component-u-tabs {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+
+    .u-tabs-titles {
+        display: flex;
+        justify-content: space-around;
+
+        h6 {
+            padding: 12px 16px;
+            font-weight: 700;
+
+            &[selected] {
+                color: $color-cian;
+            }
+        }
+    }
+
+    .u-tabs-content {
+        position: relative;
+
+        .u-tabs-content-position {
+            @extend %absolute-full;
+
+            .u-tabs-content-wrapper {
+                display: flex;
+                height: 100%;
+                transition: margin-left 0.3s 0.1s;
+
+                & > .u-tab-wrapper {
+                    width: 100%;
+                    overflow: auto;
+
+                    &[show='true'] {
+                        opacity: 1;
+                        transition: opacity 0.3s 0.1s;
+                    }
+
+                    &[show='false'] {
+                        opacity: 0;
+                        transition: opacity 0.3s 0s;
+                    }
+                }
+            }
+        }
+    }
+}

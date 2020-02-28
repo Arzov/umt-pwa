@@ -1,0 +1,68 @@
+*[u-radio-group] {
+    position: relative;
+    width: 100%;
+    font-size: 1rem;
+    
+    & > label {
+        @extend %input-label;
+    }
+
+    & > div {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-gap: 6px;
+        font-size: 1em;
+
+        & > label {
+            font-size: 1em;
+            height: 44px;
+            box-sizing: border-box;
+            margin: 0;
+            border: $input-border;
+            border-radius: $input-border-width;
+            color: $input-color-border;
+            display: grid;
+            cursor: pointer;
+            grid-template-columns: 1fr auto;
+            grid-template-areas: "label radio";
+
+            & > span:nth-child(1) {
+                grid-area: radio;
+                padding: 0.3em 1em 0.3em 0.3em;
+                align-self: center;
+
+                &::after {
+                    border: none;
+                }
+
+                &.ant-radio-checked {
+                    .ant-radio-inner {
+                        background-color: $input-color-text;
+                    }
+                }
+
+                .ant-radio-inner {
+                    background: none;
+                    border: $input-border;
+                    width: 14px;
+                    height: 14px;
+
+                    &::after {
+                        top: 0;
+                        left: 0;
+                        width: 0;
+                        height: 0;
+                    }
+                }
+            }
+
+            & > span:nth-child(2) {
+                grid-area: label;
+                padding: 0.3em 0.3em 0.3em 1em;
+                align-self: center;
+                font-weight: 500;
+                font-size: 1em;
+            }
+        }
+    }
+}

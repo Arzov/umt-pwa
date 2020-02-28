@@ -1,0 +1,59 @@
+/*
+* Attributes
+*/
+*[u-input-row] {
+    margin-top: 2rem;
+}
+
+*[u-button-row] {
+    margin-top: 1.2rem;
+}
+
+*[u-form-custom-item] {
+    width: 100%;
+    margin-bottom: 0;
+    font-size: unset;
+
+    .ant-form-item-control-wrapper,
+    .ant-form-item-children,
+    .ant-form-item-control {
+        font-size: unset;
+    }
+
+    .ant-form-item-control {
+        line-height: 1.5;
+    }
+
+    .has-error {
+
+        .ant-select {
+            & > div {
+                @extend %input-error-status; 
+            }
+        }
+
+        @extend %form-has-error;
+
+        .ant-form-explain {
+            font-size: 0.9em;
+        }
+
+        *[component-code-input] {
+            input {
+                border: none !important;
+                border-bottom: 2px solid $input-color-text-error !important;
+
+                &:hover {
+                    border: none !important;
+                    border-bottom: 2px solid $input-color-text-error !important;
+                }
+
+                &:active,
+                &:focus {
+                    border: none !important;
+                    border-bottom: 2px solid $input-color-border !important;
+                }
+            }
+        }
+    }
+}

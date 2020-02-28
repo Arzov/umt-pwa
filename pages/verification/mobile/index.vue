@@ -1,30 +1,48 @@
 <template>
     <div id="page-verification-mobile">
-        <a-row type="flex" justify="center">
-            <a-button>
-                <nuxt-link to="/start">
-                    cancelar
-                </nuxt-link>
-            </a-button>
-        </a-row>
-        <a-row type="flex" justify="center">
-            Ingresa tu código de verificación
-            {{ userData.id }}
-            <a-input v-model="code" placeholder="Codigo verificacion" />
-            <a-button @click="verify">
-                Enviar
-            </a-button>
-            <a-button type="link" @click="resendCode">
-                Reenviar código
-            </a-button>
-        </a-row>
+        <header-title-mobile to="/start" title="verificar" />
+
+        <div>
+            <a-form :form="formVerification" @submit="verify($event)">
+                <a-row type="flex" justify="center">
+                    <h6>Ingresa tu código de verificación</h6>
+                </a-row>
+
+                <a-row type="flex" justify="center">
+                    <h6 class="email">
+                        {{ email }}
+                    </h6>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="decorator.code.required" :extra="decorator.code.extra" u-form-custom-item>
+                        <code-input v-decorator="decorator.code.decorator" />
+                    </a-form-item>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-button u-button u-type="primary" html-type="submit" block>
+                        Enviar
+                    </a-button>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-button-row>
+                    <a u-anchor u-size="large" @click="resendCode">
+                        <span u-a>Reenviar código</span>
+                    </a>
+                </a-row>
+            </a-form>
+        </div>
     </div>
 </template>
 
 <script>
+    import decorator from '@/static/decorator'
+    import CodeInput from '@/components/codeInput'
 
     export default {
         name: 'VerificationMobile',
+        components: { CodeInput },
         props: {
             event: {
                 required: true
@@ -35,17 +53,29 @@
         },
         data () {
             return {
-                code: ''
+                decorator,
+                formVerification: this.$form.createForm(this)
+            }
+        },
+        computed: {
+            email () {
+                return this.userData.id
             }
         },
         methods: {
-            verify () {
-                const params = {
-                    type: this.event.VERIFY,
-                    code: this.code
-                }
+            verify (event) {
+                event.preventDefault()
 
-                this.$emit('emit', params)
+                this.formVerification.validateFields((error, data) => {
+                    if (!error) {
+                        const params = {
+                            type: this.event.VERIFY,
+                            ...data
+                        }
+
+                        this.$emit('emit', params)
+                    }
+                })
             },
             resendCode () {
                 const params = {

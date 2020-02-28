@@ -16,6 +16,7 @@
 
     export default {
         name: 'Register',
+        layout: 'auth',
         components: { RegisterMobile },
         data () {
             return {
@@ -23,7 +24,6 @@
             }
         },
         methods: {
-
             onEmit (event) {
                 switch (event.type) {
                     case this.event.REGISTER:

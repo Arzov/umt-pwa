@@ -15,6 +15,7 @@
 
     export default {
         name: 'RecoverPassword',
+        layout: 'auth',
         components: { RecoverPasswordMobile },
         data () {
             return {

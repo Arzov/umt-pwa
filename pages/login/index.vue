@@ -16,6 +16,7 @@
 
     export default {
         name: 'Login',
+        layout: 'auth',
         components: { LoginMobile },
         data () {
             return {
@@ -29,7 +30,7 @@
                     case this.event.LOGIN:
                         this.$store.dispatch('login/signIn', event.data)
                         break
-                    
+
                     case this.event.TO_RECOVER_PASSWORD:
                         this.$router.push(process.env.routes.recover_password.path)
                         break

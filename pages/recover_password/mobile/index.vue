@@ -1,25 +1,35 @@
 <template>
     <div id="page-recover-password-mobile">
-        <a-row type="flex" justify="center">
-            <a-button>
-                <nuxt-link to="/login">
-                    cancelar
-                </nuxt-link>
-            </a-button>
-        </a-row>
-        <a-row type="flex" justify="center">
-            <a-input v-model="email" placeholder="Correo electrónico" type="email" />
-            <a-button @click="recover">
-                Recuperar contraseña
-            </a-button>
-        </a-row>
+        <header-title-mobile to="/login" title="Recuperar Contraseña" />
+
+        <div>
+            <a-form :form="formRecover" @submit="recover($event)">
+                <a-row type="flex" justify="center" u-input-row>
+                    <u-input :title="decorator.username.title">
+                        <a-form-item :required="decorator.username.required" :extra="decorator.username.extra">
+                            <a-input v-decorator="decorator.username.decorator" :placeholder="decorator.username.placeholder" />
+                        </a-form-item>
+                    </u-input>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-button-row>
+                    <a-button u-button u-type="primary" html-type="submit" block>
+                        Recuperar contraseña
+                    </a-button>
+                </a-row>
+            </a-form>
+        </div>
     </div>
 </template>
 
 <script>
+    import decorator from '@/static/decorator'
+    import UInput from '@/components/uInput'
+    import HeaderTitleMobile from '@/components/headerTitleMobile'
 
     export default {
         name: 'RecoverPasswordMobile',
+        components: { UInput, HeaderTitleMobile },
         props: {
             event: {
                 required: true
@@ -27,20 +37,25 @@
         },
         data () {
             return {
-                email: ''
+                decorator,
+                formRecover: this.$form.createForm(this)
             }
         },
         methods: {
 
-            recover () {
-                const params = {
-                    type: this.event.RECOVER,
-                    data: {
-                        username: this.email
-                    }
-                }
+            recover (event) {
+                event.preventDefault()
 
-                this.$emit('emit', params)
+                this.formRecover.validateFields((error, data) => {
+                    if (!error) {
+                        const params = {
+                            type: this.event.RECOVER,
+                            data
+                        }
+
+                        this.$emit('emit', params)
+                    }
+                })
             }
         }
     }

@@ -1,0 +1,32 @@
+#component-user-request-match-card {
+    background-color: $color-grey;
+        padding: 6px 10px;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 8px;
+        align-items: center;
+    
+        .text {
+            h5 {
+                color: $color-white;
+                margin-bottom: 0;
+    
+                &:nth-child(1) {
+                    font-weight: 500;
+                    margin-bottom: -3px;
+                }
+    
+                &:nth-child(2) {
+                    font-weight: 300;
+                }
+            }
+        }
+    
+        .button-area {
+            display: flex;
+
+            button {
+                margin-left: 10px;
+            }
+        }
+}

@@ -15,6 +15,7 @@
 
     export default {
         name: 'ResetPassword',
+        layout: 'auth',
         middleware ({ store, redirect }) {
             // Si se entra a la vista sin email del usuario se devuelve a la pagina start
             if (!store.state.user.id) {

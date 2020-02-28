@@ -1,0 +1,34 @@
+#component-code-input,
+*[component-code-input] {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+
+    input {
+        padding: 6px;
+        font-size: 1.7rem;
+        max-width: 2rem;
+        text-align: center;
+        background: none;
+        border: none;
+        border-bottom: 2px solid $input-color-border;
+        color: $input-color-text;
+        outline: none;
+        caret-color: transparent;
+        transition-duration: 0.3s;
+
+        &::placeholder {
+            transition-duration: 0.3s;
+            color: $input-color-placeholder;
+        }
+
+        &:focus {
+            border-bottom: 2px solid $color-pink;
+
+            &::placeholder {
+                color: rgba($input-color-placeholder, 0.2);
+            }
+        }
+    }
+}

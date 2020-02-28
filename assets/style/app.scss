@@ -1,18 +1,34 @@
 /*
  * Globals
  */
-@import "global/dom";
-@import "global/colors";
+@import "global/sizes";
 @import "global/fonts";
-@import "global/positions";
 @import "global/layouts";
+@import "global/antd";
+@import "global/umatch_ui/index";
+@import "global/dom";
 
 /*
  * Components
  */
-@import "components/buttons";
+@import "components/header-title";
+@import "components/birthdate-input";
+@import "components/gender-input";
+@import "components/code-input";
+@import "components/footer-navbar";
+@import "components/profile-image";
+@import "components/user-search-card";
+@import "components/user-active-match-card";
+@import "components/user-request-match-card";
 
 /*
  * Pages
  */
 @import "pages/start";
+@import "pages/login";
+@import "pages/recover-password";
+@import "pages/reset-password";
+@import "pages/register";
+@import "pages/verification";
+@import "pages/home";
+@import "pages/match";

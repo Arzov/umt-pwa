@@ -1,29 +1,49 @@
 <template>
     <div id="page-login-mobile">
-        <a-row type="flex" justify="center">
-            <a-button>
-                <nuxt-link to="/start">
-                    cancelar
-                </nuxt-link>
-            </a-button>
-        </a-row>
-        <a-row type="flex" justify="center">
-            <a-input v-model="email" placeholder="Correo electrónico" type="email" />
-            <a-input-password v-model="password" placeholder="Contraseña" />
-            <a-button @click="login">
-                Iniciar Sesión
-            </a-button>
-            <a-button type="link" @click="toRecoverPassword">
-                ¿Olvidaste tu contraseña?
-            </a-button>
-        </a-row>
+        <header-title-mobile to="/start" title="Inicio de Sesión" />
+        
+        <div>
+            <a-form :form="formLogin" @submit="login($event)">
+                <a-row type="flex" justify="center" u-input-row>
+                    <u-input :title="decorator.username.title">
+                        <a-form-item :required="decorator.username.required" :extra="decorator.username.extra">
+                            <a-input v-decorator="decorator.username.decorator" :placeholder="decorator.username.placeholder" />
+                        </a-form-item>
+                    </u-input>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-input-row>
+                    <u-input :title="decorator.password.title">
+                        <a-form-item :required="decorator.password.required" :extra="decorator.password.extra">
+                            <a-input-password v-decorator="decorator.password.decorator" :placeholder="decorator.password.placeholder" />
+                        </a-form-item>
+                    </u-input>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-button-row>
+                    <a-button u-button u-type="primary" u-size="large" html-type="submit" block>
+                        Iniciar Sesión
+                    </a-button>
+                </a-row>
+            </a-form>
+
+            <a-row type="flex" justify="center" u-button-row>
+                <a u-anchor u-size="large" @click="toRecoverPassword">
+                    ¿Olvidaste tu contraseña? <span u-a>Recupérala.</span>
+                </a>
+            </a-row>
+        </div>
     </div>
 </template>
 
 <script>
+    import decorator from '@/static/decorator'
+    import UInput from '@/components/uInput'
+    import HeaderTitleMobile from '@/components/headerTitleMobile'
 
     export default {
         name: 'LoginMobile',
+        components: { UInput, HeaderTitleMobile },
         props: {
             event: {
                 required: true
@@ -31,23 +51,26 @@
         },
         data () {
             return {
-                email: '',
-                password: ''
+                decorator,
+                formLogin: this.$form.createForm(this)
             }
         },
         methods: {
+            login (event) {
+                event.preventDefault()
 
-            login () {
-                const params = {
-                    type: this.event.LOGIN,
-                    data: {
-                        username: this.email,
-                        password: this.password
+                this.formLogin.validateFields((error, data) => {
+                    if (!error) {
+                        const params = {
+                            type: this.event.LOGIN,
+                            data
+                        }
+
+                        this.$emit('emit', params)
                     }
-                }
-
-                this.$emit('emit', params)
+                })
             },
+
             toRecoverPassword () {
                 const params = {
                     type: this.event.TO_RECOVER_PASSWORD

@@ -1,7 +1,7 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <verification-mobile :userData="userData" :event="event" @emit="onEmit($event)" />
+            <verification-mobile :user-data="userData" :event="event" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>
@@ -17,6 +17,7 @@
     export default {
         name: 'Verification',
         components: { VerificationMobile },
+        layout: 'auth',
         data () {
             return {
                 event,

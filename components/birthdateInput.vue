@@ -1,26 +1,41 @@
 <template>
-    <div>
-        <a-select placeholder="Día" style="width: 100px" :defaultValue="birthdate.day" @change="setDay">
-            <a-select-option v-for="day in dayOptions" :key="'d' + day" :value="day">
-                {{ day }}
-            </a-select-option>
-        </a-select>
-        <a-select placeholder="Mes" style="width: 100px" :defaultValue="birthdate.month" @change="setMonth">
-            <a-select-option v-for="month in monthOptions" :key="'m' + month.value" :value="month.value">
-                {{ month.key }}
-            </a-select-option>
-        </a-select>
-        <a-select placeholder="Año" style="width: 100px" :defaultValue="birthdate.year" @change="setYear">
-            <a-select-option v-for="year in yearOptions" :key="'y' + year" :value="year">
-                {{ year }}
-            </a-select-option>
-        </a-select>
+    <div id="component-birthdate-input" component-birthdate-input>
+        <label>Fecha de nacimiento</label>
+
+        <div class="row">
+            <u-select>
+                <a-select :dropdown-match-select-width="false" placeholder="Día" @change="setDay">
+                    <a-select-option v-for="day in dayOptions" :key="'d' + day" :value="day">
+                        {{ day }}
+                    </a-select-option>
+                </a-select>
+            </u-select>
+            
+            <u-select>
+                <a-select :dropdown-match-select-width="false" placeholder="Mes" @change="setMonth">
+                    <a-select-option v-for="month in monthOptions" :key="'m' + month.value" :value="month.value">
+                        {{ month.key }}
+                    </a-select-option>
+                </a-select>
+            </u-select>
+
+            <u-select>
+                <a-select :dropdown-match-select-width="false" placeholder="Año" @change="setYear">
+                    <a-select-option v-for="year in yearOptions" :key="'y' + year" :value="year">
+                        {{ year }}
+                    </a-select-option>
+                </a-select>
+            </u-select>
+        </div>
     </div>
 </template>
 
 <script>
+    import USelect from '@/components/uSelect'
+
     export default {
         name: 'BirthdateInput',
+        components: { USelect },
         props: ['value'],
         data () {
             return {
@@ -61,17 +76,21 @@
         methods: {
             setDay (day) {
                 this.birthdate.day = day
-                this.$emit('input', this.birthdate)
+                this.triggerChange({ day })
             },
 
             setMonth (month) {
                 this.birthdate.month = month
-                this.$emit('input', this.birthdate)
+                this.triggerChange({ month })
             },
 
             setYear (year) {
                 this.birthdate.year = year
-                this.$emit('input', this.birthdate)
+                this.triggerChange({ year })
+            },
+
+            triggerChange (changedValue) {
+                this.$emit('change', this.birthdate)
             }
         }
     }

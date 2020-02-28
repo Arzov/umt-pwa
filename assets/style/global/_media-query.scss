@@ -1,0 +1,37 @@
+
+$mq-mobile-max-width: 690px;
+$mq-tablet-min-width: 691px;
+$mq-tablet-max-width: 1023px;
+$mq-desktop-min-width: 1024px;
+
+$mq-font-size-mobile: 1rem;
+$mq-font-size-tablet: 1rem;
+$mq-font-size-desktop: 1rem;
+
+@mixin for-size($size) {
+    @if $size == mobile {
+        @media (max-width: $mq-mobile-max-width) { @content; }
+    } @else if $size == tablet {
+        @media (min-width: $mq-tablet-min-width) { @content; }
+    } @else if $size == desktop {
+        @media (min-width: $mq-desktop-min-width) { @content; }
+    }
+}
+
+@include for-size(mobile) {
+    #__layout > div:nth-child(1) {
+        font-size: $mq-font-size-mobile;
+    }
+}
+
+@include for-size(tablet) {
+    #__layout > div:nth-child(1) {
+        font-size: $mq-font-size-tablet;
+    }
+}
+
+@include for-size(desktop) {
+    #__layout > div:nth-child(1) {
+        font-size: $mq-font-size-desktop;
+    }
+}

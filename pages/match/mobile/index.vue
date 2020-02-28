@@ -1,88 +1,36 @@
 <template>
     <div id="page-match-mobile">
-        <div>
-            <a-row type="flex" justify="center">
-                ENCUENTROS
-                <a-button>
-                    <nuxt-link to="/home">
-                        cancelar
-                    </nuxt-link>
-                </a-button>
-            </a-row>
-            <a-tabs default-active-key="1">
-                <a-tab-pane key="1" tab="ACTIVOS">
-                    <a-row v-if="activeMatches.length" type="flex" justify="center">
-                        <ul>
-                            <li v-for="(match, idx) in activeMatches" :key="idx">
-                                <div @click="toChat(match, idx)">
-                                    <a-avatar :src="match.adversaryPicture" size="large" />
-                                    {{ match.adversaryName }}
-                                </div>
-                            </li>
-                        </ul>
-                    </a-row>
-                    <a-row v-else type="flex" justify="center">
-                        No hay solicitudes
-                    </a-row>
-                </a-tab-pane>
-                <a-tab-pane key="2" tab="SOLICITUDES" force-render>
-                    <a-row v-if="requestMatches.length" type="flex" justify="center">
-                        <ul>
-                            <li v-for="(match, idx) in requestMatches" :key="idx">
-                                <div v-if="match.isCreator">
-                                    <div v-if="match.matchStatus === 'P'">
-                                        <a-avatar :src="match.adversaryPicture" size="large" />
-                                        {{ match.adversaryName }}
-                                        Solicitud enviada
-                                        <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'C')">
-                                            Cancelar
-                                        </a-button>
-                                    </div>
-                                    <div v-else-if="match.matchStatus === 'D'">
-                                        <a-avatar :src="match.adversaryPicture" size="large" />
-                                        {{ match.adversaryName }}
-                                        Solicitud rechazada
-                                        <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'C')">
-                                            Cancelar
-                                        </a-button>
-                                    </div>
-                                </div>
-                                <div v-else>
-                                    <div v-if="match.matchStatus === 'P'">
-                                        <a-avatar :src="match.adversaryPicture" size="large" />
-                                        {{ match.adversaryName }}
-                                        Aceptar solicitud
-                                        <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'D')">
-                                            Rechazar
-                                        </a-button>
-                                        <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'A')">
-                                            Aceptar
-                                        </a-button>
-                                    </div>
-                                    <div v-else-if="match.matchStatus === 'D'">
-                                        <a-avatar :src="match.adversaryPicture" size="large" />
-                                        {{ match.adversaryName }}
-                                        Solicitud rechazada
-                                        <a-button @click="updateMatch(match.hashKey, match.rangeKey, match.matchId, 'C')">
-                                            Cancelar
-                                        </a-button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </a-row>
-                    <a-row v-else type="flex" justify="center">
-                        No hay solicitudes
-                    </a-row>
-                </a-tab-pane>
-            </a-tabs>
-        </div>
+        <u-tabs :tabs="['ACTIVOS', 'SOLICITUDES']">
+            <div>
+                <div v-if="activeMatches.length">
+                    <user-active-match-card v-for="(user, index) in activeMatches" :key="index" :user-data="user" :index="index" @click="toChat(user, index)" />
+                </div>
+
+                <a-row v-else type="flex" justify="center">
+                    <h6>No hay solicitudes</h6>
+                </a-row>
+            </div>
+
+            <div>
+                <div v-if="requestMatches.length">
+                    <user-request-match-card v-for="(user, index) in requestMatches" :key="index" :user-data="user" :index="index" @submit="updateMatch" />
+                </div>
+
+                <a-row v-else type="flex" justify="center">
+                    <h6>No hay solicitudes</h6>
+                </a-row>
+            </div>
+        </u-tabs>
     </div>
 </template>
 
 <script>
+    import UserActiveMatchCard from '@/components/userActiveMatchCard'
+    import UserRequestMatchCard from '@/components/userRequestMatchCard'
+
     export default {
         name: 'MatchMobile',
+        components: { UserActiveMatchCard, UserRequestMatchCard },
         props: {
             event: {
                 required: true
@@ -110,7 +58,8 @@
              * Metodo para actualizar el estado del match.
              * @return {Object} Evento de tipo UPDATE_MATCH.
              */
-            updateMatch (hashKey, rangeKey, matchId, userStatus) {
+            updateMatch ({ hashKey, rangeKey, matchId, userStatus }) {
+                console.log(userStatus)
                 const params = {
                     type: this.event.UPDATE_MATCH,
                     hashKey,

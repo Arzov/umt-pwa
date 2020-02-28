@@ -1,77 +1,57 @@
 <template>
     <div id="page-home-mobile">
+        <div class="profile">
+            <div class="text">
+                <h3>¡Hola! {{ userData.firstName }}</h3>
+                <h3>Busca a tus rivales.</h3>
+            </div>
+
+            <profile-image type="border-cold bkg-black" :src="userData.picture" to="/profile" />
+        </div>
+
         <a-row type="flex" justify="center">
-            <b>INICIO</b>
-            <a-button>
-                <nuxt-link to="/profile">
-                    perfil
-                </nuxt-link>
-            </a-button>
+            <h5 class="title-rivals">
+                RIVALES DISPONIBLES
+            </h5>
         </a-row>
-        <a-row type="flex" justify="center">
-            RIVALES DISPONIBLES
+
+        <div v-if="usersFound.length" class="rivals">
+            <user-search-card v-for="(user, index) in usersFound" :key="user.hashKey" :user-data="user" :index="index" @submit="addMatch($event)" />
+        </div>
+
+        <a-row v-else class="rivals">
+            ¡No hay usuarios cercanos! Inténtalo más tarde.
         </a-row>
-        <a-row v-if="usersFound.length" type="flex" justify="center">
-            <a-list class="demo-loadmore-list" item-layout="horizontal" :data-source="usersFound">
-                <a-list-item slot="renderItem" slot-scope="item, index">
-                    <a-list-item-meta
-                        :key="index"
-                        :description="'A ' + item.distance + ' kilómetros de distancia'"
-                    >
-                        <a slot="title" href="https://vue.ant.design/">{{ item.firstName + ' ' + item.age }}</a>
-                        <a-avatar
-                            slot="avatar"
-                            :src="item.picture"
-                        />
-                    </a-list-item-meta>
-                    <a-button @click="addMatch(item.hashKey, item.firstName, item.picture, index)">
-                        aceptar
-                    </a-button>
-                </a-list-item>
-            </a-list>
-            <a-button @click="searchMatch">
+
+        <a-row type="flex" justify="center" class="button-row">
+            <a-button u-button u-type="primary" block @click="searchMatch">
                 Seguir Buscando
             </a-button>
         </a-row>
-        <a-row v-else type="flex" justify="center">
-            ¡No hay usuarios cercanos! Inténtalo más tarde.
-            <a-button @click="searchMatch">
-                Buscar
-            </a-button>
-        </a-row>
-        <a-breadcrumb>
-            <a-breadcrumb-item>
-                <nuxt-link to="/home">
-                    Home
-                </nuxt-link>
-            </a-breadcrumb-item>
-            <a-breadcrumb-item>
-                <nuxt-link to="/match">
-                    Match
-                </nuxt-link>
-            </a-breadcrumb-item>
-            <a-breadcrumb-item>
-                <nuxt-link to="/map">
-                    Map
-                </nuxt-link>
-            </a-breadcrumb-item>
-        </a-breadcrumb>
+        
         <Geolocation />
     </div>
 </template>
 
 <script>
+    import ProfileImage from '@/components/profileImage'
+    import UserSearchCard from '@/components/userSearchCard'
     import Geolocation from '@/components/geoloc'
 
     export default {
         name: 'HomeMobile',
-        components: { Geolocation },
+        components: { ProfileImage, UserSearchCard, Geolocation },
         props: {
             event: {
                 required: true
             },
             usersFound: {
                 required: true
+            }
+        },
+        data () {
+            return {
+                userData: this.$store.getters['user/userData']
             }
         },
         methods: {
@@ -89,7 +69,7 @@
              * Metodo que envia solicitud de match al rival.
              * @return {Object} Evento de tipo ADD_MATCH.
              */
-            addMatch (rangeKey, firstName, picture, index) {
+            addMatch ({ rangeKey, firstName, picture, index }) {
                 const params = {
                     type: this.event.ADD_MATCH,
                     index,
