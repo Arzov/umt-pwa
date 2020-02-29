@@ -1,18 +1,9 @@
 <template>
     <div id="page-map-mobile">
-        <a-row type="flex" justify="center">
-            <a-button>
-                <nuxt-link to="/home">
-                    cancelar
-                </nuxt-link>
-            </a-button>
-        </a-row>
-        <a-row>
-            <div id="map" class="google-map" />
-            <a-button @click="toCenter">
-                centrar
-            </a-button>
-        </a-row>
+        <div id="map" class="google-map" />
+        <a-button class="center-button" type="primary" @click="toCenter">
+            centrar
+        </a-button>
     </div>
 </template>
 

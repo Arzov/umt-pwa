@@ -5,9 +5,12 @@
                 <img src="./../assets/icons/arrow-left.svg" alt="" class="back-icon">
             </nuxt-link>
         </div>
+        <div v-else class="shadow-icon" />
 
         <a-row type="flex" justify="center" align="middle">
-            <h6>{{ title }}</h6>
+            <div>
+                <h6>{{ title }}</h6>
+            </div>
         </a-row>
 
         <div class="border-bottom" />

@@ -55,7 +55,7 @@
         },
         async mounted () {
             this.$store.commit('navigation/setTitle', 'Encuentros')
-            this.$store.commit('navigation/setUrl', '/home')
+            this.$store.commit('navigation/setUrl', '')
             this.$store.dispatch('match/getMatches')
             this.$store.dispatch('match/onUpdateMatch')
         },

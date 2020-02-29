@@ -194,7 +194,7 @@
 /*
  * Positions
  */
-#layout-auth, #layout-home, #layout-home > div:nth-child(1), #layout-default, #layout-default > div:nth-child(1), *[u-select] .ant-select > div > div, #component-u-tabs .u-tabs-content .u-tabs-content-position, #page-start-mobile, #page-login-mobile, #page-recover-password-mobile, #page-reset-password-mobile, #page-register-mobile, #page-verification-mobile, #page-home-mobile, #page-match-mobile, #page-chat-mobile {
+#layout-auth, #layout-home, #layout-home > div:nth-child(1), #layout-default, #layout-default > div:nth-child(1), *[u-select] .ant-select > div > div, #component-u-tabs .u-tabs-content .u-tabs-content-position, #page-start-mobile, #page-login-mobile, #page-recover-password-mobile, #page-reset-password-mobile, #page-register-mobile, #page-verification-mobile, #page-home-mobile, #page-match-mobile, #page-chat-mobile, #page-map-mobile {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -816,6 +816,10 @@ span {
   width: 3.5em;
 }
 
+#component-header-title-mobile .shadow-icon {
+  height: 3.5em;
+}
+
 #component-header-title-mobile > div:nth-child(2) {
   position: absolute;
   top: 0;
@@ -826,7 +830,20 @@ span {
   text-transform: uppercase;
 }
 
-#component-header-title-mobile > div:nth-child(2) * {
+#component-header-title-mobile > div:nth-child(2) > div {
+  height: 3.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#component-header-title-mobile > div:nth-child(2) h6 {
   color: white;
   font-weight: 700 !important;
 }
@@ -1527,5 +1544,22 @@ span {
   overflow-x: hidden;
   overflow-y: auto;
   padding: 0 5px;
+}
+
+#page-map-mobile {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr;
+      grid-template-rows: 1fr;
+}
+
+#page-map-mobile .google-map {
+  height: unset;
+}
+
+#page-map-mobile .center-button {
+  position: fixed;
+  bottom: 120px;
+  right: 40px;
 }
 /*# sourceMappingURL=app.css.map */
