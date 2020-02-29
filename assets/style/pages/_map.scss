@@ -1,0 +1,17 @@
+#page-map {
+    &-mobile {
+        @extend %absolute-full;
+        display: grid;
+        grid-template-rows: 1fr;
+
+        .google-map {
+            height: unset;
+        }
+
+        .center-button {
+            position: fixed;
+            bottom: 120px;
+            right: 40px;
+        }
+    }
+}

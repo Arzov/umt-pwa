@@ -45,6 +45,10 @@
         },
         async beforeMount () {
             this.$store.dispatch('map/fetchCourts')
+        },
+        mounted () {
+            this.$store.commit('navigation/setTitle', 'Canchas')
+            this.$store.commit('navigation/setUrl', '')
         }
     }
 </script>
