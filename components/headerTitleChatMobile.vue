@@ -10,7 +10,7 @@
 
         <div class="close-button-wrapper">
             <nuxt-link to="/match">
-                <a-icon type="close" />
+                <img src="./../assets/icons/cancel-02.svg">
             </nuxt-link>
         </div>
 
