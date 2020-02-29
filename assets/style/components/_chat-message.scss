@@ -1,0 +1,57 @@
+#component-chat-message {
+    .message-wrapper {
+        margin: 5px;
+        border-radius: 10px;
+        max-width: 80%;
+        min-width: 40%;
+
+        &[type='hot'] {
+            float: right;
+            margin-right: 15px;
+            background: linear-gradient(155deg, $color-pink, $color-purple 50%, #4F32D3 80%);
+        }
+
+        &[type='cold'] {
+            float: left;
+            margin-left: 15px;
+            background: linear-gradient(210deg, $color-cian, $color-blue 55%, #0271C4 80%);
+        }
+
+        .text-wrapper {
+            padding: 5px 10px 10px 10px;
+
+            p {
+                margin: 0;
+            }
+
+            h6 {
+                margin-bottom: -2px;
+                font-weight: 600;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                max-width: 200px;
+            }
+        }
+    }
+
+    .footer {
+        position: relative;
+
+        img {
+            height: 20px;
+            position: absolute;
+            bottom: 0;
+
+            &.hot {
+                right: 0;
+                transform: translateX(7px);
+            }
+
+            &.cold {
+                left: 0;
+                transform: translateX(-7px);
+            }
+        }
+    }
+}

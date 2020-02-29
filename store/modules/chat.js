@@ -16,6 +16,9 @@ const getters = {
 
 const actions = {
   getMessages (context) {
+    // Reset state
+    context.commit('resetState')
+
     // Usar API de Umatch
     this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
@@ -87,6 +90,10 @@ const mutations = {
         // eslint-disable-next-line no-unused-vars
         for (const key in params)
             state[key] = params[key]
+    },
+    resetState (state) {
+      state.messagesList = []
+      state.messageNextToken = null
     }
 }
 

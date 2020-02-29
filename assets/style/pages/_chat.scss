@@ -1,0 +1,15 @@
+#page-chat {
+    &-mobile {
+        @extend %absolute-full;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+
+        .chat-content {
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 0 5px;
+        }
+    }
+}
