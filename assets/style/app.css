@@ -1120,6 +1120,64 @@ span {
   margin-left: 10px;
 }
 
+#component-chat-message .message-wrapper {
+  margin: 5px;
+  border-radius: 10px;
+  max-width: 80%;
+  min-width: 40%;
+}
+
+#component-chat-message .message-wrapper[type='hot'] {
+  float: right;
+  margin-right: 15px;
+  background: linear-gradient(155deg, #ad64e6, #6457e3 50%, #4F32D3 80%);
+}
+
+#component-chat-message .message-wrapper[type='cold'] {
+  float: left;
+  margin-left: 15px;
+  background: linear-gradient(210deg, #0cecf2, #0271c4 55%, #0271C4 80%);
+}
+
+#component-chat-message .message-wrapper .text-wrapper {
+  padding: 5px 10px 10px 10px;
+}
+
+#component-chat-message .message-wrapper .text-wrapper p {
+  margin: 0;
+}
+
+#component-chat-message .message-wrapper .text-wrapper h6 {
+  margin-bottom: -2px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+#component-chat-message .footer {
+  position: relative;
+}
+
+#component-chat-message .footer img {
+  height: 20px;
+  position: absolute;
+  bottom: 0;
+}
+
+#component-chat-message .footer img.hot {
+  right: 0;
+  -webkit-transform: translateX(7px);
+          transform: translateX(7px);
+}
+
+#component-chat-message .footer img.cold {
+  left: 0;
+  -webkit-transform: translateX(-7px);
+          transform: translateX(-7px);
+}
+
 #component-header-title-chat-mobile {
   font-size: 1rem;
   position: relative;
@@ -1202,6 +1260,15 @@ span {
   width: 2.5rem;
   height: 2.5rem;
   display: inline-block;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+#component-chat-message-input .send-icon-wrapper:active {
+  opacity: 0.6;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
 }
 
 #component-chat-message-input textarea {
@@ -1421,6 +1488,7 @@ span {
       -ms-flex-direction: column;
           flex-direction: column;
   overflow: auto;
+  color: white;
 }
 
 #page-home-mobile .rivals > * {
@@ -1458,5 +1526,6 @@ span {
           flex-direction: column;
   overflow-x: hidden;
   overflow-y: auto;
+  padding: 0 5px;
 }
 /*# sourceMappingURL=app.css.map */
