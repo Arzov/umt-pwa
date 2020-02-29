@@ -58,20 +58,23 @@
         },
         computed: {
             messagesList () {
-                return this.$store.getters['chat/messagesList'].map((msg, idx) => {
+                let messages = this.$store.getters['chat/messagesList'].map((msg, idx) => {
                     return {
                         hashKey: msg.hashKey,
                         rangeKey: moment(msg.rangeKey.split('#')[0]).calendar(),
+                        key: msg.rangeKey,
                         author: msg.author,
                         authorName: msg.authorName,
                         content: msg.content
                     }
                 })
+
+                return this.removeDups(messages)
             }
         },
         async mounted () {
-            this.$store.dispatch('chat/getMessages')
-            this.$store.dispatch('chat/onAddMessage')
+            await this.$store.dispatch('chat/getMessages')
+            await this.$store.dispatch('chat/onAddMessage')
         },
         methods: {
             /**
@@ -86,6 +89,25 @@
                         }
                         break
                 }
+            },
+
+            /**
+             * Elimina mensajes duplicados.
+             * @param {Array} messages Arreglo de mensajes que llegan desde el servidor.
+             */
+            removeDups (messages) {
+                let unique = []
+
+                messages.forEach(function (i) {
+                    let exists = unique.findIndex((msg) => {
+                        return msg.key === i.key
+                    })
+
+                    if (exists === -1)
+                        unique.push(i)
+                })
+
+                return unique
             }
         }
     }

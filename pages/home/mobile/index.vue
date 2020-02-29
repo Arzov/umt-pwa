@@ -19,8 +19,8 @@
             <user-search-card v-for="(user, index) in usersFound" :key="user.hashKey" :user-data="user" :index="index" @submit="addMatch($event)" />
         </div>
 
-        <a-row v-else class="rivals">
-            ¡No hay usuarios cercanos! Inténtalo más tarde.
+        <a-row v-else type="flex" justify="center" align="middle" class="rivals">
+            <h5>¡No hay usuarios cercanos! Inténtalo más tarde.</h5>
         </a-row>
 
         <a-row type="flex" justify="center" class="button-row">
