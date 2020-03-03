@@ -4,6 +4,8 @@
             <nuxt />
             <footer-navbar />
         </mq-layout>
+
+        <u-spin />
     </div>
 </template>
 
