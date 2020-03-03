@@ -12,7 +12,7 @@ export default {
         title: process.env.npm_package_name || '',
         meta: [
             { charset: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+            { name: 'viewport', content: 'user-scalable=no, width=device-width, initial-scale=1' },
             { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
         ],
         link: [
@@ -24,12 +24,27 @@ export default {
                 src: 'https://maps.googleapis.com/maps/api/js?key=' + gcp.GCP_API_KEY,
                 body: true
             }
-        ]
+        ],
+        htmlAttrs: {
+            lang: 'es'
+        }
     },
+
+    manifest: {
+        lang: 'es',
+        name: 'Umatch',
+        short_name: 'Umatch',
+        start_url: '/',
+        orientation: 'portrait-primary',
+        background_color: '#151515',
+        theme_color: '#151515',
+        display: 'fullscreen'
+    },
+
     /*
     ** Customize the progress-bar color
     */
-    loading: { color: '#fff' },
+    loading: false,
     /*
     ** Global CSS
     */
@@ -108,5 +123,9 @@ export default {
                 })
             }
         }
+    },
+
+    generate: {
+        subFolders: false
     }
 }
