@@ -13,7 +13,6 @@ export default {
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'user-scalable=no, width=device-width, initial-scale=1' },
-            { name: 'theme-color', content: '#151515' },
             { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
         ],
         link: [
@@ -30,6 +29,7 @@ export default {
             lang: 'es'
         }
     },
+
     manifest: {
         lang: 'es',
         name: 'Umatch',
@@ -37,51 +37,10 @@ export default {
         start_url: '/',
         orientation: 'portrait-primary',
         background_color: '#151515',
-        theme_color: '#6457e3',
-        display: 'fullscreen',
-        icons: [
-            {
-            'src': '/static/icons/icon-72x72.png',
-            'sizes': '72x72',
-            'type': 'image/png'
-            },
-            {
-            'src': '/static/icons/icon-96x96.png',
-            'sizes': '96x96',
-            'type': 'image/png'
-            },
-            {
-            'src': '/static/icons/icon-128x128.png',
-            'sizes': '128x128',
-            'type': 'image/png'
-            },
-            {
-            'src': '/static/icons/icon-144x144.png',
-            'sizes': '144x144',
-            'type': 'image/png'
-            },
-            {
-            'src': '/static/icons/icon-152x152.png',
-            'sizes': '152x152',
-            'type': 'image/png'
-            },
-            {
-            'src': '/static/icons/icon-192x192.png',
-            'sizes': '192x192',
-            'type': 'image/png'
-            },
-            {
-            'src': '/static/icons/icon-384x384.png',
-            'sizes': '384x384',
-            'type': 'image/png'
-            },
-            {
-            'src': '/static/icons/icon-512x512.png',
-            'sizes': '512x512',
-            'type': 'image/png'
-            }
-        ]
+        theme_color: '#151515',
+        display: 'fullscreen'
     },
+
     /*
     ** Customize the progress-bar color
     */
@@ -164,5 +123,9 @@ export default {
                 })
             }
         }
+    },
+
+    generate: {
+        subFolders: false
     }
 }
