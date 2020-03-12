@@ -107,6 +107,12 @@
         }
     }
 
+    &:focus {
+        span {
+            position: unset;
+        }
+    }
+
     span {
         font-weight: 700;
 

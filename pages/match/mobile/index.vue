@@ -7,7 +7,7 @@
                 </div>
 
                 <a-row v-else type="flex" justify="center">
-                    <h6>No hay solicitudes</h6>
+                    <h6>No hay encuentros activos</h6>
                 </a-row>
             </div>
 
@@ -59,7 +59,6 @@
              * @return {Object} Evento de tipo UPDATE_MATCH.
              */
             updateMatch ({ hashKey, rangeKey, matchId, userStatus }) {
-                console.log(userStatus)
                 const params = {
                     type: this.event.UPDATE_MATCH,
                     hashKey,

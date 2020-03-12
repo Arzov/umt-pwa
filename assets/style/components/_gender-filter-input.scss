@@ -1,0 +1,15 @@
+#component-gender-filter-input {
+    position: relative;
+    width: 100%;
+
+    & > label {
+        @extend %input-label;
+    }
+
+    & .ant-radio-group {
+        line-height: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+        grid-gap: 6px;
+    }
+}

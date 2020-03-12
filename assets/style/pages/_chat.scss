@@ -2,14 +2,22 @@
     &-mobile {
         @extend %absolute-full;
         display: grid;
-        grid-template-rows: auto 1fr auto;
+        grid-template-rows: auto 1fr;
 
-        .chat-content {
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            overflow-y: auto;
-            padding: 0 5px;
+        .background-chat {
+            display: grid;
+            grid-template-rows: 1fr auto;
+            background: url("./../images/SVG/chat_background.svg") repeat border-box border-box;
+            background-size: 200px 200px;
+
+            .chat-content {
+                display: flex;
+                flex-direction: column;
+                overflow-x: hidden;
+                overflow-y: auto;
+                padding: 0 5px;
+                justify-content: flex-end;
+            }
         }
     }
 }

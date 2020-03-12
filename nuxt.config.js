@@ -122,6 +122,15 @@ export default {
                     exclude: /(node_modules)/
                 })
             }
+        },
+
+        postcss: {
+            preset: {
+              autoprefixer: {
+                grid: 'autoplace',
+                flexbox: true
+              }
+            }
         }
     },
 

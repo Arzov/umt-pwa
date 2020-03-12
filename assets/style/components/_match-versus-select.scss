@@ -1,0 +1,16 @@
+#component-match-versus-select,
+*[component-match-versus-select] {
+    position: relative;
+    width: 100%;
+
+    & > label {
+        @extend %input-label;
+    }
+
+    & .ant-radio-group {
+        line-height: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+        grid-gap: 6px;
+    }
+}

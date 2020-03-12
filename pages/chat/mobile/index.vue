@@ -2,11 +2,13 @@
     <div id="page-chat-mobile">
         <header-title-chat-mobile :user-data="matchInfo" />
 
-        <div class="chat-content">
-            <chat-message v-for="(msg, idx) in messagesList" :key="idx" :msg="msg" />
-        </div>
+        <div class="background-chat">
+            <div class="chat-content">
+                <chat-message v-for="(msg, idx) in messagesList" :key="idx" :msg="msg" />
+            </div>
 
-        <chat-message-input @send="addMessage" />
+            <chat-message-input @send="addMessage" />
+        </div>
     </div>
 </template>
 

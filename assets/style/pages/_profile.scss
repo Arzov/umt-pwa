@@ -1,0 +1,25 @@
+#page-profile {
+    &-mobile {
+
+        .profile-row {
+            margin-bottom: 50px;
+        }
+
+        .user-name {
+            font-weight: 600;
+            margin: 0 10px;
+        }
+
+        .content {
+            padding: $padding-default-page;
+        }
+
+        .save-button {
+            margin-top: 20px;
+        }
+
+        .close-button {
+            margin-top: 20px;
+        }
+    }
+}

@@ -10,6 +10,7 @@ import profile from './modules/profile'
 import recoverPassword from './modules/recover-password'
 import resetPassword from './modules/reset-password'
 import navigation from './modules/navigation'
+import spin from './modules/spin'
 
 const store = () => {
   return new Vuex.Store({
@@ -24,7 +25,8 @@ const store = () => {
       profile,
       recoverPassword,
       resetPassword,
-      navigation
+      navigation,
+      spin
     }
   })
 }
