@@ -4,8 +4,8 @@
 @import "global/sizes";
 @import "global/fonts";
 @import "global/layouts";
-@import "global/antd";
 @import "global/umatch_ui/index";
+@import "global/antd";
 @import "global/dom";
 
 /*
@@ -23,6 +23,9 @@
 @import "components/chat-message";
 @import "components/header-title-chat";
 @import "components/chat-message-input";
+@import "components/match-versus-select";
+@import "components/gender-filter-input";
+@import "components/age-filter-input";
 
 /*
  * Pages
@@ -37,3 +40,4 @@
 @import "pages/match";
 @import "pages/chat";
 @import "pages/map";
+@import "pages/profile";

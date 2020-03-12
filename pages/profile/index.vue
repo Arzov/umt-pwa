@@ -1,7 +1,7 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <profile-mobile :userData="userData" :event="event" @emit="onEmit($event)" />
+            <profile-mobile :user-data="userData" :event="event" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>
@@ -20,6 +20,7 @@
 
     export default {
         name: 'Profile',
+        layout: 'empty',
         components: { ProfileMobile },
         data () {
             return {

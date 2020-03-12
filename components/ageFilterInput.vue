@@ -1,12 +1,20 @@
 <template>
-    <div>
-        <a-slider range :default-value="value" :min="ageRange.min" :max="ageRange.max" @change="setAge" />
-    </div>
+    <u-slider title="rango de edad" :range="value">
+        <a-slider
+            range
+            :default-value="value"
+            :min="ageRange.min"
+            :max="ageRange.max"
+            @change="setAge"
+        />
+    </u-slider>
 </template>
 
 <script>
+    import USlider from './uSlider'
     export default {
         name: 'AgeFilterInput',
+        components: { USlider },
         props: ['value'],
         data () {
             return {

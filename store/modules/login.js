@@ -6,13 +6,12 @@ const mutations = {
 
 const actions = {
   signIn (context, data) {
+    context.dispatch('setSpin', true, { root: true })
+
     if (data.username && data.password) {
       this.$AWS.Auth.signIn(data)
       .then((user) => {
-        // eslint-disable-next-line no-console
         console.log(user)
-
-        // eslint-disable-next-line no-unused-expressions
         this.$router.push(process.env.routes.home.path)
       })
       .catch((err) => {
@@ -29,7 +28,7 @@ const actions = {
 
           // Usuario sin verificar
           case 'UserNotConfirmedException':
-              console.log(err.message)
+              console.log(err.message, this.$router)
               this.$router.push(process.env.routes.verification.path)
               break
           

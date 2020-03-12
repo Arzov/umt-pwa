@@ -1,5 +1,5 @@
 #component-chat-message-input {
-    padding: $padding-default-page;
+    padding: 10px;
 
     .send-icon-wrapper {
         width: 2.5rem;
@@ -26,7 +26,6 @@
         color: $color-white;
         font-family: $font-umatch;
         font-size: $label-size;
-        background-color: rgba($color-white, 0.1);
         resize: none;
         padding: 6px 10px;
         border-radius: 2px;
@@ -40,7 +39,7 @@
         background-color: $color-grey;
         display: grid;
         grid-template-columns: 1fr auto;
-        gap: 10px;
+        gap: 5px 10px;
         padding: 10px;
     }
 }

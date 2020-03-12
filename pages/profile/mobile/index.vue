@@ -1,40 +1,61 @@
 <template>
     <div id="page-profile-mobile">
-        <a-button>
-            <nuxt-link to="/home">
-                cancelar
-            </nuxt-link>
-        </a-button>
-        <a-avatar slot="avatar" :src="this.userData.picture" />
-        {{ this.userData.firstName }}
-        <birthdate-input v-model="birthdate" />
-        <gender-input v-model="gender" />
-        <match-filter-input v-model="matchFilter" />
-        <gender-filter-input v-model="genderFilter" />
-        <age-filter-input v-model="ageFilter" />
-        <a-row type="flex" justify="center">
-            <a-button @click="saveProfile">
-                Guardar
-            </a-button>
-        </a-row>
-        <a-row type="flex" justify="center">
-            <a-button type="link" @click="logout">
-                Cerrar sesión
-            </a-button>
-        </a-row>
+        <header-title-mobile to="/home" title="Perfil" />
+
+        <div class="content">
+            <a-row type="flex" justify="start" align="middle" class="profile-row">
+                <profile-image :src="userData.picture" type="border-cold bkg-black" />
+                <h3 class="user-name">
+                    {{ userData.firstName }} {{ userData.lastName }}
+                </h3>
+            </a-row>
+
+            <a-row type="flex" justify="center" u-input-row>
+                <birthdate-input :value="birthdate" />
+            </a-row>
+
+            <a-row type="flex" justify="center" u-input-row>
+                <gender-input :value="gender" />
+            </a-row>
+
+            <a-row type="flex" justify="center" u-input-row>
+                <match-versus-select :value="matchFilter" />
+            </a-row>
+
+            <a-row type="flex" justify="center" u-input-row>
+                <gender-filter-input :value="genderFilter" />
+            </a-row>
+
+            <a-row type="flex" justify="center" u-input-row>
+                <age-filter-input v-model="ageFilter" />
+            </a-row>
+
+            <a-row type="flex" justify="center" class="save-button">
+                <a-button u-button u-type="primary" block @click="saveProfile">
+                    Guardar configuración
+                </a-button>
+            </a-row>
+
+            <a-row type="flex" justify="center" class="close-button">
+                <a u-anchor @click="logout">
+                    <span u-a>Cerrar sesión</span>
+                </a>
+            </a-row>
+        </div>
     </div>
 </template>
 
 <script>
+    import ProfileImage from '@/components/profileImage'
     import BirthdateInput from '@/components/birthdateInput'
     import GenderInput from '@/components/genderInput'
     import GenderFilterInput from '@/components/genderFilterInput'
-    import MatchFilterInput from '@/components/matchFilterInput'
+    import MatchVersusSelect from '@/components/matchVersusSelect'
     import AgeFilterInput from '@/components/ageFilterInput'
 
     export default {
         name: 'ProfileMobile',
-        components: { BirthdateInput, GenderInput, GenderFilterInput, MatchFilterInput, AgeFilterInput },
+        components: { ProfileImage, BirthdateInput, GenderInput, GenderFilterInput, MatchVersusSelect, AgeFilterInput },
         props: {
             event: {
                 required: true
@@ -87,7 +108,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

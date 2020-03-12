@@ -82,21 +82,10 @@
             }
         },
         mounted () {
-            this.params = {
-                hashKey: this.userData.hashKey,
-                rangeKey: this.userData.rangeKey,
-                matchId: this.userData.matchId,
-                userStatus: undefined
-            }
-
-            if (this.userData.isCreator) {
-                this.showCancel = true
-            } else if (this.userData.matchStatus === 'P') {
-                this.showAccept = true
-                this.showRefuse = true
-            } else if (this.userData.matchStatus === 'D') {
-                this.showCancel = true
-            }
+            this.updateMatchStatus()
+        },
+        updated () {
+            this.updateMatchStatus()
         },
         methods: {
             onClick (event) {
@@ -106,6 +95,24 @@
                 })
 
                 event.stopPropagation()
+            },
+
+            updateMatchStatus () {
+                this.params = {
+                    hashKey: this.userData.hashKey,
+                    rangeKey: this.userData.rangeKey,
+                    matchId: this.userData.matchId,
+                    userStatus: undefined
+                }
+
+                if (this.userData.isCreator) {
+                    this.showCancel = true
+                } else if (this.userData.matchStatus === 'P') {
+                    this.showAccept = true
+                    this.showRefuse = true
+                } else if (this.userData.matchStatus === 'D') {
+                    this.showCancel = true
+                }
             }
         }
     }
