@@ -1,0 +1,17 @@
+{
+  "name": "arv-umt-add-match",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0"
+  }
+}
