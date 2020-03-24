@@ -97,3 +97,4 @@ dist
 .awspublish
 deploy_dev.sh
 deploy_prd.sh
+.vscode
