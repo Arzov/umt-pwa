@@ -50,14 +50,15 @@
 
                     // Error en la peticion de la ubicacion
                 }, function (error) {
-                    switch (error.code) {
-                        case error.PERMISSION_DENIED:
-                            // Parametros para dispatch
-                            const params = {
-                                toggle: true,
-                                allow: false
-                            }
+                    // Parametros para dispatch
+                    const params = {
+                        toggle: true,
+                        allow: false
+                    }
 
+                    switch (error.code) {
+                        // Permiso denegado
+                        case error.PERMISSION_DENIED:
                             // Mostrar popup para que el usuario configure la ubicacion
                             vue.$store.dispatch('geoloc/update', params)
                             break

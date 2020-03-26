@@ -5,7 +5,7 @@
         </a-row>
 
         <a-row type="flex" justify="center">
-            <a-button u-button u-type="primary" block @click="toLogin">
+            <a-button u-button u-type="primary" block @click="toAuth(event.TO_LOGIN)">
                 Iniciar sesión
             </a-button>
 
@@ -13,7 +13,7 @@
 
             <GoogleLogin />
 
-            <a u-anchor @click="toRegister">
+            <a u-anchor @click="toAuth(event.TO_REGISTER)">
                 ¿No tienes cuenta? <span u-a>Regístrate.</span>
             </a>
         </a-row>
@@ -28,33 +28,42 @@
     import FacebookLogin from '@/components/facebookLogin'
     import GoogleLogin from '@/components/googleLogin'
 
+    /**
+     * Componente de la vista Start para dispositivos móviles.
+     */
     export default {
         name: 'StartMobile',
         components: { FacebookLogin, GoogleLogin },
         props: {
+            /**
+             * Evento a emitir hacia vista Start.
+             *
+             * @values TO_LOGIN, TO_REGISTER
+             */
             event: {
+                type: Object,
                 required: true
             }
         },
         methods: {
             /**
-             * Metodo que re-direcciona a la vista Login.
-             * @return {Object} Evento de tipo TO_LOGIN.
+             * Emite evento para redireccionar a la vista Login o Register.
+             *
+             * @param {string} eventType Tipo de evento a gatillar.
+             * @return {object} Evento a gatillar.
+             * @public
              */
-            toLogin () {
+            toAuth (eventType) {
                 const params = {
-                    type: this.event.TO_LOGIN
+                    type: eventType
                 }
-                this.$emit('emit', params)
-            },
-            /**
-             * Metodo que re-direcciona a la vista Register.
-             * @return {Object} Evento de tipo TO_REGISTER.
-             */
-            toRegister () {
-                const params = {
-                    type: this.event.TO_REGISTER
-                }
+
+                /**
+                 * Evento para redireccionar a la vista Login o Register.
+                 *
+                 * @event emitAuth
+                 * @property {object} params Objecto con tipo a emitir.
+                 */
                 this.$emit('emit', params)
             }
         }

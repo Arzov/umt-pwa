@@ -37,14 +37,14 @@ export default ({ store }) => {
 
       // Error en la peticion de la ubicacion
       }, function (error) {
+        // Parametros para dispatch
+        const params = {
+          toggle: true,
+          allow: false
+        }
+
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            // Parametros para dispatch
-            const params = {
-              toggle: true,
-              allow: false
-            }
-
             // Mostrar popup para que el usuario configure la ubicacion
             store.dispatch('geoloc/update', params)
             break

@@ -10,7 +10,8 @@
     import StartMobile from './mobile'
 
     /**
-     * Evento que pueden emitir las vistas.
+     * Evento que pueden emitir los componentes.
+     *
      * @type {{TO_LOGIN: string, TO_REGISTER: string}}
      */
     const event = {
@@ -18,6 +19,12 @@
         TO_REGISTER: 'to_register'
     }
 
+    /**
+     * Vista principal que decide cual componente inicializar ([mobile]{@link StartMobile} o desktop).
+     * También redirecciona al usuario a la vista Login o Register.
+     *
+     * @displayName StartMain
+     */
     export default {
         name: 'Start',
         layout: 'auth',
@@ -29,8 +36,12 @@
         },
         methods: {
             /**
-             * Captura eventos generados por las vistas.
-             * @param  {Object} event Evento emitido por la vista.
+             * Captura eventos generados por los componentes. Según
+             * los valores retornados puede redireccionar al usuario
+             * a la vista Login o Register.
+             *
+             * @param {object} event Evento emitido por el componente.
+             * @public
              */
             onEmit (event) {
                 switch (event.type) {
