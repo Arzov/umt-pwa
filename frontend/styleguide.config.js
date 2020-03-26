@@ -2,8 +2,29 @@ const { resolve } = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
-title: 'Default Style Guide',
-components: 'components/*.vue',
+title: 'Arzov Umatch',
+//components: ['pages/**/*.vue', 'components/*.vue'],
+pagePerSection: true,
+tocMode: 'collapse',
+sections: [
+    {
+        name: 'Vistas',
+        description: 'Vistas principales por donde el usuario navegará en la aplicación.',
+        sections: [
+            {
+                name: 'Start',
+                description: 'Vista principal donde el usuario puede iniciar\
+                              sesión mediante Arzov, Facebook o Google. También\
+                              puede registrar una cuenta mediante Arzov.',
+                components: ['pages/start/**/*.vue']
+            }
+        ]
+    },
+    {
+        name: 'Componentes',
+        description: 'Componentes'
+    }
+],
 webpackConfig: {
     resolve: {
         alias: {
