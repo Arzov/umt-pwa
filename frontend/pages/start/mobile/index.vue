@@ -73,3 +73,31 @@
 <style scoped>
 
 </style>
+
+<docs>
+    **Ejemplo:**
+
+    ```html
+    <template>
+        <start-mobile :event="event" @emit="onEmit($event)" />
+    </template>
+
+    <script>
+        import StartMobile from './mobile'
+
+        const event = {
+            TO_LOGIN: 'to_login',
+            TO_REGISTER: 'to_register'
+        }
+
+        export default {
+            components: { StartMobile },
+            data () { return { event } },
+            methods: {
+                onEmit (event) { ... }
+            },
+            ...
+        }
+    </script>
+    ```
+</docs>

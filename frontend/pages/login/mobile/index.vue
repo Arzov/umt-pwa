@@ -119,3 +119,31 @@
 <style scoped>
 
 </style>
+
+<docs>
+    **Ejemplo:**
+
+    ```html static
+    <template>
+        <login-mobile :event="event" @emit="onEmit($event)" />
+    </template>
+
+    <script>
+        import LoginMobile from './mobile'
+
+        const event = {
+            SIGNIN: 'sigin',
+            TO_RECOVER_PASSWORD: 'to_recover_password'
+        }
+
+        export default {
+            components: { LoginMobile },
+            data () { return { event } },
+            methods: {
+                onEmit (event) { ... }
+            },
+            ...
+        }
+    </script>
+    ```
+</docs>

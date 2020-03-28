@@ -98,3 +98,5 @@ dist
 deploy_dev.sh
 deploy_prd.sh
 .vscode
+frontend/styleguide/build/
+frontend/styleguide/index.html

@@ -2,10 +2,10 @@ const { resolve } = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
-title: 'Arzov Umatch',
-//components: ['pages/**/*.vue', 'components/*.vue'],
+title: 'ARZOV UMATCH',
+version: require('./package.json').version,
 pagePerSection: true,
-tocMode: 'collapse',
+usageMode: 'expand',
 sections: [
     {
         name: 'Vistas',
@@ -63,6 +63,5 @@ webpackConfig: {
         ]
     },
     plugins: [new VueLoaderPlugin()]
-},
-exampleMode: 'expand'
+}
 }
