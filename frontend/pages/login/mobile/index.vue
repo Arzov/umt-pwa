@@ -3,11 +3,11 @@
         <header-title-mobile to="/start" title="Inicio de Sesión" />
         
         <div>
-            <a-form :form="formLogin" @submit="login($event)">
+            <a-form :form="formLogin" @submit="signIn($event)">
                 <a-row type="flex" justify="center" u-input-row>
-                    <u-input :title="decorator.username.title">
-                        <a-form-item :required="decorator.username.required" :extra="decorator.username.extra">
-                            <a-input v-decorator="decorator.username.decorator" :placeholder="decorator.username.placeholder" />
+                    <u-input :title="decorator.email.title">
+                        <a-form-item :required="decorator.email.required" :extra="decorator.email.extra">
+                            <a-input v-decorator="decorator.email.decorator" :placeholder="decorator.email.placeholder" />
                         </a-form-item>
                     </u-input>
                 </a-row>
@@ -41,11 +41,20 @@
     import UInput from '@/components/uInput'
     import HeaderTitleMobile from '@/components/headerTitleMobile'
 
+    /**
+     * Componente de la vista Login para dispositivos móviles.
+     */
     export default {
         name: 'LoginMobile',
         components: { UInput, HeaderTitleMobile },
         props: {
+            /**
+             * Evento a emitir hacia vista [Login](#login).
+             *
+             * @values SIGNIN, TO_RECOVER_PASSWORD
+             */
             event: {
+                type: Object,
                 required: true
             }
         },
@@ -56,26 +65,51 @@
             }
         },
         methods: {
-            login (event) {
+            /**
+             * Emite evento para iniciar sesión.
+             *
+             * @param {object} event Evento a gatillar.
+             * @return {object} Evento a gatillar.
+             * @public
+             */
+            signIn (event) {
                 event.preventDefault()
 
                 this.formLogin.validateFields((error, data) => {
                     if (!error) {
                         const params = {
-                            type: this.event.LOGIN,
+                            type: this.event.SIGNIN,
                             data
                         }
 
+                        /**
+                         * Evento para iniciar sesión.
+                         *
+                         * @event emitSignIn
+                         * @property {object} params Objecto de tipo SIGNIN a emitir.
+                         */
                         this.$emit('emit', params)
                     }
                 })
             },
 
+            /**
+             * Emite evento para ir a la vista [RecoverPassword](#recoverpassword).
+             *
+             * @return {object} Evento a gatillar.
+             * @public
+             */
             toRecoverPassword () {
                 const params = {
                     type: this.event.TO_RECOVER_PASSWORD
                 }
 
+                /**
+                 * Evento para ir a la vista [RecoverPassword](#recoverpassword).
+                 *
+                 * @event emitToRecoverPassword
+                 * @property {object} params Objecto de tipo TO\_RECOVER\_PASSWORD a emitir.
+                 */
                 this.$emit('emit', params)
             }
         }

@@ -1,34 +1,40 @@
-const state = () => ({
-})
-
-const mutations = {
-}
-
 const actions = {
-  signIn (context, data) {
-    context.dispatch('setSpin', true, { root: true })
+  /**
+   * Inicia sesión con la autenticación de AWS Cognito.
+   *
+   * @param {object} ctx Contexto de Nuxt.
+   * @param {object} data Datos de autenticación _email_ y _password_.
+   */
+  signIn (ctx, data) {
+    // TODO: Completar lógica para _spin_
+    ctx.dispatch('setSpin', true, { root: true })
 
-    if (data.username && data.password) {
+    // Parámetros _email_ y _password_ deben ser no nulos
+    // TODO: Inyectar componente _popup_ para mostrar mensajes
+    if (data.email && data.password) {
+      // Parametro _username_ es necesario para AWS Cognito
+      data.username = data.email
+
+      // Autenticación con AWS Cognito
       this.$AWS.Auth.signIn(data)
       .then((user) => {
-        console.log(user)
         this.$router.push(process.env.routes.home.path)
       })
       .catch((err) => {
         switch (err.code) {
-          // Usuario invalido
+          // Email inválido
           case 'UserNotFoundException':
               console.log(err.message)
               break
           
-          // Password incorrecta
+          // Contraseña incorrecta
           case 'NotAuthorizedException':
               console.log(err.message)
               break
 
-          // Usuario sin verificar
+          // Email sin verificar
           case 'UserNotConfirmedException':
-              console.log(err.message, this.$router)
+              console.log(err.message)
               this.$router.push(process.env.routes.verification.path)
               break
           
@@ -39,14 +45,12 @@ const actions = {
         }
       })
     } else {
-      console.log('Debe ingresar todos los datos!')
+      console.log('¡Debe ingresar todos los datos!')
     }
   }
 }
 
 export default {
     namespaced: true,
-    state,
-    actions,
-    mutations
+    actions
 }

@@ -6,6 +6,7 @@ import code from './decorators/code.js'
 import name from './decorators/name.js'
 import birthdate from './decorators/birthdate.js'
 
+// TODO: Eliminar decorador para _username_
 export default {
     email,
     username,

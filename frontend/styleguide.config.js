@@ -17,6 +17,12 @@ sections: [
                               sesión mediante Arzov, Facebook o Google. También\
                               puede registrar una cuenta mediante Arzov.',
                 components: ['pages/start/**/*.vue']
+            },
+            {
+                name: 'Login',
+                description: 'Vista donde el usuario puede iniciar sesión mediante Arzov (AWS Cognito).\
+                              También puede recuperar su contraseña.',
+                components: ['pages/login/**/*.vue']
             }
         ]
     },

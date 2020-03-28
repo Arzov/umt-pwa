@@ -20,8 +20,8 @@
     }
 
     /**
-     * Vista principal que decide cual componente inicializar ([mobile]{@link StartMobile} o desktop).
-     * También redirecciona al usuario a la vista Login o Register.
+     * Vista principal que decide cual componente inicializar (mobile o desktop).
+     * También redirecciona al usuario a la vista [Login](#login) o [Register](#register).
      *
      * @displayName StartMain
      */
@@ -38,7 +38,7 @@
             /**
              * Captura eventos generados por los componentes. Según
              * los valores retornados puede redireccionar al usuario
-             * a la vista Login o Register.
+             * a la vista [Login](#login) o [Register](#register).
              *
              * @param {object} event Evento emitido por el componente.
              * @public
