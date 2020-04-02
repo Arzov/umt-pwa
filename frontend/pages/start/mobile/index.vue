@@ -75,7 +75,7 @@
 </style>
 
 <docs>
-    **Ejemplo:**
+    EXAMPLE
 
     ```html
     <template>

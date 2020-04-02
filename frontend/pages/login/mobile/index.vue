@@ -121,7 +121,7 @@
 </style>
 
 <docs>
-    **Ejemplo:**
+    EXAMPLE
 
     ```html static
     <template>

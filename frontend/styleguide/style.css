@@ -1,0 +1,74 @@
+/*
+ * Content
+ */
+p {
+    color: #313131 !important;
+    margin-bottom: 30px !important;
+}
+
+
+/*
+ * Code
+ */
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #6457e3 !important;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #0cecf2 !important;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #d4d4d4 !important;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #ad64e6 !important;
+}
+
+.token.function {
+	color: #0271c4 !important;
+}
+
+
+/*
+ * Props
+ */
+td > [class*='rsg--name-'] {
+	color: #ad64e6 !important;
+}
+
+pre {
+	color: #0271c4 !important;
+}
+
+span > [class*='rsg--name-'] {
+	color: #0271c4 !important;
+}
+
+span[class*='rsg--type-'] {
+    color: #ad64e6 !important;
+    font-weight: bold !important;
+}
+
+pre > [class*='rsg--required-'] {
+    color: #ad64e6 !important;
+    opacity: 1.0 !important;
+}

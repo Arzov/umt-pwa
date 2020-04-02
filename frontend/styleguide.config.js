@@ -6,6 +6,8 @@ title: 'ARZOV UMATCH',
 version: require('./package.json').version,
 pagePerSection: true,
 usageMode: 'expand',
+styles: './styleguide/styles.js',
+require: ['./styleguide/style.css'],
 sections: [
     {
         name: 'Vistas',
