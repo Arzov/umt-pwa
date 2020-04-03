@@ -16,7 +16,7 @@ export default {
 			},
 			logo: {
 				isolated: false,
-                padding: 24,
+                padding: [[40, 10, 30, 10]],
                 border: '1px solid ' + colorBlack
             },
             sidebar: {
@@ -37,22 +37,23 @@ export default {
 			version: {
 				isolated: false,
 				color: [colorPurple, '!important'],
-				margin: [[8, 0, 0]],
+				width: '50px',
+				'margin-top': '15px !important',
+				margin: '0 auto !important',
+				'text-align': 'center',
 				padding: [[4, 8, 5]],
-				display: 'inline-block',
 				fontWeight: 'normal',
 				lineHeight: 1,
 				border: [[1, 'solid', colorPurple]],
 				textTransform: 'uppercase',
-				fontSize: '11px',
+				fontSize: '12px',
 				letterSpacing: '1px',
 				borderRadius: 3
 			}
 		},
 		Logo: {
 			logo: {
-				isolated: false,
-				color: colorWhite
+				isolated: false
 			}
         },
         Pathline: {
@@ -74,7 +75,7 @@ export default {
 					},
 					'&:focus:not($isActive)': {
 						isolate: false,
-						outline: 'none',
+						outline: 'none'
 					}
                 }
             }

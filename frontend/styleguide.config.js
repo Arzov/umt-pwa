@@ -1,69 +1,77 @@
 const { resolve } = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
+const path = require('path')
 
 module.exports = {
-title: 'ARZOV UMATCH',
-version: require('./package.json').version,
-pagePerSection: true,
-usageMode: 'expand',
-styles: './styleguide/styles.js',
-require: ['./styleguide/style.css'],
-sections: [
-    {
-        name: 'Vistas',
-        description: 'Vistas principales por donde el usuario navegará en la aplicación.',
-        sections: [
-            {
-                name: 'Start',
-                description: 'Vista principal donde el usuario puede iniciar\
-                              sesión mediante Arzov, Facebook o Google. También\
-                              puede registrar una cuenta mediante Arzov.',
-                components: ['pages/start/**/*.vue']
-            },
-            {
-                name: 'Login',
-                description: 'Vista donde el usuario puede iniciar sesión mediante Arzov (AWS Cognito).\
-                              También puede recuperar su contraseña.',
-                components: ['pages/login/**/*.vue']
-            }
-        ]
+    title: ' ',
+    version: require('./package.json').version,
+    pagePerSection: true,
+    usageMode: 'expand',
+    styles: './styleguide/styles.js',
+    require: ['./styleguide/style.css'],
+    styleguideComponents: {
+        LogoRenderer: path.join(__dirname, 'styleguide/components/Logo')
     },
-    {
-        name: 'Componentes',
-        description: 'Componentes'
-    }
-],
-webpackConfig: {
-    resolve: {
-        alias: {
-            '~': resolve(__dirname, ''),
-            '@': resolve(__dirname, '')
+    sections: [
+        {
+            name: 'Vistas',
+            description: 'Vistas principales por donde el usuario navegará en la aplicación.',
+            sections: [
+                {
+                    name: 'Start',
+                    description: 'Vista principal donde el usuario puede iniciar\
+                                sesión mediante Arzov, Facebook o Google. También\
+                                puede registrar una cuenta mediante Arzov.',
+                    components: ['pages/start/**/*.vue']
+                },
+                {
+                    name: 'Login',
+                    description: 'Vista donde el usuario puede iniciar sesión mediante Arzov (AWS Cognito).\
+                                También puede recuperar su contraseña.',
+                    components: ['pages/login/**/*.vue']
+                }
+            ]
+        },
+        {
+            name: 'Componentes',
+            description: 'Componentes'
         }
-    },
-    module: {
-        rules: [
-            {
-                test: /\.vue$/,
-                exclude: /node_modules/,
-                loader: 'vue-loader'
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader'
-            },
-            {
-                test: /\.css$/,
-                exclude: /node_modules/,
-                use: ['vue-style-loader', 'css-loader']
-            },
-            {
-                test: /\.svg$/,
-                exclude: /node_modules/,
-                use: ['babel-loader', 'vue-svg-loader']
+    ],
+    webpackConfig: {
+        resolve: {
+            alias: {
+                '~': resolve(__dirname, ''),
+                '@': resolve(__dirname, '')
             }
-        ]
-    },
-    plugins: [new VueLoaderPlugin()]
-}
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.vue$/,
+                    exclude: /node_modules/,
+                    loader: 'vue-loader'
+                },
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    loader: 'babel-loader'
+                },
+                {
+                    test: /\.css$/,
+                    exclude: /node_modules/,
+                    use: ['vue-style-loader', 'css-loader']
+                },
+                {
+                    test: /\.svg$/,
+                    exclude: /node_modules/,
+                    use: ['babel-loader', 'vue-svg-loader']
+                },
+                {
+					test: /\.png$/,
+					use: ['url-loader']
+				}
+            ]
+        },
+        plugins: [new VueLoaderPlugin()]
+    }
 }
