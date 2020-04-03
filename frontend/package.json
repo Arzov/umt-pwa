@@ -27,6 +27,12 @@
     "vuex-persistedstate": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.5",
     "@babel/runtime-corejs2": "^7.9.2",
     "@babel/runtime-corejs3": "^7.9.2",
     "@nuxtjs/eslint-config": "^2.0.2",

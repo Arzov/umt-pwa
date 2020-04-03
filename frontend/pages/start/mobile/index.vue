@@ -36,7 +36,7 @@
         components: { FacebookLogin, GoogleLogin },
         props: {
             /**
-             * Evento a emitir hacia vista Start.
+             * Evento a emitir hacia vista [Start](#start).
              *
              * @values TO_LOGIN, TO_REGISTER
              */
@@ -47,7 +47,7 @@
         },
         methods: {
             /**
-             * Emite evento para redireccionar a la vista Login o Register.
+             * Emite evento para redireccionar a la vista [Login](#login) o [Register](#register).
              *
              * @param {string} eventType Tipo de evento a gatillar.
              * @return {object} Evento a gatillar.
@@ -59,7 +59,7 @@
                 }
 
                 /**
-                 * Evento para redireccionar a la vista Login o Register.
+                 * Evento para redireccionar a la vista [Login](#login) o [Register](#register).
                  *
                  * @event emitAuth
                  * @property {object} params Objecto con tipo a emitir.
@@ -73,3 +73,31 @@
 <style scoped>
 
 </style>
+
+<docs>
+    EXAMPLE
+
+    ```html
+    <template>
+        <start-mobile :event="event" @emit="onEmit($event)" />
+    </template>
+
+    <script>
+        import StartMobile from './mobile'
+
+        const event = {
+            TO_LOGIN: 'to_login',
+            TO_REGISTER: 'to_register'
+        }
+
+        export default {
+            components: { StartMobile },
+            data () { return { event } },
+            methods: {
+                onEmit (event) { ... }
+            },
+            ...
+        }
+    </script>
+    ```
+</docs>
