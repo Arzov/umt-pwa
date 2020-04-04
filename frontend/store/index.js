@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import login from './modules/login'
 import register from './modules/register'
+import emailVerifiction from './modules/email-verification'
 import user from './modules/user'
 import geoloc from './modules/geoloc'
 import home from './modules/home'
@@ -18,6 +19,7 @@ const store = () => {
     modules: {
       login,
       register,
+      emailVerifiction,
       user,
       geoloc,
       home,

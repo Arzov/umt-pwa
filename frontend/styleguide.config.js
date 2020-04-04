@@ -35,6 +35,13 @@ module.exports = {
                     description: 'Vista donde el usuario registra su email en Arzov\
                                 (AWS Cognito maneja la autenticación).',
                     components: ['pages/register/**/*.vue']
+                },
+                {
+                    name: 'Email Verification',
+                    description: 'Vista donde el usuario debe verificar su email de\
+                                registro mediante el código enviado por Arzov. También\
+                                puede pedir un nuevo código en caso de no recibirlo.',
+                    components: ['pages/email_verification/**/*.vue']
                 }
             ]
         },

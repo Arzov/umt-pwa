@@ -22,22 +22,7 @@ const state = getDefaultState()
 
 const getters = {
     userData (state) {
-        return {
-            email: state.email,
-            firstName: state.firstName,
-            lastName: state.lastName,
-            birthdate: state.birthdate,
-            gender: state.gender,
-            picture: state.picture,
-            genderFilter: state.genderFilter,
-            matchFilter: state.matchFilter,
-            ageMinFilter: state.ageMinFilter,
-            ageMaxFilter: state.ageMaxFilter,
-            geohash: state.geohash,
-            latitude: state.latitude,
-            longitude: state.longitude,
-            verified: state.verified
-        }
+        return state
     }
 }
 
@@ -50,7 +35,7 @@ const actions = {
         this.$AWS.API.graphql(this.$AWS.Query(getUser, { hashKey: data.idToken.payload.email }))
             .then((result) => {
                 const params = {
-                    id: result.data.getUser.hashKey,
+                    email: result.data.getUser.hashKey,
                     firstName: result.data.getUser.firstName,
                     lastName: result.data.getUser.lastName,
                     birthdate: result.data.getUser.birthdate,
@@ -160,59 +145,6 @@ const actions = {
             })
             // eslint-disable-next-line no-console
             .catch(e => console.log(e))
-    },
-    verification (ctx, data) {
-        if (data.code) {
-            // Verificar codigo
-            this.$AWS.Auth.confirmSignUp(
-                ctx.state.id,
-                data.code,
-                {
-                    forceAliasCreation: true
-                }
-            )
-                .then((data) => {
-                    const params = {
-                        id: null,
-                        toVerify: false
-                    }
-
-                    ctx.commit('setState', { params })
-                    this.$router.push(process.env.routes.login.path)
-                })
-                .catch((err) => {
-                    switch (err.code) {
-                        // Codigo invalido
-                        case 'CodeMismatchException':
-                            console.log(err.message)
-                            break
-                        
-                        // Caracter invalido ingresado
-                        case 'InvalidParameterException':
-                            console.log(err.message)
-                            break
-                        
-                        // Error desconocido
-                        default:
-                            console.log('¡Error desconocido!')
-                            break
-                    }
-                })
-        } else {
-            console.log('Debe ingresar todos los datos!')
-        }
-    },
-    resendCode (ctx, data) {
-        // Reenviar codigo
-        this.$AWS.Auth.resendSignUp(
-            ctx.state.id
-        )
-            .then((data) => {
-                console.log('Codigo enviado a ' + ctx.state.id + '!')
-            })
-            .catch((err) => {
-                console.log(err)
-            })
     },
     resetStates (context) {
         context.commit('resetStates')

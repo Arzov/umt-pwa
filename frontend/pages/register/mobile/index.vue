@@ -62,7 +62,7 @@
     import GenderInput from '@/components/genderInput'
 
     /**
-     * Componente de la vista Register para dispositivos móviles.
+     * Componente de la vista [Register](#register) para dispositivos móviles.
      */
     export default {
         name: 'RegisterMobile',
@@ -74,6 +74,7 @@
              * @values SIGNUP, TO_TERMS
              */
             event: {
+                type: Object,
                 required: true
             }
         },

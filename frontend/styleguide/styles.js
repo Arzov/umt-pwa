@@ -20,6 +20,7 @@ export default {
                 border: '1px solid ' + colorBlack
             },
             sidebar: {
+				width: '220px',
                 background: colorGrey,
                 border: '1px solid ' + colorBlack,
                 '& a': {

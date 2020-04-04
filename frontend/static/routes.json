@@ -11,9 +11,9 @@
         "path": "/register",
         "name": "register"
     },
-    "verification": {
-        "path": "/verification",
-        "name": "verification"
+    "email_verification": {
+        "path": "/email_verification",
+        "name": "email_verification"
     },
     "recover_password": {
         "path": "/recover_password",

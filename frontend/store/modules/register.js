@@ -33,8 +33,8 @@ const actions = {
                 // Guardar estados para usuario
                 ctx.commit('user/setState', { params }, { root: true })
 
-                // Enviar a verificar codigo
-                this.$router.push(process.env.routes.verification.path)
+                // Enviar a verificar email
+                this.$router.push(process.env.routes.email_verification.path)
             })
             .catch((err) => {
                 switch (err.code) {
