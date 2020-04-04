@@ -3,7 +3,7 @@
         <header-title-mobile to="/start" title="Registrar" />
 
         <div>
-            <a-form :form="formRegister" @submit="register($event)">
+            <a-form :form="formRegister" @submit="signUp($event)">
                 <a-row type="flex" justify="center" u-input-row>
                     <u-input :title="decorator.name.title">
                         <a-form-item :required="decorator.name.required" :extra="decorator.name.extra">
@@ -61,10 +61,18 @@
     import BirthdateInput from '@/components/birthdateInput'
     import GenderInput from '@/components/genderInput'
 
+    /**
+     * Componente de la vista Register para dispositivos móviles.
+     */
     export default {
         name: 'RegisterMobile',
         components: { BirthdateInput, GenderInput, UInput, HeaderTitleMobile },
         props: {
+            /**
+             * Evento a emitir hacia vista [Register](#register).
+             *
+             * @values SIGNUP, TO_TERMS
+             */
             event: {
                 required: true
             }
@@ -77,19 +85,34 @@
             }
         },
         methods: {
-            register (event) {
+            /**
+             * Emite evento para iniciar sesión.
+             *
+             * @param {object} event Evento a gatillar.
+             * @return {object} Evento a gatillar.
+             * @public
+             */
+            signUp (event) {
                 event.preventDefault()
 
                 this.formRegister.validateFields((error, data) => {
                     if (!error) {
                         const params = {
-                            type: this.event.REGISTER,
+                            type: this.event.SIGNUP,
                             data: {
                                 ...data,
                                 gender: this.gender
                             }
                         }
 
+                        /**
+                         * Evento para registrar email.
+                         *
+                         * @event emitSignUp
+                         * @property {object} params Objecto con tipo SIGNUP a emitir y
+                         *                           datos para registro (email, nombre,
+                         *                           contraseña, sexo y fecha de nacimiento).
+                         */
                         this.$emit('emit', params)
                     }
                 })
@@ -101,3 +124,31 @@
 <style scoped>
 
 </style>
+
+<docs>
+    EXAMPLE
+
+    ```html static
+    <template>
+        <register-mobile :event="event" @emit="onEmit($event)" />
+    </template>
+
+    <script>
+        import RegisterMobile from './mobile'
+
+        const event = {
+            SIGNUP: 'sigup',
+            TO_TERMS: 'to_terms'
+        }
+
+        export default {
+            components: { RegisterMobile },
+            data () { return { event } },
+            methods: {
+                onEmit (event) { ... }
+            },
+            ...
+        }
+    </script>
+    ```
+</docs>

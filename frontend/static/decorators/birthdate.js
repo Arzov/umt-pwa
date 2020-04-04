@@ -1,7 +1,7 @@
-import validationBirthdate from '@/utils/validationBirthdate'
+const { validateBirthdate } = require('@/utils/inputValidator')
 
 function checkDate (rule, value, callback) {
-    let response = validationBirthdate(value)
+    let response = validateBirthdate(value)
 
     if (!response.status)
         callback(response.msg)

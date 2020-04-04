@@ -1,10 +1,8 @@
 import { addUserLocation, updateUser } from '@/graphql/mutations'
 import { getUser, getUmatchUser } from '@/graphql/queries'
-import validationBirthdate from '@/utils/validationBirthdate'
-import validationEmail from '@/utils/validationEmail'
 
-const state = () => ({
-    id: null,
+const getDefaultState = () => ({
+    email: null,
     firstName: null,
     lastName: null,
     birthdate: null,
@@ -17,13 +15,15 @@ const state = () => ({
     genderFilter: null,
     ageMinFilter: null,
     ageMaxFilter: null,
-    toVerify: false
+    verified: true
 })
+
+const state = getDefaultState()
 
 const getters = {
     userData (state) {
         return {
-            id: state.id,
+            email: state.email,
             firstName: state.firstName,
             lastName: state.lastName,
             birthdate: state.birthdate,
@@ -34,8 +34,9 @@ const getters = {
             ageMinFilter: state.ageMinFilter,
             ageMaxFilter: state.ageMaxFilter,
             geohash: state.geohash,
-            coordinates: { latitude: state.latitude, longitude: state.longitude },
-            toVerify: state.toVerify
+            latitude: state.latitude,
+            longitude: state.longitude,
+            verified: state.verified
         }
     }
 }
@@ -130,128 +131,35 @@ const actions = {
         }
     },
     saveAttributes (context, data) {
-        const validationFields = Boolean(
-            data.birthdate &&
-            data.gender
+        const birthdate = String(data.birthdate.year) + '-' + data.birthdate.month + '-' + data.birthdate.day
+
+        // Usar API de Arzov
+        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
+
+        // Actualizar datos del usuario
+        this.$AWS.API.graphql(
+            this.$AWS.Query(updateUser, {
+                hashKey: context.state.id,
+                firstName: context.state.firstName,
+                lastName: context.state.lastName,
+                picture: context.state.picture,
+                birthdate,
+                gender: data.gender
+            })
         )
-
-        // Validar que todos los campos esten completos
-        if (validationFields) {
-            // Validar edad
-            const validBirthdate = validationBirthdate(data.birthdate)
-            const birthdate = String(data.birthdate.year) + '-' + data.birthdate.month + '-' + data.birthdate.day
-
-            if (validBirthdate.status) {
-                // Usar API de Arzov
-                this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
-
-                // Actualizar datos del usuario
-                this.$AWS.API.graphql(
-                    this.$AWS.Query(updateUser, {
-                        hashKey: context.state.id,
-                        firstName: context.state.firstName,
-                        lastName: context.state.lastName,
-                        picture: context.state.picture,
-                        birthdate,
-                        gender: data.gender
-                    })
-                )
-                    .then((result) => {
-                        const params = {
-                            birthdate,
-                            gender: data.gender
-                        }
-
-                        context.commit('setState', { params })
-
-                        // Enviar a Home
-                        this.$router.push(process.env.routes.home.path)
-                    })
-                    // eslint-disable-next-line no-console
-                    .catch(e => console.log(e))
-            } else {
-                console.log(validBirthdate.msg)
-            }
-        } else {
-            // eslint-disable-next-line no-console
-            console.log('Debe ingresar todos los datos!')
-        }
-    },
-    register (ctx, data) {
-        const validationFields = Boolean(
-            data.name &&
-            data.birthdate &&
-            data.email &&
-            data.password &&
-            data.gender
-        )
-
-        // Validar que todos los campos esten completos
-        if (validationFields) {
-            // Validar edad
-            const validBirthdate = validationBirthdate(data.birthdate)
-            const birthdate = String(data.birthdate.year) + '-' + data.birthdate.month + '-' + data.birthdate.day
-
-            if (validBirthdate.status) {
-                // Validar email
-                const validEmail = validationEmail(data.email)
-
-                if (validEmail) {
-                    // Validar password
-                    if (data.password.length >= 6) {
-                        // Registrar
-                        this.$AWS.Auth.signUp({
-                            username: data.email.toLowerCase(),
-                            password: data.password,
-                            attributes: {
-                                email: data.email,
-                                name: data.name,
-                                birthdate,
-                                gender: data.gender
-                            }
-                        })
-                            .then((result) => {
-                                const params = {
-                                    id: data.email,
-                                    toVerify: true
-                                }
-        
-                                ctx.commit('setState', { params })
-
-                                // Enviar a verificar codigo
-                                this.$router.push(process.env.routes.verification.path)
-                            })
-                            .catch((err) => {
-                                switch (err.code) {
-                                    // Problema con trigger lambda PreSignUp
-                                    case 'UserLambdaValidationException':
-                                        console.log(err.message.split('#')[1])
-                                        break
-                                    
-                                    // Usuario ya existe
-                                    case 'UsernameExistsException':
-                                        console.log(err.message)
-                                        break
-                                    
-                                    // Error desconocido
-                                    default:
-                                        console.log('¡Error desconocido!')
-                                        break
-                                }
-                            })
-                    } else {
-                        console.log('Contraseña debe tener al menos 6 caracteres!')
-                    }
-                } else {
-                    console.log('Email inválido!')
+            .then((result) => {
+                const params = {
+                    birthdate,
+                    gender: data.gender
                 }
-            } else {
-                console.log(validBirthdate.msg)
-            }
-        } else {
+
+                context.commit('setState', { params })
+
+                // Enviar a Home
+                this.$router.push(process.env.routes.home.path)
+            })
             // eslint-disable-next-line no-console
-            console.log('Debe ingresar todos los datos!')
-        }
+            .catch(e => console.log(e))
     },
     verification (ctx, data) {
         if (data.code) {
@@ -319,20 +227,7 @@ const mutations = {
         }
     },
     resetStates (state) {
-        state.id = null
-        state.firstName = null
-        state.lastName = null
-        state.birthdate = null
-        state.gender = null
-        state.picture = null
-        state.latitude = null
-        state.longitude = null
-        state.geohash = null
-        state.matchFilter = null
-        state.genderFilter = null
-        state.ageMinFilter = null
-        state.ageMaxFilter = null
-        state.toVerify = false
+        Object.assign(state, getDefaultState())
     }
 }
 

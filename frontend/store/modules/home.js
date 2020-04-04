@@ -1,6 +1,6 @@
 import { searchMatch } from '@/graphql/queries'
 import { addMatch } from '@/graphql/mutations'
-import getDistance from '@/utils/getDistance'
+const { getDistance } = require('@/utils/geolocUtils')
 
 const state = () => ({
     usersFound: [],
