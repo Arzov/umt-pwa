@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import login from './modules/login'
+import register from './modules/register'
 import user from './modules/user'
 import geoloc from './modules/geoloc'
 import home from './modules/home'
@@ -16,6 +17,7 @@ const store = () => {
   return new Vuex.Store({
     modules: {
       login,
+      register,
       user,
       geoloc,
       home,

@@ -29,6 +29,12 @@ module.exports = {
                     description: 'Vista donde el usuario puede iniciar sesión mediante Arzov (AWS Cognito).\
                                 También puede recuperar su contraseña.',
                     components: ['pages/login/**/*.vue']
+                },
+                {
+                    name: 'Register',
+                    description: 'Vista donde el usuario registra su email en Arzov\
+                                (AWS Cognito maneja la autenticación).',
+                    components: ['pages/register/**/*.vue']
                 }
             ]
         },

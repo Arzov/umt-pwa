@@ -86,7 +86,9 @@
                          * Evento para iniciar sesión.
                          *
                          * @event emitSignIn
-                         * @property {object} params Objecto de tipo SIGNIN a emitir.
+                         * @property {object} params Objecto con tipo SIGNIN a emitir
+                         *                           y datos para iniciar sesión (email
+                         *                           y contraseña).
                          */
                         this.$emit('emit', params)
                     }

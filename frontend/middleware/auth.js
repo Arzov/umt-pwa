@@ -87,7 +87,7 @@ function authValidation (app, route, store, redirect) {
         const userData = store.getters['user/userData']
 
         // Si el usuario no necesita verificar su email entonces enviar a Start
-        if (!userData.toVerify || currentPath !== path.verification) {
+        if (userData.verified || currentPath !== path.verification) {
           redirect(path.start_path)
         }
       }

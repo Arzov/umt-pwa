@@ -1,6 +1,5 @@
-import getDistance from '@/utils/getDistance'
+const { getDistance } = require('@/utils/geolocUtils')
 
-// EXPORT
 export default ({ store }) => {
   // Validar si dispositivo soporta geolocalizacion
   if ('geolocation' in navigator) {
@@ -15,8 +14,8 @@ export default ({ store }) => {
         const moveDistance = getDistance(
           position.coords.latitude,
           position.coords.longitude,
-          userData.coordinates.latitude,
-          userData.coordinates.longitude
+          userData.latitude,
+          userData.longitude
         )
 
         if (moveDistance >= 5) {
