@@ -6,9 +6,6 @@ const actions = {
    * @param {object} data Datos de autenticación _email_ y _password_.
    */
   signIn (ctx, data) {
-    // TODO: Completar lógica para _spin_
-    // ctx.dispatch('setSpin', true, { root: true })
-
     // Autenticación con AWS Cognito
     // TODO: Inyectar componente _popup_ para mostrar mensajes
     this.$AWS.Auth.signIn({

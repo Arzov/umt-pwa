@@ -42,6 +42,13 @@ module.exports = {
                                 registro mediante el código enviado por Arzov. También\
                                 puede pedir un nuevo código en caso de no recibirlo.',
                     components: ['pages/email_verification/**/*.vue']
+                },
+                {
+                    name: 'Required Attributes',
+                    description: 'Vista donde el usuario debe, obligatoriamente, ingresar atributos extras\
+                                para poder filtrar la búsqueda de sus rivales (esta vista es sólo necesaria\
+                                para los usuarios que ingresan por primera vez mediante Facebook o Google).',
+                    components: ['pages/required_attributes/**/*.vue']
                 }
             ]
         },

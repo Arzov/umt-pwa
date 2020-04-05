@@ -17,7 +17,6 @@ const actions = {
         )
             .then((data) => {
                 const params = {
-                    email: null,
                     verified: true
                 }
 

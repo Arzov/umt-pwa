@@ -16,11 +16,11 @@ export default {
 			},
 			logo: {
 				isolated: false,
-                padding: [[40, 10, 30, 10]],
-                border: '1px solid ' + colorBlack
+                padding: [[30, 15, 25, 15]],
+				border: '1px solid ' + colorBlack
             },
             sidebar: {
-				width: '220px',
+				width: '260px',
                 background: colorGrey,
                 border: '1px solid ' + colorBlack,
                 '& a': {
@@ -32,6 +32,9 @@ export default {
 					cursor: ['pointer', '!important'],
 					transition: 'color 250ms ease-out'
                 }
+			},
+			content: {
+				paddingLeft: 50
 			}
 		},
 		Version: {
@@ -137,7 +140,7 @@ export default {
 				fontFamily: ["'Fira Sans'", 'Helvetica', 'Arial', 'sans-serif'],
 				'& > h1': {
 					width: 'calc(100% + 64px)',
-					fontSize: '48px',
+					fontSize: '36px',
 					fontWeight: 'bold',
 					padding: '20px 30px 0px',
 					margin: '-16px -30px 0px'

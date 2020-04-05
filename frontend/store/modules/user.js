@@ -1,4 +1,4 @@
-import { addUserLocation, updateUser } from '@/graphql/mutations'
+import { addUserLocation } from '@/graphql/mutations'
 import { getUser, getUmatchUser } from '@/graphql/queries'
 
 const getDefaultState = () => ({
@@ -49,7 +49,7 @@ const actions = {
                 this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
                 // Obtener datos Umatch del usuario
-                this.$AWS.API.graphql(this.$AWS.Query(getUmatchUser, { rangeKey: params.id }))
+                this.$AWS.API.graphql(this.$AWS.Query(getUmatchUser, { rangeKey: params.email }))
                     .then((result) => {
                         // Guardar filtros si existen desde DynamoDB
                         if (result.data.getUser.items.length) {
@@ -115,39 +115,8 @@ const actions = {
             console.log('Debe ingresar todos los datos!')
         }
     },
-    saveAttributes (context, data) {
-        const birthdate = String(data.birthdate.year) + '-' + data.birthdate.month + '-' + data.birthdate.day
-
-        // Usar API de Arzov
-        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
-
-        // Actualizar datos del usuario
-        this.$AWS.API.graphql(
-            this.$AWS.Query(updateUser, {
-                hashKey: context.state.id,
-                firstName: context.state.firstName,
-                lastName: context.state.lastName,
-                picture: context.state.picture,
-                birthdate,
-                gender: data.gender
-            })
-        )
-            .then((result) => {
-                const params = {
-                    birthdate,
-                    gender: data.gender
-                }
-
-                context.commit('setState', { params })
-
-                // Enviar a Home
-                this.$router.push(process.env.routes.home.path)
-            })
-            // eslint-disable-next-line no-console
-            .catch(e => console.log(e))
-    },
-    resetStates (context) {
-        context.commit('resetStates')
+    resetStates (ctx) {
+        ctx.commit('resetStates')
     }
 }
 

@@ -56,6 +56,7 @@
                 type: Object,
                 required: true
             },
+            
             /**
              * Datos del usuario para obtener su email.
              */

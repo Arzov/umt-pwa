@@ -26,7 +26,10 @@ const actions = {
         })
             .then((result) => {
                 const params = {
-                    email: data.email,
+                    name: data.name,
+                    birthdate,
+                    gender: data.gender,
+                    email: data.email.toLowerCase(),
                     verified: false
                 }
     

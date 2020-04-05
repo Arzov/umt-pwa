@@ -49,12 +49,12 @@
                 switch (event.type) {
                     // Verificar email
                     case this.event.VERIFY:
-                        this.$store.dispatch('email-verification/verify', event)
+                        this.$store.dispatch('emailVerification/verify', event)
                         break
                     
                     // Reenviar codigo de verificacion
                     case this.event.RESEND_CODE:
-                        this.$store.dispatch('email-verification/resendCode')
+                        this.$store.dispatch('emailVerification/resendCode')
                         break
                 }
             }
