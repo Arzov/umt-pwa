@@ -10,14 +10,21 @@
     import RequiredFiltersMobile from './mobile'
 
     /**
-     * Evento que pueden emitir las vistas.
-     * @type {{SAVE_FILTERS: string, LOGOUT: string}}
+     * Evento que pueden emitir los componentes.
+     *
+     * @type {{SAVE_FILTERS: string, SIGNOUT: string}}
      */
     const event = {
         SAVE_FILTERS: 'save_filters',
-        LOGOUT: 'logout'
+        SIGNOUT: 'signout'
     }
 
+    /**
+     * Vista principal que decide cual componente inicializar (mobile o desktop).
+     * También guardar filtros del usuario o cerrar sesión.
+     *
+     * @displayName RequiredFiltersMain
+     */
     export default {
         name: 'RequiredFilters',
         components: { RequiredFiltersMobile },
@@ -28,18 +35,26 @@
         },
         methods: {
             /**
-             * Captura eventos generados por las vistas.
-             * @param  {Object} event Evento emitido por la vista.
+             * Captura eventos generados por los componentes. Según
+             * los valores retornados puede guardar los filtros del usuario
+             * o cerrar sesión.
+             *
+             * @param {object} event Evento emitido por el componente.
+             * @public
              */
             onEmit (event) {
                 switch (event.type) {
                     // Guardar filtros seleccionados
                     case this.event.SAVE_FILTERS:
-                        this.$store.dispatch('user/saveFilters', event)
+                        this.$store.dispatch('requiredFilters/saveFilters', event)
+                            .then((result) => {
+                                this.$router.push(process.env.routes.home.path)
+                            })
+                            .catch(e => console.log(e))
                         break
 
                     // Cerrar sesion
-                    case this.event.LOGOUT:
+                    case this.event.SIGNOUT:
                         this.$AWS.Auth.signOut({ global: true })
                         break
                 }

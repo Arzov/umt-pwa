@@ -17,12 +17,11 @@ export default {
 			logo: {
 				isolated: false,
                 padding: [[30, 15, 25, 15]],
-				border: '1px solid ' + colorBlack
+				borderBottom: '1px solid ' + colorBlack
             },
             sidebar: {
 				width: '260px',
                 background: colorGrey,
-                border: '1px solid ' + colorBlack,
                 '& a': {
                     color: [colorWhite, '!important'],
                     fontWeight: ['bold', '!important']

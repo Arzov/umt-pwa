@@ -95,26 +95,6 @@ const actions = {
             // eslint-disable-next-line no-console
             .catch(e => console.log(e))
     },
-    saveFilters (context, data) {
-        // Validar que todos los campos esten completos
-        if (data.gender && data.match) {
-            const age = Array.from(data.age, x => String(x))
-            const params = {
-                matchFilter: data.match,
-                genderFilter: data.gender,
-                ageMinFilter: age[0],
-                ageMaxFilter: age[1]
-            }
-
-            context.commit('setState', { params })
-
-            // Enviar a Home
-            this.$router.push(process.env.routes.home.path)
-        } else {
-            // eslint-disable-next-line no-console
-            console.log('Debe ingresar todos los datos!')
-        }
-    },
     resetStates (ctx) {
         ctx.commit('resetStates')
     }

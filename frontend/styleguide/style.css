@@ -1,13 +1,17 @@
-/*
+/**
  * Content
  */
+body {
+	background: #e6e6e6;
+}
+
 p {
     color: #313131 !important;
     margin-bottom: 30px !important;
 }
 
 
-/*
+/**
  * Code
  */
 .token.property,
@@ -48,7 +52,7 @@ p {
 }
 
 
-/*
+/**
  * Props
  */
 td > [class*='rsg--name-'] {
@@ -71,4 +75,24 @@ span[class*='rsg--type-'] {
 pre > [class*='rsg--required-'] {
     color: #ad64e6 !important;
     opacity: 1.0 !important;
+}
+
+
+/**
+ * Scroll
+ */
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+	background: #6457e3; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #ad64e6; 
 }

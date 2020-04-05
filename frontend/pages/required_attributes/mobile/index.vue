@@ -52,7 +52,7 @@
             /**
              * Emite evento para guardar atributos.
              *
-             * @return {Object} Evento de tipo SAVE_ATTRIBUTES.
+             * @return {object} Evento de tipo SAVE_ATTRIBUTES.
              * @public
              */
             saveAttributes () {
@@ -75,7 +75,7 @@
             /**
              * Emite evento para cerrar sesión.
              *
-             * @return {Object} Evento de tipo SIGNOUT.
+             * @return {object} Evento de tipo SIGNOUT.
              * @public
              */
             signOut () {

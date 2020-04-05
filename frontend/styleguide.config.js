@@ -49,6 +49,12 @@ module.exports = {
                                 para poder filtrar la búsqueda de sus rivales (esta vista es sólo necesaria\
                                 para los usuarios que ingresan por primera vez mediante Facebook o Google).',
                     components: ['pages/required_attributes/**/*.vue']
+                },
+                {
+                    name: 'Required Filters',
+                    description: 'Vista donde se le pregunta al usuario por filtros necesarios para la\
+                                búsqueda de rivales en la app según su preferencia.',
+                    components: ['pages/required_filters/**/*.vue']
                 }
             ]
         },

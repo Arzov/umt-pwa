@@ -1,7 +1,7 @@
 <template>
     <div id="page-required-filters-mobile">
         <a-row type="flex" justify="center">
-            <a-button @click="logout">
+            <a-button @click="signOut">
                 Salir
             </a-button>
         </a-row>
@@ -21,11 +21,20 @@
     import MatchFilterInput from '@/components/matchFilterInput'
     import AgeFilterInput from '@/components/ageFilterInput'
 
+    /**
+     * Componente de la vista [RequiredFiltersMobile](#required-filters) para dispositivos móviles.
+     */
     export default {
         name: 'RequiredFiltersMobile',
         components: { GenderFilterInput, MatchFilterInput, AgeFilterInput },
         props: {
+            /**
+             * Evento a emitir hacia vista [RequiredFiltersMobile](#required-filters).
+             *
+             * @values SAVE_FILTERS, SIGNOUT
+             */
             event: {
+                type: Object,
                 required: true
             }
         },
@@ -38,8 +47,10 @@
         },
         methods: {
             /**
-             * Metodo guarda los filtros seleccionados.
-             * @return {Object} Evento de tipo SAVE_FILTERS.
+             * Emite evento para guardar filtros.
+             *
+             * @return {object} Evento de tipo SAVE_FILTERS.
+             * @public
              */
             saveFilters () {
                 const params = {
@@ -48,16 +59,34 @@
                     match: this.match,
                     age: this.age
                 }
+
+                /**
+                 * Evento para guardar filtros.
+                 *
+                 * @event emitSaveFilters
+                 * @property {object} params Objecto con tipo SAVE_FILTERS a emitir y
+                 *                           datos para guardar (tipo de juego, sexo y rango de edad).
+                 */
                 this.$emit('emit', params)
             },
+
             /**
-             * Metodo para cerrar sesion.
-             * @return {Object} Evento de tipo LOGOUT.
+             * Emite evento para cerrar sesión.
+             *
+             * @return {object} Evento de tipo SIGNOUT.
+             * @public
              */
-            logout () {
+            signOut () {
                 const params = {
-                    type: this.event.LOGOUT
+                    type: this.event.SIGNOUT
                 }
+
+                /**
+                 * Evento para cerrar sesión.
+                 *
+                 * @event emitSignOut
+                 * @property {object} params Objecto con tipo SIGNOUT a emitir.
+                 */
                 this.$emit('emit', params)
             }
         }
@@ -67,3 +96,35 @@
 <style scoped>
 
 </style>
+
+<docs>
+    EXAMPLE
+
+    ```html static
+    <template>
+        <required-filters-mobile :event="event" @emit="onEmit($event)" />
+    </template>
+
+    <script>
+        import RequiredFiltersMobile from './mobile'
+
+        const event = {
+            SAVE_FILTERS: 'save_filters',
+            SIGNOUT: 'signout'
+        }
+
+        export default {
+            components: { RequiredFiltersMobile },
+            data () {
+                return {
+                    event
+                }
+            },
+            methods: {
+                onEmit (event) { ... }
+            },
+            ...
+        }
+    </script>
+    ```
+</docs>
