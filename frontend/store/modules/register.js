@@ -26,15 +26,18 @@ const actions = {
         })
             .then((result) => {
                 const params = {
-                    email: data.email,
+                    name: data.name,
+                    birthdate,
+                    gender: data.gender,
+                    email: data.email.toLowerCase(),
                     verified: false
                 }
     
                 // Guardar estados para usuario
                 ctx.commit('user/setState', { params }, { root: true })
 
-                // Enviar a verificar codigo
-                this.$router.push(process.env.routes.verification.path)
+                // Enviar a verificar email
+                this.$router.push(process.env.routes.email_verification.path)
             })
             .catch((err) => {
                 switch (err.code) {

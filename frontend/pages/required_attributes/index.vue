@@ -13,14 +13,21 @@
     import RequiredAttributesMobile from './mobile'
 
     /**
-     * Evento que pueden emitir las vistas.
+     * Evento que pueden emitir los componentes.
+     *
      * @type {{SAVE_ATTRIBUTES: string, LOGOUT: string}}
      */
     const event = {
         SAVE_ATTRIBUTES: 'save_attributes',
-        LOGOUT: 'logout'
+        SIGNOUT: 'signout'
     }
 
+    /**
+     * Vista principal que decide cual componente inicializar (mobile o desktop).
+     * También guardar atributos del usuario o cerrar sesión.
+     *
+     * @displayName RequiredAttributesMain
+     */
     export default {
         name: 'RequiredAttributes',
         components: { RequiredAttributesMobile },
@@ -31,18 +38,26 @@
         },
         methods: {
             /**
-             * Captura eventos generados por las vistas.
-             * @param  {Object} event Evento emitido por la vista.
+             * Captura eventos generados por los componentes. Según
+             * los valores retornados puede guardar los atributos del usuario
+             * o cerrar sesión.
+             *
+             * @param {object} event Evento emitido por el componente.
+             * @public
              */
             onEmit (event) {
                 switch (event.type) {
                     // Guardar atributos seleccionados
                     case this.event.SAVE_ATTRIBUTES:
-                        this.$store.dispatch('user/saveAttributes', event)
+                        this.$store.dispatch('requiredAttributes/saveAttributes', event)
+                            .then((result) => {
+                                this.$router.push(process.env.routes.home.path)
+                            })
+                            .catch(e => console.log(e))
                         break
 
                     // Cerrar sesion
-                    case this.event.LOGOUT:
+                    case this.event.SIGNOUT:
                         this.$AWS.Auth.signOut({ global: true })
                         break
                 }

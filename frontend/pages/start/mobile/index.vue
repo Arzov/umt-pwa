@@ -29,7 +29,7 @@
     import GoogleLogin from '@/components/googleLogin'
 
     /**
-     * Componente de la vista Start para dispositivos móviles.
+     * Componente de la vista [Start](#start) para dispositivos móviles.
      */
     export default {
         name: 'StartMobile',

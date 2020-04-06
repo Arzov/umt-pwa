@@ -42,7 +42,7 @@
     import HeaderTitleMobile from '@/components/headerTitleMobile'
 
     /**
-     * Componente de la vista Login para dispositivos móviles.
+     * Componente de la vista [Login](#login) para dispositivos móviles.
      */
     export default {
         name: 'LoginMobile',

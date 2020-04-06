@@ -35,6 +35,26 @@ module.exports = {
                     description: 'Vista donde el usuario registra su email en Arzov\
                                 (AWS Cognito maneja la autenticación).',
                     components: ['pages/register/**/*.vue']
+                },
+                {
+                    name: 'Email Verification',
+                    description: 'Vista donde el usuario debe verificar su email de\
+                                registro mediante el código enviado por Arzov. También\
+                                puede pedir un nuevo código en caso de no recibirlo.',
+                    components: ['pages/email_verification/**/*.vue']
+                },
+                {
+                    name: 'Required Attributes',
+                    description: 'Vista donde el usuario debe, obligatoriamente, ingresar atributos extras\
+                                para poder filtrar la búsqueda de sus rivales (esta vista es sólo necesaria\
+                                para los usuarios que ingresan por primera vez mediante Facebook o Google).',
+                    components: ['pages/required_attributes/**/*.vue']
+                },
+                {
+                    name: 'Required Filters',
+                    description: 'Vista donde se le pregunta al usuario por filtros necesarios para la\
+                                búsqueda de rivales en la app según su preferencia.',
+                    components: ['pages/required_filters/**/*.vue']
                 }
             ]
         },

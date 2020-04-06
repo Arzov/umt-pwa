@@ -2,7 +2,7 @@
     <div id="page-required-attributes-mobile">
         <a-row>
             <a-row type="flex" justify="center">
-                <a-button @click="logout">
+                <a-button @click="signOut">
                     Salir
                 </a-button>
             </a-row>
@@ -21,11 +21,20 @@
     import BirthdateInput from '@/components/birthdateInput'
     import GenderInput from '@/components/genderInput'
 
+    /**
+     * Componente de la vista [RequiredAttributes](#required-attributes) para dispositivos móviles.
+     */
     export default {
         name: 'RequiredAttributesMobile',
         components: { BirthdateInput, GenderInput },
         props: {
+            /**
+             * Evento a emitir hacia vista [RequiredAttributes](#required-attributes).
+             *
+             * @values SAVE_ATTRIBUTES, SIGNOUT
+             */
             event: {
+                type: Object,
                 required: true
             }
         },
@@ -41,8 +50,10 @@
         },
         methods: {
             /**
-             * Metodo guarda los atributos seleccionados.
-             * @return {Object} Evento de tipo SAVE_ATTRIBUTES.
+             * Emite evento para guardar atributos.
+             *
+             * @return {object} Evento de tipo SAVE_ATTRIBUTES.
+             * @public
              */
             saveAttributes () {
                 const params = {
@@ -50,16 +61,34 @@
                     birthdate: this.birthdate,
                     gender: this.gender
                 }
+
+                /**
+                 * Evento para guardar atributos.
+                 *
+                 * @event emitSaveAttributes
+                 * @property {object} params Objecto con tipo SAVE_ATTRIBUTES a emitir y
+                 *                           datos para guardar (fecha de nacimiento y sexo).
+                 */
                 this.$emit('emit', params)
             },
+
             /**
-             * Metodo para cerrar sesion.
-             * @return {Object} Evento de tipo LOGOUT.
+             * Emite evento para cerrar sesión.
+             *
+             * @return {object} Evento de tipo SIGNOUT.
+             * @public
              */
-            logout () {
+            signOut () {
                 const params = {
-                    type: this.event.LOGOUT
+                    type: this.event.SIGNOUT
                 }
+
+                /**
+                 * Evento para cerrar sesión.
+                 *
+                 * @event emitSignOut
+                 * @property {object} params Objecto con tipo SIGNOUT a emitir.
+                 */
                 this.$emit('emit', params)
             }
         }
@@ -69,3 +98,35 @@
 <style scoped>
 
 </style>
+
+<docs>
+    EXAMPLE
+
+    ```html static
+    <template>
+        <required-attributes-mobile :event="event" @emit="onEmit($event)" />
+    </template>
+
+    <script>
+        import RequiredAttributesMobile from './mobile'
+
+        const event = {
+            SAVE_ATTRIBUTES: 'save_attributes',
+            SIGNOUT: 'signout'
+        }
+
+        export default {
+            components: { RequiredAttributesMobile },
+            data () {
+                return {
+                    event
+                }
+            },
+            methods: {
+                onEmit (event) { ... }
+            },
+            ...
+        }
+    </script>
+    ```
+</docs>
