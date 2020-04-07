@@ -27,11 +27,20 @@
     import UInput from '@/components/uInput'
     import HeaderTitleMobile from '@/components/headerTitleMobile'
 
+    /**
+     * Componente de la vista [RecoverPassword](#recoverpassword) para dispositivos móviles.
+     */
     export default {
         name: 'RecoverPasswordMobile',
         components: { UInput, HeaderTitleMobile },
         props: {
+            /**
+             * Evento a emitir hacia vista [RecoverPassword](#recoverpassword).
+             *
+             * @values RECOVER
+             */
             event: {
+                type: Object,
                 required: true
             }
         },
@@ -42,7 +51,13 @@
             }
         },
         methods: {
-
+            /**
+             * Emite evento para restablecer contraseña.
+             *
+             * @param {object} event Evento a gatillar.
+             * @return {object} Evento a gatillar.
+             * @public
+             */
             recover (event) {
                 event.preventDefault()
 
@@ -53,6 +68,12 @@
                             data
                         }
 
+                        /**
+                         * Evento para restablecer contraseña.
+                         *
+                         * @event emitRecover
+                         * @property {object} params Objecto con tipo RECOVER a emitir.
+                         */
                         this.$emit('emit', params)
                     }
                 })
@@ -64,3 +85,30 @@
 <style scoped>
 
 </style>
+
+<docs>
+    EXAMPLE
+
+    ```html static
+    <template>
+        <recover-password-mobile :event="event" @emit="onEmit($event)" />
+    </template>
+
+    <script>
+        import RecoverPasswordMobile from './mobile'
+
+        const event = {
+            RECOVER: 'recover'
+        }
+
+        export default {
+            components: { RecoverPasswordMobile },
+            data () { return { event } },
+            methods: {
+                onEmit (event) { ... }
+            },
+            ...
+        }
+    </script>
+    ```
+</docs>

@@ -62,6 +62,14 @@ module.exports = {
                                 la solicitud en la vista [RecoverPassword](#recoverpassword). El usuario deberá ingresar\
                                 un código enviado a su email registrado y la nueva contraseña.',
                     components: ['pages/reset_password/**/*.vue']
+                },
+                {
+                    name: 'Recover Password',
+                    description: 'Vista donde el usuario puede restablecer su contraseña en caso de que\
+                                la olvide (comportamiento sólo para autenticación con Arzov).\
+                                El usuario deberá ingresar su email registrado para poder acceder a la\
+                                vista de cambio de contraseña.',
+                    components: ['pages/recover_password/**/*.vue']
                 }
             ]
         },
