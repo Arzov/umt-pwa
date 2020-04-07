@@ -23,7 +23,7 @@
     }
 
     /**
-     * Vista principal que decide cual componente inicializar (mobile o desktop).
+     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
      * También guardar atributos del usuario o cerrar sesión.
      *
      * @displayName RequiredAttributesMain

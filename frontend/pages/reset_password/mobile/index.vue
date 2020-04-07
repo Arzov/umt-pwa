@@ -35,11 +35,20 @@
     import UInput from '@/components/uInput'
     import HeaderTitleMobile from '@/components/headerTitleMobile'
 
+    /**
+     * Componente de la vista [ResetPassword](#resetpassword) para dispositivos móviles.
+     */
     export default {
         name: 'ResetPasswordMobile',
         components: { UInput, HeaderTitleMobile },
         props: {
+            /**
+             * Evento a emitir hacia vista [ResetPassword](#resetpassword).
+             *
+             * @values RESET
+             */
             event: {
+                type: Object,
                 required: true
             }
         },
@@ -50,7 +59,13 @@
             }
         },
         methods: {
-
+            /**
+             * Emite evento para cambiar contraseña.
+             *
+             * @param {object} event Evento a gatillar.
+             * @return {object} Evento a gatillar.
+             * @public
+             */
             reset (event) {
                 event.preventDefault()
 
@@ -61,6 +76,12 @@
                             data
                         }
 
+                        /**
+                         * Evento para cambiar contraseña.
+                         *
+                         * @event emitReset
+                         * @property {object} params Objecto con tipo RESET a emitir.
+                         */
                         this.$emit('emit', params)
                     }
                 })
@@ -72,3 +93,30 @@
 <style scoped>
 
 </style>
+
+<docs>
+    EXAMPLE
+
+    ```html static
+    <template>
+        <reset-password-mobile :event="event" @emit="onEmit($event)" />
+    </template>
+
+    <script>
+        import ResetPasswordMobile from './mobile'
+
+        const event = {
+            RESET: 'reset'
+        }
+
+        export default {
+            components: { ResetPasswordMobile },
+            data () { return { event } },
+            methods: {
+                onEmit (event) { ... }
+            },
+            ...
+        }
+    </script>
+    ```
+</docs>

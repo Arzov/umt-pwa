@@ -1,4 +1,10 @@
 const actions = {
+  /**
+   * Guarda filtros del usuario.
+   *
+   * @param {object} ctx Contexto de Nuxt.
+   * @param {object} data Filtros a guardar _match_, _gender_, _age_.
+   */
   saveFilters (ctx, data) {
     const age = Array.from(data.age, x => String(x))
     const params = {

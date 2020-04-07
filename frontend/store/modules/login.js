@@ -2,10 +2,9 @@ const actions = {
   /**
    * Inicia sesión con la autenticación de AWS Cognito.
    *
-   * @param {object} ctx Contexto de Nuxt.
    * @param {object} data Datos de autenticación _email_ y _password_.
    */
-  signIn (ctx, data) {
+  signIn (data) {
     // Autenticación con AWS Cognito
     // TODO: Inyectar componente _popup_ para mostrar mensajes
     this.$AWS.Auth.signIn({

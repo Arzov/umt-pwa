@@ -1,6 +1,6 @@
 const actions = {
     /**
-     * Registrar email con AWS Cognito.
+     * Registra email con AWS Cognito.
      *
      * @param {object} ctx Contexto de Nuxt.
      * @param {object} data Datos de registro _email_, _name_, _birthdate_,
