@@ -1,19 +1,15 @@
-const state = () => ({
-})
-
-const mutations = {
-}
-
 const actions = {
+  /**
+   * Restablece la contraseña.
+   *
+   * @param {object} ctx Contexto de Nuxt.
+   * @param {object} data Datos para restablecer la contraseña _email_.
+   */
   recoverPassword (ctx, data) {
-    if (data.username) {
-      this.$AWS.Auth.forgotPassword(data.username)
-      .then((user) => {
-        // eslint-disable-next-line no-console
-        console.log(user)
-
+    this.$AWS.Auth.forgotPassword(data.email)
+      .then(() => {
         const params = {
-          id: data.username
+          email: data.email
         }
 
         ctx.commit('user/setState', { params }, { root: true })
@@ -34,15 +30,10 @@ const actions = {
               break
         }
       })
-    } else {
-      console.log('Debe ingresar todos los datos!')
-    }
   }
 }
 
 export default {
   namespaced: true,
-  state,
-  actions,
-  mutations
+  actions
 }
