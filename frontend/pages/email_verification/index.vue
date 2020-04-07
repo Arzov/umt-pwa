@@ -20,7 +20,7 @@
     }
 
     /**
-     * Vista principal que decide cual componente inicializar (mobile o desktop).
+     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
      * También gatillar la verificación del email del usuario o reenviar nuevo código
      * de validación.
      *

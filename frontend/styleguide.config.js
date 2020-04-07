@@ -55,6 +55,13 @@ module.exports = {
                     description: 'Vista donde se le pregunta al usuario por filtros necesarios para la\
                                 búsqueda de rivales en la app según su preferencia.',
                     components: ['pages/required_filters/**/*.vue']
+                },
+                {
+                    name: 'Reset Password',
+                    description: 'Vista donde el usuario puede cambiar su contraseña una vez enviada\
+                                la solicitud en la vista [RecoverPassword](#recoverpassword). El usuario deberá ingresar\
+                                un código enviado a su email registrado y la nueva contraseña.',
+                    components: ['pages/reset_password/**/*.vue']
                 }
             ]
         },

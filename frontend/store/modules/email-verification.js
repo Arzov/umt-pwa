@@ -1,6 +1,6 @@
 const actions = {
     /**
-     * Verificar email con AWS Cognito.
+     * Verifica email con AWS Cognito.
      *
      * @param {object} ctx Contexto de Nuxt.
      * @param {object} data Datos con código de verificación _code_.
@@ -47,7 +47,7 @@ const actions = {
     },
 
     /**
-     * Reenviar código de verificación.
+     * Reenvia código de verificación.
      *
      * @param {object} ctx Contexto de Nuxt.
      */

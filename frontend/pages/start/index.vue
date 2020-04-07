@@ -20,7 +20,7 @@
     }
 
     /**
-     * Vista principal que decide cual componente inicializar (mobile o desktop).
+     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
      * También redirecciona al usuario a la vista [Login](#login) o [Register](#register).
      *
      * @displayName StartMain
