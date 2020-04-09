@@ -77,6 +77,13 @@ module.exports = {
                                 rivales cercanos y enlistarlos. El usuario puede enviar una solicitud\
                                 de _match_ a cada rival.',
                     components: ['pages/home/**/*.vue']
+                },
+                {
+                    name: 'Profile',
+                    description: 'Vista donde el usuario puede revisar sus datos de la cuenta y\
+                                eventualmente modificar sus valores (filtros de búsqueda,\
+                                atributos personales, etc.).',
+                    components: ['pages/profile/**/*.vue']
                 }
             ]
         },
