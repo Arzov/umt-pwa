@@ -84,6 +84,16 @@ module.exports = {
                                 eventualmente modificar sus valores (filtros de búsqueda,\
                                 atributos personales, etc.).',
                     components: ['pages/profile/**/*.vue']
+                },
+                {
+                    name: 'Match',
+                    description: 'Vista donde el usuario puede ver las solicitudes enviadas y las\
+                                solicitudes activas con otros usuarios.\
+                                En las **enviadas** o **pendientes** el usuario puede aceptar o\
+                                rechazar las solicitudes.\
+                                En las **activas** puede acceder a un chat para acordar una fecha y\
+                                cancha del partido a jugar.',
+                    components: ['pages/match/**/*.vue']
                 }
             ]
         },

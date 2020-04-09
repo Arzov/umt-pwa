@@ -2,10 +2,12 @@ import { getMatches } from '@/graphql/queries'
 import { updateMatch } from '@/graphql/mutations'
 import { onUpdateMatch } from '@/graphql/subscriptions'
 
-const state = () => ({
+const getDefaultState = () => ({
     matchesList: [],
     matchNextToken: null
 })
+
+const state = getDefaultState()
 
 const getters = {
     matchesList: state => state.matchesList,
@@ -13,7 +15,7 @@ const getters = {
 }
 
 const actions = {
-    getMatches (context) {
+    fetchMatches (context) {
         // Usar API de Umatch
         this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
@@ -88,8 +90,8 @@ const actions = {
                 }
             })
     },
-    resetStates (context) {
-        context.commit('resetStates')
+    resetStates (ctx) {
+        ctx.commit('resetStates')
     }
 }
 
@@ -101,8 +103,7 @@ const mutations = {
         }
     },
     resetStates (state) {
-        state.matchesList = []
-        state.matchNextToken = null
+        Object.assign(state, getDefaultState())
     }
 }
 
