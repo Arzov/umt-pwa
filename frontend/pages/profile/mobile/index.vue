@@ -37,7 +37,7 @@
             </a-row>
 
             <a-row type="flex" justify="center" class="close-button">
-                <a u-anchor @click="logout">
+                <a u-anchor @click="signOut">
                     <span u-a>Cerrar sesión</span>
                 </a>
             </a-row>
@@ -53,14 +53,28 @@
     import MatchVersusSelect from '@/components/matchVersusSelect'
     import AgeFilterInput from '@/components/ageFilterInput'
 
+    /**
+     * Componente de la vista [Profile](#profile) para dispositivos móviles.
+     */
     export default {
         name: 'ProfileMobile',
         components: { ProfileImage, BirthdateInput, GenderInput, GenderFilterInput, MatchVersusSelect, AgeFilterInput },
         props: {
+            /**
+             * Evento a emitir hacia vista [Profile](#profile).
+             *
+             * @values SAVE_PROFILE, SIGNOUT
+             */
             event: {
+                type: Object,
                 required: true
             },
+
+            /**
+             * Datos del usuario.
+             */
             userData: {
+                type: Object,
                 required: true
             }
         },
@@ -79,8 +93,11 @@
         },
         methods: {
             /**
-             * Metodo guarda los filtros seleccionados.
-             * @return {Object} Evento de tipo SAVE_PROFILE.
+             * Emite evento para guardar los datos del usuario.
+             *
+             * @param {string} eventType Tipo de evento a gatillar.
+             * @return {object} Evento a gatillar.
+             * @public
              */
             saveProfile () {
                 const params = {
@@ -93,18 +110,70 @@
                         ageFilter: this.ageFilter
                     }
                 }
+
+                /**
+                 * Evento para guardar los datos del usuario.
+                 *
+                 * @event emitSaveProfile
+                 * @property {object} params Objecto con tipo SAVE_PROFILE a emitir y datos
+                 *                           a guardar (sexo, fecha de nacimiento, filtro de sexo,
+                 *                           tipo de juego y rango de edad de búsqueda).
+                 */
                 this.$emit('emit', params)
             },
+
             /**
              * Metodo para cerrar sesion.
-             * @return {Object} Evento de tipo LOGOUT.
+             *
+             * @return {Object} Evento de tipo SIGNOUT.
+             * @public
              */
-            logout () {
+            signOut () {
                 const params = {
-                    type: this.event.LOGOUT
+                    type: this.event.SIGNOUT
                 }
+
+                /**
+                 * Evento para guardar los datos del usuario.
+                 *
+                 * @event emitSignOut
+                 * @property {object} params Objecto con tipo SIGNOUT a emitir.
+                 */
                 this.$emit('emit', params)
             }
         }
     }
 </script>
+
+<docs>
+    EXAMPLE
+
+    ```html static
+    <template>
+        <profile-mobile :user-data="userData" :event="event" @emit="onEmit($event)" />
+    </template>
+
+    <script>
+        import ProfileMobile from './mobile'
+
+        const event = {
+            SAVE_PROFILE: 'save_profile',
+            SIGNOUT: 'signout'
+        }
+
+        export default {
+            components: { ProfileMobile },
+            data () {
+                return {
+                    event,
+                    userData: ... // Datos del usuario
+                }
+            },
+            methods: {
+                onEmit (event) { ... }
+            },
+            ...
+        }
+    </script>
+    ```
+</docs>

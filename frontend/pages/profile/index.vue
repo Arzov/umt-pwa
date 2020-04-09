@@ -10,14 +10,21 @@
     import ProfileMobile from './mobile'
 
     /**
-     * Evento que pueden emitir las vistas.
-     * @type {{SAVE_PROFILE: string, LOGOUT: string}}
+     * Evento que pueden emitir los componentes.
+     *
+     * @type {{SAVE_PROFILE: string, SIGNOUT: string}}
      */
     const event = {
         SAVE_PROFILE: 'save_profile',
-        LOGOUT: 'logout'
+        SIGNOUT: 'signout'
     }
 
+    /**
+     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
+     * También guardar los datos del usuario o cerrar sesión.
+     *
+     * @displayName ProfileMain
+     */
     export default {
         name: 'Profile',
         layout: 'empty',
@@ -30,18 +37,22 @@
         },
         methods: {
             /**
-             * Captura eventos generados por las vistas.
-             * @param  {Object} event Evento emitido por la vista.
+             * Captura eventos generados por los componentes. Según
+             * los valores retornados puede guardar los datos del
+             * usuario o cerrar sesión.
+             *
+             * @param {object} event Evento emitido por el componente.
+             * @public
              */
             onEmit (event) {
                 switch (event.type) {
-                    // Guardar filtros seleccionados
+                    // Guardar datos
                     case this.event.SAVE_PROFILE:
                         this.$store.dispatch('profile/saveProfile', event.data)
                         break
 
                     // Cerrar sesion
-                    case this.event.LOGOUT:
+                    case this.event.SIGNOUT:
                         this.$AWS.Auth.signOut({ global: true })
                         break
                 }
