@@ -10,14 +10,21 @@
     import HomeMobile from './mobile'
 
     /**
-     * Evento que pueden emitir las vistas.
-     * @type {{SEARCH_MATCH: string, ADD_MATCH: string}}
+     * Evento que pueden emitir los componentes.
+     *
+     * @type {{SEARCH_MATCH: string, REQUEST_MATCH: string}}
      */
     const event = {
         SEARCH_MATCH: 'search_match',
-        ADD_MATCH: 'add_match'
+        REQUEST_MATCH: 'request_match'
     }
 
+    /**
+     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
+     * También permite buscar rivales cercanos o enviar una solicitud de _match_ a un rival.
+     *
+     * @displayName HomeMain
+     */
     export default {
         name: 'Home',
         layout: 'home',
@@ -28,21 +35,14 @@
                 usersFound: this.$store.getters['home/usersFound']
             }
         },
-        mounted () {
-            this.$store.dispatch('home/searchMatch')
-
-            // Refrescar listado de usuarios cuando se haga una busqueda
-            this.$store.watch(
-                (state, getters) => getters['home/usersFound'],
-                (newValue, oldValue) => {
-                    this.usersFound = newValue
-                }
-            )
-        },
         methods: {
             /**
-             * Captura eventos generados por las vistas.
-             * @param {Object} event Evento emitido por la vista.
+             * Captura eventos generados por los componentes. Según
+             * los valores retornados puede buscar rivales cercanos o enviar una
+             * solicitud a un rival.
+             *
+             * @param {object} event Evento emitido por el componente.
+             * @public
              */
             onEmit (event) {
                 switch (event.type) {
@@ -52,8 +52,10 @@
                         break
         
                     // Enviar solicitud de match
-                    case this.event.ADD_MATCH:
-                        this.$store.dispatch('home/addMatch', event)
+                    case this.event.REQUEST_MATCH:
+                        this.$store.dispatch('home/requestMatch', event)
+
+                        // Se elimina al rival solicitado del listado de rivales encontrados
                         this.usersFound.splice(event.index, 1)
                         break
                 }
