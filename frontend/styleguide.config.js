@@ -70,6 +70,13 @@ module.exports = {
                                 El usuario deberá ingresar su email registrado para poder acceder a la\
                                 vista de cambio de contraseña.',
                     components: ['pages/recover_password/**/*.vue']
+                },
+                {
+                    name: 'Home',
+                    description: 'Vista inicial de la app donde el usuario tiene la funcionalidad de buscar\
+                                rivales cercanos y enlistarlos. El usuario puede enviar una solicitud\
+                                de _match_ a cada rival.',
+                    components: ['pages/home/**/*.vue']
                 }
             ]
         },

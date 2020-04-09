@@ -2,10 +2,12 @@ import { searchMatch } from '@/graphql/queries'
 import { addMatch } from '@/graphql/mutations'
 const { getDistance } = require('@/utils/geolocUtils')
 
-const state = () => ({
-    usersFound: [],
-    matchNextToken: null
+const getDefaultState = () => ({
+  usersFound: [],
+  matchNextToken: null
 })
+
+const state = getDefaultState()
 
 const getters = {
     usersFound: state => state.usersFound,
@@ -13,24 +15,29 @@ const getters = {
 }
 
 const actions = {
-  searchMatch (context) {
+  /**
+   * Busca rivales cercanos al usuario.
+   *
+   * @param {object} ctx Contexto de Nuxt.
+   */
+  searchMatch (ctx) {
     // Verificar si geohash se ha actualizado para poder buscar
-    if (context.rootState.user.geohash) {
+    if (ctx.rootState.user.geohash) {
       // Usar API de Umatch
       this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
       // Obtener usuarios cercanos para hacer match
       this.$AWS.API.graphql(
         this.$AWS.Query(searchMatch, {
-          hashKey: context.rootState.user.geohash,
-          nextToken: context.state.matchNextToken,
-          birthdate: context.rootState.user.birthdate,
-          matchFilter: context.rootState.user.matchFilter,
-          genderFilter: context.rootState.user.genderFilter,
-          rangeKey: context.rootState.user.id,
-          ageMinFilter: context.rootState.user.ageMinFilter,
-          ageMaxFilter: context.rootState.user.ageMaxFilter,
-          gender: context.rootState.user.gender
+          hashKey: ctx.rootState.user.geohash,
+          nextToken: ctx.state.matchNextToken,
+          birthdate: ctx.rootState.user.birthdate,
+          matchFilter: ctx.rootState.user.matchFilter,
+          genderFilter: ctx.rootState.user.genderFilter,
+          rangeKey: ctx.rootState.user.email,
+          ageMinFilter: ctx.rootState.user.ageMinFilter,
+          ageMaxFilter: ctx.rootState.user.ageMaxFilter,
+          gender: ctx.rootState.user.gender
         })
       )
         .then((result) => {
@@ -45,40 +52,51 @@ const actions = {
                   distance: Math.round(getDistance(
                       user.geoJson[1],
                       user.geoJson[0],
-                      context.rootState.user.latitude,
-                      context.rootState.user.longitude
+                      ctx.rootState.user.latitude,
+                      ctx.rootState.user.longitude
                   ))
               }
               return userEdited
             })
           }
 
-          context.commit('setState', { params })
+          ctx.commit('setState', { params })
         })
         // eslint-disable-next-line no-console
         .catch(e => console.log(e))
     } else {
-      console.log('aun se debe actualizar el geohash segun geoloc')
+      /**
+       * Si el usuario no posee _geohash_ es debido a que aún no ha permitido
+       * el acceso a la ubicación desde el navegador.
+       */
+      console.log('El usuario debe permitir el acceso a la ubicación.')
     }
   },
-  addMatch (context, data) {
+
+  /**
+   * Envia solicitud de _match_ a un rival.
+   *
+   * @param {object} ctx Contexto de Nuxt.
+   * @param {object} data Datos para la solicitud _rangeKey_, _adversaryName_ y _adversaryPicture_.
+   */
+  requestMatch (ctx, data) {
     // Usar API de Umatch
     this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
     // Obtener usuarios cercanos para hacer match
     this.$AWS.API.graphql(
       this.$AWS.Query(addMatch, {
-        hashKey: context.rootState.user.id,
+        hashKey: ctx.rootState.user.email,
         rangeKey: data.rangeKey,
-        geohash: context.rootState.user.geohash,
-        creatorName: context.rootState.user.firstName,
-        creatorPicture: context.rootState.user.picture,
+        geohash: ctx.rootState.user.geohash,
+        creatorName: ctx.rootState.user.firstName,
+        creatorPicture: ctx.rootState.user.picture,
         adversaryName: data.adversaryName,
         adversaryPicture: data.adversaryPicture,
-        matchFilter: context.rootState.user.matchFilter,
-        genderFilter: context.rootState.user.genderFilter,
-        ageMinFilter: context.rootState.user.ageMinFilter,
-        ageMaxFilter: context.rootState.user.ageMaxFilter
+        matchFilter: ctx.rootState.user.matchFilter,
+        genderFilter: ctx.rootState.user.genderFilter,
+        ageMinFilter: ctx.rootState.user.ageMinFilter,
+        ageMaxFilter: ctx.rootState.user.ageMaxFilter
       })
     )
       .then((result) => {
@@ -86,8 +104,14 @@ const actions = {
       // eslint-disable-next-line no-console
       .catch(e => console.log(e))
   },
-  resetStates (context) {
-    context.commit('resetStates')
+
+  /**
+   * Reinicia estados en valores iniciales.
+   *
+   * @param {object} ctx Contexto de Nuxt.
+   */
+  resetStates (ctx) {
+    ctx.commit('resetStates')
   }
 }
 
@@ -99,8 +123,7 @@ const mutations = {
         }
     },
     resetStates (state) {
-        state.usersFound = []
-        state.matchNextToken = null
+      Object.assign(state, getDefaultState())
     }
 }
 
