@@ -190,7 +190,7 @@
 /*
  * Positions
  */
-#layout-auth, #layout-home, #layout-home > div:nth-child(1), #layout-default, #layout-default > div:nth-child(1), *[u-select] .ant-select > div > div, #component-u-tabs .u-tabs-content .u-tabs-content-position, #page-start-mobile, #page-login-mobile, #page-recover-password-mobile, #page-reset-password-mobile, #page-register-mobile, #page-verification-mobile, #page-home-mobile, #page-match-mobile, #page-chat-mobile, #page-map-mobile, #page-required-attributes-mobile {
+#layout-auth, #layout-home, #layout-home > div:nth-child(1), #layout-default, #layout-default > div:nth-child(1), *[u-select] .ant-select > div > div, #component-u-tabs .u-tabs-content .u-tabs-content-position, #page-start-mobile, #page-login-mobile, #page-recover-password-mobile, #page-reset-password-mobile, #page-register-mobile, #page-verification-mobile, #page-home-mobile, #page-match-mobile, #page-chat-mobile, #page-map-mobile, #page-required-attributes-mobile, #page-required-filters-mobile {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -270,7 +270,7 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-#page-login-mobile > div:nth-child(2), #page-recover-password-mobile > div:nth-child(2), #page-reset-password-mobile > div:nth-child(2), #page-register-mobile > div:nth-child(2), #page-verification-mobile > div:nth-child(2), #page-required-attributes-mobile > div:nth-child(2) {
+#page-login-mobile > div:nth-child(2), #page-recover-password-mobile > div:nth-child(2), #page-reset-password-mobile > div:nth-child(2), #page-register-mobile > div:nth-child(2), #page-verification-mobile > div:nth-child(2), #page-required-attributes-mobile > div:nth-child(2), #page-required-filters-mobile > div:nth-child(2) {
   background-color: #242728;
   margin: 20px;
   padding: 10px 30px 60px 30px;
@@ -618,8 +618,8 @@
 *[u-radio-group] > div {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(120px, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  -ms-grid-columns: (minmax(100px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   grid-gap: 6px;
   font-size: 1em;
 }
@@ -1692,6 +1692,13 @@ span {
 }
 
 #page-required-attributes-mobile {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto auto 1fr;
+      grid-template-rows: auto auto 1fr;
+}
+
+#page-required-filters-mobile {
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: auto auto 1fr;

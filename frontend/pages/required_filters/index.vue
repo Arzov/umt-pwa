@@ -27,6 +27,7 @@
      */
     export default {
         name: 'RequiredFilters',
+        layout: 'auth',
         components: { RequiredFiltersMobile },
         data () {
             return {
@@ -47,7 +48,7 @@
                     // Guardar filtros seleccionados
                     case this.event.SAVE_FILTERS:
                         this.$store.dispatch('requiredFilters/saveFilters', event)
-                            .then((result) => {
+                            .then(() => {
                                 this.$router.push(process.env.routes.home.path)
                             })
                             .catch(e => console.log(e))
