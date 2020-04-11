@@ -4,6 +4,7 @@ import newPassword from './decorators/new-password.js'
 import code from './decorators/code.js'
 import name from './decorators/name.js'
 import birthdate from './decorators/birthdate.js'
+import gender from './decorators/gender.js'
 
 export default {
     email,
@@ -11,5 +12,6 @@ export default {
     newPassword,
     code,
     name,
-    birthdate
+    birthdate,
+    gender
 }

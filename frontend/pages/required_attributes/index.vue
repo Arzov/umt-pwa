@@ -30,6 +30,7 @@
      */
     export default {
         name: 'RequiredAttributes',
+        layout: 'auth',
         components: { RequiredAttributesMobile },
         data () {
             return {
@@ -50,9 +51,10 @@
                     // Guardar atributos seleccionados
                     case this.event.SAVE_ATTRIBUTES:
                         this.$store.dispatch('requiredAttributes/saveAttributes', event)
-                            .then((result) => {
+                            .then(() => {
                                 this.$router.push(process.env.routes.home.path)
                             })
+                            // TODO: falta implementar popup.
                             .catch(e => console.log(e))
                         break
 

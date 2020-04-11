@@ -27,6 +27,7 @@ module.exports = {
         "require-await": "off",
         "prefer-const": "off",
         "eqeqeq": ["warn", "smart"],
+        "no-async-promise-executor": "off",
 
         // Vue
         "vue/no-unused-components": "off",

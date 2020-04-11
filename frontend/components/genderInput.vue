@@ -1,12 +1,10 @@
 <template>
-    <div id="component-gender-input">
-        <u-radio-group title="sexo">
-            <a-radio-group name="radioGroup" :default-value="value" @change="setGender">
-
-                <a-radio v-for="gender in genderOptions" :key="'g' + gender.value" :value="gender.value">
-                    {{ gender.key }}
+    <div id="component-gender-input" component-gender-input>
+        <u-radio-group :title="_title">
+            <a-radio-group name="radioGroup" :default-value="_option" @change="setGender">
+                <a-radio v-for="gender in _options" :key="'g' + gender.value" :value="gender.value">
+                    {{ gender.text }}
                 </a-radio>
-
             </a-radio-group>
         </u-radio-group>
     </div>
@@ -18,18 +16,36 @@
     export default {
         name: 'GenderInput',
         components: { URadioGroup },
-        props: ['value'],
+        props: ['value', 'title', 'options'],
         data () {
             return {
                 genderOptions: [
-                    { key: 'Masculino', value: 'M' },
-                    { key: 'Femenino', value: 'F' }
+                    { text: 'Masculino', value: 'M' },
+                    { text: 'Femenino', value: 'F' }
+                ],
+
+                genderOptionsFilter: [
+                    { text: 'Hombres', value: 'M' },
+                    { text: 'Mujeres', value: 'F' }
                 ]
+            }
+        },
+        computed: {
+            _title () {
+                return this.title ? this.title : 'Sexo'
+            },
+
+            _option () {
+                return this.value ? this.value : 'M'
+            },
+
+            _options () {
+                return this[this.options] ? this[this.options] : this.genderOptions
             }
         },
         methods: {
             setGender (event) {
-                this.$emit('input', event.target.value)
+                this.$emit('change', event.target.value)
             }
         }
     }

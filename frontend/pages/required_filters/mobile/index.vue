@@ -6,7 +6,7 @@
             </a-button>
         </a-row>
         <match-filter-input v-model="match" />
-        <gender-filter-input v-model="gender" />
+        <gender-input v-model="gender" />
         <age-filter-input v-model="age" />
         <a-row type="flex" justify="center">
             <a-button @click="saveFilters">
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import GenderFilterInput from '@/components/genderFilterInput'
+    import GenderInput from '@/components/GenderInput'
     import MatchFilterInput from '@/components/matchFilterInput'
     import AgeFilterInput from '@/components/ageFilterInput'
 
@@ -26,7 +26,7 @@
      */
     export default {
         name: 'RequiredFiltersMobile',
-        components: { GenderFilterInput, MatchFilterInput, AgeFilterInput },
+        components: { GenderInput, MatchFilterInput, AgeFilterInput },
         props: {
             /**
              * Evento a emitir hacia vista [RequiredFiltersMobile](#required-filters).

@@ -23,7 +23,7 @@
             </a-row>
 
             <a-row type="flex" justify="center" u-input-row>
-                <gender-filter-input :value="genderFilter" />
+                <gender-input :value="genderFilter" />
             </a-row>
 
             <a-row type="flex" justify="center" u-input-row>
@@ -49,7 +49,6 @@
     import ProfileImage from '@/components/profileImage'
     import BirthdateInput from '@/components/birthdateInput'
     import GenderInput from '@/components/genderInput'
-    import GenderFilterInput from '@/components/genderFilterInput'
     import MatchVersusSelect from '@/components/matchVersusSelect'
     import AgeFilterInput from '@/components/ageFilterInput'
 
@@ -58,7 +57,7 @@
      */
     export default {
         name: 'ProfileMobile',
-        components: { ProfileImage, BirthdateInput, GenderInput, GenderFilterInput, MatchVersusSelect, AgeFilterInput },
+        components: { ProfileImage, BirthdateInput, GenderInput, MatchVersusSelect, AgeFilterInput },
         props: {
             /**
              * Evento a emitir hacia vista [Profile](#profile).
