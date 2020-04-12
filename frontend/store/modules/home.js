@@ -4,14 +4,16 @@ const { getDistance } = require('@/utils/geolocUtils')
 
 const getDefaultState = () => ({
   usersFound: [],
-  matchNextToken: null
+  matchNextToken: null,
+  searchingUsers: true
 })
 
 const state = getDefaultState()
 
 const getters = {
     usersFound: state => state.usersFound,
-    matchNextToken: state => state.matchNextToken
+    matchNextToken: state => state.matchNextToken,
+    searchingUsers: state => state.searchingUsers
 }
 
 const actions = {
@@ -20,9 +22,11 @@ const actions = {
    *
    * @param {object} ctx Contexto de Nuxt.
    */
-  searchMatch (ctx) {
+  async searchMatch (ctx) {
     // Verificar si geohash se ha actualizado para poder buscar
     if (ctx.rootState.user.geohash) {
+      ctx.commit('setSearchingStatus', true)
+
       // Usar API de Umatch
       this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
@@ -62,8 +66,12 @@ const actions = {
 
           ctx.commit('setState', { params })
         })
-        // eslint-disable-next-line no-console
-        .catch(e => console.log(e))
+        .catch((e) => {
+          console.log(e)
+        })
+        .finally(() => {
+          ctx.commit('setSearchingStatus', false)
+        })
     } else {
       /**
        * Si el usuario no posee _geohash_ es debido a que aún no ha permitido
@@ -121,6 +129,9 @@ const mutations = {
         for (const key in params) {
             state[key] = params[key]
         }
+    },
+    setSearchingStatus (state, value) {
+      state['searchingUsers'] = value
     },
     resetStates (state) {
       Object.assign(state, getDefaultState())

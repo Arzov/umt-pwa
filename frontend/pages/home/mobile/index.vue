@@ -15,15 +15,23 @@
             </h5>
         </a-row>
 
-        <div v-if="usersFound.length" class="rivals">
-            <user-search-card v-for="(user, index) in usersFound" :key="user.hashKey" :user-data="user" :index="index" @submit="requestMatch($event)" />
+        <div v-if="!searchingUsers">
+            <div v-if="usersFound.length" class="rivals">
+                <user-search-card v-for="(user, index) in usersFound" :key="user.hashKey" :user-data="user" :index="index" @submit="requestMatch($event)" />
+            </div>
+
+            <a-row v-else type="flex" justify="center" align="middle" class="rivals">
+                <h5>¡No hay usuarios cercanos! Inténtalo más tarde.</h5>
+            </a-row>
         </div>
 
+        <!--TODO: falta mostrar spin de cargando-->
         <a-row v-else type="flex" justify="center" align="middle" class="rivals">
-            <h5>¡No hay usuarios cercanos! Inténtalo más tarde.</h5>
+            <h5>Cargando.</h5>
         </a-row>
 
         <a-row type="flex" justify="center" class="button-row">
+            <!--TODO: mostrar spin de cargando cuando searchingUsers = true-->
             <a-button u-button u-type="primary" block @click="searchMatch">
                 Seguir Buscando
             </a-button>
@@ -56,16 +64,27 @@
             },
 
             /**
-             * Objeto con listado de rivales encontrados.
+             * Listado de rivales encontrados.
              */
             usersFound: {
+                type: Array,
+                required: true
+            },
+
+            /**
+             * Datos del usuario.
+             */
+            userData: {
                 type: Object,
                 required: true
-            }
-        },
-        data () {
-            return {
-                userData: this.$store.getters['user/userData']
+            },
+
+            /**
+             * Indicador de búsqueda de rivales.
+             */
+            searchingUsers: {
+                type: Boolean,
+                required: true
             }
         },
         methods: {
