@@ -1,7 +1,7 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <home-mobile :users-found="usersFound" :event="event" @emit="onEmit($event)" />
+            <home-mobile :users-found="usersFound" :user-data="userData" :searching-users="searchingUsers" :event="event" @emit="onEmit($event)" />
         </mq-layout>
     </div>
 </template>
@@ -31,9 +31,24 @@
         components: { HomeMobile },
         data () {
             return {
-                event,
-                usersFound: this.$store.getters['home/usersFound']
+                event
             }
+        },
+        computed: {
+            userData () {
+                return this.$store.getters['user/userData']
+            },
+
+            usersFound () {
+                return this.$store.getters['home/usersFound']
+            },
+
+            searchingUsers () {
+                return this.$store.getters['home/searchingUsers']
+            }
+        },
+        mounted () {
+            this.$store.dispatch('home/searchMatch')
         },
         methods: {
             /**

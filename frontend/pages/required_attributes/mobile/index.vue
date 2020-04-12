@@ -1,23 +1,39 @@
 <template>
     <div id="page-required-attributes-mobile">
-        <a-row>
-            <a-row type="flex" justify="center">
-                <a-button @click="signOut">
-                    Salir
-                </a-button>
-            </a-row>
-            <birthdate-input v-model="birthdate" />
-            <gender-input v-model="gender" />
-        </a-row>
-        <a-row type="flex" justify="center">
-            <a-button @click="saveAttributes">
-                Continuar
-            </a-button>
-        </a-row>
+        <header-title-mobile title="Atributos Requeridos" />
+
+        <div>
+            <a-form :form="formRequire" @submit="saveAttributes($event)">
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="decorator.birthdate.required" :extra="decorator.birthdate.extra" u-form-custom-item>
+                        <birthdate-input v-decorator="decorator.birthdate.decorator" />
+                    </a-form-item>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="decorator.gender.required" :extra="decorator.gender.extra" u-form-custom-item>
+                        <gender-input v-decorator="decorator.gender.decorator" />
+                    </a-form-item>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-button-row>
+                    <a-button u-button u-type="primary" html-type="submit" block>
+                        Continuar
+                    </a-button>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-button-row>
+                    <a u-anchor u-size="large" @click="signOut">
+                        <span u-a>Cerrar sesión</span>
+                    </a>
+                </a-row>
+            </a-form>
+        </div>
     </div>
 </template>
 
 <script>
+    import decorator from '@/static/decorator'
     import BirthdateInput from '@/components/birthdateInput'
     import GenderInput from '@/components/genderInput'
 
@@ -40,12 +56,8 @@
         },
         data () {
             return {
-                birthdate: {
-                    day: undefined,
-                    month: undefined,
-                    year: undefined
-                },
-                gender: undefined
+                decorator,
+                formRequire: this.$form.createForm(this)
             }
         },
         methods: {
@@ -55,21 +67,26 @@
              * @return {object} Evento de tipo SAVE_ATTRIBUTES.
              * @public
              */
-            saveAttributes () {
-                const params = {
-                    type: this.event.SAVE_ATTRIBUTES,
-                    birthdate: this.birthdate,
-                    gender: this.gender
-                }
+            saveAttributes (event) {
+                event.preventDefault()
 
-                /**
-                 * Evento para guardar atributos.
-                 *
-                 * @event emitSaveAttributes
-                 * @property {object} params Objecto con tipo SAVE_ATTRIBUTES a emitir y
-                 *                           datos para guardar (fecha de nacimiento y sexo).
-                 */
-                this.$emit('emit', params)
+                this.formRequire.validateFields((errors, values) => {
+                    if (!errors) {
+                        const params = {
+                            type: this.event.SAVE_ATTRIBUTES,
+                            ...values
+                        }
+
+                        /**
+                         * Evento para guardar atributos.
+                         *
+                         * @event emitSaveAttributes
+                         * @property {object} params Objecto con tipo SAVE_ATTRIBUTES a emitir y
+                         *                           datos para guardar (fecha de nacimiento y sexo).
+                         */
+                        this.$emit('emit', params)
+                    }
+                })
             },
 
             /**

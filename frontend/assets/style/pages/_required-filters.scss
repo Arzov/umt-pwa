@@ -1,0 +1,12 @@
+#page-required-filters {
+    &-mobile {
+        @extend %absolute-full;
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+
+        // Formulario
+        & > div:nth-child(2) {
+            @extend %form-container;
+        }
+    }
+}

@@ -1,7 +1,7 @@
 <template>
     <div id="page-start-mobile">
         <a-row type="flex" justify="center" align="top">
-            <img src="./../../../assets/images/SVG/umatch_logo.svg" alt="">
+            <img src="./../../../assets/images/SVG/logo.svg" alt="">
         </a-row>
 
         <a-row type="flex" justify="center">

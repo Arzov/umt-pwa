@@ -27,7 +27,7 @@
         },
         methods: {
             setAge (event) {
-                this.$emit('input', event)
+                this.$emit('change', event)
             }
         }
     }

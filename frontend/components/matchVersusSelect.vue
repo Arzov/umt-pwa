@@ -1,7 +1,7 @@
 <template>
-    <div id="component-match-versus-select">
+    <div id="component-match-versus-select" component-match-versus-select>
         <u-radio-group title="tipo de juego">
-            <a-radio-group name="radioGroup" :default-value="defaultOption" @change="setMatch">
+            <a-radio-group name="radioGroup" :default-value="_value" @change="setMatch">
 
                 <a-radio v-for="match in matchOptions" :key="'m' + match.value" :value="match.value">
                     {{ match.key }}
@@ -29,13 +29,13 @@
             }
         },
         computed: {
-            defaultOption () {
+            _value () {
                 return this.value ? this.value : '7v7'
             }
         },
         methods: {
             setMatch (event) {
-                this.$emit('input', event.target.value)
+                this.$emit('change', event.target.value)
             }
         }
     }
