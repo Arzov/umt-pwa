@@ -3,7 +3,7 @@
         <header-title-mobile title="Atributos Requeridos" />
 
         <div>
-            <a-form :form="formRequire" @submit="saveAttributes($event)">
+            <a-form :form="formRequired" @submit="saveAttributes($event)">
                 <a-row type="flex" justify="center" u-input-row>
                     <a-form-item :required="decorator.birthdate.required" :extra="decorator.birthdate.extra" u-form-custom-item>
                         <birthdate-input v-decorator="decorator.birthdate.decorator" />
@@ -57,7 +57,7 @@
         data () {
             return {
                 decorator,
-                formRequire: this.$form.createForm(this)
+                formRequired: this.$form.createForm(this)
             }
         },
         methods: {
@@ -70,7 +70,7 @@
             saveAttributes (event) {
                 event.preventDefault()
 
-                this.formRequire.validateFields((errors, values) => {
+                this.formRequired.validateFields((errors, values) => {
                     if (!errors) {
                         const params = {
                             type: this.event.SAVE_ATTRIBUTES,

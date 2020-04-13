@@ -3,7 +3,7 @@
         <header-title-mobile title="Filtros Requeridos" />
 
         <div>
-            <a-form :form="formRequire" @submit="saveFilters($event)">
+            <a-form :form="formRequired" @submit="saveFilters($event)">
                 <a-row type="flex" justify="center" u-input-row>
                     <a-form-item :required="decorator.match.required" :extra="decorator.match.extra" u-form-custom-item>
                         <match-versus-select v-decorator="decorator.match.decorator" />
@@ -65,7 +65,7 @@
         data () {
             return {
                 decorator,
-                formRequire: this.$form.createForm(this)
+                formRequired: this.$form.createForm(this)
             }
         },
         methods: {
@@ -78,7 +78,7 @@
             saveFilters (event) {
                 event.preventDefault()
 
-                this.formRequire.validateFields((errors, values) => {
+                this.formRequired.validateFields((errors, values) => {
                     if (!errors) {
                         const params = {
                             type: this.event.SAVE_FILTERS,

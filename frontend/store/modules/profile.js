@@ -5,15 +5,18 @@ const actions = {
      * @param {object} data Datos de autenticación _email_ y _password_.
      */
     saveProfile (ctx, data) {
-        ctx.dispatch('requiredAttributes/saveAttributes', { data }, { root: true })
+        return new Promise(async (resolve, reject) => {
+        await ctx.dispatch('requiredAttributes/saveAttributes', { data }, { root: true })
             .then(() => {
                 ctx.dispatch('requiredFilters/saveFilters', { data }, { root: true })
                     .then(() => {
                         // Guardado
+                        resolve()
                     })
-                    .catch(e => console.log(e))
+                    .catch(e => reject(e))
             })
-            .catch(e => console.log(e))
+            .catch(e => reject(e))
+        })
     }
 }
 
