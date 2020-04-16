@@ -49,6 +49,11 @@
                     // Guardar datos
                     case this.event.SAVE_PROFILE:
                         this.$store.dispatch('profile/saveProfile', event.data)
+                            .then(() => {
+                                this.$router.push(process.env.routes.home.path)
+                            })
+                            // TODO: falta implementar popup.
+                            .catch(e => console.log(e))
                         break
 
                     // Cerrar sesion

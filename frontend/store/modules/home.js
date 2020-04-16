@@ -78,6 +78,7 @@ const actions = {
        * el acceso a la ubicación desde el navegador.
        */
       console.log('El usuario debe permitir el acceso a la ubicación.')
+      ctx.commit('setSearchingStatus', false)
     }
   },
 
