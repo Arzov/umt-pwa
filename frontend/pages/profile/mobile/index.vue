@@ -10,42 +10,50 @@
                 </h3>
             </a-row>
 
-            <a-row type="flex" justify="center" u-input-row>
-                <birthdate-input :value="birthdate" />
-            </a-row>
+            <a-form :form="formProfile" @submit="saveProfile($event)">
 
-            <a-row type="flex" justify="center" u-input-row>
-                <gender-input :value="gender" />
-            </a-row>
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="decorator.birthdate.required" :extra="decorator.birthdate.extra" u-form-custom-item>
+                        <birthdate-input v-decorator="decorator.birthdate.decorator" />
+                    </a-form-item>
+                </a-row>
 
-            <a-row type="flex" justify="center" u-input-row>
-                <match-versus-select :value="matchFilter" />
-            </a-row>
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="decorator.gender.required" :extra="decorator.gender.extra" u-form-custom-item>
+                        <gender-input v-decorator="decorator.gender.decorator" />
+                    </a-form-item>
+                </a-row>
 
-            <a-row type="flex" justify="center" u-input-row>
-                <gender-input :value="genderFilter" />
-            </a-row>
+                <!-- <a-row type="flex" justify="center" u-input-row>
+                    <match-versus-select :value="matchFilter" />
+                </a-row>
 
-            <a-row type="flex" justify="center" u-input-row>
-                <age-filter-input v-model="ageFilter" />
-            </a-row>
+                <a-row type="flex" justify="center" u-input-row>
+                    <gender-input :value="genderFilter" />
+                </a-row>
 
-            <a-row type="flex" justify="center" class="save-button">
-                <a-button u-button u-type="primary" block @click="saveProfile">
-                    Guardar configuración
-                </a-button>
-            </a-row>
+                <a-row type="flex" justify="center" u-input-row>
+                    <age-filter-input v-model="ageFilter" />
+                </a-row> -->
 
-            <a-row type="flex" justify="center" class="close-button">
-                <a u-anchor @click="signOut">
-                    <span u-a>Cerrar sesión</span>
-                </a>
-            </a-row>
+                <a-row type="flex" justify="center" class="save-button">
+                    <a-button u-button u-type="primary" block html-type="submit">
+                        Guardar configuración
+                    </a-button>
+                </a-row>
+
+                <a-row type="flex" justify="center" class="close-button">
+                    <a u-anchor @click="signOut">
+                        <span u-a>Cerrar sesión</span>
+                    </a>
+                </a-row>
+            </a-form>
         </div>
     </div>
 </template>
 
 <script>
+    import decorator from '@/static/decorator'
     import ProfileImage from '@/components/profileImage'
     import BirthdateInput from '@/components/birthdateInput'
     import GenderInput from '@/components/genderInput'
@@ -79,16 +87,27 @@
         },
         data () {
             return {
-                gender: this.userData.gender,
-                birthdate: {
-                    day: this.userData.birthdate.slice(8, 10),
-                    month: this.userData.birthdate.slice(5, 7),
-                    year: this.userData.birthdate.slice(0, 4)
-                },
+                decorator,
+                formProfile: this.$form.createForm(this),
                 genderFilter: this.userData.genderFilter,
                 matchFilter: this.userData.matchFilter,
                 ageFilter: [this.userData.ageMinFilter, this.userData.ageMaxFilter]
             }
+        },
+        computed: {
+            _birthdate () {
+                return {
+                    day: this.userData.birthdate.slice(8, 10),
+                    month: this.userData.birthdate.slice(5, 7),
+                    year: this.userData.birthdate.slice(0, 4)
+                }
+            }
+        },
+        mounted () {
+            this.formProfile.setFieldsValue({
+                gender: this.userData.gender,
+                birthdate: this._birthdate
+            })
         },
         methods: {
             /**

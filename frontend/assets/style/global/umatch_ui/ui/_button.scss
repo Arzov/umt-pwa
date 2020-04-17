@@ -53,12 +53,14 @@
     }
 
     &[u-type='rounded'] {
-        padding: 2px 10px;
         border: solid 1.4px $button-border-rounded;
         border-radius: 25px;
         background-clip: padding-box;
         background: $button-background-rounded;
         text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
 
         span {
             font-size: 0.8rem;

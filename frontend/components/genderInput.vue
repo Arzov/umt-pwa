@@ -1,7 +1,7 @@
 <template>
     <div id="component-gender-input" component-gender-input>
         <u-radio-group :title="_title">
-            <a-radio-group name="radioGroup" :default-value="_option" @change="setGender">
+            <a-radio-group v-model="value" name="radioGroup" :default-value="_option" @change="setGender">
                 <a-radio v-for="gender in _options" :key="'g' + gender.value" :value="gender.value">
                     {{ gender.text }}
                 </a-radio>
