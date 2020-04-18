@@ -48,9 +48,10 @@
                 switch (event.type) {
                     // Guardar datos
                     case this.event.SAVE_PROFILE:
-                        this.$store.dispatch('profile/saveProfile', event.data)
+                        this.$store.dispatch('profile/saveProfile', event)
                             .then(() => {
-                                this.$router.push(process.env.routes.home.path)
+                                // Datos guardados
+                                // TODO: Terminar spin o loading
                             })
                             // TODO: falta implementar popup.
                             .catch(e => console.log(e))
