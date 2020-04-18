@@ -7,18 +7,22 @@ function checkRequire (rule, value, callback) {
         callback(error)
 }
 
-export default {
-    title: 'Género',
-    required: true,
-    placeholder: '',
-    extra: '',
-    decorator: [
-        'gender',
-        {
-            initialValue: 'M',
-            rules: [
-                { validator: checkRequire }
-            ]
-        }
-    ]
+const createAgeDecorator = (name = 'gender') => {
+    return {
+        title: 'Género',
+        required: true,
+        placeholder: '',
+        extra: '',
+        decorator: [
+            name,
+            {
+                initialValue: 'M',
+                rules: [
+                    { validator: checkRequire }
+                ]
+            }
+        ]
+    }
 }
+
+export default createAgeDecorator

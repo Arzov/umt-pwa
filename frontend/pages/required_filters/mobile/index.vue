@@ -6,7 +6,7 @@
             <a-form :form="formRequired" @submit="saveFilters($event)">
                 <a-row type="flex" justify="center" u-input-row>
                     <a-form-item :required="decorator.match.required" :extra="decorator.match.extra" u-form-custom-item>
-                        <match-versus-select v-decorator="decorator.match.decorator" />
+                        <match-filter-input v-decorator="decorator.match.decorator" />
                     </a-form-item>
                 </a-row>
 
@@ -41,8 +41,8 @@
 
 <script>
     import decorator from '@/static/decorator'
-    import GenderInput from '@/components/GenderInput'
-    import MatchVersusSelect from '@/components/MatchVersusSelect'
+    import GenderInput from '@/components/genderInput'
+    import MatchFilterInput from '@/components/matchFilterInput'
     import AgeFilterInput from '@/components/ageFilterInput'
 
     /**
@@ -50,7 +50,7 @@
      */
     export default {
         name: 'RequiredFiltersMobile',
-        components: { GenderInput, MatchVersusSelect, AgeFilterInput },
+        components: { GenderInput, MatchFilterInput, AgeFilterInput },
         props: {
             /**
              * Evento a emitir hacia vista [RequiredFiltersMobile](#required-filters).

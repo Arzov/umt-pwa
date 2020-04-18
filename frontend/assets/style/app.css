@@ -203,8 +203,8 @@
  */
 *[u-input] > label, *[u-select] > label, *[u-radio-group] > label, *[u-slider] > label, #component-birthdate-input > label,
 *[component-birthdate-input] > label, #component-gender-input > label,
-*[component-gender-input] > label, #component-match-versus-select > label,
-*[component-match-versus-select] > label {
+*[component-gender-input] > label, #component-match-filter-input > label,
+*[component-match-filter-input] > label {
   color: white;
   text-transform: uppercase;
   font-weight: 600;
@@ -385,12 +385,18 @@
 }
 
 *[u-button][u-type='rounded'] {
-  padding: 2px 10px;
   border: solid 1.4px #6457e3;
   border-radius: 25px;
   background-clip: padding-box;
   background: transparent !important;
   text-transform: uppercase;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5px 10px;
 }
 
 *[u-button][u-type='rounded'] span {
@@ -1411,14 +1417,14 @@ span {
   padding: 10px;
 }
 
-#component-match-versus-select,
-*[component-match-versus-select] {
+#component-match-filter-input,
+*[component-match-filter-input] {
   position: relative;
   width: 100%;
 }
 
-#component-match-versus-select .ant-radio-group,
-*[component-match-versus-select] .ant-radio-group {
+#component-match-filter-input .ant-radio-group,
+*[component-match-filter-input] .ant-radio-group {
   line-height: 0;
   display: -ms-grid;
   display: grid;
