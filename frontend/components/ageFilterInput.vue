@@ -1,6 +1,7 @@
 <template>
     <u-slider title="rango de edad" :range="value">
         <a-slider
+            v-model="_value"
             range
             :default-value="value"
             :min="ageRange.min"
@@ -12,6 +13,8 @@
 
 <script>
     import USlider from './uSlider'
+
+    // TODO: Revisar warning de Vue para _value para el v-model
     export default {
         name: 'AgeFilterInput',
         components: { USlider },
@@ -23,6 +26,11 @@
                     max: 60,
                     default: [18, 22]
                 }
+            }
+        },
+        computed: {
+            _value () {
+                return this.value ? this.value : [18, 22]
             }
         },
         methods: {

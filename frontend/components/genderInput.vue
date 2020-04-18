@@ -1,7 +1,7 @@
 <template>
     <div id="component-gender-input" component-gender-input>
         <u-radio-group :title="_title">
-            <a-radio-group v-model="value" name="radioGroup" :default-value="_option" @change="setGender">
+            <a-radio-group v-model="_value" name="radioGroup" :default-value="_option" @change="setGender">
                 <a-radio v-for="gender in _options" :key="'g' + gender.value" :value="gender.value">
                     {{ gender.text }}
                 </a-radio>
@@ -13,6 +13,7 @@
 <script>
     import URadioGroup from '@/components/uRadioGroup'
 
+    // TODO: Revisar warning de Vue para _value para el v-model
     export default {
         name: 'GenderInput',
         components: { URadioGroup },
@@ -41,6 +42,10 @@
 
             _options () {
                 return this[this.options] ? this[this.options] : this.genderOptions
+            },
+
+            _value () {
+                return this.value ? this.value : 'M'
             }
         },
         methods: {

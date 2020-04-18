@@ -1,16 +1,24 @@
 <template>
-    <div id="component-match-versus-input" component-match-versus-input>
-        <a-radio-group name="radioGroup" :default-value="_value" @change="setMatch">
-            <a-radio v-for="match in matchOptions" :key="'m' + match.value" :value="match.value">
-                {{ match.key }}
-            </a-radio>
-        </a-radio-group>
+    <div id="component-match-filter-input" component-match-filter-input>
+        <u-radio-group title="tipo de juego">
+            <a-radio-group v-model="_value" name="radioGroup" :default-value="_value" @change="setMatch">
+
+                <a-radio v-for="match in matchOptions" :key="'m' + match.value" :value="match.value">
+                    {{ match.key }}
+                </a-radio>
+
+            </a-radio-group>
+        </u-radio-group>
     </div>
 </template>
 
 <script>
+    import URadioGroup from '@/components/uRadioGroup'
+
+    // TODO: Revisar warning de Vue para _value para el v-model
     export default {
         name: 'MatchFilterInput',
+        components: { URadioGroup },
         props: ['value'],
         data () {
             return {
@@ -33,7 +41,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>
