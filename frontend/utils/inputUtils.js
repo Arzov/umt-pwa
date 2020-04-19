@@ -1,4 +1,4 @@
-exports.validateBirthdate = (birthdate) => {
+const validateBirthdate = (birthdate) => {
     // Revisar que la fecha de nacimiento sea la correcta
     const validBirthdate = new Date(birthdate.year, (+birthdate.month - 1), birthdate.day)
     const result = {
@@ -36,3 +36,5 @@ exports.validateBirthdate = (birthdate) => {
         }
     }
 }
+
+export { validateBirthdate }

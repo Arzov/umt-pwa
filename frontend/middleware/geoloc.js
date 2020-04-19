@@ -1,4 +1,4 @@
-const { getDistance } = require('@/utils/geolocUtils')
+import { getDistance } from '@/utils/geolocUtils'
 
 export default ({ store }) => {
   // Validar si dispositivo soporta geolocalizacion

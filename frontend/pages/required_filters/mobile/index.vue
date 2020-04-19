@@ -11,8 +11,8 @@
                 </a-row>
 
                 <a-row type="flex" justify="center" u-input-row>
-                    <a-form-item :required="decorator.gender.required" :extra="decorator.gender.extra" u-form-custom-item>
-                        <gender-input v-decorator="decorator.gender.decorator" title="busco rivales" options="genderOptionsFilter" />
+                    <a-form-item :required="genderFilterDecorator.required" :extra="genderFilterDecorator.extra" u-form-custom-item>
+                        <gender-input v-decorator="genderFilterDecorator.decorator" title="busco rivales" options="genderOptionsFilter" />
                     </a-form-item>
                 </a-row>
 
@@ -65,7 +65,8 @@
         data () {
             return {
                 decorator,
-                formRequired: this.$form.createForm(this)
+                formRequired: this.$form.createForm(this),
+                genderFilterDecorator: decorator.gender('genderFilter')
             }
         },
         methods: {
@@ -82,7 +83,7 @@
                     if (!errors) {
                         const params = {
                             type: this.event.SAVE_FILTERS,
-                            genderFilter: values.gender,
+                            genderFilter: values.genderFilter,
                             matchFilter: values.match,
                             ageFilter: values.age
                         }

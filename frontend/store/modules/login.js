@@ -4,7 +4,7 @@ const actions = {
    *
    * @param {object} data Datos de autenticación _email_ y _password_.
    */
-  signIn (data) {
+  signIn (ctx, data) {
     // Autenticación con AWS Cognito
     // TODO: Inyectar componente _popup_ para mostrar mensajes
     this.$AWS.Auth.signIn({
@@ -29,7 +29,7 @@ const actions = {
         // Email sin verificar
         case 'UserNotConfirmedException':
             console.log(err.message)
-            this.$router.push(process.env.routes.verification.path)
+            this.$router.push(process.env.routes.email_verification.path)
             break
         
         // Error desconocido

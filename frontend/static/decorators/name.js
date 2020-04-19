@@ -1,5 +1,5 @@
 module.exports = {
-    title: 'nombre',
+    title: 'Nombre',
     required: true,
     placeholder: 'Ingresa tu nombre',
     extra: '',

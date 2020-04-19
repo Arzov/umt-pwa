@@ -57,6 +57,7 @@ const actions = {
             ctx.rootState.user.email
         )
             .then((data) => {
+                // TODO: Implementar popup
                 console.log('Codigo enviado a ' + ctx.rootState.user.email + '!')
             })
             .catch((err) => {

@@ -75,11 +75,11 @@
             signIn (event) {
                 event.preventDefault()
 
-                this.formLogin.validateFields((error, data) => {
+                this.formLogin.validateFields((error, values) => {
                     if (!error) {
                         const params = {
                             type: this.event.SIGNIN,
-                            data
+                            ...values
                         }
 
                         /**

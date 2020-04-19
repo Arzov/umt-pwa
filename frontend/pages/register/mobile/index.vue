@@ -35,7 +35,9 @@
                 </a-row>
 
                 <a-row type="flex" justify="center" u-input-row>
-                    <gender-input v-model="gender" />
+                    <a-form-item :required="genderDecorator.required" :extra="genderDecorator.extra" u-form-custom-item>
+                        <gender-input v-decorator="genderDecorator.decorator" />
+                    </a-form-item>
                 </a-row>
 
                 <a-row type="flex" justify="center" u-button-row>
@@ -82,7 +84,7 @@
             return {
                 decorator,
                 formRegister: this.$form.createForm(this),
-                gender: 'M'
+                genderDecorator: decorator.gender()
             }
         },
         methods: {
@@ -96,14 +98,11 @@
             signUp (event) {
                 event.preventDefault()
 
-                this.formRegister.validateFields((error, data) => {
+                this.formRegister.validateFields((error, values) => {
                     if (!error) {
                         const params = {
                             type: this.event.SIGNUP,
-                            data: {
-                                ...data,
-                                gender: this.gender
-                            }
+                            ...values
                         }
 
                         /**
