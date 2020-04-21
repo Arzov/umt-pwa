@@ -47,7 +47,7 @@ const actions = {
     this.$AWS.API.graphql(
       this.$AWS.Query(addMessage, {
         hashKey: context.state.matchInfo.matchId,
-        author: context.rootState.user.id,
+        author: context.rootState.user.email,
         authorName: context.rootState.user.firstName,
         content: data.userMessage
       })

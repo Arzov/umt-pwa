@@ -128,8 +128,8 @@
                  *
                  * @event emitRequestMatch
                  * @property {object} params Objecto con tipo REQUEST_MATCH a emitir y datos
-                 *                           para agregar la solicitud (Pocisión de búsqueda del rival,
-                 *                           Nombre del rival, Foto de perfil del
+                 *                           para agregar la solicitud (posición de búsqueda del rival,
+                 *                           nombre del rival, foto de perfil del
                  *                           rival y email del rival).
                  */
                 this.$emit('emit', params)
