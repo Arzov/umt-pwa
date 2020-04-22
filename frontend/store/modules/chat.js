@@ -3,9 +3,9 @@ import { getMessages } from '@/graphql/queries'
 import { onAddMessage } from '@/graphql/subscriptions'
 
 const state = () => ({
-  matchInfo: null,
-  messagesList: [],
-  messageNextToken: null
+    matchInfo: null,
+    messagesList: [],
+    messageNextToken: null
 })
 
 const getters = {
@@ -15,74 +15,100 @@ const getters = {
 }
 
 const actions = {
-  getMessages (context) {
-    // Reset state
-    context.commit('resetState')
+    /**
+     * Obtiene los mensajes del _chat_ desde servidor.
+     *
+     * @param {object} ctx Contexto de Nuxt.
+     */
+    fetchMessages (ctx) {
+        // Reset state
+        ctx.commit('resetState')
 
-    // Usar API de Umatch
-    this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+        // Usar API de Umatch
+        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
-    // Obtener usuarios cercanos para hacer match
-    this.$AWS.API.graphql(
-      this.$AWS.Query(getMessages, {
-        hashKey: context.state.matchInfo.matchId,
-        nextToken: context.state.messageNextToken
-      })
-    )
-      .then((result) => {
-        const params = {
-          messageNextToken: result.data.getMessages.nextToken,
-          messagesList: result.data.getMessages.items.reverse()
-        }
+        // Obtener usuarios cercanos para hacer match
+        this.$AWS.API.graphql(
+        this.$AWS.Query(getMessages, {
+            hashKey: ctx.state.matchInfo.matchId,
+            nextToken: ctx.state.messageNextToken
+        })
+        )
+        .then((result) => {
+            const params = {
+                messageNextToken: result.data.getMessages.nextToken,
+                messagesList: result.data.getMessages.items.reverse()
+            }
 
-        context.commit('setState', { params })
-      })
-      // eslint-disable-next-line no-console
-      .catch(e => console.log(e))
-  },
-  addMessage (context, data) {
-    // Usar API de Umatch
-    this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+            ctx.commit('setState', { params })
+        })
+        // eslint-disable-next-line no-console
+        .catch(e => console.log(e))
+    },
 
-    this.$AWS.API.graphql(
-      this.$AWS.Query(addMessage, {
-        hashKey: context.state.matchInfo.matchId,
-        author: context.rootState.user.email,
-        authorName: context.rootState.user.firstName,
-        content: data.userMessage
-      })
-    )
-      .then((result) => {
-      })
-      // eslint-disable-next-line no-console
-      .catch(e => console.log(e))
-  },
-  onAddMessage (context) {
-    // Usar API de Umatch
-    this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+    /**
+     * Agrega o envia mensaje al _chat_.
+     *
+     * @param {object} ctx Contexto de Nuxt.
+     * @param {object} data Datos con el mensaje a agregar (_hashKey_, _author_, _authorName_
+     *                      y _content_).
+     */
+    addMessage (ctx, data) {
+        // Usar API de Umatch
+        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
-    this.$AWS.API.graphql(this.$AWS.Query(onAddMessage, {
-      hashKey: context.state.matchInfo.matchId
-    }))
-      .subscribe({
-        next: (eventData) => {
-          const message = eventData.value.data.onAddMessage
-          const newMessages = [
-            ...context.state.messagesList,
-            message
-          ]
-          const params = {
-            messagesList: newMessages
-          }
-          
-          context.commit('setState', { params })
-        }
-      })
-  },
-  setMatchInfo (context, data) {
-    const params = data
-    context.commit('setState', { params })
-  }
+        this.$AWS.API.graphql(
+        this.$AWS.Query(addMessage, {
+            hashKey: ctx.state.matchInfo.matchId,
+            author: ctx.rootState.user.email,
+            authorName: ctx.rootState.user.firstName,
+            content: data.userMessage
+        })
+        )
+        .then((result) => {
+        })
+        // eslint-disable-next-line no-console
+        .catch(e => console.log(e))
+    },
+
+    /**
+     * Suscripción de AWS AppSync para sincronizar envio de mensajes.
+     *
+     * @param {object} ctx Contexto de Nuxt.
+     */
+    onAddMessage (ctx) {
+        // Usar API de Umatch
+        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+
+        this.$AWS.API.graphql(this.$AWS.Query(onAddMessage, {
+        hashKey: ctx.state.matchInfo.matchId
+        }))
+        .subscribe({
+            next: (eventData) => {
+            const message = eventData.value.data.onAddMessage
+            const newMessages = [
+                ...ctx.state.messagesList,
+                message
+            ]
+            const params = {
+                messagesList: newMessages
+            }
+            
+            ctx.commit('setState', { params })
+            }
+        })
+    },
+
+    /**
+     * Actualiza estado del _store_.
+     *
+     * @param {object} ctx Contexto de Nuxt.
+     * @param {object} data Datos con a actualizar.
+     */
+    setMatchInfo (ctx, data) {
+        const params = data
+        ctx.commit('setState', { params })
+    }
 }
 
 const mutations = {
@@ -92,8 +118,8 @@ const mutations = {
             state[key] = params[key]
     },
     resetState (state) {
-      state.messagesList = []
-      state.messageNextToken = null
+        state.messagesList = []
+        state.messageNextToken = null
     }
 }
 

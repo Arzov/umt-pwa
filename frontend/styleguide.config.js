@@ -1,6 +1,6 @@
 const { resolve } = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
 const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
     title: ' ',
@@ -94,6 +94,12 @@ module.exports = {
                                 En las **activas** puede acceder a un chat para acordar una fecha y\
                                 cancha del partido a jugar.',
                     components: ['pages/match/**/*.vue']
+                },
+                {
+                    name: 'Chat',
+                    description: 'Vista donde el usuario puede conversar con sus rivales y acordar fechas\
+                                y canchas donde realizar el partido de fútbol o _match_.',
+                    components: ['pages/chat/**/*.vue']
                 }
             ]
         },
