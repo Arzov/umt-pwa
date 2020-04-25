@@ -34,7 +34,7 @@
             }
         },
         mounted () {
-            if (this.$store.state.user.id.toLowerCase() !== this.msg.author.toLowerCase()) {
+            if (this.$store.state.user.email.toLowerCase() !== this.msg.author.toLowerCase()) {
                 this.isAuthor = false
                 this.type = 'cold'
             }

@@ -8,7 +8,6 @@ const actions = {
      */
     signUp (ctx, data) {
         // TODO: Completar lógica para _spin_
-        // ctx.dispatch('setSpin', true, { root: true })
 
         const birthdate = String(data.birthdate.year) + '-' + data.birthdate.month + '-' + data.birthdate.day
 

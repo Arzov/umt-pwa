@@ -89,10 +89,10 @@
             /**
              * Emite evento para actualizar solicitud.
              *
-             * @param {string} hashKey COMPLETAR.
-             * @param {string} rangeKey COMPLETAR.
-             * @param {string} matchId COMPLETAR.
-             * @param {string} userStatus COMPLETAR.
+             * @param {string} hashKey Email del usuario.
+             * @param {string} rangeKey Email del rival.
+             * @param {string} matchId Id del _match_.
+             * @param {string} userStatus Estado del _match_ a actualizar.
              * @return {object} Evento a gatillar.
              * @public
              */
@@ -110,7 +110,8 @@
                  *
                  * @event emitUpdateMatch
                  * @property {object} params Objecto con tipo UPDATE_MATCH a emitir y datos
-                 *                           para actualizar la solicitud.
+                 *                           para actualizar la solicitud (email del usuario,
+                 *                           email del rival, id del _match_ y estado del _match_).
                  */
                 this.$emit('emit', params)
             }

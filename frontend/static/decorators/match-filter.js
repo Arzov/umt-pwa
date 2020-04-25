@@ -8,7 +8,7 @@ function checkRequire (rule, value, callback) {
 }
 
 export default {
-    title: 'Match',
+    title: 'Tipo de juego',
     required: true,
     placeholder: '',
     extra: '',

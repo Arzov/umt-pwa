@@ -1,7 +1,7 @@
 import passwordRules from './password'
 
 export default {
-    title: 'contraseña nueva',
+    title: 'Contraseña nueva',
     required: true,
     placeholder: 'Ingresa tu nueva contraseña',
     extra: '',

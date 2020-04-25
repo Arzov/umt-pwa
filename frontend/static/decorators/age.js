@@ -8,7 +8,7 @@ function checkRequire (rule, value, callback) {
 }
 
 export default {
-    title: 'Age',
+    title: 'Rango de edad',
     required: true,
     placeholder: '',
     extra: '',

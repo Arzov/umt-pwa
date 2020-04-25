@@ -69,11 +69,11 @@
             reset (event) {
                 event.preventDefault()
 
-                this.formReset.validateFields((error, data) => {
+                this.formReset.validateFields((error, values) => {
                     if (!error) {
                         const params = {
                             type: this.event.RESET,
-                            data
+                            ...values
                         }
 
                         /**

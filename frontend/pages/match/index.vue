@@ -80,7 +80,11 @@
                     // Redireccionar al chat del encuentro seleccionado
                     case this.event.TO_CHAT:
                         this.$store.dispatch('chat/setMatchInfo', { matchInfo: event.match })
-                        this.$router.push(process.env.routes.chat.path)
+                            .then(() => {
+                                this.$router.push(process.env.routes.chat.path)
+                            })
+                            // TODO: falta implementar popup.
+                            .catch(e => console.log(e))
                         break
         
                     // Actualizar el estado del match

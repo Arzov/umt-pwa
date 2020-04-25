@@ -61,11 +61,11 @@
             recover (event) {
                 event.preventDefault()
 
-                this.formRecover.validateFields((error, data) => {
+                this.formRecover.validateFields((error, values) => {
                     if (!error) {
                         const params = {
                             type: this.event.RECOVER,
-                            data
+                            ...values
                         }
 
                         /**

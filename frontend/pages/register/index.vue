@@ -48,7 +48,7 @@
                 switch (event.type) {
                     // Registrar email con Arzov
                     case this.event.SIGNUP:
-                        this.$store.dispatch('register/signUp', event.data)
+                        this.$store.dispatch('register/signUp', event)
                         break
 
                     // TODO: Se debe redireccionar a los terminos y condiciones

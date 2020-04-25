@@ -132,13 +132,11 @@
                     if (!errors) {
                         const params = {
                             type: this.event.SAVE_PROFILE,
-                            data: {
-                                gender: values.gender,
-                                birthdate: values.birthdate,
-                                genderFilter: values.genderFilter,
-                                matchFilter: values.match,
-                                ageFilter: values.age
-                            }
+                            gender: values.gender,
+                            birthdate: values.birthdate,
+                            genderFilter: values.genderFilter,
+                            matchFilter: values.match,
+                            ageFilter: values.age
                         }
 
                         /**

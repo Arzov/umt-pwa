@@ -87,11 +87,11 @@
             verify (event) {
                 event.preventDefault()
 
-                this.formVerification.validateFields((error, data) => {
+                this.formVerification.validateFields((error, values) => {
                     if (!error) {
                         const params = {
                             type: this.event.VERIFY,
-                            ...data
+                            ...values
                         }
 
                         /**
