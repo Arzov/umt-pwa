@@ -21,7 +21,7 @@
         methods: {
             onClick () {
                 if (this.msg !== '') {
-                    this.$emit('send', this.msg)
+                    this.$emit('send', this.msg.replace(/^\s+|\s+$/g, ''))
                     this.msg = ''
                 }
             }

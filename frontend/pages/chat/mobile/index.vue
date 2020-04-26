@@ -4,7 +4,11 @@
 
         <div class="background-chat">
             <div class="chat-content">
-                <chat-message v-for="(msg, idx) in messagesList" :key="idx" :msg="msg" />
+                <div>
+                    <div>
+                        <chat-message v-for="(msg, idx) in messagesList" :key="idx" :msg="msg" />
+                    </div>
+                </div>
             </div>
 
             <chat-message-input @send="addMessage" />
@@ -84,7 +88,7 @@
              * @public
              */
             scrollToLastMessage () {
-                document.querySelector('.chat-content').scrollTo(0, document.querySelector('.chat-content').scrollHeight)
+                document.querySelector('.chat-content').scrollTo(-10, document.querySelector('.chat-content').scrollHeight)
             }
         }
     }
