@@ -186,7 +186,7 @@
 /*
  * Positions
  */
-#layout-auth, #layout-home, #layout-home > div:nth-child(1), #layout-default, #layout-default > div:nth-child(1), *[u-select] .ant-select > div > div, #component-u-tabs .u-tabs-content .u-tabs-content-position, #page-start-mobile, #page-login-mobile, #page-recover-password-mobile, #page-reset-password-mobile, #page-register-mobile, #page-verification-mobile, #page-home-mobile, #page-match-mobile, #page-chat-mobile, #page-map-mobile, #page-required-attributes-mobile, #page-required-filters-mobile {
+#layout-auth, #layout-home, #layout-home > div:nth-child(1), #layout-default, #layout-default > div:nth-child(1), *[u-select] .ant-select > div > div, #component-u-tabs .u-tabs-content .u-tabs-content-position, #page-start-mobile, #page-login-mobile, #page-recover-password-mobile, #page-reset-password-mobile, #page-register-mobile, #page-email-verification-mobile, #page-home-mobile, #page-match-mobile, #page-chat-mobile, #page-map-mobile, #page-required-attributes-mobile, #page-required-filters-mobile {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -260,7 +260,7 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-#page-login-mobile > div:nth-child(2), #page-recover-password-mobile > div:nth-child(2), #page-reset-password-mobile > div:nth-child(2), #page-register-mobile > div:nth-child(2), #page-verification-mobile > div:nth-child(2), #page-required-attributes-mobile > div:nth-child(2), #page-required-filters-mobile > div:nth-child(2) {
+#page-login-mobile > div:nth-child(2), #page-recover-password-mobile > div:nth-child(2), #page-reset-password-mobile > div:nth-child(2), #page-register-mobile > div:nth-child(2), #page-email-verification-mobile > div:nth-child(2), #page-required-attributes-mobile > div:nth-child(2), #page-required-filters-mobile > div:nth-child(2) {
   background-color: #242728;
   margin: 20px;
   padding: 10px 30px 60px 30px;
@@ -1366,18 +1366,18 @@ span {
   grid-template-rows: auto auto 1fr;
 }
 
-#page-verification-mobile {
+#page-email-verification-mobile {
   display: grid;
   grid-template-rows: auto auto 1fr;
 }
 
-#page-verification-mobile > div:nth-child(2) h6 {
+#page-email-verification-mobile > div:nth-child(2) h6 {
   color: white;
   font-weight: 600;
   margin-bottom: 0;
 }
 
-#page-verification-mobile > div:nth-child(2) .email {
+#page-email-verification-mobile > div:nth-child(2) .email {
   color: #ad64e6;
   font-style: italic;
 }

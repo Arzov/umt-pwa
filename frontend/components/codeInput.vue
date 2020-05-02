@@ -78,7 +78,7 @@
             triggerChange () {
                 let code = ''
                 this.code.forEach((n) => {
-                    if (n)
+                    if (n || n === 0)
                         code += n.toString()
                     else
                         code += ''
