@@ -58,15 +58,15 @@
 
             // eslint-disable-next-line no-unused-vars
             const currentMarker = new window.google.maps.Marker({
-                position: { lat: this.userData.coordinates.latitude, lng: this.userData.coordinates.longitude },
+                position: { lat: this.userData.latitude, lng: this.userData.longitude },
                 map: this.map
             })
         },
         methods: {
             toCenter () {
                 this.map.panTo({
-                    lat: this.userData.coordinates.latitude,
-                    lng: this.userData.coordinates.longitude
+                    lat: this.userData.latitude,
+                    lng: this.userData.longitude
                 })
             }
         }

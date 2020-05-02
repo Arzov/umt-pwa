@@ -25,10 +25,11 @@
                 store.dispatch('map/setPosition', params)
             }, function (error) {
                 console.log(error)
+                
                 const params = {
                     position: {
-                        lat: store.getters['user/userData'].coordinates.latitude,
-                        lng: store.getters['user/userData'].coordinates.longitude
+                        lat: store.getters['user/userData'].latitude,
+                        lng: store.getters['user/userData'].longitude
                     }
                 }
 
