@@ -21,7 +21,7 @@ const actions = {
      * @param {object} ctx Contexto de Nuxt.
      */
     fetchMessages (ctx) {
-        // Reset state
+        // TODO: Revisar porque solo se reinicia _messagesList_ y _messageNextToken_
         ctx.commit('resetState')
 
         // Usar API de Umatch

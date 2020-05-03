@@ -100,6 +100,12 @@ module.exports = {
                     description: 'Vista donde el usuario puede conversar con sus rivales y acordar fechas\
                                 y canchas donde realizar el partido de fútbol o _match_.',
                     components: ['pages/chat/**/*.vue']
+                },
+                {
+                    name: 'Map',
+                    description: 'Vista donde el usuario puede buscar canchas disponibles que estén cerca\
+                                de su radio de búsqueda.',
+                    components: ['pages/map/**/*.vue']
                 }
             ]
         },
