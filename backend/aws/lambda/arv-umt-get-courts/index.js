@@ -46,14 +46,14 @@ exports.handler = (event, context, callback) => {
     const hashKey = String(event.hashKey);
     const matchType = event.matchType;
     let nextToken = event.nextToken;
-    
+
     // El hashKey del nextToken debe ser igual al hashKey del usuario, en caso que no sea se anula el nextToken,
-	// de esta manera se evita que dynamoDB no pueda encontrar la particion correcta
-	if (nextToken) {
-		if (Number(JSON.parse(nextToken).hashKey.N) !== Number(hashKey)) {
-			nextToken = null;
-		}
-	}
+    // de esta manera se evita que dynamoDB no pueda encontrar la particion correcta
+    if (nextToken) {
+        if (Number(JSON.parse(nextToken).hashKey.N) !== Number(hashKey)) {
+            nextToken = null;
+        }
+    }
 
     // Obtener canchas cercanas
     getCourts(DYNAMO_TABLE_COURTS, hashKey, matchType, limitScan, nextToken, function(err, data) {
@@ -68,14 +68,18 @@ exports.handler = (event, context, callback) => {
 
             // Existen canchas
             if (data.Count) {
+
                 // Quitar tipo de datos al resultado de DynamoDB
                 const dataResult = data.Items.map(function(x) {
                     let unmarshallResult = AWS.DynamoDB.Converter.unmarshall(x);
 
-                    unmarshallResult.geoJson = JSON.parse(unmarshallResult.geoJson).coordinates
+                    unmarshallResult.geoJson = JSON.parse(unmarshallResult.geoJson).coordinates;
+                    unmarshallResult.email = unmarshallResult.email.values;
+                    unmarshallResult.matchType = unmarshallResult.matchType.values;
+                    unmarshallResult.phone = unmarshallResult.phone.values;
 
-
-                    console.log(unmarshallResult);
+                    // No se necesita geohash
+                    delete unmarshallResult['geohash'];
 
                     return unmarshallResult;
                 });

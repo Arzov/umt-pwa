@@ -8,19 +8,34 @@
 </template>
 
 <script>
+
+    /**
+     * Componente de la vista [Map](#map) para dispositivos móviles.
+     */
     export default {
         name: 'MapMobile',
         props: {
-            event: {
-                required: true
-            },
+            /**
+             * Información del usuario.
+             */
             userData: {
+                type: Object,
                 required: true
             },
+
+            /**
+             * Posicion actual del usuario.
+             */
             position: {
+                type: Object,
                 required: true
             },
+
+            /**
+             * Listado de canchas cercanas.
+             */
             courtsList: {
+                type: Array,
                 required: true
             }
         },
@@ -34,8 +49,208 @@
             this.map = new window.google.maps.Map(document.getElementById('map'), {
                 center: this.position,
                 zoom: 16,
-                disableDefaultUI: true
+                disableDefaultUI: true,
+                styles: [
+                    {
+                        elementType: 'geometry',
+                        stylers: [
+                            {
+                                color: '#151515'
+                            }
+                        ]
+                    },
+                    {
+                        elementType: 'labels.text.fill',
+                        stylers: [
+                            {
+                                color: '#0cecf2'
+                            }
+                        ]
+                    },
+                    {
+                        elementType: 'labels.text.stroke',
+                        stylers: [
+                            {
+                                color: '#151515'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'administrative',
+                        elementType: 'geometry',
+                        stylers: [
+                            {
+                                visibility: 'off'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'landscape.man_made',
+                        elementType: 'geometry.fill',
+                        stylers: [
+                            {
+                                color: '#151515'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'landscape.man_made',
+                        elementType: 'geometry.stroke',
+                        stylers: [
+                            {
+                                color: '#ad64e6'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'landscape.natural',
+                        elementType: 'geometry',
+                        stylers: [
+                            {
+                                color: '#6457e3'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'poi',
+                        stylers: [
+                            {
+                                visibility: 'off'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'labels.icon',
+                        stylers: [
+                            {
+                                visibility: 'off'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'labels.text.fill',
+                        stylers: [
+                            {
+                                color: '#ffffff'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'labels.text.stroke',
+                        stylers: [
+                            {
+                                color: '#151515'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'road.arterial',
+                        elementType: 'geometry.fill',
+                        stylers: [
+                            {
+                                color: '#242728'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'road.arterial',
+                        elementType: 'geometry.stroke',
+                        stylers: [
+                            {
+                                color: '#242728'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'geometry',
+                        stylers: [
+                            {
+                                color: '#ad64e6'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'geometry.stroke',
+                        stylers: [
+                            {
+                                color: '#151515'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'labels.text.fill',
+                        stylers: [
+                            {
+                                color: '#0cecf2'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'labels.text.stroke',
+                        stylers: [
+                            {
+                                color: '#151515'
+                            },
+                            {
+                                weight: 2
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'road.local',
+                        elementType: 'geometry.fill',
+                        stylers: [
+                            {
+                                color: '#242728'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'road.local',
+                        elementType: 'geometry.stroke',
+                        stylers: [
+                            {
+                                color: '#242728'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'transit',
+                        stylers: [
+                            {
+                                visibility: 'off'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'geometry',
+                        stylers: [
+                            {
+                                color: '#0271c4'
+                            }
+                        ]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'labels.text.fill',
+                        stylers: [
+                            {
+                                color: '#151515'
+                            }
+                        ]
+                    }
+                ]
             })
+
+            console.log(this.courtsList)
 
             // Marcadores de canchas
             this.courtsList.map((x) => {
@@ -63,6 +278,11 @@
             })
         },
         methods: {
+            /**
+             * Reinicia vista del mapa a la posición del usuario.
+             *
+             * @public
+             */
             toCenter () {
                 this.map.panTo({
                     lat: this.userData.latitude,

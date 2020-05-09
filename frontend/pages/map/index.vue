@@ -1,7 +1,7 @@
 <template>
     <div>
         <mq-layout :mq="['mobile', 'tablet']">
-            <map-mobile :user-data="userData" :position="position" :courts-list="courtsList" :event="event" @emit="onEmit($event)" />
+            <map-mobile :user-data="userData" :position="position" :courts-list="courtsList" />
         </mq-layout>
     </div>
 </template>
@@ -9,6 +9,12 @@
 <script>
     import MapMobile from './mobile'
 
+    /**
+     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
+     * También permite obtener las canchas cercanas al usuario.
+     *
+     * @displayName MapMain
+     */
     export default {
         name: 'Map',
         components: { MapMobile },
@@ -38,7 +44,6 @@
         },
         data () {
             return {
-                event,
                 userData: this.$store.getters['user/userData'],
                 position: this.$store.getters['map/position'],
                 courtsList: this.$store.getters['map/courtsList']
