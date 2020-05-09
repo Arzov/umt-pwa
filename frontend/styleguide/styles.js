@@ -1,6 +1,5 @@
 const colorWhite = '#ffffff'
 const colorBlack = '#151515'
-const colorBlackLight = '#313131'
 const colorGrey = '#242728'
 const colorPurple = '#6457e3'
 const colorPink = '#ad64e6'
@@ -11,7 +10,7 @@ const colorGreyLight = '#e6e6e6'
 export default {
 		StyleGuide: {
 			root: {
-				color: colorBlackLight,
+				color: colorGrey,
 				background: colorGreyLight
 			},
 			logo: {
@@ -176,7 +175,7 @@ export default {
 			},
 			isActive: {
 				borderBottom: 'none'
-			},
+			}
 		},
 		Table: {
 			cellHeading: {
