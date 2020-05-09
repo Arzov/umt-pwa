@@ -4,7 +4,7 @@ export const passwordRules = [
 ]
 
 export default {
-    title: 'contraseña',
+    title: 'Contraseña',
     required: true,
     placeholder: 'Ingresa tu contraseña',
     extra: '',

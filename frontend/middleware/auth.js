@@ -104,7 +104,6 @@ export default ({ app, route, store, redirect }) => {
         break
       case 'signOut':
         store.dispatch('user/resetStates')
-        redirect(process.env.routes.start.path)
         break
     }
   })

@@ -48,7 +48,7 @@
                 switch (event.type) {
                     // Iniciar sesión con Arzov
                     case this.event.SIGNIN:
-                        this.$store.dispatch('login/signIn', event.data)
+                        this.$store.dispatch('login/signIn', event)
                         break
 
                     // Redireccionar a la vista RecoverPassword

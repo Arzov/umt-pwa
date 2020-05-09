@@ -44,7 +44,7 @@
                 switch (event.type) {
                     // Restablecer contraseña
                     case this.event.RECOVER:
-                        this.$store.dispatch('recoverPassword/recoverPassword', event.data)
+                        this.$store.dispatch('recoverPassword/recoverPassword', event)
                         break
                 }
             }

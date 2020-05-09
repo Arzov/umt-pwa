@@ -10,47 +10,60 @@
                 </h3>
             </a-row>
 
-            <a-row type="flex" justify="center" u-input-row>
-                <birthdate-input :value="birthdate" />
-            </a-row>
+            <a-form :form="formProfile" @submit="saveProfile($event)">
 
-            <a-row type="flex" justify="center" u-input-row>
-                <gender-input :value="gender" />
-            </a-row>
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="decorator.birthdate.required" :extra="decorator.birthdate.extra" u-form-custom-item>
+                        <birthdate-input v-decorator="decorator.birthdate.decorator" />
+                    </a-form-item>
+                </a-row>
 
-            <a-row type="flex" justify="center" u-input-row>
-                <match-versus-select :value="matchFilter" />
-            </a-row>
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="genderDecorator.required" :extra="genderDecorator.extra" u-form-custom-item>
+                        <gender-input v-decorator="genderDecorator.decorator" />
+                    </a-form-item>
+                </a-row>
 
-            <a-row type="flex" justify="center" u-input-row>
-                <gender-filter-input :value="genderFilter" />
-            </a-row>
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="decorator.match.required" :extra="decorator.match.extra" u-form-custom-item>
+                        <match-filter-input v-decorator="decorator.match.decorator" />
+                    </a-form-item>
+                </a-row>
 
-            <a-row type="flex" justify="center" u-input-row>
-                <age-filter-input v-model="ageFilter" />
-            </a-row>
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="genderFilterDecorator.required" :extra="genderFilterDecorator.extra" u-form-custom-item>
+                        <gender-input v-decorator="genderFilterDecorator.decorator" title="busco rivales" options="genderOptionsFilter" />
+                    </a-form-item>
+                </a-row>
 
-            <a-row type="flex" justify="center" class="save-button">
-                <a-button u-button u-type="primary" block @click="saveProfile">
-                    Guardar configuración
-                </a-button>
-            </a-row>
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="decorator.age.required" :extra="decorator.age.extra" u-form-custom-item>
+                        <age-filter-input v-decorator="decorator.age.decorator" />
+                    </a-form-item>
+                </a-row>
 
-            <a-row type="flex" justify="center" class="close-button">
-                <a u-anchor @click="signOut">
-                    <span u-a>Cerrar sesión</span>
-                </a>
-            </a-row>
+                <a-row type="flex" justify="center" class="save-button">
+                    <a-button u-button u-type="primary" block html-type="submit">
+                        Guardar configuración
+                    </a-button>
+                </a-row>
+
+                <a-row type="flex" justify="center" class="close-button">
+                    <a u-anchor @click="signOut">
+                        <span u-a>Cerrar sesión</span>
+                    </a>
+                </a-row>
+            </a-form>
         </div>
     </div>
 </template>
 
 <script>
+    import decorator from '@/static/decorator'
     import ProfileImage from '@/components/profileImage'
     import BirthdateInput from '@/components/birthdateInput'
     import GenderInput from '@/components/genderInput'
-    import GenderFilterInput from '@/components/genderFilterInput'
-    import MatchVersusSelect from '@/components/matchVersusSelect'
+    import MatchFilterInput from '@/components/matchFilterInput'
     import AgeFilterInput from '@/components/ageFilterInput'
 
     /**
@@ -58,7 +71,7 @@
      */
     export default {
         name: 'ProfileMobile',
-        components: { ProfileImage, BirthdateInput, GenderInput, GenderFilterInput, MatchVersusSelect, AgeFilterInput },
+        components: { ProfileImage, BirthdateInput, GenderInput, MatchFilterInput, AgeFilterInput },
         props: {
             /**
              * Evento a emitir hacia vista [Profile](#profile).
@@ -80,16 +93,29 @@
         },
         data () {
             return {
-                gender: this.userData.gender,
-                birthdate: {
+                decorator,
+                formProfile: this.$form.createForm(this),
+                genderDecorator: decorator.gender(),
+                genderFilterDecorator: decorator.gender('genderFilter')
+            }
+        },
+        computed: {
+            _birthdate () {
+                return {
                     day: this.userData.birthdate.slice(8, 10),
                     month: this.userData.birthdate.slice(5, 7),
                     year: this.userData.birthdate.slice(0, 4)
-                },
-                genderFilter: this.userData.genderFilter,
-                matchFilter: this.userData.matchFilter,
-                ageFilter: [this.userData.ageMinFilter, this.userData.ageMaxFilter]
+                }
             }
+        },
+        mounted () {
+            this.formProfile.setFieldsValue({
+                gender: this.userData.gender,
+                birthdate: this._birthdate,
+                match: this.userData.matchFilter,
+                genderFilter: this.userData.genderFilter,
+                age: [this.userData.ageMinFilter, this.userData.ageMaxFilter]
+            })
         },
         methods: {
             /**
@@ -100,26 +126,30 @@
              * @public
              */
             saveProfile () {
-                const params = {
-                    type: this.event.SAVE_PROFILE,
-                    data: {
-                        gender: this.gender,
-                        birthdate: this.birthdate,
-                        genderFilter: this.genderFilter,
-                        matchFilter: this.matchFilter,
-                        ageFilter: this.ageFilter
-                    }
-                }
+                event.preventDefault()
 
-                /**
-                 * Evento para guardar los datos del usuario.
-                 *
-                 * @event emitSaveProfile
-                 * @property {object} params Objecto con tipo SAVE_PROFILE a emitir y datos
-                 *                           a guardar (sexo, fecha de nacimiento, filtro de sexo,
-                 *                           tipo de juego y rango de edad de búsqueda).
-                 */
-                this.$emit('emit', params)
+                this.formProfile.validateFields((errors, values) => {
+                    if (!errors) {
+                        const params = {
+                            type: this.event.SAVE_PROFILE,
+                            gender: values.gender,
+                            birthdate: values.birthdate,
+                            genderFilter: values.genderFilter,
+                            matchFilter: values.match,
+                            ageFilter: values.age
+                        }
+
+                        /**
+                         * Evento para guardar los datos del usuario.
+                         *
+                         * @event emitSaveProfile
+                         * @property {object} params Objecto con tipo SAVE_PROFILE a emitir y datos
+                         *                           a guardar (sexo, fecha de nacimiento, filtro de sexo,
+                         *                           tipo de juego y rango de edad de búsqueda).
+                         */
+                        this.$emit('emit', params)
+                    }
+                })
             },
 
             /**

@@ -107,10 +107,15 @@
 
                 if (this.userData.isCreator) {
                     this.showCancel = true
+                    this.showAccept = false
+                    this.showRefuse = false
                 } else if (this.userData.matchStatus === 'P') {
                     this.showAccept = true
                     this.showRefuse = true
+                    this.showCancel = false
                 } else if (this.userData.matchStatus === 'D') {
+                    this.showAccept = false
+                    this.showRefuse = false
                     this.showCancel = true
                 }
             }

@@ -50,7 +50,7 @@
                 switch (event.type) {
                     // Cambiar contraseña
                     case this.event.RESET:
-                        this.$store.dispatch('resetPassword/resetPassword', event.data)
+                        this.$store.dispatch('resetPassword/resetPassword', event)
                         break
                 }
             }

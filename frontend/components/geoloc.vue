@@ -1,25 +1,63 @@
 <template>
-    <div v-if="this.$store.getters['geoloc/toggle']">
-        <a-row v-if="this.$store.getters['geoloc/allow']">
-            <h1><b>Comparte tu ubicación</b></h1>
-            Umatch utiliza tu ubicación para encontrar rivales cercanos. Presiona el botón "Aceptar" y luego debes permitir el acceso a la ubicación, de lo contrario no podrás usar la aplicación.
-            <a-button @click="getPosition">
-                Aceptar
-            </a-button>
-            <a-button @click="logout">
-                Cerrar sesión
-            </a-button>
-        </a-row>
-        <a-row v-else>
-            <h1><b>¡Ubicación denegada!</b></h1>
-            Necesitas habilitar la ubicación para utilizar la aplicación. Debes configurar tu navegador.
-            <a-button>
-                Configurar
-            </a-button>
-            <a-button @click="resetStates">
-                Atrás
-            </a-button>
-        </a-row>
+    <div v-if="this.$store.getters['geoloc/toggle']" id="component-geoloc">
+        <div class="card">
+            <a-row v-if="this.$store.getters['geoloc/allow']">
+                <a-row type="flex" justify="center" align="top">
+                    <img src="./../assets/icons/pin.svg">
+                </a-row>
+
+                <div>
+                    <h3>Comparte tu ubicación</h3>
+                
+                    <p>
+                        Umatch utiliza tu ubicación para encontrar rivales cercanos. Presiona el botón "Aceptar" y luego debes permitir el acceso a la ubicación, de lo contrario no podrás usar la aplicación.
+                    </p>
+                </div>
+
+                <div>
+                    <a-row type="flex" justify="center" u-button-row>
+                        <a-button u-button u-type="primary" block @click="getPosition">
+                            Aceptar
+                        </a-button>
+                    </a-row>
+
+                    <a-row type="flex" justify="center" u-button-row>
+                        <a u-anchor u-size="large" @click="logout">
+                            <span u-a>Cerrar sesión</span>
+                        </a>
+                    </a-row>
+                </div>
+            </a-row>
+
+            <a-row v-else>
+                <a-row type="flex" justify="center" align="top">
+                    <img src="./../assets/icons/pin.svg">
+                </a-row>
+
+                <div>
+                    <h3>¡Ubicación denegada!</h3>
+                
+                    <p>
+                        Necesitas habilitar la ubicación para utilizar la aplicación. Debes configurar tu navegador.
+                    </p>
+                </div>
+
+                <div>
+                    <a-row type="flex" justify="center" u-button-row>
+                        <!--TODO: falta implementar acción-->
+                        <a-button u-button u-type="primary" block>
+                            Configurar
+                        </a-button>
+                    </a-row>
+
+                    <a-row type="flex" justify="center" u-button-row>
+                        <a u-anchor u-size="large" @click="resetStates">
+                            <span u-a>Atrás</span>
+                        </a>
+                    </a-row>
+                </div>
+            </a-row>
+        </div>
     </div>
 </template>
 
@@ -36,7 +74,7 @@
                     const userData = vue.$store.getters['user/userData']
 
                     const params = {
-                        userId: userData.id,
+                        userId: userData.email,
                         latitude: position.coords.latitude,
                         longitude: position.coords.longitude,
                         genderFilter: userData.genderFilter,

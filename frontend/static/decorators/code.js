@@ -8,7 +8,7 @@ function checkCode (rule, value, callback) {
 }
 
 module.exports = {
-    title: 'código',
+    title: 'Código',
     required: true,
     placeholder: 'Ingresa el código enviado',
     extra: '',

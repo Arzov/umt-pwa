@@ -1,4 +1,4 @@
-const { getDistance } = require('@/utils/geolocUtils')
+import { getDistance } from '@/utils/geolocUtils'
 
 export default ({ store }) => {
   // Validar si dispositivo soporta geolocalizacion
@@ -21,7 +21,7 @@ export default ({ store }) => {
         if (moveDistance >= 5) {
           // Parametros para graphql
           const params = {
-            userId: userData.id,
+            userId: userData.email,
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
             genderFilter: userData.genderFilter,

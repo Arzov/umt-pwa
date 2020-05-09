@@ -26,9 +26,17 @@
 
     .has-error {
 
+        // Select
         .ant-select {
             & > div {
                 @extend %input-error-status; 
+            }
+        }
+
+        // Radio Group
+        .ant-radio-group {
+            & > label {
+                border-color: $color-pink;
             }
         }
 

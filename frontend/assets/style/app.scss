@@ -23,9 +23,9 @@
 @import "components/chat-message";
 @import "components/header-title-chat";
 @import "components/chat-message-input";
-@import "components/match-versus-select";
-@import "components/gender-filter-input";
+@import "components/match-filter-input";
 @import "components/age-filter-input";
+@import "components/geoloc";
 
 /*
  * Pages
@@ -35,9 +35,11 @@
 @import "pages/recover-password";
 @import "pages/reset-password";
 @import "pages/register";
-@import "pages/verification";
+@import "pages/email-verification";
 @import "pages/home";
 @import "pages/match";
 @import "pages/chat";
 @import "pages/map";
 @import "pages/profile";
+@import "pages/required-attributes";
+@import "pages/required-filters";

@@ -1,6 +1,6 @@
 const { resolve } = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
 const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
     title: ' ',
@@ -84,6 +84,28 @@ module.exports = {
                                 eventualmente modificar sus valores (filtros de búsqueda,\
                                 atributos personales, etc.).',
                     components: ['pages/profile/**/*.vue']
+                },
+                {
+                    name: 'Match',
+                    description: 'Vista donde el usuario puede ver las solicitudes enviadas y las\
+                                solicitudes activas con otros usuarios.\
+                                En las **enviadas** o **pendientes** el usuario puede aceptar o\
+                                rechazar las solicitudes.\
+                                En las **activas** puede acceder a un chat para acordar una fecha y\
+                                cancha del partido a jugar.',
+                    components: ['pages/match/**/*.vue']
+                },
+                {
+                    name: 'Chat',
+                    description: 'Vista donde el usuario puede conversar con sus rivales y acordar fechas\
+                                y canchas donde realizar el partido de fútbol o _match_.',
+                    components: ['pages/chat/**/*.vue']
+                },
+                {
+                    name: 'Map',
+                    description: 'Vista donde el usuario puede buscar canchas disponibles que estén cerca\
+                                de su radio de búsqueda.',
+                    components: ['pages/map/**/*.vue']
                 }
             ]
         },

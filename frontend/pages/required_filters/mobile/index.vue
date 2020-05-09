@@ -1,23 +1,47 @@
 <template>
     <div id="page-required-filters-mobile">
-        <a-row type="flex" justify="center">
-            <a-button @click="signOut">
-                Salir
-            </a-button>
-        </a-row>
-        <match-filter-input v-model="match" />
-        <gender-filter-input v-model="gender" />
-        <age-filter-input v-model="age" />
-        <a-row type="flex" justify="center">
-            <a-button @click="saveFilters">
-                Continuar
-            </a-button>
-        </a-row>
+        <header-title-mobile title="Filtros Requeridos" />
+
+        <div>
+            <a-form :form="formRequired" @submit="saveFilters($event)">
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="decorator.match.required" :extra="decorator.match.extra" u-form-custom-item>
+                        <match-filter-input v-decorator="decorator.match.decorator" />
+                    </a-form-item>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="genderFilterDecorator.required" :extra="genderFilterDecorator.extra" u-form-custom-item>
+                        <gender-input v-decorator="genderFilterDecorator.decorator" title="busco rivales" options="genderOptionsFilter" />
+                    </a-form-item>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-input-row>
+                    <a-form-item :required="decorator.age.required" :extra="decorator.age.extra" u-form-custom-item>
+                        <age-filter-input v-decorator="decorator.age.decorator" />
+                    </a-form-item>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-button-row>
+                    <a-button u-button u-type="primary" html-type="submit" block>
+                        Continuar
+                    </a-button>
+                </a-row>
+
+                <a-row type="flex" justify="center" u-button-row>
+                    <a u-anchor u-size="large" @click="signOut">
+                        <span u-a>Cerrar sesión</span>
+                    </a>
+                </a-row>
+            </a-form>
+        </div>
+        
     </div>
 </template>
 
 <script>
-    import GenderFilterInput from '@/components/genderFilterInput'
+    import decorator from '@/static/decorator'
+    import GenderInput from '@/components/genderInput'
     import MatchFilterInput from '@/components/matchFilterInput'
     import AgeFilterInput from '@/components/ageFilterInput'
 
@@ -26,7 +50,7 @@
      */
     export default {
         name: 'RequiredFiltersMobile',
-        components: { GenderFilterInput, MatchFilterInput, AgeFilterInput },
+        components: { GenderInput, MatchFilterInput, AgeFilterInput },
         props: {
             /**
              * Evento a emitir hacia vista [RequiredFiltersMobile](#required-filters).
@@ -40,9 +64,9 @@
         },
         data () {
             return {
-                gender: undefined,
-                match: undefined,
-                age: [18, 22]
+                decorator,
+                formRequired: this.$form.createForm(this),
+                genderFilterDecorator: decorator.gender('genderFilter')
             }
         },
         methods: {
@@ -52,22 +76,28 @@
              * @return {object} Evento de tipo SAVE_FILTERS.
              * @public
              */
-            saveFilters () {
-                const params = {
-                    type: this.event.SAVE_FILTERS,
-                    gender: this.gender,
-                    match: this.match,
-                    age: this.age
-                }
+            saveFilters (event) {
+                event.preventDefault()
 
-                /**
-                 * Evento para guardar filtros.
-                 *
-                 * @event emitSaveFilters
-                 * @property {object} params Objecto con tipo SAVE_FILTERS a emitir y
-                 *                           datos para guardar (tipo de juego, sexo y rango de edad).
-                 */
-                this.$emit('emit', params)
+                this.formRequired.validateFields((errors, values) => {
+                    if (!errors) {
+                        const params = {
+                            type: this.event.SAVE_FILTERS,
+                            genderFilter: values.genderFilter,
+                            matchFilter: values.match,
+                            ageFilter: values.age
+                        }
+
+                        /**
+                         * Evento para guardar filtros.
+                         *
+                         * @event emitSaveFilters
+                         * @property {object} params Objecto con tipo SAVE_FILTERS a emitir y
+                         *                           datos para guardar (tipo de juego, sexo y rango de edad).
+                         */
+                        this.$emit('emit', params)
+                    }
+                })
             },
 
             /**

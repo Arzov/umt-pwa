@@ -4,7 +4,7 @@
 
         <div class="row">
             <u-select>
-                <a-select :dropdown-match-select-width="false" placeholder="Día" :default-value="birthdate.day" @change="setDay">
+                <a-select v-model="value.day" :dropdown-match-select-width="false" placeholder="Día" :default-value="value.day" @change="setDay">
                     <a-select-option v-for="day in dayOptions" :key="'d' + day" :value="day">
                         {{ day }}
                     </a-select-option>
@@ -12,7 +12,7 @@
             </u-select>
 
             <u-select>
-                <a-select :dropdown-match-select-width="false" placeholder="Mes" :default-value="birthdate.month" @change="setMonth">
+                <a-select v-model="value.month" :dropdown-match-select-width="false" placeholder="Mes" :default-value="value.month" @change="setMonth">
                     <a-select-option v-for="month in monthOptions" :key="'m' + month.value" :value="month.value">
                         {{ month.key }}
                     </a-select-option>
@@ -20,7 +20,7 @@
             </u-select>
 
             <u-select>
-                <a-select :dropdown-match-select-width="false" placeholder="Año" :default-value="birthdate.year" @change="setYear">
+                <a-select v-model="value.year" :dropdown-match-select-width="false" placeholder="Año" :default-value="value.year" @change="setYear">
                     <a-select-option v-for="year in yearOptions" :key="'y' + year" :value="year">
                         {{ year }}
                     </a-select-option>
@@ -52,12 +52,12 @@
                     { key: 'Octubre', value: '10' },
                     { key: 'Noviembre', value: '11' },
                     { key: 'Diciembre', value: '12' }
-                ],
-                birthdate: {
-                    day: this.value.day,
-                    month: this.value.month,
-                    year: this.value.year
-                }
+                ]
+                // birthdate: {
+                //     day: this.value.day,
+                //     month: this.value.month,
+                //     year: this.value.year
+                // }
             }
         },
         computed: {
@@ -75,22 +75,22 @@
         },
         methods: {
             setDay (day) {
-                this.birthdate.day = day
-                this.triggerChange({ day })
+                this.value.day = day
+                this.triggerChange()
             },
 
             setMonth (month) {
-                this.birthdate.month = month
-                this.triggerChange({ month })
+                this.value.month = month
+                this.triggerChange()
             },
 
             setYear (year) {
-                this.birthdate.year = year
-                this.triggerChange({ year })
+                this.value.year = year
+                this.triggerChange()
             },
 
-            triggerChange (changedValue) {
-                this.$emit('change', this.birthdate)
+            triggerChange () {
+                this.$emit('change', this.value)
             }
         }
     }

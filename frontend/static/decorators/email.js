@@ -4,7 +4,7 @@ export const emailRules = [
 ]
 
 export default {
-    title: 'correo electrónico',
+    title: 'Correo electrónico',
     required: true,
     placeholder: 'Ingresa tu correo electrónico',
     extra: '',
