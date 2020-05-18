@@ -1,10 +1,7 @@
 # Continuous Integration
-
 name: CI
 
 on:
-  push:
-    branches: [ master, develop ]
   pull_request:
     branches: [ master, develop ]
 
@@ -16,12 +13,12 @@ jobs:
 
     # Pasos
     steps:
-    # Clonar repositorio
-    - uses: actions/checkout@v2
+      # Clonar repositorio
+      - uses: actions/checkout@v2
 
-    # Correr los test unitarios
-    - name: Run unit test
-      run: |
-        cd frontend
-        npm install
-        npm run test
+      # Correr los test unitarios
+      - name: Run unit test
+        run: |
+          cd frontend
+          npm install
+          npm run test
