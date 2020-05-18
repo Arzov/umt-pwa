@@ -9,7 +9,7 @@ on:
 jobs:
   # Deploy en AWS
   deploy:
-    if: github.event.pull_request.merged == true && github.ref == 'develop'
+    if: github.event.pull_request.merged == true && github.ref == 'master'
 
     # Instancia de Linux Ubuntu
     runs-on: ubuntu-latest
