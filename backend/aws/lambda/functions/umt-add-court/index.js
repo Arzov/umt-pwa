@@ -1,10 +1,13 @@
-// LIBRERIAS
+/**
+ * Agrega una cancha en AWS DynamoDB
+ * @version 1.0.0
+ * @author Franco Barrientos <franco.barrientos@arzov.com>
+ */
+
 const AWS = require('aws-sdk');
 const ddbGeo = require('dynamodb-geo');
-
-// PARAMETROS CONFIGURACION
 const dynamodb = new AWS.DynamoDB();
-const DYNAMO_TABLE_COURTS = 'ARV_UMT_COURTS';
+const TBL_UMT_COURTS = 'ARV_UMT_COURTS';
 const config = new ddbGeo.GeoDataManagerConfiguration(dynamodb, DYNAMO_TABLE_COURTS);
 
 config.hashKeyLength = 6;
