@@ -1,0 +1,18 @@
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Funciones AWS Lambda
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 180
+
+Resources:
+  UMTAddCourt:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: umt-add-court/
+      Handler: index.handler
+      Runtime: nodejs12.x
+      Layers:
+        - arn:aws:lambda:us-east-2:223453650380:layer:umt:1
