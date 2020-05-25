@@ -1,4 +1,4 @@
-const umt_env = require('../index');
+const umt_env = require('../index')
 
 test('Variables AWS DynamoDB', () => {
   expect(umt_env.db.UMT_COURTS).toBe('UMT_COURTS')

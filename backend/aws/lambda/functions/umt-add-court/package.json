@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -12,7 +12,7 @@
     "dynamodb-geo": "^0.4.0"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.1.4"
+    "aws-sdk": "^2.683.0",
+    "jest": "^26.0.1"
   }
 }
