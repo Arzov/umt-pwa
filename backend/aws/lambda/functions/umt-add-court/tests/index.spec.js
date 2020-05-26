@@ -1,8 +1,8 @@
 const aws = require('aws-sdk')
 const event = require('../events/event.json')
 
+describe("Test AWS Lambda: umt-add-court", () => {
 
-test('Ejecución AWS Lambda: umt-add-court', (done) => {
   let lambda = new aws.Lambda({
     apiVersion: '2015-03-31',
     region: 'us-east-2',
@@ -15,16 +15,18 @@ test('Ejecución AWS Lambda: umt-add-court', (done) => {
     Payload: JSON.stringify(event)
   }
 
-  lambda.invoke(params, function(err, data) {
-    if (err) {
-      console.log(err)
-      expect(err.StatusCode).toBe(200)
-    }
-    else {
-      console.log(data)
-      expect(data.StatusCode).toBe(200)
-    }
+  test('Evaluar respuesta desde AWS', (done) => {
 
-    done()
-  })
+    lambda.invoke(params, function(err, data) {
+      if (err) {
+        expect(err.StatusCode).toBe(200)
+      } else {
+        console.log(data)
+        expect(data.StatusCode).toBe(200)
+      }
+
+      done()
+    })
+  }, 30000)
+
 })

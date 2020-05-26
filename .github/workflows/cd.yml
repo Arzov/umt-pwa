@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # Deploy en AWS DEV
-      - name: Deploy to AWS DEV
+      - name: Deploy en AWS DEV
         if: github.ref == 'develop'
         env:
           AWS_ACCESS_KEY_DEV: ${{ secrets.AWS_ACCESS_KEY_DEV }}
