@@ -6,13 +6,16 @@
   "scripts": {
     "test": "jest"
   },
+  "files": [
+    "index.js"
+  ],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "dynamodb-geo": "^0.4.0"
-  },
   "devDependencies": {
     "aws-sdk": "^2.683.0",
     "jest": "^26.0.1"
+  },
+  "optionalDependencies": {
+    "dynamodb-geo": "^0.4.0"
   }
 }

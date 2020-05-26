@@ -3,8 +3,8 @@ version = 0.1
 [default.deploy]
 [default.deploy.parameters]
 stack_name = "umt"
-s3_bucket = "arzov-umatch-artifacts-dev"
+s3_bucket = "@S3_BUCKET"
 s3_prefix = "umt"
-region = "us-east-2"
+region = "@REGION"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
