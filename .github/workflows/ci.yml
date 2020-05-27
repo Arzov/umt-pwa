@@ -25,7 +25,7 @@ jobs:
         run: |
           cd backend/aws
           sed "s/@LAMBDA_LAYER/$AWS_LAMBDA_LAYER/g;s+@LAMBDA_ROLE+$AWS_LAMBDA_ROLE+g" template.yml > template_tmp.yml
-          sam local start-lambda -t template_tmp.yml
+          sam local start-lambda -t template_tmp.yml &
 
       - name: Pruebas AWS Lambda
         run: |
