@@ -28,6 +28,6 @@ describe("Test AWS Lambda: umt-add-court", () => {
 
       done()
     })
-  }, 30000)
+  }, 60000)
 
 })
