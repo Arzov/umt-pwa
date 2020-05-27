@@ -19,6 +19,7 @@ describe("Test AWS Lambda: umt-add-court", () => {
 
     lambda.invoke(params, function(err, data) {
       if (err) {
+        console.log(err)
         expect(err.StatusCode).toBe(200)
       } else {
         console.log(data)
