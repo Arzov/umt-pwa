@@ -6,19 +6,40 @@ on:
     branches: [ master, develop ]
 
 jobs:
-  # Test unitarios
-  test:
-    # Instancia de Linux Ubuntu
+
+  test-backend:
+    name: Test backend
     runs-on: ubuntu-latest
 
-    # Pasos
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_DEV }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY_DEV }}
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION_DEV }}
+      AWS_LAMBDA_LAYER: ${{ secrets.AWS_LAMBDA_LAYER_DEV }}
+      AWS_LAMBDA_ROLE: ${{ secrets.AWS_LAMBDA_ROLE_DEV }}
+
     steps:
-      # Clonar repositorio
       - uses: actions/checkout@v2
 
-      # Correr los test unitarios
-      - name: Run unit test
+      - name: Levantar servicio AWS Lambda
+        run: |
+          cd backend/aws
+          sed "s/@LAMBDA_LAYER/$AWS_LAMBDA_LAYER/g;s+@LAMBDA_ROLE+$AWS_LAMBDA_ROLE+g" template.yml > template_tmp.yml
+          sam local start-lambda -t template_tmp.yml &
+
+      - name: Pruebas AWS Lambda
+        run: |
+          cd backend/aws
+          cd lambda/functions/umt-add-court; npm install; npm run test
+
+  test-frontend:
+    name: Test frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Pruebas PWA
         run: |
           cd frontend
-          npm install
-          npm run test
+          npm install; npm run test

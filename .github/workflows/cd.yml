@@ -7,28 +7,51 @@ on:
     branches: [ master, develop ]
 
 jobs:
-  # Deploy en AWS
-  deploy:
-    # Solo ejecutar si se resolvió el pull request
-    if: github.event.pull_request.merged == true
 
-    # Instancia de Linux Ubuntu
+  deploy-backend:
+    # Solo ejecutar si se resolvió el pull request y la rama es develop
+    if: github.event.pull_request.merged == true && github.ref == 'develop'
+
+    name: Deploy backend en AWS
     runs-on: ubuntu-latest
 
-    # Pasos
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_DEV }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY_DEV }}
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION_DEV }}
+      AWS_LAMBDA_LAYER: ${{ secrets.AWS_LAMBDA_LAYER_DEV }}
+      AWS_LAMBDA_ROLE: ${{ secrets.AWS_LAMBDA_ROLE_DEV }}
+      AWS_S3_DEPLOY_BUCKET: ${{ secrets.AWS_S3_DEPLOY_BUCKET_DEV }}
+      AWS_S3_ARTIFACTS_BUCKET: ${{ secrets.AWS_S3_ARTIFACTS_BUCKET_DEV }}
+
     steps:
-      # Clonar repositorio
       - uses: actions/checkout@v2
 
-      # Deploy en AWS DEV
-      - name: Deploy to AWS DEV
-        if: github.ref == 'develop'
-        env:
-          AWS_ACCESS_KEY_DEV: ${{ secrets.AWS_ACCESS_KEY_DEV }}
-          AWS_SECRET_KEY_DEV: ${{ secrets.AWS_SECRET_KEY_DEV }}
-          AWS_S3_BUCKET_DEV: ${{ secrets.AWS_S3_BUCKET_DEV }}
-          AWS_CLOUDFRONT_DEV: ${{ secrets.AWS_CLOUDFRONT_DEV }}
+      - name: Deploy
+        run: |
+          cd backend/aws
+          chmod +x deploy.sh
+          ./deploy.sh
+
+  deploy-frontend:
+    # Solo ejecutar si se resolvió el pull request y la rama es develop
+    if: github.event.pull_request.merged == true && github.ref == 'develop'
+
+    name: Deploy frontend en AWS
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_DEV }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY_DEV }}
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION_DEV }}
+      AWS_S3_DEPLOY_BUCKET: ${{ secrets.AWS_S3_DEPLOY_BUCKET_DEV }}
+      AWS_CLOUDFRONT: ${{ secrets.AWS_CLOUDFRONT_DEV }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Deploy
         run: |
           cd frontend
-          chmod +x deploy_dev.sh
-          ./deploy_dev.sh
+          chmod +x deploy.sh
+          ./deploy.sh

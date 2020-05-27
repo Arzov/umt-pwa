@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "umt"
+s3_bucket = "@S3_BUCKET"
+s3_prefix = "umt"
+region = "@REGION"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"

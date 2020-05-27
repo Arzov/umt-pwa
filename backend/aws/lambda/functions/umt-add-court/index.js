@@ -1,11 +1,14 @@
-// LIBRERIAS
-const AWS = require('aws-sdk');
-const ddbGeo = require('dynamodb-geo');
+/**
+ * Agrega una cancha en AWS DynamoDB
+ * @version 1.0.0
+ * @author Franco Barrientos <franco.barrientos@arzov.com>
+ */
 
-// PARAMETROS CONFIGURACION
-const dynamodb = new AWS.DynamoDB();
-const DYNAMO_TABLE_COURTS = 'ARV_UMT_COURTS';
-const config = new ddbGeo.GeoDataManagerConfiguration(dynamodb, DYNAMO_TABLE_COURTS);
+const aws = require('aws-sdk');
+const umt_env = require('umt-env');
+const ddbGeo = require('dynamodb-geo');
+const dynamodb = new aws.DynamoDB();
+const config = new ddbGeo.GeoDataManagerConfiguration(dynamodb, umt_env.db.UMT_COURTS);
 
 config.hashKeyLength = 6;
 
@@ -136,18 +139,18 @@ exports.handler = function(event, context, callback) {
 	console.log(event);
 
 	// Revisar si exite una ubicacion para la cancha
-	getCourt(DYNAMO_TABLE_COURTS, rangeKey, function(err, data) {
+	getCourt(umt_env.db.UMT_COURTS, rangeKey, function(err, data) {
 		if (err) console.log(err);
 		else {
 			// La ubicacion existente se elimina y se reemplaza por la nueva
 			if (data.Count) {
 				const hashKey = data.Items[0].hashKey.N;
 
-				deleteLocation(DYNAMO_TABLE_COURTS, hashKey, rangeKey, function(err, data) {
+				deleteLocation(umt_env.db.UMT_COURTS, hashKey, rangeKey, function(err, data) {
 					if (err) console.log(err);
 					else {
 						addLocation(
-							DYNAMO_TABLE_COURTS,
+							umt_env.db.UMT_COURTS,
 							latitude,
 							longitude,
 							rangeKey,
@@ -171,7 +174,7 @@ exports.handler = function(event, context, callback) {
 			// Si no existe se crea la nueva ubicacion
 			else {
 				addLocation(
-					DYNAMO_TABLE_COURTS,
+					umt_env.db.UMT_COURTS,
 					latitude,
 					longitude,
 					rangeKey,

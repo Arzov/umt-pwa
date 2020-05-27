@@ -98,3 +98,5 @@ dist
 .vscode
 frontend/styleguide/build/
 frontend/styleguide/index.html
+**/layers/**/nodejs
+**/layers/**/*.zip
