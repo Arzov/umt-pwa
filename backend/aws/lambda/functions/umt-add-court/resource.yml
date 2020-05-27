@@ -1,0 +1,7 @@
+
+  UMTAddCourt:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: umt-add-court
+      CodeUri: lambda/functions/umt-add-court/
+      Role: @LAMBDA_ROLE

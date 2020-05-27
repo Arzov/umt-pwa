@@ -6,7 +6,15 @@
 
 
 # ----------------------------------------------------------
-#  Build local
+#  Generar template.yml
+# ----------------------------------------------------------
+
+cat header.yml > template.yml
+for i in $(find -name "resource.yml" -not -path "*/node_modules/*");do cat $i >> template.yml;done
+
+
+# ----------------------------------------------------------
+#  Build local para AWS Lambda
 # ----------------------------------------------------------
 
 # Reemplazar variables en archivo template.yml
@@ -30,4 +38,5 @@ sam deploy --no-confirm-changeset
 # Remover archivos temporales
 cd ../../
 rm template_tmp.yml
+rm template.yml
 rm -R .aws-sam

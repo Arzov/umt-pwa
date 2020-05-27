@@ -1,30 +1,4 @@
-Transform: AWS::Serverless-2016-10-31
-Description: >
-  Backend en AWS
 
-Globals:
-  Function:
-    MemorySize: 256
-    Timeout: 180
-    Handler: index.handler
-    Runtime: nodejs12.x
-    Layers:
-      - @LAMBDA_LAYER
-
-Resources:
-  # ==================================
-  # AWS Lambda
-  # ==================================
-  UMTAddCourt:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: umt-add-court
-      CodeUri: lambda/functions/umt-add-court/
-      Role: @LAMBDA_ROLE
-    
-  # ==================================
-  # AWS DynamoDB
-  # ==================================
   UMTCourts:
     Type: AWS::DynamoDB::Table
     Properties:
