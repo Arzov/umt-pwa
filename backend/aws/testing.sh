@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==========================================================
-# Deploy backend en AWS
+# Testing backend en AWS
 # Author : Franco Barrientos <franco.barrientos@arzov.com>
 # ==========================================================
 
@@ -13,32 +13,27 @@ chmod +x template_generator.sh; ./template_generator.sh
 
 
 # ----------------------------------------------------------
-#  Build local para AWS Lambda
+#  Levantar servicio AWS Lambda
 # ----------------------------------------------------------
 
 # Reemplazar variables en archivo template.yml
 sed "s/@LAMBDA_LAYER/$AWS_LAMBDA_LAYER/g;s+@LAMBDA_ROLE+$AWS_LAMBDA_ROLE+g" template.yml > template_tmp.yml
 
-# AWS SAM build
-sam build -t template_tmp.yml
+sam local start-lambda -t template_tmp.yml &
 
 
 # ----------------------------------------------------------
-#  Deploy en AWS
+#  Pruebas AWS Lambda
 # ----------------------------------------------------------
 
-# Reemplazar variables en archivo samconfig.toml
-sed "s/@S3_BUCKET/$AWS_S3_ARTIFACTS_BUCKET/g;s/@REGION/$AWS_DEFAULT_REGION/g" samconfig.toml > .aws-sam/build/samconfig.toml
-
-# AWS SAM deploy
-cd .aws-sam/build/
-sam deploy --no-confirm-changeset
+cd lambda/functions/umt-add-court
+npm install
+npm run test
 status=$?
 
 # Remover archivos temporales
-cd ../../
+cd ../../../
 rm template_tmp.yml
 rm template.yml
-rm -R .aws-sam
 
 exit $status

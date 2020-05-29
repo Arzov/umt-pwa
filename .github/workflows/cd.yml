@@ -21,7 +21,6 @@ jobs:
       AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION_DEV }}
       AWS_LAMBDA_LAYER: ${{ secrets.AWS_LAMBDA_LAYER_DEV }}
       AWS_LAMBDA_ROLE: ${{ secrets.AWS_LAMBDA_ROLE_DEV }}
-      AWS_S3_DEPLOY_BUCKET: ${{ secrets.AWS_S3_DEPLOY_BUCKET_DEV }}
       AWS_S3_ARTIFACTS_BUCKET: ${{ secrets.AWS_S3_ARTIFACTS_BUCKET_DEV }}
 
     steps:

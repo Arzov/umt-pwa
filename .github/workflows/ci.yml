@@ -21,16 +21,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Levantar servicio AWS Lambda
-        run: |
-          cd backend/aws
-          sed "s/@LAMBDA_LAYER/$AWS_LAMBDA_LAYER/g;s+@LAMBDA_ROLE+$AWS_LAMBDA_ROLE+g" template.yml > template_tmp.yml
-          sam local start-lambda -t template_tmp.yml &
-
       - name: Pruebas AWS Lambda
         run: |
           cd backend/aws
-          cd lambda/functions/umt-add-court; npm install; npm run test
+          chmod +x testing.sh
+          ./testing.sh
 
   test-frontend:
     name: Test frontend
@@ -42,4 +37,5 @@ jobs:
       - name: Pruebas PWA
         run: |
           cd frontend
-          npm install; npm run test
+          chmod +x testing.sh
+          ./testing.sh
