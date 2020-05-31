@@ -1,5 +1,5 @@
 
-  UMTMessages:
+  DBTableUMTMessages:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:

@@ -1,7 +1,10 @@
 
-  UMTAddCourt:
+  LDFunctionUMTAddCourt:
     Type: AWS::Serverless::Function
+    DependsOn: LDLayerUMT
     Properties:
       FunctionName: umt-add-court
       CodeUri: lambda/functions/umt-add-court/
       Role: @LAMBDA_ROLE
+      Layers:
+        - !Ref LDLayerUMT

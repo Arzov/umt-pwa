@@ -1,0 +1,5 @@
+
+  S3BucketUMTPWA:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: @S3_PWA_BUCKET
