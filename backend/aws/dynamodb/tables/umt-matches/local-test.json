@@ -7,9 +7,25 @@
     {
       "AttributeName": "rangeKey",
       "AttributeType": "S"
+    },
+    {
+      "AttributeName": "geohash",
+      "AttributeType": "N"
     }
   ],
-  "TableName": "UMT_MESSAGES",
+  "TableName": "UMT_MATCHES",
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "geohash-index",
+      "KeySchema": [{
+          "AttributeName": "geohash",
+          "KeyType": "HASH"
+      }],
+      "Projection": {
+        "ProjectionType": "ALL"
+      }
+    }
+  ],
   "KeySchema": [
     {
       "AttributeName": "hashKey",

@@ -6,6 +6,10 @@
   "scripts": {
     "test": "jest"
   },
+  "files": [
+    "index.js",
+    "utils/"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {},

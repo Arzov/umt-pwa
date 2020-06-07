@@ -28,6 +28,8 @@ docker run --name aws-arzov -d -p 8000:8000 \
 # Crear tablas
 dynamodb_conn="--endpoint-url http://localhost:8000 --region localhost"
 
+aws dynamodb create-table --cli-input-json file://dynamodb/tables/umt-courts/local-test.json $dynamodb_conn
+aws dynamodb create-table --cli-input-json file://dynamodb/tables/umt-matches/local-test.json $dynamodb_conn
 aws dynamodb create-table --cli-input-json file://dynamodb/tables/umt-messages/local-test.json $dynamodb_conn
 
 
@@ -52,11 +54,11 @@ status=$((status + $?))
 
 cd lambda/functions
 
-# cd umt-add-court; npm install; npm run test; cd ../
-# status=$((status + $?))
+cd umt-add-court; npm install; npm run test; cd ../
+status=$((status + $?))
 
-# cd umt-add-match; npm install; npm run test; cd ../
-# status=$((status + $?))
+cd umt-add-match; npm install; npm run test; cd ../
+status=$((status + $?))
 
 cd umt-add-message; npm install; npm run test; cd ../
 status=$((status + $?))

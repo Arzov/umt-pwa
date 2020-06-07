@@ -25,13 +25,13 @@ describe('Test AWS Lambda: umt-add-court', () => {
         let response = JSON.parse(data.Payload)
 
         expect(data.StatusCode).toBe(200)
-        expect(response.hashKey).toBe('-761029')
+        expect(response.hashKey).toBe('66jcfp')
         expect(response.rangeKey).toBe('+56200000000')
         expect(response.geoJson[0]).toBe('-70.573615')
         expect(response.geoJson[1]).toBe('-33.399435')
-        expect(response.matchType[0]).toBe('11v11')
-        expect(response.matchType[1]).toBe('5v5')
-        expect(response.matchType[2]).toBe('7v7')
+        expect(response.matchType[0]).toBe('5v5')
+        expect(response.matchType[1]).toBe('7v7')
+        expect(response.matchType[2]).toBe('11v11')
         expect(response.name).toBe('Canchas Futbolito RPC')
       }
 

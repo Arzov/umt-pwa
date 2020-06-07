@@ -10,4 +10,5 @@
         - !Ref LDLayerUMT
       Environment:
         Variables:
+          RUN_MODE: SERVER
           DB_UMT_COURTS: !Ref DBTableUMTCourts

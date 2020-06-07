@@ -9,7 +9,19 @@
       "AttributeType": "S"
     }
   ],
-  "TableName": "UMT_MESSAGES",
+  "TableName": "UMT_COURTS",
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "rangeKey-index",
+      "KeySchema": [{
+          "AttributeName": "rangeKey",
+          "KeyType": "HASH"
+      }],
+      "Projection": {
+        "ProjectionType": "ALL"
+      }
+    }
+  ],
   "KeySchema": [
     {
       "AttributeName": "hashKey",

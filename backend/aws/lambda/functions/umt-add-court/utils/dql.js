@@ -48,11 +48,10 @@ const getCourt = (db, tableName, rangeKey, fn) => {
 /**
  * Agrega una cancha con su geolocalización
  * @param {Object} db Conexion a DynamoDB
- * @param {Object} geoTableManager GeoDataManager para agregar geolocalización en DynamoDB
  * @param {String} tableName Nombre de la tabla
- * @param {String} latitude Latitud de la ubicación
- * @param {String} longitude Longitud de la ubicación
+ * @param {String} hashKey Hash de geolocalización
  * @param {String} rangeKey Id de la cancha
+ * @param {String} geoJson Longitud y latitud de la ubicación
  * @param {String[]} matchType Tipo de canchas que maneja (5v5, 7v7, 11v11)
  * @param {String} name Nombre de la cancha
  * @param {String} website Sitio web
@@ -67,57 +66,49 @@ const getCourt = (db, tableName, rangeKey, fn) => {
  * @param {String} active Vigencia de la cancha
  * @param {Function} fn Función callback
  */
-const addLocation = (db, geoTableManager, tableName, latitude, longitude, rangeKey, matchType, name, website,
+const addLocation = (db, tableName, hashKey, rangeKey, geoJson, matchType, name, website,
 	email, phone, information, benefits, schedule, payCondition, prices, partner, active, callback) => {
-    geoTableManager.putPoint({
-        RangeKeyValue: { S: rangeKey },
-		GeoPoint: {
-			latitude: latitude,
-			longitude: longitude
-		},
-		PutItemInput: {
-			Item: {
-				matchType: { SS: matchType },
-				name: { S: name },
-				website: { S: website },
-				email: { SS: email },
-				phone: { SS: phone },
-				information: { S: information },
-				benefits: { S: benefits },
-				schedule: { S: schedule },
-				payCondition: { S: payCondition },
-				prices: { S: prices },
-				partner: { BOOL: partner },
-				active: { BOOL: active }
-			}
+	db.putItem({
+		TableName: tableName,
+		Item: {
+			"hashKey": { S: hashKey },
+			"rangeKey": { S: rangeKey },
+			"geoJson": { S: geoJson },
+			"matchType": { SS: matchType },
+			"name": { S: name },
+			"website": { S: website },
+			"email": { SS: email },
+			"phone": { SS: phone },
+			"information": { S: information },
+			"benefits": { S: benefits },
+			"schedule": { S: schedule },
+			"payCondition": { S: payCondition },
+			"prices": { S: prices },
+			"partner": { BOOL: partner },
+			"active": { BOOL: active }
 		}
-	}).promise()
-	    .then(function() {
-			getCourt(db, tableName, rangeKey, function(err, data) {
-				if (err) console.log(err);
-				else {
-					const result = data.Items[0];
-
-					callback(null, {
-						hashKey: result.hashKey.N,
-						rangeKey: result.rangeKey.S,
-						geoJson: JSON.parse(result.geoJson.S).coordinates,
-						matchType: result.matchType.SS,
-						name: result.name.S,
-						website: result.website.S,
-						email: result.email.SS,
-						phone: result.phone.SS,
-						information: result.information.S,
-						benefits: result.benefits.S,
-						schedule: result.schedule.S,
-						payCondition: result.payCondition.S,
-						prices: result.prices.S,
-						partner: result.partner.BOOL,
-						active: result.active.BOOL
-					});
-				}
+	}, function(err, data) {
+		if (err) callback(err);
+		else {
+			callback(null, {
+				hashKey: hashKey,
+				rangeKey: rangeKey,
+				geoJson: JSON.parse(geoJson).coordinates,
+				matchType: matchType,
+				name: name,
+				website: website,
+				email: email,
+				phone: phone,
+				information: information,
+				benefits: benefits,
+				schedule: schedule,
+				payCondition: payCondition,
+				prices: prices,
+				partner: partner,
+				active: active
 			});
-		});
+		}
+	});
 }
 
 module.exports.deleteLocation = deleteLocation;

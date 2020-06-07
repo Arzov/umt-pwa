@@ -5,14 +5,19 @@
  */
 
 const aws = require('aws-sdk');
-const ddbGeo = require('dynamodb-geo');
+const ngeohash = require('ngeohash');
 const dql = require('utils/dql');
-const dynamodb = new aws.DynamoDB();
-const config = new ddbGeo.GeoDataManagerConfiguration(dynamodb, process.env.DB_UMT_COURTS);
+const geohashLength = 6;
+let options = { apiVersion: '2012-08-10' }
 
-config.hashKeyLength = 6;
+if (process.env.RUN_MODE === 'LOCAL') {
+	options.endpoint = 'http://arzov:8000'
+	options.accessKeyId = 'xxxx'
+	options.secretAccessKey = 'xxxx'
+	options.region = 'localhost'
+}
 
-const geoTableManager = new ddbGeo.GeoDataManager(config);
+const dynamodb = new aws.DynamoDB(options);
 
 
 exports.handler = function(event, context, callback) {
@@ -32,6 +37,8 @@ exports.handler = function(event, context, callback) {
 	const prices = event.prices;
 	const partner = event.partner;
 	const active = event.active;
+	const geoJson = "{\"type\":\"POINT\",\"coordinates\":[\""+ longitude +"\",\""+ latitude +"\"]}";
+	let hashKey = ngeohash.encode(latitude, longitude, geohashLength);
 
 	// Revisar si exite una ubicacion para la cancha
 	dql.getCourt(dynamodb, process.env.DB_UMT_COURTS, rangeKey, function(err, data) {
@@ -39,24 +46,24 @@ exports.handler = function(event, context, callback) {
 		else {
 			// La ubicacion existente se elimina y se reemplaza por la nueva
 			if (data.Count) {
-				const hashKey = data.Items[0].hashKey.N;
+				hashKey = data.Items[0].hashKey.N;
 
 				dql.deleteLocation(dynamodb, process.env.DB_UMT_COURTS, hashKey, rangeKey,
 					function(err, data) {
 					if (err) callback(err);
 					else {
-						dql.addLocation(dynamodb, geoTableManager, process.env.DB_UMT_COURTS, latitude,
-							longitude, rangeKey, matchType, name, website, email, phone, information,
-							benefits, schedule, payCondition, prices, partner, active, callback
+						dql.addLocation(dynamodb, process.env.DB_UMT_COURTS, hashKey, rangeKey, geoJson,
+							matchType, name, website, email, phone, information, benefits, schedule,
+							payCondition, prices, partner, active, callback
 						);
 					}
 				});
 			}
 			// Si no existe se crea la nueva ubicacion
 			else {
-				dql.addLocation(dynamodb, geoTableManager, process.env.DB_UMT_COURTS, latitude, longitude,
-					rangeKey, matchType, name, website, email, phone, information, benefits, schedule,
-					payCondition, prices, partner, active, callback
+				dql.addLocation(dynamodb, process.env.DB_UMT_COURTS, hashKey, rangeKey, geoJson, matchType,
+					name, website, email, phone, information, benefits, schedule, payCondition, prices,
+					partner, active, callback
 				);
 			}
 		}

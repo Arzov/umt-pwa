@@ -8,7 +8,16 @@
 const AWS = require('aws-sdk');
 const moment = require('moment');
 const dql = require('utils/dql');
-const dynamodb = new AWS.DynamoDB();
+let options = { apiVersion: '2012-08-10' }
+
+if (process.env.RUN_MODE === 'LOCAL') {
+	options.endpoint = 'http://arzov:8000'
+	options.accessKeyId = 'xxxx'
+	options.secretAccessKey = 'xxxx'
+	options.region = 'localhost'
+}
+
+const dynamodb = new AWS.DynamoDB(options);
 const daysToExpire = 10;
 
 
