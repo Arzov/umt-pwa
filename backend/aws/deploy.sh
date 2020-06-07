@@ -9,7 +9,7 @@
 #  Generar template.yml
 # ----------------------------------------------------------
 
-chmod +x template_generator.sh; ./template_generator.sh
+chmod +x samtemplate.sh; ./samtemplate.sh
 status=$?
 
 
@@ -18,7 +18,10 @@ status=$?
 # ----------------------------------------------------------
 
 # Reemplazar variables en archivo template.yml
-sed "s/@S3_PWA_BUCKET/$AWS_S3_PWA_BUCKET/g;s+@LAMBDA_ROLE+$AWS_LAMBDA_ROLE+g" template.yml > template_tmp.yml
+sed "
+    s/@AWS_S3_PWA_BUCKET/$AWS_S3_PWA_BUCKET/g;
+    s+@AWS_LAMBDA_ROLE+$AWS_LAMBDA_ROLE+g
+" template.yml > template_tmp.yml
 
 # AWS SAM build
 sam build -t template_tmp.yml
@@ -30,7 +33,10 @@ status=$((status + $?))
 # ----------------------------------------------------------
 
 # Reemplazar variables en archivo samconfig.toml
-sed "s/@S3_BUCKET/$AWS_S3_ARTIFACTS_BUCKET/g;s/@REGION/$AWS_DEFAULT_REGION/g" samconfig.toml > .aws-sam/build/samconfig.toml
+sed "
+    s/@AWS_S3_ARTIFACTS_BUCKET/$AWS_S3_ARTIFACTS_BUCKET/g;
+    s/@AWS_DEFAULT_REGION/$AWS_DEFAULT_REGION/g
+" samconfig.toml > .aws-sam/build/samconfig.toml
 
 # AWS SAM deploy
 cd .aws-sam/build/

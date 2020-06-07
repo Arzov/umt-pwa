@@ -1,13 +1,13 @@
 
-  LDFunctionUMTAddCourt:
+  LDFunctionUMTAddMatch:
     Type: AWS::Serverless::Function
     DependsOn: LDLayerUMT
     Properties:
-      FunctionName: umt-add-court
-      CodeUri: lambda/functions/umt-add-court/
+      FunctionName: umt-add-match
+      CodeUri: lambda/functions/umt-add-match/
       Role: @AWS_LAMBDA_ROLE
       Layers:
         - !Ref LDLayerUMT
       Environment:
         Variables:
-          DB_UMT_COURTS: !Ref DBTableUMTCourts
+          DB_UMT_MATCHES: !Ref DBTableUMTMatches

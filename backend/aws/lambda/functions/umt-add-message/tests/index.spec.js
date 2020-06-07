@@ -1,7 +1,7 @@
 const aws = require('aws-sdk')
 const event = require('../events/event.json')
 
-describe('Test AWS Lambda: umt-add-court', () => {
+describe('Test AWS Lambda: umt-add-message', () => {
 
   let lambda = new aws.Lambda({
     apiVersion: '2015-03-31',
@@ -11,7 +11,7 @@ describe('Test AWS Lambda: umt-add-court', () => {
   })
 
   let params = {
-    FunctionName: 'umt-add-court',
+    FunctionName: 'umt-add-message',
     Payload: JSON.stringify(event)
   }
 
@@ -25,14 +25,10 @@ describe('Test AWS Lambda: umt-add-court', () => {
         let response = JSON.parse(data.Payload)
 
         expect(data.StatusCode).toBe(200)
-        expect(response.hashKey).toBe('-761029')
-        expect(response.rangeKey).toBe('+56200000000')
-        expect(response.geoJson[0]).toBe('-70.573615')
-        expect(response.geoJson[1]).toBe('-33.399435')
-        expect(response.matchType[0]).toBe('11v11')
-        expect(response.matchType[1]).toBe('5v5')
-        expect(response.matchType[2]).toBe('7v7')
-        expect(response.name).toBe('Canchas Futbolito RPC')
+        expect(response.hashKey).toBe('fjbarrientosg@gmail.com#franco.barrientos@arzov.com')
+        expect(response.author).toBe('fjbarrientosg@gmail.com')
+        expect(response.authorName).toBe('Franco')
+        expect(response.content).toBe('Hola Mundo!')
       }
 
       done()

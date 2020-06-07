@@ -1,97 +1,19 @@
-// LIBRERIAS
+/**
+ * Agrega un match en AWS DynamoDB
+ * @version 1.0.0
+ * @author Franco Barrientos <franco.barrientos@arzov.com>
+ */
+
+
 const AWS = require('aws-sdk');
 const moment = require('moment');
-
-// PARAMETROS
+const dql = require('utils/dql');
 const dynamodb = new AWS.DynamoDB();
-const DYNAMO_TABLE_MATCHES = 'ARV_UMT_MATCHES';
 const daysToExpire = 10;
 
-// FUNCIONES
-function getMatch(tableName, hashKey, rangeKey, fn) {
-    dynamodb.getItem({
-            "TableName": tableName,
-            "Key": {
-                "hashKey": { "S": hashKey },
-                "rangeKey": { "S": rangeKey }
-            }
-        },
-        function(err, data) {
-            if (err) return fn(err);
-            else fn(null, data);
-        });
-}
 
-function queryAddMatch(tableName, hashKey, rangeKey, matchId, geohash, adversaryName, adversaryPicture, createdAt, expireAt, matchStatus, matchFilter, genderFilter, ageMinFilter, ageMaxFilter, fn) {
-    dynamodb.putItem({
-        TableName: tableName,
-        Item: {
-            "hashKey": {
-                S: hashKey
-            },
-            "rangeKey": {
-                S: rangeKey
-            },
-            "geohash": {
-                N: geohash
-            },
-            "adversaryName": {
-                S: adversaryName
-            },
-            "adversaryPicture": {
-                S: adversaryPicture
-            },
-            "matchId": {
-                S: matchId
-            },
-            "createdAt": {
-                S: createdAt
-            },
-            "expireAt": {
-                S: expireAt
-            },
-            "matchStatus": {
-                S: matchStatus
-            },
-            "matchFilter": {
-                S: matchFilter
-            },
-            "genderFilter": {
-                S: genderFilter
-            },
-            "ageMinFilter": {
-                N: ageMinFilter
-            },
-            "ageMaxFilter": {
-                N: ageMaxFilter
-            }
-        }
-    }, function(err, data) {
-        if (err) return fn(err);
-        else fn(null, data);
-    });
-}
-
-function addMatch(tableName, hashKey, rangeKey, matchId, geohash, creatorName, creatorPicture, adversaryName, adversaryPicture, createdAt, expireAt, matchStatus, matchFilter, genderFilter, ageMinFilter, ageMaxFilter, callback) {
-    // Se crea primero el match para el creador
-    queryAddMatch(tableName, hashKey, rangeKey, matchId, geohash, adversaryName, adversaryPicture, createdAt, expireAt, matchStatus, matchFilter, genderFilter, ageMinFilter, ageMaxFilter, function(err, data) {
-        if (err) console.log(err);
-        else {
-            // Se crea el match para el invitado o adversario
-            queryAddMatch(tableName, rangeKey, hashKey, matchId, geohash, creatorName, creatorPicture, createdAt, expireAt, matchStatus, matchFilter, genderFilter, ageMinFilter, ageMaxFilter, function(err, data) {
-                if (err) console.log(err);
-                else {
-                    callback(null, {
-                        matchId: matchId
-                    });
-                }
-            });
-        }
-    });
-}
-
-// HANDLER
 exports.handler = (event, context, callback) => {
+    // Parametros del usuario
     const hashKey = event.hashKey;
     const rangeKey = event.rangeKey;
     const geohash = String(event.geohash);
@@ -107,8 +29,8 @@ exports.handler = (event, context, callback) => {
     const expireAt = moment().add(daysToExpire, 'days').format();
 
     // Verificar si el match ya existe
-    getMatch(DYNAMO_TABLE_MATCHES, hashKey, rangeKey, function(err, data) {
-        if (err) console.log(err);
+    dql.getMatch(dynamodb, process.env.DB_UMT_MATCHES, hashKey, rangeKey, function(err, data) {
+        if (err) callback(err);
         else {
             // Existe el match
             if (Object.entries(data).length > 0 && data.constructor === Object) {
@@ -121,15 +43,14 @@ exports.handler = (event, context, callback) => {
                         const matchStatus = 'P';
                         const matchId = hashKey + '#' + rangeKey;
 
-                        addMatch(DYNAMO_TABLE_MATCHES, hashKey, rangeKey, matchId, geohash, creatorName, creatorPicture, adversaryName, adversaryPicture, createdAt, expireAt, matchStatus, matchFilter, genderFilter, ageMinFilter, ageMaxFilter, callback);
+                        dql.createMatch(dynamodb, process.env.DB_UMT_MATCHES, hashKey, rangeKey,
+                            matchId, geohash, creatorName, creatorPicture, adversaryName,
+                            adversaryPicture, createdAt, expireAt, matchStatus, matchFilter,
+                            genderFilter, ageMinFilter, ageMaxFilter, callback);
                     }
 
                     // Si no expiro entonces no hacer nada y devolver el matchId
-                    else {
-                        callback(null, {
-                            matchId: data.Item.matchId.S
-                        });
-                    }
+                    else callback(null, { matchId: data.Item.matchId.S });
                 }
 
                 // El usuario solicitante es el invitado del match
@@ -139,7 +60,10 @@ exports.handler = (event, context, callback) => {
                         const matchStatus = 'P';
                         const matchId = hashKey + '#' + rangeKey;
 
-                        addMatch(DYNAMO_TABLE_MATCHES, hashKey, rangeKey, matchId, geohash, creatorName, creatorPicture, adversaryName, adversaryPicture, createdAt, expireAt, matchStatus, matchFilter, genderFilter, ageMinFilter, ageMaxFilter, callback);
+                        dql.createMatch(dynamodb, process.env.DB_UMT_MATCHES, hashKey, rangeKey,
+                            matchId, geohash, creatorName, creatorPicture, adversaryName,
+                            adversaryPicture, createdAt, expireAt, matchStatus, matchFilter,
+                            genderFilter, ageMinFilter, ageMaxFilter, callback);
                     }
 
                     // Si el estado es pendiente entonces se acepta la solicitud
@@ -158,15 +82,14 @@ exports.handler = (event, context, callback) => {
                         const createdAt = data.Item.createdAt.S;
                         const expireAt = data.Item.expireAt.S;
 
-                        addMatch(DYNAMO_TABLE_MATCHES, rangeKey, hashKey, matchId, geohash, creatorName, creatorPicture, adversaryName, adversaryPicture, createdAt, expireAt, matchStatus, matchFilter, genderFilter, ageMinFilter, ageMaxFilter, callback);
+                        dql.createMatch(dynamodb, process.env.DB_UMT_MATCHES, rangeKey, hashKey,
+                            matchId, geohash, creatorName, creatorPicture, adversaryName,
+                            adversaryPicture, createdAt, expireAt, matchStatus, matchFilter,
+                            genderFilter, ageMinFilter, ageMaxFilter, callback);
                     }
 
                     // En caso contrario no hacer nada
-                    else {
-                        callback(null, {
-                            matchId: data.Item.matchId.S
-                        });
-                    }
+                    else callback(null, { matchId: data.Item.matchId.S });
                 }
             }
 
@@ -175,7 +98,10 @@ exports.handler = (event, context, callback) => {
                 const matchStatus = 'P';
                 const matchId = hashKey + '#' + rangeKey;
 
-                addMatch(DYNAMO_TABLE_MATCHES, hashKey, rangeKey, matchId, geohash, creatorName, creatorPicture, adversaryName, adversaryPicture, createdAt, expireAt, matchStatus, matchFilter, genderFilter, ageMinFilter, ageMaxFilter, callback);
+                dql.createMatch(dynamodb, process.env.DB_UMT_MATCHES, hashKey, rangeKey, matchId,
+                    geohash, creatorName, creatorPicture, adversaryName, adversaryPicture, createdAt,
+                    expireAt, matchStatus, matchFilter, genderFilter, ageMinFilter, ageMaxFilter,
+                    callback);
             }
         }
     });

@@ -1,0 +1,27 @@
+{
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "hashKey",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "rangeKey",
+      "AttributeType": "S"
+    }
+  ],
+  "TableName": "UMT_MESSAGES",
+  "KeySchema": [
+    {
+      "AttributeName": "hashKey",
+      "KeyType": "HASH"
+    },
+    {
+      "AttributeName": "rangeKey",
+      "KeyType": "RANGE"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 35,
+    "WriteCapacityUnits": 35
+  }
+}

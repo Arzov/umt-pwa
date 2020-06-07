@@ -20,6 +20,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY_DEV }}
       AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION_DEV }}
       AWS_LAMBDA_ROLE: ${{ secrets.AWS_LAMBDA_ROLE_DEV }}
+      AWS_S3_PWA_BUCKET: ${{ secrets.AWS_S3_PWA_BUCKET_DEV }}
       AWS_S3_ARTIFACTS_BUCKET: ${{ secrets.AWS_S3_ARTIFACTS_BUCKET_DEV }}
 
     steps:
