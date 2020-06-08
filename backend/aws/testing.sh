@@ -26,11 +26,28 @@ docker run --name aws-arzov -d -p 8000:8000 \
     -inMemory -sharedDb
 
 # Crear tablas
+cd dynamodb/tables
 dynamodb_conn="--endpoint-url http://localhost:8000 --region localhost"
 
-aws dynamodb create-table --cli-input-json file://dynamodb/tables/umt-courts/local-test.json $dynamodb_conn
-aws dynamodb create-table --cli-input-json file://dynamodb/tables/umt-matches/local-test.json $dynamodb_conn
-aws dynamodb create-table --cli-input-json file://dynamodb/tables/umt-messages/local-test.json $dynamodb_conn
+# UMT_COURTS
+cd umt-courts
+awk 'NR >= 5' resource.yml > tmp.yml
+aws dynamodb create-table --cli-input-yaml file://tmp.yml $dynamodb_conn &>null.log
+rm tmp.yml; rm null.log; cd ../
+
+# UMT_MATCHES
+cd umt-matches
+awk 'NR >= 5' resource.yml > tmp.yml
+aws dynamodb create-table --cli-input-yaml file://tmp.yml $dynamodb_conn &>null.log
+rm tmp.yml; rm null.log; cd ../
+
+# UMT_MESSAGES
+cd umt-messages
+awk 'NR >= 5' resource.yml > tmp.yml
+aws dynamodb create-table --cli-input-yaml file://tmp.yml $dynamodb_conn &>null.log
+rm tmp.yml; rm null.log; cd ../
+
+cd ../../
 
 
 # ----------------------------------------------------------
