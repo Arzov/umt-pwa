@@ -1,76 +1,24 @@
-// LIBRERIAS
-const AWS = require('aws-sdk');
+/**
+ * Acutaliza estado de un match en AWS DynamoDB
+ * @version 1.0.0
+ * @author Franco Barrientos <franco.barrientos@arzov.com>
+ */
 
-// PARAMETROS
-const dynamodb = new AWS.DynamoDB();
-const DYNAMO_TABLE_MATCHES = 'ARV_UMT_MATCHES';
 
-// FUNCIONES
-function getMatch(tableName, hashKey, rangeKey, fn) {
-    dynamodb.getItem({
-            "TableName": tableName,
-            "Key": {
-                "hashKey": { "S": hashKey },
-                "rangeKey": { "S": rangeKey }
-            }
-        },
-        function(err, data) {
-            if (err) return fn(err);
-            else fn(null, data);
-        });
+const aws = require('aws-sdk');
+const dql = require('utils/dql');
+let options = { apiVersion: '2012-08-10' }
+
+if (process.env.RUN_MODE === 'LOCAL') {
+	options.endpoint = 'http://arzov:8000'
+	options.accessKeyId = 'xxxx'
+	options.secretAccessKey = 'xxxx'
+	options.region = 'localhost'
 }
 
-function queryUpdateMatch(tableName, hashKey, rangeKey, matchStatus, fn) {
-    dynamodb.updateItem({
-            TableName: tableName,
-            Key: {
-                "hashKey": {
-                    S: hashKey
-                },
-                "rangeKey": {
-                    S: rangeKey
-                }
-            },
-            UpdateExpression: "set matchStatus = :v1",
-            ExpressionAttributeValues: {
-                ":v1": {
-                    S: matchStatus
-                }
-            }
-        },
-        function(err, data) {
-            if (err) return fn(err);
-            else fn(null, data);
-        });
-}
+const dynamodb = new aws.DynamoDB(options);
 
-function updateMatch(tableName, hashKey, rangeKey, creatorStatus, adversaryStatus, isCreator, callback) {
-    // Se actualiza primero el match para el creador
-    queryUpdateMatch(tableName, hashKey, rangeKey, creatorStatus, function(err, data) {
-        if (err) console.log(err);
-        else {
-            // Se actualiza el match para el invitado o adversario
-            queryUpdateMatch(tableName, rangeKey, hashKey, adversaryStatus, function(err, data) {
-                if (err) console.log(err);
-                else {
-                    // Devolver el id del adversario segun corresponda para notificar en la suscripcion App
-                    if (isCreator) {
-                        callback(null, {
-                            rangeKey: rangeKey
-                        });
-                    }
-                    else {
-                        callback(null, {
-                            rangeKey: hashKey
-                        });
-                    }
-                }
-            });
-        }
-    });
-}
 
-// HANDLER
 exports.handler = (event, context, callback) => {
     const hashKey = event.hashKey;
     const rangeKey = event.rangeKey;
@@ -79,8 +27,8 @@ exports.handler = (event, context, callback) => {
     const creatorId = matchId.split('#')[0];
 
     // Obtener informacion del match
-    getMatch(DYNAMO_TABLE_MATCHES, hashKey, rangeKey, function(err, data) {
-        if (err) console.log(err);
+    dql.getMatch(dynamodb, process.env.DB_UMT_MATCHES, hashKey, rangeKey, function(err, data) {
+        if (err) callback(err);
         else {
             // El usuario solicitante es el creador del match
             if (hashKey === creatorId) {
@@ -92,7 +40,8 @@ exports.handler = (event, context, callback) => {
                     const creatorStatus = 'C';
                     const adversaryStatus = 'C';
 
-                    updateMatch(DYNAMO_TABLE_MATCHES, hashKey, rangeKey, creatorStatus, adversaryStatus, isCreator, callback);
+                    dql.updateMatch(dynamodb, process.env.DB_UMT_MATCHES, hashKey, rangeKey, creatorStatus,
+                        adversaryStatus, isCreator, callback);
                 }
 
                 // El match sigue pendiente
@@ -101,7 +50,8 @@ exports.handler = (event, context, callback) => {
                     const creatorStatus = 'C';
                     const adversaryStatus = 'D';
 
-                    updateMatch(DYNAMO_TABLE_MATCHES, hashKey, rangeKey, creatorStatus, adversaryStatus, isCreator, callback);
+                    dql.updateMatch(dynamodb, process.env.DB_UMT_MATCHES, hashKey, rangeKey, creatorStatus,
+                        adversaryStatus, isCreator, callback);
                 }
             }
 
@@ -116,9 +66,7 @@ exports.handler = (event, context, callback) => {
                         // El usuario creador cancelo el match
                         if (data.Item.matchStatus.S === 'D') {
                             // No actualizar nada y devolver el estado rechazado
-                            callback(null, {
-                                matchStatus: 'D'
-                            });
+                            callback(null, { matchStatus: 'D' });
                         }
 
                         // El match sigue pendiente
@@ -127,11 +75,12 @@ exports.handler = (event, context, callback) => {
                             const creatorStatus = 'A';
                             const adversaryStatus = 'A';
 
-                            updateMatch(DYNAMO_TABLE_MATCHES, rangeKey, hashKey, creatorStatus, adversaryStatus, isCreator, callback);
+                            dql.updateMatch(dynamodb, process.env.DB_UMT_MATCHES, rangeKey, hashKey,
+                                creatorStatus, adversaryStatus, isCreator, callback);
                         }
                         break;
 
-                        // El usuario rechaza la solicitud
+                    // El usuario rechaza la solicitud
                     case 'D':
                         // El usuario creador cancelo el match
                         if (data.Item.matchStatus.S === 'D') {
@@ -139,26 +88,35 @@ exports.handler = (event, context, callback) => {
                             const creatorStatus = 'C';
                             const adversaryStatus = 'C';
 
-                            updateMatch(DYNAMO_TABLE_MATCHES, rangeKey, hashKey, creatorStatus, adversaryStatus, isCreator, callback);
+                            dql.updateMatch(dynamodb, process.env.DB_UMT_MATCHES, rangeKey, hashKey,
+                                creatorStatus, adversaryStatus, isCreator, callback);
                         }
 
                         // El match sigue pendiente
                         else {
-                            // Se notifica al creador que el match es rechazado y se cancela por parte del adversario
+                            /**
+                             * Se notifica al creador que el match es rechazado y se cancela
+                             * por parte del adversario
+                             */
                             const creatorStatus = 'D';
                             const adversaryStatus = 'C';
 
-                            updateMatch(DYNAMO_TABLE_MATCHES, rangeKey, hashKey, creatorStatus, adversaryStatus, isCreator, callback);
+                            dql.updateMatch(dynamodb, process.env.DB_UMT_MATCHES, rangeKey, hashKey,
+                                creatorStatus, adversaryStatus, isCreator, callback);
                         }
                         break;
 
-                        // El usuario cancelo la solicitud (solo puede dar esta opcion cuando el creador cancelo el match)
+                    /**
+                     * El usuario cancelo la solicitud (solo puede dar esta opcion cuando el
+                     * creador cancelo el match)
+                     */ 
                     case 'C':
                         // Se debe cancelar el match en su totalidad
                         const creatorStatus = 'C';
                         const adversaryStatus = 'C';
 
-                        updateMatch(DYNAMO_TABLE_MATCHES, rangeKey, hashKey, creatorStatus, adversaryStatus, isCreator, callback);
+                        dql.updateMatch(dynamodb, process.env.DB_UMT_MATCHES, rangeKey, hashKey,
+                            creatorStatus, adversaryStatus, isCreator, callback);
                         break;
                 }
             }

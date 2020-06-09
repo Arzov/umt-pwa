@@ -17,12 +17,12 @@ const getMatch = (db, tableName, hashKey, rangeKey, fn) => {
     db.getItem({
         TableName: tableName,
         Key: {
-            "hashKey": { "S": hashKey },
-            "rangeKey": { "S": rangeKey }
+            "hashKey": { S: hashKey },
+            "rangeKey": { S: rangeKey }
         }
     },
     function(err, data) {
-        if (err) return fn(err);
+        if (err) fn(err);
         else fn(null, data);
     });
 }
@@ -67,7 +67,7 @@ const addMatch = (db, tableName, hashKey, rangeKey, matchId, geohash, adversaryN
             "ageMaxFilter": { N: ageMaxFilter }
         }
     }, function(err, data) {
-        if (err) return fn(err);
+        if (err) fn(err);
         else fn(null, data);
     });
 }
@@ -105,12 +105,11 @@ const createMatch = (db, tableName, hashKey, rangeKey, matchId, geohash, creator
                 createdAt, expireAt, matchStatus, matchFilter, genderFilter, ageMinFilter,
                 ageMaxFilter, function(err, data) {
                 if (err) callback(err);
-                else callback(null, { matchId: matchId });
+                else callback(null, { matchId });
             });
         }
     });
 }
 
 module.exports.getMatch = getMatch;
-module.exports.addMatch = addMatch;
 module.exports.createMatch = createMatch;

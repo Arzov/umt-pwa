@@ -27,7 +27,7 @@ const addMessage = (db, tableName, hashKey, rangeKey, author, authorName, conten
 			"content": { S: content }
 		}
 	}, function(err, data) {
-		if (err) return fn(err);
+		if (err) fn(err);
 		else fn(null, data);
 	});
 }

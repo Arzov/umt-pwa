@@ -1,0 +1,16 @@
+
+  LDFunctionUMTSearchMatch:
+    Type: AWS::Serverless::Function
+    DependsOn: LDLayerUMT
+    Properties:
+      FunctionName: umt-search-match
+      CodeUri: lambda/functions/umt-search-match/
+      Role: @AWS_LAMBDA_ROLE
+      Layers:
+        - !Ref LDLayerUMT
+      Environment:
+        Variables:
+          RUN_MODE: SERVER
+          DB_ARV_USERS: !ImportValue ARV-DBTableARVUsersRef
+          DB_UMT_USERS: !Ref DBTableUMTUsers
+          DB_UMT_MATCHES: !Ref DBTableUMTMatches

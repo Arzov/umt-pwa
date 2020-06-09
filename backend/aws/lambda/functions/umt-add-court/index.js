@@ -52,7 +52,7 @@ exports.handler = function(event, context, callback) {
 					function(err, data) {
 					if (err) callback(err);
 					else {
-						dql.addLocation(dynamodb, process.env.DB_UMT_COURTS, hashKey, rangeKey, geoJson,
+						dql.addCourt(dynamodb, process.env.DB_UMT_COURTS, hashKey, rangeKey, geoJson,
 							matchType, name, website, email, phone, information, benefits, schedule,
 							payCondition, prices, partner, active, callback
 						);
@@ -61,7 +61,7 @@ exports.handler = function(event, context, callback) {
 			}
 			// Si no existe se crea la nueva ubicacion
 			else {
-				dql.addLocation(dynamodb, process.env.DB_UMT_COURTS, hashKey, rangeKey, geoJson, matchType,
+				dql.addCourt(dynamodb, process.env.DB_UMT_COURTS, hashKey, rangeKey, geoJson, matchType,
 					name, website, email, phone, information, benefits, schedule, payCondition, prices,
 					partner, active, callback
 				);

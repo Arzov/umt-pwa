@@ -5,7 +5,7 @@
  */
 
 
-const AWS = require('aws-sdk');
+const aws = require('aws-sdk');
 const moment = require('moment');
 const dql = require('utils/dql');
 let options = { apiVersion: '2012-08-10' }
@@ -17,7 +17,7 @@ if (process.env.RUN_MODE === 'LOCAL') {
 	options.region = 'localhost'
 }
 
-const dynamodb = new AWS.DynamoDB(options);
+const dynamodb = new aws.DynamoDB(options);
 const daysToExpire = 10;
 
 

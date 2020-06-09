@@ -17,11 +17,11 @@ const deleteLocation = (db, tableName, hashKey, rangeKey, fn) => {
     db.deleteItem({
         TableName: tableName,
         Key: {
-            "hashKey": { "N": hashKey },
-            "rangeKey": { "S": rangeKey }
+            "hashKey": { N: hashKey },
+            "rangeKey": { S: rangeKey }
         }
     }, function(err, data) {
-        if (err) return fn(err);
+        if (err) fn(err);
         else fn(null, data);
     });
 }
@@ -38,9 +38,9 @@ const getCourt = (db, tableName, rangeKey, fn) => {
         TableName: tableName,
         IndexName: "rangeKey-index",
         KeyConditionExpression: "rangeKey = :v1",
-        ExpressionAttributeValues: { ":v1": { "S": rangeKey } }
+        ExpressionAttributeValues: { ":v1": { S: rangeKey } }
     }, function(err, data) {
-        if (err) return fn(err);
+        if (err) fn(err);
         else fn(null, data);
     });
 }
@@ -66,7 +66,7 @@ const getCourt = (db, tableName, rangeKey, fn) => {
  * @param {String} active Vigencia de la cancha
  * @param {Function} fn Función callback
  */
-const addLocation = (db, tableName, hashKey, rangeKey, geoJson, matchType, name, website,
+const addCourt = (db, tableName, hashKey, rangeKey, geoJson, matchType, name, website,
 	email, phone, information, benefits, schedule, payCondition, prices, partner, active, callback) => {
 	db.putItem({
 		TableName: tableName,
@@ -91,21 +91,21 @@ const addLocation = (db, tableName, hashKey, rangeKey, geoJson, matchType, name,
 		if (err) callback(err);
 		else {
 			callback(null, {
-				hashKey: hashKey,
-				rangeKey: rangeKey,
+				hashKey,
+				rangeKey,
 				geoJson: JSON.parse(geoJson).coordinates,
-				matchType: matchType,
-				name: name,
-				website: website,
-				email: email,
-				phone: phone,
-				information: information,
-				benefits: benefits,
-				schedule: schedule,
-				payCondition: payCondition,
-				prices: prices,
-				partner: partner,
-				active: active
+				matchType,
+				name,
+				website,
+				email,
+				phone,
+				information,
+				benefits,
+				schedule,
+				payCondition,
+				prices,
+				partner,
+				active
 			});
 		}
 	});
@@ -113,4 +113,4 @@ const addLocation = (db, tableName, hashKey, rangeKey, geoJson, matchType, name,
 
 module.exports.deleteLocation = deleteLocation;
 module.exports.getCourt = getCourt;
-module.exports.addLocation = addLocation;
+module.exports.addCourt = addCourt;

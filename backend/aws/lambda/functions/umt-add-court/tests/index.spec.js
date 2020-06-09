@@ -32,7 +32,7 @@ describe('Test AWS Lambda: umt-add-court', () => {
         expect(response.matchType[0]).toBe('5v5')
         expect(response.matchType[1]).toBe('7v7')
         expect(response.matchType[2]).toBe('11v11')
-        expect(response.name).toBe('Canchas Futbolito RPC')
+        expect(response.name).toBe('RPC')
       }
 
       done()

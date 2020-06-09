@@ -27,25 +27,22 @@ docker run --name aws-arzov -d -p 8000:8000 \
 
 # Crear tablas
 cd dynamodb/tables
-dynamodb_conn="--endpoint-url http://localhost:8000 --region localhost"
 
-# UMT_COURTS
-cd umt-courts
-awk 'NR >= 5' resource.yml > tmp.yml
-aws dynamodb create-table --cli-input-yaml file://tmp.yml $dynamodb_conn &>null.log
-rm tmp.yml; rm null.log; cd ../
+declare -A tables=(
+  [umt-courts]=5
+  [umt-matches]=5
+  [umt-messages]=5
+  [umt-users]=5
+)
 
-# UMT_MATCHES
-cd umt-matches
-awk 'NR >= 5' resource.yml > tmp.yml
-aws dynamodb create-table --cli-input-yaml file://tmp.yml $dynamodb_conn &>null.log
-rm tmp.yml; rm null.log; cd ../
-
-# UMT_MESSAGES
-cd umt-messages
-awk 'NR >= 5' resource.yml > tmp.yml
-aws dynamodb create-table --cli-input-yaml file://tmp.yml $dynamodb_conn &>null.log
-rm tmp.yml; rm null.log; cd ../
+for table in "${!tables[@]}"
+do
+    ln="${tables[$table]}"
+    cd $table
+    awk "NR >= ${ln}" resource.yml > tmp.yml
+    aws dynamodb create-table --cli-input-yaml file://tmp.yml --endpoint-url http://localhost:8000 --region localhost > null.log
+    rm tmp.yml; rm null.log; cd ../
+done
 
 cd ../../
 
@@ -71,14 +68,24 @@ status=$((status + $?))
 
 cd lambda/functions
 
-cd umt-add-court; npm install; npm run test; cd ../
-status=$((status + $?))
+lambdas="
+    umt-add-court
+    umt-add-match
+    umt-add-message
+    umt-add-user
+    umt-get-courts
+    umt-get-matches
+    umt-search-match
+    umt-update-match
+    umt-update-user
+"
 
-cd umt-add-match; npm install; npm run test; cd ../
-status=$((status + $?))
-
-cd umt-add-message; npm install; npm run test; cd ../
-status=$((status + $?))
+for lambda in $lambdas
+do
+    cd $lambda; npm install; npm run test
+    status=$((status + $?))
+    cd ../
+done
 
 # Detener servicios
 kill -9 $pids
