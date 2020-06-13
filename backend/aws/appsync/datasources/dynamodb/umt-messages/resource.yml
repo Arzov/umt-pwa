@@ -1,0 +1,11 @@
+
+  ASDataSourceUMTDBMessages:
+    Type: AWS::AppSync::DataSource
+    Properties: 
+      ApiId: !GetAtt ASGraphQLApiUMT.ApiId
+      DynamoDBConfig: 
+        AwsRegion: @AWS_DEFAULT_REGION
+        TableName: !Ref DBTableUMTMessages
+      Name: DBMessages
+      ServiceRoleArn: !ImportValue ARV-IARoleARVAppSyncARN
+      Type: AMAZON_DYNAMODB

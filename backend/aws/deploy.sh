@@ -20,7 +20,7 @@ status=$?
 # Reemplazar variables en archivo template.yml
 sed "
     s/@AWS_S3_PWA_BUCKET/$AWS_S3_PWA_BUCKET/g;
-    s+@AWS_LAMBDA_ROLE+$AWS_LAMBDA_ROLE+g
+    s/@AWS_DEFAULT_REGION/$AWS_DEFAULT_REGION/g;
 " template.yml > template_tmp.yml
 
 # AWS SAM build
