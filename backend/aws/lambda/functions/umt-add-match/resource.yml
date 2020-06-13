@@ -5,7 +5,7 @@
     Properties:
       FunctionName: umt-add-match
       CodeUri: lambda/functions/umt-add-match/
-      Role: @AWS_LAMBDA_ROLE
+      Role: !ImportValue ARV-IARoleARVLambdaARN
       Layers:
         - !Ref LDLayerUMT
       Environment:

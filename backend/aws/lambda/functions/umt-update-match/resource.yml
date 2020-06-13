@@ -4,7 +4,7 @@
     Properties:
       FunctionName: umt-update-match
       CodeUri: lambda/functions/umt-update-match/
-      Role: @AWS_LAMBDA_ROLE
+      Role: !ImportValue ARV-IARoleARVLambdaARN
       Environment:
         Variables:
           RUN_MODE: SERVER

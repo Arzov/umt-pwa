@@ -4,7 +4,7 @@
     Properties:
       FunctionName: umt-get-courts
       CodeUri: lambda/functions/umt-get-courts/
-      Role: @AWS_LAMBDA_ROLE
+      Role: !ImportValue ARV-IARoleARVLambdaARN
       Environment:
         Variables:
           RUN_MODE: SERVER
