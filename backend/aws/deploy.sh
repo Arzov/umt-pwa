@@ -17,6 +17,13 @@ status=$?
 #  Build local para AWS Lambda
 # ----------------------------------------------------------
 
+# Instalar layers
+cd lambda/layers
+
+cd umt/nodejs; npm install; cd ../../
+
+cd ../../
+
 # Reemplazar variables en archivo template.yml
 sed "
     s/@AWS_S3_PWA_BUCKET/$AWS_S3_PWA_BUCKET/g;
