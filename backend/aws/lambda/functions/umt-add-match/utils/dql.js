@@ -54,7 +54,7 @@ const addMatch = (db, tableName, hashKey, rangeKey, matchId, geohash, adversaryN
         Item: {
             "hashKey": { S: hashKey },
             "rangeKey": { S: rangeKey },
-            "geohash": { N: geohash },
+            "geohash": { S: geohash },
             "adversaryName": { S: adversaryName },
             "adversaryPicture": { S: adversaryPicture },
             "matchId": { S: matchId },

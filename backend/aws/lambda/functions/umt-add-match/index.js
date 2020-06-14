@@ -79,7 +79,7 @@ exports.handler = (event, context, callback) => {
                     else if (data.Item.matchStatus.S === 'P') {
                         const matchStatus = 'A';
                         const matchId = data.Item.matchId.S;
-                        const geohash = data.Item.geohash.N;
+                        const geohash = data.Item.geohash.S;
                         const adversaryName = event.creatorName;
                         const adversaryPicture = event.creatorPicture;
                         const creatorName = data.Item.adversaryName.S;

@@ -1,4 +1,4 @@
-import { addUserLocation } from '@/graphql/mutations'
+import { addUser } from '@/graphql/mutations'
 import { getUser, getUmatchUser } from '@/graphql/queries'
 
 const getDefaultState = () => ({
@@ -77,12 +77,12 @@ const actions = {
         this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
 
         // Actualizar posicion del usuario
-        this.$AWS.API.graphql(this.$AWS.Query(addUserLocation, data))
+        this.$AWS.API.graphql(this.$AWS.Query(addUser, data))
             .then((result) => {
                 const params = {
                     latitude: data.latitude,
                     longitude: data.longitude,
-                    geohash: result.data.addUserLocation.hashKey
+                    geohash: result.data.addUser.hashKey
                 }
 
                 context.commit('setState', { params })

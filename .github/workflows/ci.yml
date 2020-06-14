@@ -28,6 +28,8 @@ jobs:
 
       - name: Pruebas AWS Lambda
         run: |
+          aws --version
+          sam --version
           cd backend/aws
           chmod +x testing.sh
           ./testing.sh

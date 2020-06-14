@@ -42,20 +42,20 @@ export const updateUser = `
   }
 `
 
-export const addUserLocation = `
-  mutation addUserLocation(
+export const addUser = `
+  mutation addUser(
     $latitude: Float!
     $longitude: Float!
-    $userId: String!
+    $rangeKey: String!
     $genderFilter: String!
     $ageMinFilter: Int!
     $ageMaxFilter: Int!
     $matchFilter: String!
   ) {
-    addUserLocation(
+    addUser(
       latitude: $latitude
       longitude: $longitude
-      userId: $userId
+      rangeKey: $rangeKey
       genderFilter: $genderFilter
       ageMinFilter: $ageMinFilter
       ageMaxFilter: $ageMaxFilter
@@ -76,7 +76,7 @@ export const addMatch = `
   mutation addMatch(
     $hashKey: String!
     $rangeKey: String!
-    $geohash: Int!
+    $geohash: String!
     $creatorName: String!
     $creatorPicture: String!
     $adversaryName: String!
