@@ -1,0 +1,10 @@
+
+  ASGraphQLApiUMT:
+    Type: AWS::AppSync::GraphQLApi
+    Properties:
+      AuthenticationType: AMAZON_COGNITO_USER_POOLS
+      Name: umt
+      UserPoolConfig:
+        DefaultAction: ALLOW
+        AwsRegion: @AWS_DEFAULT_REGION
+        UserPoolId: !ImportValue ARV-CGUserPoolARVId

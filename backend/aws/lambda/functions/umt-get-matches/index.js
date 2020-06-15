@@ -1,58 +1,35 @@
-// LIBRERIAS
-const AWS = require('aws-sdk');
+/**
+ * Obtiene matches activos o pendientes del usuario desde AWS DynamoDB
+ * @version 1.0.0
+ * @author Franco Barrientos <franco.barrientos@arzov.com>
+ */
+
+
+const aws = require('aws-sdk');
+const dql = require('utils/dql');
 const moment = require('moment');
+let options = { apiVersion: '2012-08-10' }
 
-// PARAMETROS
-const dynamodb = new AWS.DynamoDB();
-const DYNAMO_TABLE_MATCHES = 'ARV_UMT_MATCHES';
-const limitScan = 100;
-
-// FUNCIONES
-function getMatches(tableName, hashKey, currentDate, limitScan, nextToken, fn) {
-    if (nextToken) {
-        dynamodb.query({
-            "TableName": tableName,
-            "KeyConditionExpression": "hashKey = :v1",
-            "FilterExpression": "expireAt >= :v2 and matchStatus <> :v3",
-            "ExpressionAttributeValues": {
-                ":v1": { "S": hashKey },
-                ":v2": { "S": currentDate },
-                ":v3": { "S": 'C' }
-            },
-            "ExclusiveStartKey": JSON.parse(nextToken),
-            "Limit": limitScan
-        }, function(err, data) {
-            if (err) return fn(err);
-            else fn(null, data);
-        });
-    }
-    else {
-        dynamodb.query({
-            "TableName": tableName,
-            "KeyConditionExpression": "hashKey = :v1",
-            "FilterExpression": "expireAt >= :v2 and matchStatus <> :v3",
-            "ExpressionAttributeValues": {
-                ":v1": { "S": hashKey },
-                ":v2": { "S": currentDate },
-                ":v3": { "S": 'C' }
-            },
-            "Limit": limitScan
-        }, function(err, data) {
-            if (err) return fn(err);
-            else fn(null, data);
-        });
-    }
+if (process.env.RUN_MODE === 'LOCAL') {
+	options.endpoint = 'http://arzov:8000'
+	options.accessKeyId = 'xxxx'
+	options.secretAccessKey = 'xxxx'
+	options.region = 'localhost'
 }
 
-// HANDLER
+const dynamodb = new aws.DynamoDB(options);
+const limitScan = 100;
+
+
 exports.handler = (event, context, callback) => {
     const hashKey = event.hashKey;
     const nextToken = event.nextToken;
     let currentDate = moment().format();
 
     // Obtener matches
-    getMatches(DYNAMO_TABLE_MATCHES, hashKey, currentDate, limitScan, nextToken, function(err, data) {
-        if (err) console.log(err);
+    dql.getMatches(dynamodb, process.env.DB_UMT_MATCHES, hashKey, currentDate, limitScan, nextToken,
+        function(err, data) {
+        if (err) callback(err);
         else {
             // Obtener nextToken para paginacion
             let nextTokenResult = null;
@@ -65,7 +42,7 @@ exports.handler = (event, context, callback) => {
             if (data.Count) {
                 // Quitar tipo de datos al resultado de DynamoDB
                 const dataResult = data.Items.map(function(x) {
-                    return AWS.DynamoDB.Converter.unmarshall(x);
+                    return aws.DynamoDB.Converter.unmarshall(x);
                 });
 
                 callback(null, {

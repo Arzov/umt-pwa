@@ -98,5 +98,6 @@ dist
 .vscode
 frontend/styleguide/build/
 frontend/styleguide/index.html
-**/layers/**/nodejs
-**/layers/**/*.zip
+
+# Whitelist
+!backend/aws/lambda/layers/**/nodejs/.gitkeep

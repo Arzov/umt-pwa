@@ -1,39 +1,25 @@
-// LIBRERIAS
-const AWS = require('aws-sdk');
+/**
+ * Agrega un mensaje al chat en AWS DynamoDB
+ * @version 1.0.0
+ * @author Franco Barrientos <franco.barrientos@arzov.com>
+ */
+
+
+const aws = require('aws-sdk');
 const moment = require('moment');
+const dql = require('utils/dql');
+let options = { apiVersion: '2012-08-10' }
 
-// PARAMETROS CONFIGURACION
-const dynamodb = new AWS.DynamoDB();
-const DYNAMO_TABLE_MESSAGES = 'ARV_UMT_MESSAGES';
-
-// FUNCIONES
-function addMessage(tableName, hashKey, rangeKey, author, authorName, content, fn) {
-	dynamodb.putItem({
-		TableName: tableName,
-		Item: {
-			"hashKey": {
-				S: hashKey
-			},
-			"rangeKey": {
-				S: rangeKey
-			},
-			"author": {
-				S: author
-			},
-			"authorName": {
-				S: authorName
-			},
-			"content": {
-				S: content
-			}
-		}
-	}, function(err, data) {
-		if (err) return fn(err);
-		else fn(null, data);
-	});
+if (process.env.RUN_MODE === 'LOCAL') {
+	options.endpoint = 'http://arzov:8000'
+	options.accessKeyId = 'xxxx'
+	options.secretAccessKey = 'xxxx'
+	options.region = 'localhost'
 }
 
-// HANDLER
+const dynamodb = new aws.DynamoDB(options);
+
+
 exports.handler = function(event, context, callback) {
 	// Parametros del usuario
 	const hashKey = event.hashKey;
@@ -43,17 +29,17 @@ exports.handler = function(event, context, callback) {
 	const rangeKey = moment().format() + '#' + author;
 
 	// Agregar mensaje
-	addMessage(DYNAMO_TABLE_MESSAGES, hashKey, rangeKey, author, authorName, content, function(err, data) {
-		if (err) console.log(err);
+	dql.addMessage(dynamodb, process.env.DB_UMT_MESSAGES, hashKey, rangeKey, author, authorName,
+		content, function(err, data) {
+		if (err) callback(err);
 		else {
 			callback(null, {
 				hashKey,
 				rangeKey,
 				author,
 				authorName,
-content
+				content
 			});
 		}
 	});
-
 };

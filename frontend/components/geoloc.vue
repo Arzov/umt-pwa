@@ -74,7 +74,7 @@
                     const userData = vue.$store.getters['user/userData']
 
                     const params = {
-                        userId: userData.email,
+                        rangeKey: userData.email,
                         latitude: position.coords.latitude,
                         longitude: position.coords.longitude,
                         genderFilter: userData.genderFilter,

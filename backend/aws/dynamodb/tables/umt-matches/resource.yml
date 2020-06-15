@@ -1,5 +1,5 @@
 
-  UMTMatches:
+  DBTableUMTMatches:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
@@ -8,7 +8,7 @@
         - AttributeName: "rangeKey"
           AttributeType: "S"
         - AttributeName: "geohash"
-          AttributeType: "N"
+          AttributeType: "S"
       BillingMode: "PAY_PER_REQUEST"
       GlobalSecondaryIndexes:
         - IndexName: "geohash-index"

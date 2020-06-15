@@ -21,7 +21,7 @@ export default ({ store }) => {
         if (moveDistance >= 5) {
           // Parametros para graphql
           const params = {
-            userId: userData.email,
+            rangeKey: userData.email,
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
             genderFilter: userData.genderFilter,

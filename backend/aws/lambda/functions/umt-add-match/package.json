@@ -1,17 +1,23 @@
 {
-  "name": "arv-umt-add-match",
+  "name": "umt-add-match",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
+  "files": [
+    "index.js",
+    "utils/"
+  ],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "moment": "^2.24.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "aws-sdk": "^2.683.0",
     "jest": "^25.1.0"
+  },
+  "optionalDependencies": {
+    "moment": "^2.26.0"
   }
 }

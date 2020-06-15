@@ -1,0 +1,11 @@
+
+  ASDataSourceUMTDBUsers:
+    Type: AWS::AppSync::DataSource
+    Properties: 
+      ApiId: !GetAtt ASGraphQLApiUMT.ApiId
+      DynamoDBConfig: 
+        AwsRegion: @AWS_DEFAULT_REGION
+        TableName: !Ref DBTableUMTUsers
+      Name: DBUsers
+      ServiceRoleArn: !ImportValue ARV-IARoleARVAppSyncARN
+      Type: AMAZON_DYNAMODB

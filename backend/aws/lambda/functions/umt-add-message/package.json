@@ -1,14 +1,23 @@
 {
-  "name": "arv-umt-add-message",
+  "name": "umt-add-message",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
+  "files": [
+    "index.js",
+    "utils/"
+  ],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "moment": "^2.24.0"
+  "dependencies": {},
+  "devDependencies": {
+    "aws-sdk": "^2.683.0",
+    "jest": "^25.1.0"
+  },
+  "optionalDependencies": {
+    "moment": "^2.26.0"
   }
 }
