@@ -8,5 +8,6 @@ export AWS_CLOUDFRONT="$AWS_CLOUDFRONT"
 # Npm install if not already.
 [ ! -d "node_modules" ] && npm install
 
+npm install -g gulp
 npm run generate
 gulp deploy
