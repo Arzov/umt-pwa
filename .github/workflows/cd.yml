@@ -32,6 +32,8 @@ jobs:
           ./deploy.sh
 
   deploy-frontend:
+    needs: deploy-backend
+
     # Solo ejecutar si se resolvió el pull request y la rama es develop
     if: github.event.pull_request.merged == true && github.ref == 'develop'
 
@@ -42,8 +44,7 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_DEV }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY_DEV }}
       AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION_DEV }}
-      AWS_S3_DEPLOY_BUCKET: ${{ secrets.AWS_S3_DEPLOY_BUCKET_DEV }}
-      AWS_CLOUDFRONT: ${{ secrets.AWS_CLOUDFRONT_DEV }}
+      AWS_S3_PWA_BUCKET: ${{ secrets.AWS_S3_DEPLOY_BUCKET_DEV }}
 
     steps:
       - uses: actions/checkout@v2

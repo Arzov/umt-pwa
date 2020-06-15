@@ -1,4 +1,3 @@
 {
-    "ROOT_URL": "http://localhost:3000",
-    "ROOT_URL_": "https://d1hqkpyx6tuicy.cloudfront.net"
+    "ROOT_URL": "https://@AWS_CLOUDFRONT_DOMAIN"
 }
