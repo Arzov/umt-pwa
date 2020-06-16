@@ -22,7 +22,7 @@ const actions = {
      */
     fetchMatches (ctx) {
         // Usar API de Umatch
-        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
 
         // Obtener usuarios cercanos para hacer match
         this.$AWS.API.graphql(
@@ -73,7 +73,7 @@ const actions = {
      */
     updateMatch (ctx, data) {
         // Usar API de Umatch
-        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
 
         // Actualizar el match
         this.$AWS.API.graphql(
@@ -98,7 +98,7 @@ const actions = {
      */
     onUpdateMatch (ctx) {
         // Usar API de Umatch
-        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
 
         this.$AWS.API.graphql(this.$AWS.Query(onUpdateMatch, {
             rangeKey: ctx.rootState.user.email

@@ -33,7 +33,7 @@ const actions = {
      */
     fetchCourts (ctx) {
         // Usar API de Umatch
-        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
 
         // Obtener canchas cercanas
         this.$AWS.API.graphql(

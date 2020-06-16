@@ -1,7 +1,4 @@
 const routes = require('./static/routes')
-const aws = require('./static/aws')
-const app = require('./static/app')
-const gcp = require('./static/gcp')
 
 export default {
     mode: 'spa',
@@ -21,7 +18,7 @@ export default {
         ],
         script: [
             {
-                src: 'https://maps.googleapis.com/maps/api/js?key=' + gcp.GCP_API_KEY,
+                src: 'https://maps.googleapis.com/maps/api/js?key=' + process.env.NUXT_ENV_GCP_API_KEY,
                 body: true
             }
         ],
@@ -101,8 +98,6 @@ export default {
     ** Environment variables
     */
     env: {
-        app,
-        aws,
         routes
     },
     /*
@@ -125,7 +120,7 @@ export default {
         },
 
         babel: {
-            presets({ isServer }) {
+            presets ({ isServer }) {
               return [
                 [
                   require.resolve('@nuxt/babel-preset-app'),
