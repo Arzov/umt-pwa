@@ -26,7 +26,7 @@ aws cloudformation describe-stacks \
 	--query 'Stacks[0].Outputs[?OutputKey==`CGUserPoolDomainARVId`].OutputValue' \
 	--output text > tmp; export NUXT_ENV_AWS_COGNITO_USER_POOL_DOMAIN=$(cat tmp); rm tmp
 
-export NUXT_ENV_AWS_COGNITO_USER_POOL_DOMAIN=$NUXT_ENV_AWS_COGNITO_USER_POOL_DOMAIN.auth.us-east-1.amazoncognito.com
+export NUXT_ENV_AWS_COGNITO_USER_POOL_DOMAIN=$NUXT_ENV_AWS_COGNITO_USER_POOL_DOMAIN.auth.$AWS_DEFAULT_REGION.amazoncognito.com
 
 aws cloudformation describe-stacks \
     --stack-name arv \
@@ -39,12 +39,7 @@ aws cloudformation describe-stacks \
 	--query 'Stacks[0].Outputs[?OutputKey==`ASGraphQLApiUMTUrl`].OutputValue' \
 	--output text > tmp; export NUXT_ENV_AWS_APPSYNC_UMATCH_URL=$(cat tmp); rm tmp
 
-aws cloudformation describe-stacks \
-    --stack-name umt \
-	--query 'Stacks[0].Outputs[?OutputKey==`CFDistributionUMTPWADomain`].OutputValue' \
-	--output text > tmp; export NUXT_ENV_AWS_CLOUDFRONT_DOMAIN=$(cat tmp); rm tmp
-
-export NUXT_ENV_ROOT_URL=https://$NUXT_ENV_AWS_CLOUDFRONT_DOMAIN
+export NUXT_ENV_ROOT_URL=https://$AWS_R53_UMT_DOMAIN
 
 aws cloudformation describe-stacks \
     --stack-name umt \

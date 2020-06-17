@@ -119,7 +119,7 @@ export const searchMatch = `
 
 export const getCourts = `
   query getCourts(
-    $hashKey: Int!
+    $hashKey: String!
     $matchType: String!
     $nextToken: String
   ) {
