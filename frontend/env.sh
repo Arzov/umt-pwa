@@ -26,7 +26,7 @@ aws cloudformation describe-stacks \
 	--query 'Stacks[0].Outputs[?OutputKey==`CGUserPoolDomainARVId`].OutputValue' \
 	--output text > tmp; export NUXT_ENV_AWS_COGNITO_USER_POOL_DOMAIN=$(cat tmp); rm tmp
 
-export NUXT_ENV_AWS_COGNITO_USER_POOL_DOMAIN=$NUXT_ENV_AWS_COGNITO_USER_POOL_DOMAIN.auth.us-east-2.amazoncognito.com
+export NUXT_ENV_AWS_COGNITO_USER_POOL_DOMAIN=$NUXT_ENV_AWS_COGNITO_USER_POOL_DOMAIN.auth.us-east-1.amazoncognito.com
 
 aws cloudformation describe-stacks \
     --stack-name arv \

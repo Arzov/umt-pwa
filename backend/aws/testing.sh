@@ -62,6 +62,7 @@ cd ../../
 sed "
     s/@AWS_S3_PWA_BUCKET/$AWS_S3_PWA_BUCKET/g;
     s/@AWS_DEFAULT_REGION/$AWS_DEFAULT_REGION/g;
+    s/@AWS_R53_UMT_DOMAIN/$AWS_R53_UMT_DOMAIN/g;
 " template.yml > template_tmp.yml
 
 sam local start-lambda --docker-network arzov-local-network -t template_tmp.yml \

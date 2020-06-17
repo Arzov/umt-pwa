@@ -5,7 +5,7 @@ describe('Test AWS Lambda: umt-update-user', () => {
 
   let lambda = new aws.Lambda({
     apiVersion: '2015-03-31',
-    region: 'us-east-2',
+    region: 'us-east-1',
     endpoint: 'http://127.0.0.1:3001',
     sslEnabled: false
   })
