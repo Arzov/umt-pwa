@@ -24,6 +24,5 @@ export AWS_CLOUDFRONT="$NUXT_ENV_AWS_CLOUDFRONT_ID"
 # Npm install if not already.
 [ ! -d "node_modules" ] && npm install
 
-npm install -g gulp
 npm run generate
-gulp deploy
+./node_modules/.bin/gulp deploy
