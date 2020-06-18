@@ -33,7 +33,7 @@ const actions = {
                 resolve()
             } else {
                 // Usar API de Umatch
-                this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+                this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
 
                 // Actualizar datos del usuario
                 await this.$AWS.API.graphql(

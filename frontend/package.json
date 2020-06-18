@@ -5,7 +5,7 @@
   "author": "Arzov",
   "private": true,
   "scripts": {
-    "dev": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3000 nuxt",
+    "dev": "sh run_dev.sh",
     "build": "nuxt build",
     "start": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3000 nuxt start",
     "generate": "nuxt generate",

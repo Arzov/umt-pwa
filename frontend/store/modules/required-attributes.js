@@ -12,7 +12,7 @@ const actions = {
             const birthdate = String(data.birthdate.year) + '-' + data.birthdate.month + '-' + data.birthdate.day
 
             // Usar API de Arzov
-            this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
+            this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_ARZOV_URL
 
             // Actualizar datos del usuario
             await this.$AWS.API.graphql(

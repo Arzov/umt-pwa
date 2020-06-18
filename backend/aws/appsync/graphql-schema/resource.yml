@@ -108,7 +108,7 @@
         }
         
         type Query {
-          getCourts(hashKey: Int!, matchType: String!, nextToken: String): CourtsList
+          getCourts(hashKey: String!, matchType: String!, nextToken: String): CourtsList
           getMatches(hashKey: String!, nextToken: String): MatchesList
           getMessages(hashKey: String!, nextToken: String): MessagesList
           getUser(rangeKey: String!, nextToken: String): UsersList

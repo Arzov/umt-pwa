@@ -29,7 +29,7 @@ const getters = {
 const actions = {
     fetchUserData (context, data) {
         // Usar API de Arzov
-        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_ARZOV_URL
+        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_ARZOV_URL
 
         // Obtener datos del usuario
         this.$AWS.API.graphql(this.$AWS.Query(getUser, { hashKey: data.idToken.payload.email }))
@@ -46,7 +46,7 @@ const actions = {
                 context.commit('setState', { params })
 
                 // Usar API de Umatch
-                this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+                this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
 
                 // Obtener datos Umatch del usuario
                 this.$AWS.API.graphql(this.$AWS.Query(getUmatchUser, { rangeKey: params.email }))
@@ -74,7 +74,7 @@ const actions = {
     },
     updatePosition (context, data) {
         // Usar API de Umatch
-        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+        this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
 
         // Actualizar posicion del usuario
         this.$AWS.API.graphql(this.$AWS.Query(addUser, data))

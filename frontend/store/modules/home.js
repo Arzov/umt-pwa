@@ -28,7 +28,7 @@ const actions = {
       ctx.commit('setSearchingStatus', true)
 
       // Usar API de Umatch
-      this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+      this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
 
       // Obtener usuarios cercanos para hacer match
       this.$AWS.API.graphql(
@@ -90,7 +90,7 @@ const actions = {
    */
   requestMatch (ctx, data) {
     // Usar API de Umatch
-    this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.aws.APPSYNC_UMATCH_URL
+    this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
 
     // Obtener usuarios cercanos para hacer match
     this.$AWS.API.graphql(

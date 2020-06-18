@@ -3,6 +3,17 @@
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
+        CustomErrorResponses:
+          - ErrorCachingMinTTL: 300
+            ErrorCode: 403
+            ResponseCode: 200
+            ResponsePagePath: /start.html        
+        Aliases:
+          - @AWS_R53_UMT_DOMAIN
+        ViewerCertificate:
+          AcmCertificateArn: !ImportValue ARV-CMCertificateARVARN
+          MinimumProtocolVersion: TLSv1.2_2018
+          SslSupportMethod: sni-only        
         DefaultCacheBehavior: 
           AllowedMethods: 
             - GET
