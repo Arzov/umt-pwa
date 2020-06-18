@@ -22,7 +22,7 @@ export AWS_CLOUDFRONT="$NUXT_ENV_AWS_CLOUDFRONT_ID"
 # Load nvm (node version manager), install node (version in .nvmrc), and npm install packages
 [ -s "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh" && nvm use
 # Npm install if not already.
-[ ! -d "node_modules" ] && npm install
+[ ! -d "node_modules" ] && npm install && npm install gulp
 
 npm run generate
 ./node_modules/.bin/gulp deploy
