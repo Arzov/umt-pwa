@@ -58,14 +58,12 @@ cd umt/nodejs; npm install; cd ../../
 
 cd ../../
 
-# Reemplazar variables en archivo template.yml
-sed "
-    s/@AWS_S3_PWA_BUCKET/$AWS_S3_PWA_BUCKET/g;
-    s/@AWS_DEFAULT_REGION/$AWS_DEFAULT_REGION/g;
-    s/@AWS_R53_UMT_DOMAIN/$AWS_R53_UMT_DOMAIN/g;
-" template.yml > template_tmp.yml
-
-sam local start-lambda --docker-network arzov-local-network -t template_tmp.yml \
+sam local start-lambda --docker-network arzov-local-network -t template.yml \
+    --parameter-overrides "
+        ParameterKey=AWSDefaultRegion,ParameterValue=$AWS_DEFAULT_REGION
+        ParameterKey=AWSS3PWABucket,ParameterValue=$AWS_S3_PWA_BUCKET
+        ParameterKey=AWSR53UMTDomain,ParameterValue=$AWS_R53_UMT_DOMAIN
+    " \
     --env-vars lambda/functions/env.json & pids="${pids-} $!"
 status=$((status + $?))
 
@@ -103,7 +101,6 @@ docker network rm arzov-local-network
 
 # Remover archivos temporales
 cd ../../
-rm template_tmp.yml
 rm template.yml
 status=$((status + $?))
 

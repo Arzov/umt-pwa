@@ -6,5 +6,5 @@
       Name: umt
       UserPoolConfig:
         DefaultAction: ALLOW
-        AwsRegion: @AWS_DEFAULT_REGION
+        AwsRegion: !Ref AWSDefaultRegion
         UserPoolId: !ImportValue ARV-CGUserPoolARVId

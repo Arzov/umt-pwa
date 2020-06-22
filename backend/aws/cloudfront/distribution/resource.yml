@@ -9,7 +9,7 @@
             ResponseCode: 200
             ResponsePagePath: /start.html        
         Aliases:
-          - @AWS_R53_UMT_DOMAIN
+          - !Ref AWSR53UMTDomain
         ViewerCertificate:
           AcmCertificateArn: !ImportValue ARV-CMCertificateARVARN
           MinimumProtocolVersion: TLSv1.2_2018

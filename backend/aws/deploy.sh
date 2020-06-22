@@ -24,15 +24,13 @@ cd umt/nodejs; npm install; cd ../../
 
 cd ../../
 
-# Reemplazar variables en archivo template.yml
-sed "
-    s/@AWS_S3_PWA_BUCKET/$AWS_S3_PWA_BUCKET/g;
-    s/@AWS_DEFAULT_REGION/$AWS_DEFAULT_REGION/g;
-    s/@AWS_R53_UMT_DOMAIN/$AWS_R53_UMT_DOMAIN/g;
-" template.yml > template_tmp.yml
-
 # AWS SAM build
-sam build -t template_tmp.yml
+sam build -t template.yml \
+    --parameter-overrides "
+        ParameterKey=AWSDefaultRegion,ParameterValue=$AWS_DEFAULT_REGION
+        ParameterKey=AWSS3PWABucket,ParameterValue=$AWS_S3_PWA_BUCKET
+        ParameterKey=AWSR53UMTDomain,ParameterValue=$AWS_R53_UMT_DOMAIN
+    "
 status=$((status + $?))
 
 
@@ -40,20 +38,24 @@ status=$((status + $?))
 #  Deploy en AWS
 # ----------------------------------------------------------
 
-# Reemplazar variables en archivo samconfig.toml
-sed "
-    s/@AWS_S3_ARTIFACTS_BUCKET/$AWS_S3_ARTIFACTS_BUCKET/g;
-    s/@AWS_DEFAULT_REGION/$AWS_DEFAULT_REGION/g
-" samconfig.toml > .aws-sam/build/samconfig.toml
-
 # AWS SAM deploy
 cd .aws-sam/build/
-sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
+sam deploy --no-confirm-changeset \
+    --stack-name umt \
+    --s3-prefix umt \
+    --region $AWS_DEFAULT_REGION \
+    --capabilities CAPABILITY_IAM \
+    --s3-bucket $AWS_S3_ARTIFACTS_BUCKET \
+    --parameter-overrides "
+        ParameterKey=AWSDefaultRegion,ParameterValue=$AWS_DEFAULT_REGION
+        ParameterKey=AWSS3PWABucket,ParameterValue=$AWS_S3_PWA_BUCKET
+        ParameterKey=AWSR53UMTDomain,ParameterValue=$AWS_R53_UMT_DOMAIN
+    " \
+    --no-fail-on-empty-changeset
 status=$((status + $?))
 
 # Remover archivos temporales
 cd ../../
-rm template_tmp.yml
 rm template.yml
 rm -R .aws-sam
 status=$((status + $?))
