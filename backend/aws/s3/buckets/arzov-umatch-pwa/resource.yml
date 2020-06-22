@@ -2,7 +2,7 @@
   S3BucketUMTPWA:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: @AWS_S3_PWA_BUCKET
+      BucketName: !Ref AWSS3PWABucket
       PublicAccessBlockConfiguration:
         BlockPublicAcls: false
         BlockPublicPolicy: false

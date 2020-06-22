@@ -4,7 +4,7 @@
     Properties: 
       ApiId: !GetAtt ASGraphQLApiUMT.ApiId
       DynamoDBConfig: 
-        AwsRegion: @AWS_DEFAULT_REGION
+        AwsRegion: !Ref AWSDefaultRegion
         TableName: !Ref DBTableUMTMessages
       Name: DBMessages
       ServiceRoleArn: !ImportValue ARV-IARoleARVAppSyncARN
