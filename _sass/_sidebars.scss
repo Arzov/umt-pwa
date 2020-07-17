@@ -1,0 +1,31 @@
+@import 'base';
+
+%sidebar-left {
+    min-width: 250px / 960px * 100%;
+    max-width: 250px / 960px * 100%;
+    padding-left: 30px / 960px * 100%;
+}
+
+.sub {
+    padding-left: 30px / 960px * 100%;   
+}
+
+body[data-theme="light"] {
+    #sidebar-left {
+        @extend %sidebar-left;
+
+        a {
+            color: $color-dm-bg-01;
+        }
+    }
+}
+
+body[data-theme="dark"] {
+    #sidebar-left {
+        @extend %sidebar-left;
+
+        a {
+            color: $color-lm-bg-02;
+        }
+    }
+}

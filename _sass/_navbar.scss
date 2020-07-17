@@ -1,0 +1,53 @@
+@import 'base';
+
+%image-btn {
+    margin-right: 20px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: block;
+	width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+body[data-theme="light"] {
+    .navbar {
+        background-color: $color-lm-bg-02;
+
+        #theme-toggle {
+            content: url($base-url + "/dark-mode.svg");
+            @extend %image-btn;
+        }
+
+        #github-btn {
+            background-image: url($base-url + "/lm-github.svg");
+            @extend %image-btn;
+        }
+    }
+
+    .navbar-brand {
+        color: $color-dm-bg-01;
+        font-family: $font-title;
+    }
+}
+
+body[data-theme="dark"] {
+    .navbar {
+        background-color: $color-dm-bg-02;
+
+        #theme-toggle {
+            content: url($base-url + "/light-mode.svg");
+            @extend %image-btn;
+        }
+
+        #github-btn {
+            background-image: url($base-url + "/dm-github.svg");
+            @extend %image-btn;
+        }
+    }
+
+    .navbar-brand {
+        color: $color-lm-bg-02;
+        font-family: $font-title;
+    }
+}
