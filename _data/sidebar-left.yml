@@ -1,11 +1,14 @@
 - name: Inicio
-  link: /index.html
+  link: /
 - name: Frontend
-  link: /about.html
+  link: /frontend
   subs:
     - name: Páginas
-      link: /about.html
+      link: /frontend/pages
+      subs:
+        - name: Start
+          link: /frontend/pages/start.html
     - name: Componentes
-      link: /about.html
+      link: /frontend/components
 - name: Backend
-  link: /about.html
+  link: /backend
