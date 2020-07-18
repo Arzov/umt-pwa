@@ -2,16 +2,28 @@
 @import 'navbar';
 @import 'sidebars';
 
+%commons {
+    transition: background 0.2s linear;
+}
+
 body, body[data-theme="light"] {
     color: $color-dm-bg-01;
     background: $color-lm-bg-01;
-    transition: background 0.2s linear;
+    @extend %commons;
+
+    hr {
+        border-top: 1px solid rgba(0, 0, 0, .1);
+    }
 }
 
 body[data-theme="dark"] {
     color: $color-lm-bg-02;
     background: $color-dm-bg-01;
-    transition: background 0.2s linear;
+    @extend %commons;
+
+    hr {
+        border-top: 1px solid rgba(255, 255, 255, 1);
+    }
 }
 
 .wrapper {
@@ -19,4 +31,14 @@ body[data-theme="dark"] {
     display: flex;
     width: 100%;
     align-items: stretch;
+}
+
+#content {
+    padding-left: 50px / 960px * 100%;
+    padding-right: 250px / 960px * 100%;
+    text-align: justify;
+}
+
+a, a:hover {
+    color: $color-pink-01;
 }
