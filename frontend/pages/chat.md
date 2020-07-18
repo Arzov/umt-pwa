@@ -1,6 +1,6 @@
 ---
-title: Start
+title: Chat
 layout: default
 ---
 
-# Start
+# Chat

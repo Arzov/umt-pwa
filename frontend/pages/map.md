@@ -1,6 +1,6 @@
 ---
-title: Start
+title: Map
 layout: default
 ---
 
-# Start
+# Map

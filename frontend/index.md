@@ -24,3 +24,10 @@ Creemos fuertemente que las PWA serán parte del futuro de las aplicaciones móv
 ##### ¿Por qué NuxtJS?
 
 Este framework basado en Vue.js nos permite aprovechar las ventajas de poder compilar código en una SPA (Single Page Application) sin necesidad de servidores a los cuales dar soporte. SPA es la solución adecuada para nuestro propósito de una PWA **flexible, liviana, estática y de bajo costo en hosting**.
+
+<br>
+
+---
+
+- [Páginas](./pages)
+- [Componentes](./components)

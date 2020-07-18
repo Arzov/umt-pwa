@@ -1,6 +1,6 @@
 ---
-title: Start
+title: Profile
 layout: default
 ---
 
-# Start
+# Profile

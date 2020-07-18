@@ -10,8 +10,15 @@
     cursor: pointer;
 }
 
+%navbar {
+    top: 0;
+    position: sticky;
+    z-index: 1100;
+}
+
 body[data-theme="light"] {
     .navbar {
+        @extend %navbar;
         background-color: $color-lm-bg-02;
 
         #theme-toggle {
@@ -23,6 +30,10 @@ body[data-theme="light"] {
             background-image: url($base-url + "/lm-github.svg");
             @extend %image-btn;
         }
+
+        a, a:hover {
+            color: $color-dm-bg-01;
+        }
     }
 
     .navbar-brand {
@@ -33,6 +44,7 @@ body[data-theme="light"] {
 
 body[data-theme="dark"] {
     .navbar {
+        @extend %navbar;
         background-color: $color-dm-bg-02;
 
         #theme-toggle {
@@ -43,6 +55,10 @@ body[data-theme="dark"] {
         #github-btn {
             background-image: url($base-url + "/dm-github.svg");
             @extend %image-btn;
+        }
+
+        a, a:hover {
+            color: $color-lm-bg-02;
         }
     }
 

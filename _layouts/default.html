@@ -16,10 +16,15 @@
     {% include header.html %}
     {% include navbar.html %}
 
-    <div class="wrapper">
-      {% include sidebar-left.html %}
-      <div id="content">
-        {{ content }}
+    <div class="container-fluid">
+      <div class="row">
+        {% include sidebar-left.html %}
+        <div id="content" class="col-md-8">
+          {{ content }}
+        </div>
+        <!-- TODO: Sidebar right -->
+        <div class="col-md-2">
+        </div>
       </div>
     </div>
     

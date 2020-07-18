@@ -1,19 +1,19 @@
-<nav id="sidebar-left">
+<div id="sidebar-left" class="col-md-2">
   <ul class="nav flex-column">
     {% for item in site.data.sidebar-left %}
     <li>
       <a href="{{ item.link | relative_url }}">
         <b>{{ item.name }}</b>
       </a>
-      <ul class="nav flex-column">
+      <ul class="nav flex-column sub-1">
         {% for item in item.subs %}
-        <li class="sub">
+        <li>
           <a href="{{ item.link | relative_url }}">
             {{ item.name }}
           </a>
-          <ul class="nav flex-column">
+          <ul class="nav flex-column sub-2">
             {% for item in item.subs %}
-            <li class="sub">
+            <li>
               <a href="{{ item.link | relative_url }}">
                 {{ item.name }}
               </a>
@@ -26,4 +26,4 @@
     </li>
     {% endfor %}
   </ul>
-</nav>
+</div>

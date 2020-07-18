@@ -1,6 +1,6 @@
 ---
-title: Start
+title: Login
 layout: default
 ---
 
-# Start
+# Login

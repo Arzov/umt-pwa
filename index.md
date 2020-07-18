@@ -5,7 +5,7 @@ layout: default
 
 # Documentación de ayuda
 
-Documentación para desarrolladores y diseñadores de **Arzov** que corresponde al desarrollo de la aplicación web progresiva ([PWA](https://es.wikipedia.org/wiki/Aplicaci%C3%B3n_web_progresiva)) **Arzov Umatch**.
+Documentación para desarrolladores y diseñadores de **Arzov** que corresponde al desarrollo de la aplicación web progresiva (<a href="https://es.wikipedia.org/wiki/Aplicaci%C3%B3n_web_progresiva" target="_blank">PWA</a>) **Arzov Umatch**.
 
 <br>
 
@@ -19,13 +19,11 @@ Documentación para desarrolladores y diseñadores de **Arzov** que corresponde 
 
 ### ¿Qué contiene esta documentación?
 
-Esta documentación se desglosa en dos partes; la primera tiene relación a todo el desarrollo del [_frontend_](./frontend) de la pwa la cual está basada en el framework [Nuxt.js](https://nuxtjs.org/) basado en [Vue.js](https://vuejs.org/); la segunda tiene relación a toda la infraestructura y arquitectura del [_backend_](./backend) montado en la nube de [AWS](https://aws.amazon.com/es/) (Amazon Web Services).
+Esta documentación se desglosa en dos partes; la primera tiene relación a todo el desarrollo del [_frontend_](./frontend) de la pwa la cual está basada en el framework <a href="https://nuxtjs.org/" target="_blank">Nuxt.js</a> basado en <a href="https://vuejs.org/" target="_blank">Vue.js</a>; la segunda tiene relación a toda la infraestructura y arquitectura del [_backend_](./backend) montado en la nube de <a href="https://aws.amazon.com/" target="_blank">AWS</a> (Amazon Web Services).
 
 <br>
 
 ---
-
-### Te puede interesar
 
 - [Frontend](./frontend)
 - [Backend](./backend)

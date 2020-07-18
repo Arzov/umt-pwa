@@ -1,6 +1,6 @@
 ---
-title: Start
+title: Home
 layout: default
 ---
 
-# Start
+# Home
