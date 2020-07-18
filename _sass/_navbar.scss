@@ -11,8 +11,6 @@
 }
 
 %navbar {
-    top: 0;
-    position: sticky;
     z-index: 1100;
 }
 
@@ -22,12 +20,12 @@ body[data-theme="light"] {
         background-color: $color-lm-bg-02;
 
         #theme-toggle {
-            content: url($base-url + "/dark-mode.svg");
+            content: url($base-url + "/assets/images/dark-mode.svg");
             @extend %image-btn;
         }
 
         #github-btn {
-            background-image: url($base-url + "/lm-github.svg");
+            background-image: url($base-url + "/assets/images/lm-github.svg");
             @extend %image-btn;
         }
 
@@ -48,12 +46,12 @@ body[data-theme="dark"] {
         background-color: $color-dm-bg-02;
 
         #theme-toggle {
-            content: url($base-url + "/light-mode.svg");
+            content: url($base-url + "/assets/images/light-mode.svg");
             @extend %image-btn;
         }
 
         #github-btn {
-            background-image: url($base-url + "/dm-github.svg");
+            background-image: url($base-url + "/assets/images/dm-github.svg");
             @extend %image-btn;
         }
 

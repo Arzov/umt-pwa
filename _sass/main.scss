@@ -1,9 +1,28 @@
 @import 'base';
 @import 'navbar';
 @import 'sidebars';
+@import 'content';
+@import 'images';
+@import 'codes';
 
 %commons {
     transition: background 0.2s linear;
+    position: absolute;
+    top: 4rem;
+    bottom: 0;
+    width: 100%;
+    overflow: auto;
+}
+
+%copy-btn {
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 12px;
+    cursor: pointer;
+}
+
+html {
+    overflow: hidden;
 }
 
 body, body[data-theme="light"] {
@@ -11,8 +30,21 @@ body, body[data-theme="light"] {
     background: $color-lm-bg-01;
     @extend %commons;
 
+    .table {
+        color: $color-dm-bg-01;
+
+        th {
+            white-space: nowrap;
+        }
+
+        td, th {
+            border-bottom: 1px solid $color-black-trans-10;
+            border-top: none;
+        }
+    }
+
     hr {
-        border-top: 1px solid rgba(0, 0, 0, .1);
+        border-top: 1px solid $color-black-trans-10;
     }
 
     a, a:hover {
@@ -25,8 +57,21 @@ body[data-theme="dark"] {
     background: $color-dm-bg-01;
     @extend %commons;
 
+    .table {
+        color: $color-lm-bg-02;
+
+        th {
+            white-space: nowrap;
+        }
+
+        td, th {
+            border-bottom: 1px solid $color-white-trans-30;
+            border-top: none;
+        }
+    }
+
     hr {
-        border-top: 1px solid rgba(255, 255, 255, .3);
+        border-top: 1px solid $color-white-trans-30;
     }
 
     a, a:hover {
@@ -34,9 +79,20 @@ body[data-theme="dark"] {
     }
 }
 
-#content {
-    padding-top: 2rem;
-    padding-left: 3rem;
-    padding-right: 6rem;
-    text-align: justify;
+// Scroll
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+	background: $color-purple-01; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: $color-purple-02; 
 }

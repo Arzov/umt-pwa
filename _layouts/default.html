@@ -11,21 +11,21 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ "/assets/css/styles.css" | relative_url }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
   </head>
   <body>
     {% include header.html %}
     {% include navbar.html %}
 
-    <div class="container-fluid">
-      <div class="row">
+    <div class="d-flex" id="wrapper">
         {% include sidebar-left.html %}
-        <div id="content" class="col-md-8">
-          {{ content }}
+        <div id="content">
+          <div class="container-fluid">
+            {{ content }}
+          </div>
         </div>
         <!-- TODO: Sidebar right -->
-        <div class="col-md-2">
-        </div>
-      </div>
     </div>
     
     <!-- Optional JavaScript -->

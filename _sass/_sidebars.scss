@@ -1,12 +1,11 @@
 @import 'base';
 
 %sidebar-left {
-    padding-top: 2rem;
-    padding-left: 2rem;
-    position: sticky;
-    top: 4rem;
-    height: calc(100vh - 4rem);
-    z-index: 1000;
+    width: 17rem;
+    position: fixed;
+    padding-top: 3rem;
+    padding-left: 3rem;
+    overflow-x: hidden;
 }
 
 .sub-1 {
@@ -25,7 +24,7 @@ body[data-theme="light"] {
         @extend %sidebar-left;
 
         > .nav {
-            border-right: 1px solid rgba(0, 0, 0, .1);
+            border-right: 1px solid $color-black-trans-10;
         }
 
         a {
@@ -33,7 +32,7 @@ body[data-theme="light"] {
         }
 
         .sub-2 {
-            border-left: 1px solid rgba(0, 0, 0, .1);
+            border-left: 1px solid $color-black-trans-10;
         }
     }
 }
@@ -43,7 +42,7 @@ body[data-theme="dark"] {
         @extend %sidebar-left;
 
         > .nav {
-            border-right: 1px solid rgba(255, 255, 255, .3);
+            border-right: 1px solid $color-white-trans-30;
         }
 
         a {
@@ -51,7 +50,7 @@ body[data-theme="dark"] {
         }
 
         .sub-2 {
-            border-left: 1px solid rgba(255, 255, 255, .3);
+            border-left: 1px solid $color-white-trans-30;
         }
     }
 }

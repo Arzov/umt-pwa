@@ -1,5 +1,5 @@
-<!-- Dark/Light mode -->
 <script>
+    // Dark/Light mode
     function modeSwitcher() {
         let currentMode = document.body.getAttribute('data-theme');
         if (currentMode === "dark") {
@@ -10,4 +10,7 @@
             window.localStorage.setItem('theme', 'dark');
         }
     }
+
+    // Copy clipboard
+    var clipboard = new ClipboardJS('.copy-btn');
 </script>

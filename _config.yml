@@ -22,6 +22,7 @@ title: arzov umatch
 email: contact@arzov.com
 baseurl: "/umt-pwa" # the subpath of your site, e.g. /blog
 github: "arzov/umt-pwa"
+exclude: ["/frontend/node_modules"]
 
 # Build settings
 plugins:
