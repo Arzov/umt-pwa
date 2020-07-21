@@ -25,6 +25,12 @@ Vista principal que decide cual componente inicializar mobile o desktop. Tambié
 
 <br>
 
+**LINKED COMPONENTS**
+
+[ChatMobile](#chatmobile)
+
+<br>
+
 **DATA**
 
 <div id="js" class="table-responsive">
@@ -168,6 +174,13 @@ Elimina mensajes duplicados desde un arreglo.
 <img class="copy-btn" data-clipboard-target="#cp-chat-mobile-path">
 
 Componente de la vista [Chat](#chat) para dispositivos móviles.
+
+<br>
+
+**LINKED COMPONENTS**
+
+[//]: // TODO: Apuntar a los links correctos
+[HeaderTitleChatMobile](#) \| [ChatMessageInput](#) \| [ChatMessage](#)
 
 <br>
 
