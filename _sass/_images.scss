@@ -45,6 +45,15 @@ body[data-theme="light"] {
 
         @extend %fig-light;
     }
+
+    #homePage {
+        img {
+            content: url($base-url + "/assets/images/lm_home@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-light;
+    }
 }
 
 body[data-theme="dark"] {
@@ -60,6 +69,15 @@ body[data-theme="dark"] {
     #emailVerificationPage {
         img {
             content: url($base-url + "/assets/images/dm_email_verification@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-light;
+    }
+
+    #homePage {
+        img {
+            content: url($base-url + "/assets/images/dm_home@3x.png");
             @extend %images;
         }
 

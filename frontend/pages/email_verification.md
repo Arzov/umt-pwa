@@ -5,7 +5,7 @@ layout: default
 
 # Email Verification
 
-Vista donde el usuario puede conversar con sus rivales, acordar fechas y canchas donde realizar el partido de fútbol o _match_.
+Vista donde el usuario debe verificar su email de registro mediante el código enviado por **Arzov**. También puede pedir un nuevo código en caso de no recibirlo.
 
 <figure id="emailVerificationPage" class="content-img">
     <figcaption><b></b></figcaption>
@@ -17,17 +17,17 @@ Vista donde el usuario puede conversar con sus rivales, acordar fechas y canchas
 
 <br>
 
-### ChatMain
-<code id="cp-chat-main-path">pages\chat\index.vue</code>
-<img class="copy-btn" data-clipboard-target="#cp-chat-main-path">
+### EmailVerificationMain
+<code id="cp-email-verification-main">pages\email_verification\index.vue</code>
+<img class="copy-btn" data-clipboard-target="#cp-email-verification-main">
 
-Vista principal que decide cual componente inicializar mobile o desktop. También gatillar el evento para agregar un mensaje en el chat.
+Vista principal que decide cual componente inicializar mobile o desktop. También gatillar la verificación del email del usuario o reenviar nuevo código de validación.
 
 <br>
 
 **LINKED COMPONENTS**
 
-[ChatMobile](#chatmobile)
+[EmailVerificationMobile](#emailverificationmobile)
 
 <br>
 
@@ -46,42 +46,12 @@ Vista principal que decide cual componente inicializar mobile o desktop. Tambié
       <tr>
         <td><code><par>event</par></code></td>
         <td><code><type>object</type></code></td>
-        <td>Evento para emitir desde componente.</td>
+        <td>Evento que puede emitir el componente.</td>
       </tr>
       <tr>
-        <td><code><par>matchInfo</par></code></td>
+        <td><code><par>userData</par></code></td>
         <td><code><type>object</type></code></td>
-        <td>Información del match obtenida desde el store.</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<br>
-
-**COMPUTED**
-
-<div id="js" class="highlight">
-<code>
-<fn>messagesList</fn>() => <type>array[object]</type>
-</code>
-</div>
-
-Obtiene mensajes del chat desde el store, los transforma y elimina duplicados.
-
-<b>Returns</b>
-<div id="js" class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code><type>array[object]</type></code></td>
-        <td>Listado de mensajes del chat transformado.</td>
+        <td>Información del usuario.</td>
       </tr>
     </tbody>
   </table>
@@ -97,7 +67,7 @@ Obtiene mensajes del chat desde el store, los transforma y elimina duplicados.
 </code>
 </div>
 
-Captura evento generado por el componente [ChatMobile](#chatmobile) para agregar mensaje en el chat.
+Captura eventos generado por el componente [EmailVerificationMobile](#emailverificationmobile). Según los valores retornados puede verificar el email o reenviar un nuevo código de verificación.
 
 <b>Parameters</b>
 <div id="js" class="table-responsive">
@@ -121,66 +91,18 @@ Captura evento generado por el componente [ChatMobile](#chatmobile) para agregar
 
 <br>
 
-<div id="js" class="highlight">
-<code>
-<fn>removeDups</fn>(<par>messages</par>) => <type>array[object]</type>
-</code>
-</div>
+### EmailVerificationMobile
+<code id="cp-email-verification-mobile">pages\email_verification\mobile\index.vue</code>
+<img class="copy-btn" data-clipboard-target="#cp-email-verification-mobile">
 
-Elimina mensajes duplicados desde un arreglo.
-
-<b>Parameters</b>
-<div id="js" class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Field</th>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code><par>messages</par></code></td>
-        <td><code><type>array[object]</type></code></td>
-        <td>Listado de mensajes a eliminar duplicados.</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<b>Returns</b>
-<div id="js" class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code><type>array[object]</type></code></td>
-        <td>Listado de mensajes sin duplicados.</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<br>
-
-### ChatMobile
-<code id="cp-chat-mobile-path">pages\chat\mobile\index.vue</code>
-<img class="copy-btn" data-clipboard-target="#cp-chat-mobile-path">
-
-Componente de la vista [Chat](#chat) para dispositivos móviles.
+Componente de la vista [EmailVerification](#email-verification) para dispositivos móviles.
 
 <br>
 
 **LINKED COMPONENTS**
 
 [//]: // TODO: Apuntar a los links correctos
-[HeaderTitleChatMobile](#) \| [ChatMessageInput](#) \| [ChatMessage](#)
+[CodeInput](#)
 
 <br>
 
@@ -200,21 +122,45 @@ Componente de la vista [Chat](#chat) para dispositivos móviles.
       <tr>
         <td><code><par>event</par></code></td>
         <td><code><type>object</type></code></td>
-        <td>Evento a emitir hacia vista <a href="#chatmain">ChatMain</a>.</td>
+        <td>Evento a emitir hacia vista <a href="#emailverificationmain">EmailVerificationMain</a>.</td>
         <td>
         </td>
       </tr>
       <tr>
-        <td><code><par>matchInfo</par></code></td>
+        <td><code><par>userData</par></code></td>
         <td><code><type>object</type></code></td>
-        <td>Información básica del match para mostrar en el chat (foto de perfil del rival, nombre del rival).</td>
+        <td>Información del usuario.</td>
         <td></td>
       </tr>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+**COMPUTED**
+
+<div id="js" class="highlight">
+<code>
+<fn>email</fn>() => <type>string</type>
+</code>
+</div>
+
+Retorna email del usuario desde datos del store.
+
+<b>Returns</b>
+<div id="js" class="table-responsive">
+  <table class="table">
+    <thead>
       <tr>
-        <td><code><par>messagesList</par></code></td>
-        <td><code><type>array[string]</type></code></td>
-        <td>Listado de mensajes del chat.</td>
-        <td></td>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code><type>string</type></code></td>
+        <td>Email del usuario.</td>
       </tr>
     </tbody>
   </table>
@@ -226,11 +172,11 @@ Componente de la vista [Chat](#chat) para dispositivos móviles.
 
 <div id="js" class="highlight">
 <code>
-<fn>addMessage</fn>(<par>message</par>) => <type>void</type>
+<fn>verify</fn>(<par>event</par>) => <type>void</type>
 </code>
 </div>
 
-Emite evento para enviar mensaje.
+Emite evento para verificar el email.
 
 <b>Parameters</b>
 <div id="js" class="table-responsive">
@@ -244,9 +190,9 @@ Emite evento para enviar mensaje.
     </thead>
     <tbody>
       <tr>
-        <td><code><par>message</par></code></td>
-        <td><code><type>string</type></code></td>
-        <td>Mensaje a enviar.</td>
+        <td><code><par>event</par></code></td>
+        <td><code><type>object</type></code></td>
+        <td>Evento del formulario.</td>
       </tr>
     </tbody>
   </table>
@@ -256,8 +202,8 @@ Emite evento para enviar mensaje.
 
 <div id="js" class="highlight">
 <code>
-<fn>scrollToLastMessage</fn>() => <type>void</type>
+<fn>resendCode</fn>() => <type>void</type>
 </code>
 </div>
 
-Desplaza la vista al último mensaje enviado.
+Emite evento para reenviar código de verificación.

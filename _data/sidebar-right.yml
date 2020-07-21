@@ -7,3 +7,21 @@
           link: "#chatmain"
         - name: ChatMobile
           link: "#chatmobile"
+- name: Email Verification
+  subs:
+    - name: Email Verification
+      link: "#email-verification"
+      subs:
+        - name: EmailVerificationMain
+          link: "#emailverificationmain"
+        - name: EmailVerificationMobile
+          link: "#emailverificationmobile"
+- name: Home
+  subs:
+    - name: Home
+      link: "#home"
+      subs:
+        - name: HomeMain
+          link: "#homemain"
+        - name: HomeMobile
+          link: "#homemobile"
