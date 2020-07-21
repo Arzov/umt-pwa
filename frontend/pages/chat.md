@@ -18,8 +18,8 @@ Vista donde el usuario puede conversar con sus rivales, acordar fechas y canchas
 <br>
 
 ### ChatMain
-<code id="chat-main-path">pages\chat\index.vue</code>
-<img class="copy-btn" data-clipboard-target="#chat-main-path">
+<code id="cp-chat-main-path">pages\chat\index.vue</code>
+<img class="copy-btn" data-clipboard-target="#cp-chat-main-path">
 
 Vista principal que decide cual componente inicializar mobile o desktop. También gatillar el evento para agregar un mensaje en el chat.
 
@@ -164,8 +164,8 @@ Elimina mensajes duplicados desde un arreglo.
 <br>
 
 ### ChatMobile
-<code id="chat-mobile-path">pages\chat\mobile\index.vue</code>
-<img class="copy-btn" data-clipboard-target="#chat-mobile-path">
+<code id="cp-chat-mobile-path">pages\chat\mobile\index.vue</code>
+<img class="copy-btn" data-clipboard-target="#cp-chat-mobile-path">
 
 Componente de la vista [Chat](#chat) para dispositivos móviles.
 

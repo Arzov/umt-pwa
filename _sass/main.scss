@@ -79,6 +79,10 @@ body[data-theme="dark"] {
     }
 }
 
+#wrapper {
+    overflow-x: hidden;
+}
+
 // Scroll
 ::-webkit-scrollbar {
     width: 5px;
