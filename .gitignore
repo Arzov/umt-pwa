@@ -99,5 +99,9 @@ dist
 frontend/styleguide/build/
 frontend/styleguide/index.html
 
+# Jekyll
+_site
+.jekyll-cache
+
 # Whitelist
 !backend/aws/lambda/layers/**/nodejs/.gitkeep
