@@ -54,6 +54,15 @@ body[data-theme="light"] {
 
         @extend %fig-light;
     }
+
+    #loginPage {
+        img {
+            content: url($base-url + "/assets/images/lm_login@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-light;
+    }
 }
 
 body[data-theme="dark"] {
@@ -78,6 +87,15 @@ body[data-theme="dark"] {
     #homePage {
         img {
             content: url($base-url + "/assets/images/dm_home@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-light;
+    }
+
+    #loginPage {
+        img {
+            content: url($base-url + "/assets/images/dm_login@3x.png");
             @extend %images;
         }
 

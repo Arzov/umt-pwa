@@ -3,4 +3,4 @@ title: Login
 layout: default
 ---
 
-# Login
+{% include f-pages.html %}

@@ -80,6 +80,9 @@ subs:
               - field: message
                 type: string
                 desc: Mensaje a enviar.
+            return:
+              type: object
+              desc: Evento a gatillar.
           - name: scrollToLastMessage
             desc: >
               Desplaza la vista al último mensaje enviado.

@@ -79,6 +79,9 @@ subs:
           - name: searchMatch
             desc: >
               Emite evento para buscar rivales.
+            return:
+              type: object
+              desc: Evento a gatillar.
           - name: requestMatch
             desc: >
               Emite evento para enviar solicitud de match a un rival.
@@ -95,3 +98,6 @@ subs:
               - field: index
                 type: integer
                 desc: Índice del rival en listado de rivales cercanos.
+            return:
+              type: object
+              desc: Evento a gatillar.
