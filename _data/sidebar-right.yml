@@ -34,3 +34,12 @@
           link: "#loginmain"
         - name: LoginMobile
           link: "#loginmobile"
+- name: Map
+  subs:
+    - name: Map
+      link: "#map"
+      subs:
+        - name: MapMain
+          link: "#mapmain"
+        - name: MapMobile
+          link: "#mapmobile"

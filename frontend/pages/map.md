@@ -3,4 +3,4 @@ title: Map
 layout: default
 ---
 
-# Map
+{% include f-pages.html %}

@@ -63,6 +63,15 @@ body[data-theme="light"] {
 
         @extend %fig-light;
     }
+
+    #mapPage {
+        img {
+            content: url($base-url + "/assets/images/lm_map@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-light;
+    }
 }
 
 body[data-theme="dark"] {
@@ -96,6 +105,15 @@ body[data-theme="dark"] {
     #loginPage {
         img {
             content: url($base-url + "/assets/images/dm_login@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-light;
+    }
+
+    #mapPage {
+        img {
+            content: url($base-url + "/assets/images/dm_map@3x.png");
             @extend %images;
         }
 

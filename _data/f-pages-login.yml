@@ -37,7 +37,7 @@ subs:
       id: cp-mobile
       path: pages\login\mobile\index.vue
     intro: >
-      Componente de la vista [Home](#home) para dispositivos móviles.
+      Componente de la vista [Login](#login) para dispositivos móviles.
     attrs:
       - name: LINKED COMPONENTS
         links:
