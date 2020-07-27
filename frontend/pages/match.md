@@ -3,4 +3,4 @@ title: Match
 layout: default
 ---
 
-# Match
+{% include f-pages.html %}

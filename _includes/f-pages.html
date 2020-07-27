@@ -104,8 +104,8 @@
                                         <tr>
                                             <td><code><par>{{ item.field }}</par></code></td>
                                             <td><code><type>{{ item.type }}</type></code></td>
-                                            <td>{{ item.desc }}</td>
-                                            <td>{{ item.values }}</td>
+                                            <td>{{ item.desc | markdownify }}</td>
+                                            <td>{{ item.values | markdownify }}</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
