@@ -3,4 +3,4 @@ title: Profile
 layout: default
 ---
 
-# Profile
+{% include f-pages.html %}

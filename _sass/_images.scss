@@ -81,6 +81,15 @@ body[data-theme="light"] {
 
         @extend %fig-light;
     }
+
+    #profilePage {
+        img {
+            content: url($base-url + "/assets/images/lm_profile@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-light;
+    }
 }
 
 body[data-theme="dark"] {
@@ -132,6 +141,15 @@ body[data-theme="dark"] {
     #matchPage {
         img {
             content: url($base-url + "/assets/images/dm_match.gif");
+            @extend %images;
+        }
+
+        @extend %fig-dark;
+    }
+
+    #profilePage {
+        img {
+            content: url($base-url + "/assets/images/dm_profile@3x.png");
             @extend %images;
         }
 
