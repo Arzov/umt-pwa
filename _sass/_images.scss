@@ -90,6 +90,15 @@ body[data-theme="light"] {
 
         @extend %fig-light;
     }
+
+    #recoverPasswordPage {
+        img {
+            content: url($base-url + "/assets/images/lm_recover_password@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-light;
+    }
 }
 
 body[data-theme="dark"] {
@@ -150,6 +159,15 @@ body[data-theme="dark"] {
     #profilePage {
         img {
             content: url($base-url + "/assets/images/dm_profile@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-dark;
+    }
+
+    #recoverPasswordPage {
+        img {
+            content: url($base-url + "/assets/images/dm_recover_password@3x.png");
             @extend %images;
         }
 

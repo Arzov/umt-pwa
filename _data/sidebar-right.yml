@@ -61,3 +61,12 @@
           link: "#profilemain"
         - name: ProfileMobile
           link: "#profilemobile"
+- name: Recover Password
+  subs:
+    - name: Recover Password
+      link: "#recover-password"
+      subs:
+        - name: RecoverPasswordMain
+          link: "#recoverpasswordmain"
+        - name: RecoverPasswordMobile
+          link: "#recoverpasswordmobile"

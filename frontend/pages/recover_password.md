@@ -3,4 +3,4 @@ title: Recover Password
 layout: default
 ---
 
-# Recover Password
+{% include f-pages.html %}
