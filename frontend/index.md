@@ -11,7 +11,7 @@ Guía para los componentes y páginas de la aplicación.
 
 ### PWA en Nuxt.js
 
-El _frontend_ de la aplicación está diseñado en el framework [Nuxt.js](https://nuxtjs.org/) basado en [Vue.js](https://vuejs.org/) y contempla ser una [PWA](https://es.wikipedia.org/wiki/Aplicaci%C3%B3n_web_progresiva).
+El _frontend_ de la aplicación está diseñado en el framework <a href="https://nuxtjs.org/" target="_blank">Nuxt.js</a> basado en <a href="https://vuejs.org/" target="_blank">Vue.js</a> y contempla ser una <a href="https://es.wikipedia.org/wiki/Aplicaci%C3%B3n_web_progresiva" target="_blank">PWA</a>.
 
 <br>
 

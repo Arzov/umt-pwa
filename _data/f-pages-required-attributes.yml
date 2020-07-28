@@ -2,7 +2,7 @@ name: Required Attributes
 intro: >
   Vista donde el usuario debe, obligatoriamente, ingresar atributos extras para poder
   filtrar la búsqueda de sus rivales (esta vista es sólo necesaria para los usuarios que
-  ingresan por primera vez mediante Facebook o Google).
+  ingresan por primera vez mediante **Facebook** o **Google**).
 imageId: requiredAttributesPage 
 subs:
   - name: RequiredAttributesMain

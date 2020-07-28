@@ -3,4 +3,4 @@ title: Start
 layout: default
 ---
 
-# Start
+{% include f-pages.html %}

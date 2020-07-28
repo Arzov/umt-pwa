@@ -135,6 +135,15 @@ body[data-theme="light"] {
 
         @extend %fig-light;
     }
+
+    #startPage {
+        img {
+            content: url($base-url + "/assets/images/lm_start@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-light;
+    }
 }
 
 body[data-theme="dark"] {
@@ -240,6 +249,15 @@ body[data-theme="dark"] {
     #resetPasswordPage {
         img {
             content: url($base-url + "/assets/images/dm_reset_password@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-dark;
+    }
+
+    #startPage {
+        img {
+            content: url($base-url + "/assets/images/dm_start@3x.png");
             @extend %images;
         }
 

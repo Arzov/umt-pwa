@@ -106,3 +106,12 @@
           link: "#resetpasswordmain"
         - name: ResetPasswordMobile
           link: "#resetpasswordmobile"
+- name: Start
+  subs:
+    - name: Start
+      link: "#start"
+      subs:
+        - name: StartMain
+          link: "#startmain"
+        - name: StartMobile
+          link: "#startmobile"
