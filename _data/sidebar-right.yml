@@ -97,3 +97,12 @@
           link: "#requiredfiltersmain"
         - name: RequiredFiltersMobile
           link: "#requiredfiltersmobile"
+- name: Reset Password
+  subs:
+    - name: Reset Password
+      link: "#reset-password"
+      subs:
+        - name: ResetPasswordMain
+          link: "#resetpasswordmain"
+        - name: ResetPasswordMobile
+          link: "#resetpasswordmobile"

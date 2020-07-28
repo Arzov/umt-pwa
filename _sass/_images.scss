@@ -126,6 +126,15 @@ body[data-theme="light"] {
 
         @extend %fig-light;
     }
+
+    #resetPasswordPage {
+        img {
+            content: url($base-url + "/assets/images/lm_reset_password@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-light;
+    }
 }
 
 body[data-theme="dark"] {
@@ -222,6 +231,15 @@ body[data-theme="dark"] {
     #requiredFiltersPage {
         img {
             content: url($base-url + "/assets/images/dm_required_filters@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-dark;
+    }
+
+    #resetPasswordPage {
+        img {
+            content: url($base-url + "/assets/images/dm_reset_password@3x.png");
             @extend %images;
         }
 

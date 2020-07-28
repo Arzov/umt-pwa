@@ -3,4 +3,4 @@ title: Reset Password
 layout: default
 ---
 
-# Reset Password
+{% include f-pages.html %}
