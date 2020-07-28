@@ -3,4 +3,4 @@ title: Required Filters
 layout: default
 ---
 
-# Required Filters
+{% include f-pages.html %}

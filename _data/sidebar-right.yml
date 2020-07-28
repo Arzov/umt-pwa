@@ -88,3 +88,12 @@
           link: "#requiredattributesmain"
         - name: RequiredAttributesMobile
           link: "#requiredattributesmobile"
+- name: Required Filters
+  subs:
+    - name: Required Filters
+      link: "#required-filters"
+      subs:
+        - name: RequiredFiltersMain
+          link: "#requiredfiltersmain"
+        - name: RequiredFiltersMobile
+          link: "#requiredfiltersmobile"
