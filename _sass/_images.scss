@@ -99,6 +99,15 @@ body[data-theme="light"] {
 
         @extend %fig-light;
     }
+
+    #registerPage {
+        img {
+            content: url($base-url + "/assets/images/lm_register@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-light;
+    }
 }
 
 body[data-theme="dark"] {
@@ -168,6 +177,15 @@ body[data-theme="dark"] {
     #recoverPasswordPage {
         img {
             content: url($base-url + "/assets/images/dm_recover_password@3x.png");
+            @extend %images;
+        }
+
+        @extend %fig-dark;
+    }
+
+    #registerPage {
+        img {
+            content: url($base-url + "/assets/images/dm_register@3x.png");
             @extend %images;
         }
 

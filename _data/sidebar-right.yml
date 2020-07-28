@@ -70,3 +70,12 @@
           link: "#recoverpasswordmain"
         - name: RecoverPasswordMobile
           link: "#recoverpasswordmobile"
+- name: Register
+  subs:
+    - name: Register
+      link: "#register"
+      subs:
+        - name: RegisterMain
+          link: "#registermain"
+        - name: RegisterMobile
+          link: "#registermobile"

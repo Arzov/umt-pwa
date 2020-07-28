@@ -3,4 +3,4 @@ title: Register
 layout: default
 ---
 
-# Register
+{% include f-pages.html %}
