@@ -3,4 +3,4 @@ title: Required Attributes
 layout: default
 ---
 
-# Required Attributes
+{% include f-pages.html %}

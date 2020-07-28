@@ -79,3 +79,12 @@
           link: "#registermain"
         - name: RegisterMobile
           link: "#registermobile"
+- name: Required Attributes
+  subs:
+    - name: Required Attributes
+      link: "#required-attributes"
+      subs:
+        - name: RequiredAttributesMain
+          link: "#requiredattributesmain"
+        - name: RequiredAttributesMobile
+          link: "#requiredattributesmobile"
