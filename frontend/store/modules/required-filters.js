@@ -1,12 +1,6 @@
 import { updateUmatchUser } from '@/graphql/mutations'
 
 const actions = {
-    /**
-     * Guarda filtros del usuario.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     * @param {object} data Filtros a guardar _match_, _gender_, _age_.
-     */
     saveFilters (ctx, data) {
         return new Promise(async (resolve, reject) => {
             const ageFilter = Array.from(data.ageFilter, x => String(x))

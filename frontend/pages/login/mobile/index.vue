@@ -41,18 +41,10 @@
     import UInput from '@/components/uInput'
     import HeaderTitleMobile from '@/components/headerTitleMobile'
 
-    /**
-     * Componente de la vista [Login](#login) para dispositivos móviles.
-     */
     export default {
         name: 'LoginMobile',
         components: { UInput, HeaderTitleMobile },
         props: {
-            /**
-             * Evento a emitir hacia vista [Login](#login).
-             *
-             * @values SIGNIN, TO_RECOVER_PASSWORD
-             */
             event: {
                 type: Object,
                 required: true
@@ -65,13 +57,6 @@
             }
         },
         methods: {
-            /**
-             * Emite evento para iniciar sesión.
-             *
-             * @param {object} event Evento a gatillar.
-             * @return {object} Evento a gatillar.
-             * @public
-             */
             signIn (event) {
                 event.preventDefault()
 
@@ -81,71 +66,16 @@
                             type: this.event.SIGNIN,
                             ...values
                         }
-
-                        /**
-                         * Evento para iniciar sesión.
-                         *
-                         * @event emitSignIn
-                         * @property {object} params Objecto con tipo SIGNIN a emitir
-                         *                           y datos para iniciar sesión (email
-                         *                           y contraseña).
-                         */
                         this.$emit('emit', params)
                     }
                 })
             },
-
-            /**
-             * Emite evento para ir a la vista [RecoverPassword](#recoverpassword).
-             *
-             * @return {object} Evento a gatillar.
-             * @public
-             */
             toRecoverPassword () {
                 const params = {
                     type: this.event.TO_RECOVER_PASSWORD
                 }
-
-                /**
-                 * Evento para ir a la vista [RecoverPassword](#recoverpassword).
-                 *
-                 * @event emitToRecoverPassword
-                 * @property {object} params Objecto de tipo TO\_RECOVER\_PASSWORD a emitir.
-                 */
                 this.$emit('emit', params)
             }
         }
     }
 </script>
-
-<style scoped>
-
-</style>
-
-<docs>
-    EXAMPLE
-
-    ```html static
-    <template>
-        <login-mobile :event="event" @emit="onEmit($event)" />
-    </template>
-
-    <script>
-        import LoginMobile from './mobile'
-
-        const event = {
-            SIGNIN: 'sigin',
-            TO_RECOVER_PASSWORD: 'to_recover_password'
-        }
-
-        export default {
-            components: { LoginMobile },
-            data () { return { event } },
-            methods: {
-                onEmit (event) { ... }
-            },
-            ...
-        }
-    </script>
-    ```
-</docs>

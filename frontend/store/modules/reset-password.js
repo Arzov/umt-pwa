@@ -1,10 +1,4 @@
 const actions = {
-  /**
-   * Cambia contraseña actual.
-   *
-   * @param {object} ctx Contexto de Nuxt.
-   * @param {object} data Datos para cambiar contraseña _code_ y _password_.
-   */
   resetPassword (ctx, data) {
     this.$AWS.Auth.forgotPasswordSubmit(
       ctx.rootState.user.email,

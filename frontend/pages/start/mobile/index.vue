@@ -28,76 +28,23 @@
     import FacebookLogin from '@/components/facebookLogin'
     import GoogleLogin from '@/components/googleLogin'
 
-    /**
-     * Componente de la vista [Start](#start) para dispositivos móviles.
-     */
     export default {
         name: 'StartMobile',
         components: { FacebookLogin, GoogleLogin },
         props: {
-            /**
-             * Evento a emitir hacia vista [Start](#start).
-             *
-             * @values TO_LOGIN, TO_REGISTER
-             */
             event: {
                 type: Object,
                 required: true
             }
         },
         methods: {
-            /**
-             * Emite evento para redireccionar a la vista [Login](#login) o [Register](#register).
-             *
-             * @param {string} eventType Tipo de evento a gatillar.
-             * @return {object} Evento a gatillar.
-             * @public
-             */
             toAuth (eventType) {
                 const params = {
                     type: eventType
                 }
 
-                /**
-                 * Evento para redireccionar a la vista [Login](#login) o [Register](#register).
-                 *
-                 * @event emitAuth
-                 * @property {object} params Objecto con tipo a emitir.
-                 */
                 this.$emit('emit', params)
             }
         }
     }
 </script>
-
-<style scoped>
-
-</style>
-
-<docs>
-    EXAMPLE
-
-    ```html
-    <template>
-        <start-mobile :event="event" @emit="onEmit($event)" />
-    </template>
-
-    <script>
-        import StartMobile from './mobile'
-
-        const event = {
-            TO_LOGIN: 'to_login',
-            TO_REGISTER: 'to_register'
-        }
-
-        export default {
-            components: { StartMobile },
-            data () { return { event } },
-            methods: {
-                onEmit (event) { ... }
-            },
-            ...
-        }
-    </script>
-    ```
-</docs>

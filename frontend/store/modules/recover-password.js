@@ -1,10 +1,4 @@
 const actions = {
-  /**
-   * Restablece la contraseña.
-   *
-   * @param {object} ctx Contexto de Nuxt.
-   * @param {object} data Datos para restablecer la contraseña _email_.
-   */
   recoverPassword (ctx, data) {
     this.$AWS.Auth.forgotPassword(data.email)
       .then(() => {

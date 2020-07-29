@@ -15,11 +15,6 @@ const getters = {
 }
 
 const actions = {
-    /**
-     * Obtiene los mensajes del _chat_ desde servidor.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     */
     fetchMessages (ctx) {
         // TODO: Revisar porque solo se reinicia _messagesList_ y _messageNextToken_
         ctx.commit('resetState')
@@ -45,15 +40,7 @@ const actions = {
         // eslint-disable-next-line no-console
         .catch(e => console.log(e))
     },
-
-    /**
-     * Agrega o envia mensaje al _chat_.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     * @param {object} data Datos con el mensaje a agregar (_hashKey_, _author_, _authorName_
-     *                      y _content_).
-     */
-    addMessage (ctx, data) {
+    sendMessage (ctx, data) {
         // Usar API de Umatch
         this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
 
@@ -70,12 +57,6 @@ const actions = {
         // eslint-disable-next-line no-console
         .catch(e => console.log(e))
     },
-
-    /**
-     * Suscripción de AWS AppSync para sincronizar envio de mensajes.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     */
     onAddMessage (ctx) {
         // Usar API de Umatch
         this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
@@ -98,13 +79,6 @@ const actions = {
             }
         })
     },
-
-    /**
-     * Actualiza estado del _store_.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     * @param {object} data Datos con a actualizar.
-     */
     setMatchInfo (ctx, data) {
         const params = data
         ctx.commit('setState', { params })

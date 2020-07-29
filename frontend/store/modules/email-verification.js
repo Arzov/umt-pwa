@@ -1,10 +1,4 @@
 const actions = {
-    /**
-     * Verifica email con AWS Cognito.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     * @param {object} data Datos con código de verificación _code_.
-     */
     verify (ctx, data) {
         // Verificar codigo
         // TODO: Inyectar componente _popup_ para mostrar mensajes
@@ -45,12 +39,6 @@ const actions = {
                 }
             })
     },
-
-    /**
-     * Reenvia código de verificación.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     */
     resendCode (ctx) {
         // Reenviar codigo
         this.$AWS.Auth.resendSignUp(

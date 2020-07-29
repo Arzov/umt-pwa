@@ -1,9 +1,4 @@
 const actions = {
-    /**
-     * Guarda datos del usuario.
-     *
-     * @param {object} data Datos de autenticación _email_ y _password_.
-     */
     saveProfile (ctx, data) {
         return new Promise(async (resolve, reject) => {
             await ctx.dispatch('requiredAttributes/saveAttributes', data, { root: true })

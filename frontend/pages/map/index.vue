@@ -9,12 +9,6 @@
 <script>
     import MapMobile from './mobile'
 
-    /**
-     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
-     * También permite obtener las canchas cercanas al usuario.
-     *
-     * @displayName MapMain
-     */
     export default {
         name: 'Map',
         components: { MapMobile },

@@ -63,18 +63,10 @@
     import BirthdateInput from '@/components/birthdateInput'
     import GenderInput from '@/components/genderInput'
 
-    /**
-     * Componente de la vista [Register](#register) para dispositivos móviles.
-     */
     export default {
         name: 'RegisterMobile',
         components: { BirthdateInput, GenderInput, UInput, HeaderTitleMobile },
         props: {
-            /**
-             * Evento a emitir hacia vista [Register](#register).
-             *
-             * @values SIGNUP, TO_TERMS
-             */
             event: {
                 type: Object,
                 required: true
@@ -88,13 +80,6 @@
             }
         },
         methods: {
-            /**
-             * Emite evento para iniciar sesión.
-             *
-             * @param {object} event Evento a gatillar.
-             * @return {object} Evento a gatillar.
-             * @public
-             */
             signUp (event) {
                 event.preventDefault()
 
@@ -104,15 +89,6 @@
                             type: this.event.SIGNUP,
                             ...values
                         }
-
-                        /**
-                         * Evento para registrar email.
-                         *
-                         * @event emitSignUp
-                         * @property {object} params Objecto con tipo SIGNUP a emitir y
-                         *                           datos para registro (email, nombre,
-                         *                           contraseña, sexo y fecha de nacimiento).
-                         */
                         this.$emit('emit', params)
                     }
                 })
@@ -120,35 +96,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>
-
-<docs>
-    EXAMPLE
-
-    ```html static
-    <template>
-        <register-mobile :event="event" @emit="onEmit($event)" />
-    </template>
-
-    <script>
-        import RegisterMobile from './mobile'
-
-        const event = {
-            SIGNUP: 'sigup',
-            TO_TERMS: 'to_terms'
-        }
-
-        export default {
-            components: { RegisterMobile },
-            data () { return { event } },
-            methods: {
-                onEmit (event) { ... }
-            },
-            ...
-        }
-    </script>
-    ```
-</docs>

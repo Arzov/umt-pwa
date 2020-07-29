@@ -8,32 +8,17 @@
 </template>
 
 <script>
-
-    /**
-     * Componente de la vista [Map](#map) para dispositivos móviles.
-     */
     export default {
         name: 'MapMobile',
         props: {
-            /**
-             * Información del usuario.
-             */
             userData: {
                 type: Object,
                 required: true
             },
-
-            /**
-             * Posicion actual del usuario.
-             */
             position: {
                 type: Object,
                 required: true
             },
-
-            /**
-             * Listado de canchas cercanas.
-             */
             courtsList: {
                 type: Array,
                 required: true
@@ -278,11 +263,6 @@
             })
         },
         methods: {
-            /**
-             * Reinicia vista del mapa a la posición del usuario.
-             *
-             * @public
-             */
             toCenter () {
                 this.map.panTo({
                     lat: this.userData.latitude,

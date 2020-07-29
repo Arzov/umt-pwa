@@ -32,21 +32,10 @@
     })
     moment.locale('es')
 
-    /**
-     * Evento que pueden emitir los componentes.
-     *
-     * @type {{ADD_MESSAGE: string}}
-     */
     const event = {
-        ADD_MESSAGE: 'add_message'
+        SEND_MESSAGE: 'send_message'
     }
 
-    /**
-     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
-     * También gatillar el evento para agregar un mensaje en el _chat_.
-     *
-     * @displayName ChatMain
-     */
     export default {
         middleware ({ store, redirect }) {
             // Si se entra a la vista chat sin un matchId se devuelve a la pagina home
@@ -84,28 +73,15 @@
             await this.$store.dispatch('chat/onAddMessage')
         },
         methods: {
-            /**
-             * Captura eventos generados por los componentes. Según
-             * los valores retornados puede agregar un mensaje al _chat_.
-             *
-             * @param {object} event Evento emitido por el componente.
-             * @public
-             */
             onEmit (event) {
                 switch (event.type) {
-                    case this.event.ADD_MESSAGE:
+                    case this.event.SEND_MESSAGE:
                         if (event.userMessage) {
-                            this.$store.dispatch('chat/addMessage', event)
+                            this.$store.dispatch('chat/sendMessage', event)
                         }
                         break
                 }
             },
-
-            /**
-             * Elimina mensajes duplicados.
-             *
-             * @param {Array} messages Arreglo de mensajes que llegan desde el servidor.
-             */
             removeDups (messages) {
                 let unique = []
 
@@ -123,7 +99,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

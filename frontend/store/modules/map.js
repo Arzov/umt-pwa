@@ -15,22 +15,10 @@ const getters = {
 }
 
 const actions = {
-    /**
-     * Guarda posicion actual del usuario para centrar el mapa en esa posicion.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     * @param {object} data Datos con la latitud y longitud del usuario.
-     */
     setPosition (ctx, data) {
         const params = data
         ctx.commit('setState', { params })
     },
-
-    /**
-     * Obtiene las canchas cercanas desde servidor.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     */
     fetchCourts (ctx) {
         // Usar API de Umatch
         this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL

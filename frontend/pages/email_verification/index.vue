@@ -9,23 +9,11 @@
 <script>
     import EmailVerificationMobile from './mobile'
 
-    /**
-     * Evento que pueden emitir los componentes.
-     *
-     * @type {{VERIFY: string, RESEND_CODE: string}}
-     */
     const event = {
         VERIFY: 'verify',
         RESEND_CODE: 'resend_code'
     }
 
-    /**
-     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
-     * También gatillar la verificación del email del usuario o reenviar nuevo código
-     * de validación.
-     *
-     * @displayName EmailVerificationMain
-     */
     export default {
         name: 'EmailVerification',
         components: { EmailVerificationMobile },
@@ -37,14 +25,6 @@
             }
         },
         methods: {
-            /**
-             * Captura eventos generados por los componentes. Según
-             * los valores retornados puede verificar el email o
-             * reenviar un nuevo código de verificación.
-             *
-             * @param {object} event Evento emitido por el componente.
-             * @public
-             */
             onEmit (event) {
                 switch (event.type) {
                     // Verificar email
@@ -61,7 +41,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

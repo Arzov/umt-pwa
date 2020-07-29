@@ -12,22 +12,11 @@
 <script>
     import RequiredAttributesMobile from './mobile'
 
-    /**
-     * Evento que pueden emitir los componentes.
-     *
-     * @type {{SAVE_ATTRIBUTES: string, LOGOUT: string}}
-     */
     const event = {
         SAVE_ATTRIBUTES: 'save_attributes',
         SIGNOUT: 'signout'
     }
 
-    /**
-     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
-     * También guardar atributos del usuario o cerrar sesión.
-     *
-     * @displayName RequiredAttributesMain
-     */
     export default {
         name: 'RequiredAttributes',
         layout: 'auth',
@@ -38,14 +27,6 @@
             }
         },
         methods: {
-            /**
-             * Captura eventos generados por los componentes. Según
-             * los valores retornados puede guardar los atributos del usuario
-             * o cerrar sesión.
-             *
-             * @param {object} event Evento emitido por el componente.
-             * @public
-             */
             onEmit (event) {
                 switch (event.type) {
                     // Guardar atributos seleccionados
@@ -67,7 +48,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

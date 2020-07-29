@@ -17,11 +17,6 @@ const getters = {
 }
 
 const actions = {
-  /**
-   * Busca rivales cercanos al usuario.
-   *
-   * @param {object} ctx Contexto de Nuxt.
-   */
   async searchMatch (ctx) {
     // Verificar si geohash se ha actualizado para poder buscar
     if (ctx.rootState.user.geohash) {
@@ -81,13 +76,6 @@ const actions = {
       ctx.commit('setSearchingStatus', false)
     }
   },
-
-  /**
-   * Envia solicitud de _match_ a un rival.
-   *
-   * @param {object} ctx Contexto de Nuxt.
-   * @param {object} data Datos para la solicitud _rangeKey_, _adversaryName_ y _adversaryPicture_.
-   */
   requestMatch (ctx, data) {
     // Usar API de Umatch
     this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
@@ -113,12 +101,6 @@ const actions = {
       // eslint-disable-next-line no-console
       .catch(e => console.log(e))
   },
-
-  /**
-   * Reinicia estados en valores iniciales.
-   *
-   * @param {object} ctx Contexto de Nuxt.
-   */
   resetStates (ctx) {
     ctx.commit('resetStates')
   }

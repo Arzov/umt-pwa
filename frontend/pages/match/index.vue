@@ -14,22 +14,11 @@
 <script>
     import MatchMobile from './mobile'
 
-    /**
-     * Evento que pueden emitir los componentes.
-     *
-     * @type {{TO_CHAT: string, UPDATE_MATCH: string}}
-     */
     const event = {
         TO_CHAT: 'to_chat',
         UPDATE_MATCH: 'update_match'
     }
 
-    /**
-     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
-     * También enviar a la vista [Chat](#chat) o actualizar una solicitud.
-     *
-     * @displayName MatchMain
-     */
     export default {
         name: 'Match',
         components: { MatchMobile },
@@ -67,14 +56,6 @@
             this.$store.dispatch('match/onUpdateMatch')
         },
         methods: {
-            /**
-             * Captura eventos generados por los componentes. Según
-             * los valores retornados puede enviar a la vista [Chat](#chat)
-             * o actualizar una solicitud.
-             *
-             * @param {object} event Evento emitido por el componente.
-             * @public
-             */
             onEmit (event) {
                 switch (event.type) {
                     // Redireccionar al chat del encuentro seleccionado
@@ -96,7 +77,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

@@ -46,74 +46,34 @@
     import UserSearchCard from '@/components/userSearchCard'
     import Geolocation from '@/components/geoloc'
 
-    /**
-     * Componente de la vista [Home](#home) para dispositivos móviles.
-     */
     export default {
         name: 'HomeMobile',
         components: { ProfileImage, UserSearchCard, Geolocation },
         props: {
-            /**
-             * Evento a emitir hacia vista [Home](#home).
-             *
-             * @values SEARCH_MATCH, REQUEST_MATCH
-             */
             event: {
                 type: Object,
                 required: true
             },
-
-            /**
-             * Listado de rivales encontrados.
-             */
             usersFound: {
                 type: Array,
                 required: true
             },
-
-            /**
-             * Datos del usuario.
-             */
             userData: {
                 type: Object,
                 required: true
             },
-
-            /**
-             * Indicador de búsqueda de rivales.
-             */
             searchingUsers: {
                 type: Boolean,
                 required: true
             }
         },
         methods: {
-            /**
-             * Emite evento para buscar rivales.
-             *
-             * @return {object} Evento a gatillar.
-             * @public
-             */
             searchMatch () {
                 const params = {
                     type: this.event.SEARCH_MATCH
                 }
-
-                /**
-                 * Evento para buscar rivales cercanos.
-                 *
-                 * @event emitSearchMatch
-                 * @property {object} params Objecto con tipo SEARCH_MATCH a emitir.
-                 */
                 this.$emit('emit', params)
             },
-
-            /**
-             * Emite evento para enviar solicitud de _match_ a un rival.
-             *
-             * @return {object} Evento a gatillar.
-             * @public
-             */
             requestMatch ({ rangeKey, firstName, picture, index }) {
                 const params = {
                     type: this.event.REQUEST_MATCH,
@@ -122,54 +82,8 @@
                     adversaryPicture: picture,
                     rangeKey
                 }
-
-                /**
-                 * Evento para enviar solicitud de _match_ a un rival.
-                 *
-                 * @event emitRequestMatch
-                 * @property {object} params Objecto con tipo REQUEST_MATCH a emitir y datos
-                 *                           para agregar la solicitud (posición de búsqueda del rival,
-                 *                           nombre del rival, foto de perfil del
-                 *                           rival y email del rival).
-                 */
                 this.$emit('emit', params)
             }
         }
     }
 </script>
-
-<style scoped>
-</style>
-
-<docs>
-    EXAMPLE
-
-    ```html
-    <template>
-        <home-mobile :users-found="usersFound" :event="event" @emit="onEmit($event)" />
-    </template>
-
-    <script>
-        import HomeMobile from './mobile'
-
-        const event = {
-            SEARCH_MATCH: 'search_match',
-            REQUEST_MATCH: 'request_match'
-        }
-
-        export default {
-            components: { HomeMobile },
-            data () {
-                return {
-                    event,
-                    usersFound: ... // Listado de rivales encontrados
-                }
-            },
-            methods: {
-                onEmit (event) { ... }
-            },
-            ...
-        }
-    </script>
-    ```
-</docs>

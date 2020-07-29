@@ -9,23 +9,11 @@
 <script>
     import RegisterMobile from './mobile'
 
-    /**
-     * Evento que pueden emitir los componentes.
-     *
-     * @type {{SIGNUP: string, TO_TERMS: string}}
-     */
     const event = {
         SIGNUP: 'signup',
         TO_TERMS: 'to_terms'
     }
 
-    /**
-     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
-     * También gatillar el registro mediante Arzov o redireccionar
-     * a los **términos y condiciones**.
-     *
-     * @displayName RegisterMain
-     */
     export default {
         name: 'Register',
         layout: 'auth',
@@ -36,14 +24,6 @@
             }
         },
         methods: {
-            /**
-             * Captura eventos generados por los componentes. Según
-             * los valores retornados puede redireccionar al usuario
-             * a los **términos y condiciones** o registrarse con Arzov.
-             *
-             * @param {object} event Evento emitido por el componente.
-             * @public
-             */
             onEmit (event) {
                 switch (event.type) {
                     // Registrar email con Arzov
@@ -59,7 +39,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

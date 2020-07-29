@@ -1,12 +1,6 @@
 import { updateUser } from '@/graphql/mutations'
 
 const actions = {
-    /**
-     * Guarda atributos del usuario.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     * @param {object} data Atributos a guardar _gender_, _birthdate_.
-     */
     saveAttributes (ctx, data) {
         return new Promise(async (resolve, reject) => {
             const birthdate = String(data.birthdate.year) + '-' + data.birthdate.month + '-' + data.birthdate.day

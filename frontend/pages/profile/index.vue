@@ -9,22 +9,11 @@
 <script>
     import ProfileMobile from './mobile'
 
-    /**
-     * Evento que pueden emitir los componentes.
-     *
-     * @type {{SAVE_PROFILE: string, SIGNOUT: string}}
-     */
     const event = {
         SAVE_PROFILE: 'save_profile',
         SIGNOUT: 'signout'
     }
 
-    /**
-     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
-     * También guardar los datos del usuario o cerrar sesión.
-     *
-     * @displayName ProfileMain
-     */
     export default {
         name: 'Profile',
         layout: 'empty',
@@ -36,14 +25,6 @@
             }
         },
         methods: {
-            /**
-             * Captura eventos generados por los componentes. Según
-             * los valores retornados puede guardar los datos del
-             * usuario o cerrar sesión.
-             *
-             * @param {object} event Evento emitido por el componente.
-             * @public
-             */
             onEmit (event) {
                 switch (event.type) {
                     // Guardar datos

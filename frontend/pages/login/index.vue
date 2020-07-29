@@ -9,23 +9,11 @@
 <script>
     import LoginMobile from './mobile'
 
-    /**
-     * Evento que pueden emitir los componentes.
-     *
-     * @type {{SIGNIN: string, TO_RECOVER_PASSWORD: string}}
-     */
     const event = {
         SIGNIN: 'sigin',
         TO_RECOVER_PASSWORD: 'to_recover_password'
     }
 
-    /**
-     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
-     * También gatillar el inicio de sesión mediante Arzov o redireccionar
-     * a la vista [RecoverPassword](#recoverpassword).
-     *
-     * @displayName LoginMain
-     */
     export default {
         name: 'Login',
         layout: 'auth',
@@ -36,14 +24,6 @@
             }
         },
         methods: {
-            /**
-             * Captura eventos generados por los componentes. Según
-             * los valores retornados puede redireccionar al usuario
-             * a la vista [RecoverPassword](#recoverpassword) o iniciar la sesión con Arzov.
-             *
-             * @param {object} event Evento emitido por el componente.
-             * @public
-             */
             onEmit (event) {
                 switch (event.type) {
                     // Iniciar sesión con Arzov
@@ -60,7 +40,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

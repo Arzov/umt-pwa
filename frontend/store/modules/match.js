@@ -15,11 +15,6 @@ const getters = {
 }
 
 const actions = {
-    /**
-     * Obtiene los _match_ solicitados o activos del usuario.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     */
     fetchMatches (ctx) {
         // Usar API de Umatch
         this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
@@ -63,14 +58,6 @@ const actions = {
             // eslint-disable-next-line no-console
             .catch(e => console.log(e))
     },
-
-    /**
-     * Actualiza una solicitud de _match_.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     * @param {object} data Datos para actualizar la solicitud _hashKey_, _rangeKey_,
-     *                      _matchId_ y _userStatus_.
-     */
     updateMatch (ctx, data) {
         // Usar API de Umatch
         this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
@@ -90,12 +77,6 @@ const actions = {
             // eslint-disable-next-line no-console
             .catch(e => console.log(e))
     },
-
-    /**
-     * Suscripción de AWS Appsync para obtener eventos dado una actualización de solicitud.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     */
     onUpdateMatch (ctx) {
         // Usar API de Umatch
         this.$AWS.API._options.aws_appsync_graphqlEndpoint = process.env.NUXT_ENV_AWS_APPSYNC_UMATCH_URL
@@ -109,12 +90,6 @@ const actions = {
                 }
             })
     },
-
-    /**
-     * Reinicia estados en valores iniciales.
-     *
-     * @param {object} ctx Contexto de Nuxt.
-     */
     resetStates (ctx) {
         ctx.commit('resetStates')
     }

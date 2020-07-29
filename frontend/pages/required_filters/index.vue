@@ -9,22 +9,11 @@
 <script>
     import RequiredFiltersMobile from './mobile'
 
-    /**
-     * Evento que pueden emitir los componentes.
-     *
-     * @type {{SAVE_FILTERS: string, SIGNOUT: string}}
-     */
     const event = {
         SAVE_FILTERS: 'save_filters',
         SIGNOUT: 'signout'
     }
 
-    /**
-     * Vista principal que decide cual componente inicializar _mobile_ o _desktop_.
-     * También guardar filtros del usuario o cerrar sesión.
-     *
-     * @displayName RequiredFiltersMain
-     */
     export default {
         name: 'RequiredFilters',
         layout: 'auth',
@@ -35,14 +24,6 @@
             }
         },
         methods: {
-            /**
-             * Captura eventos generados por los componentes. Según
-             * los valores retornados puede guardar los filtros del usuario
-             * o cerrar sesión.
-             *
-             * @param {object} event Evento emitido por el componente.
-             * @public
-             */
             onEmit (event) {
                 switch (event.type) {
                     // Guardar filtros seleccionados
@@ -63,7 +44,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

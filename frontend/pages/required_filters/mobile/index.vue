@@ -45,18 +45,10 @@
     import MatchFilterInput from '@/components/matchFilterInput'
     import AgeFilterInput from '@/components/ageFilterInput'
 
-    /**
-     * Componente de la vista [RequiredFiltersMobile](#required-filters) para dispositivos móviles.
-     */
     export default {
         name: 'RequiredFiltersMobile',
         components: { GenderInput, MatchFilterInput, AgeFilterInput },
         props: {
-            /**
-             * Evento a emitir hacia vista [RequiredFiltersMobile](#required-filters).
-             *
-             * @values SAVE_FILTERS, SIGNOUT
-             */
             event: {
                 type: Object,
                 required: true
@@ -70,12 +62,6 @@
             }
         },
         methods: {
-            /**
-             * Emite evento para guardar filtros.
-             *
-             * @return {object} Evento de tipo SAVE_FILTERS.
-             * @public
-             */
             saveFilters (event) {
                 event.preventDefault()
 
@@ -87,74 +73,18 @@
                             matchFilter: values.match,
                             ageFilter: values.age
                         }
-
-                        /**
-                         * Evento para guardar filtros.
-                         *
-                         * @event emitSaveFilters
-                         * @property {object} params Objecto con tipo SAVE_FILTERS a emitir y
-                         *                           datos para guardar (tipo de juego, sexo y rango de edad).
-                         */
+                        
                         this.$emit('emit', params)
                     }
                 })
             },
-
-            /**
-             * Emite evento para cerrar sesión.
-             *
-             * @return {object} Evento de tipo SIGNOUT.
-             * @public
-             */
             signOut () {
                 const params = {
                     type: this.event.SIGNOUT
                 }
 
-                /**
-                 * Evento para cerrar sesión.
-                 *
-                 * @event emitSignOut
-                 * @property {object} params Objecto con tipo SIGNOUT a emitir.
-                 */
                 this.$emit('emit', params)
             }
         }
     }
 </script>
-
-<style scoped>
-
-</style>
-
-<docs>
-    EXAMPLE
-
-    ```html static
-    <template>
-        <required-filters-mobile :event="event" @emit="onEmit($event)" />
-    </template>
-
-    <script>
-        import RequiredFiltersMobile from './mobile'
-
-        const event = {
-            SAVE_FILTERS: 'save_filters',
-            SIGNOUT: 'signout'
-        }
-
-        export default {
-            components: { RequiredFiltersMobile },
-            data () {
-                return {
-                    event
-                }
-            },
-            methods: {
-                onEmit (event) { ... }
-            },
-            ...
-        }
-    </script>
-    ```
-</docs>
