@@ -1,12 +1,11 @@
 /**
  * Queries sobre AWS DynamoDB
- * @version 1.0.0
  * @author Franco Barrientos <franco.barrientos@arzov.com>
  */
 
 
 /**
- * Obtiene rivales que coincidan con los filtros del usuario
+ * Obtiene rivales que sus filtros coincidan con el usuario
  * @param {Object} db Conexion a DynamoDB
  * @param {String} tableName Nombre de la tabla
  * @param {String} hashKey Hash de geolocalización
@@ -22,12 +21,13 @@ const getMatchingUsers = (db, tableName, hashKey, age, gender, matchFilter, limi
 		db.query({
 			TableName: tableName,
 			KeyConditionExpression: "hashKey = :v1",
-			FilterExpression: "ageMinFilter <= :v2 and ageMaxFilter >= :v2 and genderFilter = :v3 and matchFilter = :v4",
+			FilterExpression: "ageMinFilter <= :v2 and (ageMaxFilter >= :v2 or ageMaxFilter = :v5) and genderFilter = :v3 and matchFilter = :v4",
 			ExpressionAttributeValues: {
 				":v1": { S: hashKey },
 				":v2": { N: age },
 				":v3": { S: gender },
-				":v4": { S: matchFilter }
+				":v4": { S: matchFilter },
+				":v5": { N: "60" }
 			},
 			ExclusiveStartKey: JSON.parse(nextToken),
 			Limit: limitScan
@@ -40,12 +40,13 @@ const getMatchingUsers = (db, tableName, hashKey, age, gender, matchFilter, limi
 		db.query({
 			TableName: tableName,
 			KeyConditionExpression: "hashKey = :v1",
-			FilterExpression: "ageMinFilter <= :v2 and ageMaxFilter >= :v2 and genderFilter = :v3 and matchFilter = :v4",
+			FilterExpression: "ageMinFilter <= :v2 and (ageMaxFilter >= :v2 or ageMaxFilter = :v5) and genderFilter = :v3 and matchFilter = :v4",
 			ExpressionAttributeValues: {
 				":v1": { S: hashKey },
 				":v2": { N: age },
 				":v3": { S: gender },
-				":v4": { S: matchFilter }
+				":v4": { S: matchFilter },
+				":v5": { N: "60" }
 			},
 			Limit: limitScan
 		}, function(err, data) {

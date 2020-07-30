@@ -1,6 +1,5 @@
 /**
  * Busca rivales cercanos al usuario
- * @version 1.0.0
  * @author Franco Barrientos <franco.barrientos@arzov.com>
  */
 
@@ -49,7 +48,7 @@ const validateUser = (calls, hashKey, geoJson, ageMinFilter, ageMaxFilter, gende
 						const age = 25;
 
 						if ('M' == genderFilter && age >= ageMinFilter &&
-							age <= ageMaxFilter) {
+							(age <= ageMaxFilter || ageMaxFilter == 60)) {
 							callback(null, {
 								hashKey: hashKey,
 								firstName: 'Jesús',
@@ -69,7 +68,7 @@ const validateUser = (calls, hashKey, geoJson, ageMinFilter, ageMaxFilter, gende
 
 								// Validar que los datos del usuario coincidan con los filtros
 								if (data.Item.gender.S == genderFilter && age >= ageMinFilter &&
-									age <= ageMaxFilter) {
+									(age <= ageMaxFilter || ageMaxFilter == 60)) {
 									callback(null, {
 										hashKey,
 										firstName: data.Item.firstName.S,

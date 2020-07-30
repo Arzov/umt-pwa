@@ -1,6 +1,5 @@
 /**
  * Cálculos varios
- * @version 1.0.0
  * @author Franco Barrientos <franco.barrientos@arzov.com>
  */
 
