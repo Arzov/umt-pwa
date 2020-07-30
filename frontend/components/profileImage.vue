@@ -3,7 +3,7 @@
         <nuxt-link :to="url">
             <div class="border">
                 <div class="border-shadow">
-                    <img :src="src">
+                    <img :src="_src">
                 </div>
             </div>
         </nuxt-link>
@@ -17,6 +17,10 @@
         computed: {
             url () {
                 return this.to ? this.to : ''
+            },
+            _src () {
+                if (this.src === ' ') return require('@/assets/icons/dm-avatar.svg')
+                else return this.src
             }
         }
     }

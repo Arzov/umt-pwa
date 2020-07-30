@@ -33,6 +33,16 @@ aws cloudformation describe-stacks \
 	--query 'Stacks[0].Outputs[?OutputKey==`ASGraphQLApiARVUrl`].OutputValue' \
 	--output text > tmp; export NUXT_ENV_AWS_APPSYNC_ARZOV_URL=$(cat tmp); rm tmp
 
+aws cloudformation describe-stacks \
+    --stack-name arv \
+	--query 'Stacks[0].Outputs[?OutputKey==`S3BucketARVAssetsId`].OutputValue' \
+	--output text > tmp; export NUXT_ENV_AWS_S3_ARZOV_ASSETS=$(cat tmp); rm tmp
+
+aws cloudformation describe-stacks \
+    --stack-name arv \
+	--query 'Stacks[0].Outputs[?OutputKey==`CGIdentityPoolARVId`].OutputValue' \
+	--output text > tmp; export NUXT_ENV_AWS_COGNITO_IDENTITY_POOL_ID=$(cat tmp); rm tmp
+
 # UMT
 aws cloudformation describe-stacks \
     --stack-name umt \

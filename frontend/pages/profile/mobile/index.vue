@@ -8,6 +8,7 @@
                 <h3 class="user-name">
                     {{ userData.firstName }} {{ userData.lastName }}
                 </h3>
+                <input type="file" accept="image/x-png,image/gif,image/jpeg" @change="uploadPhoto">
             </a-row>
 
             <a-form :form="formProfile" @submit="saveProfile($event)">
@@ -122,6 +123,13 @@
                         this.$emit('emit', params)
                     }
                 })
+            },
+            uploadPhoto (event) {
+                const params = {
+                    file: event.target.files[0],
+                    type: this.event.UPLOAD_PHOTO
+                }
+                this.$emit('emit', params)
             },
             signOut () {
                 const params = {

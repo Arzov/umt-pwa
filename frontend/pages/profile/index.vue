@@ -10,6 +10,7 @@
     import ProfileMobile from './mobile'
 
     const event = {
+        UPLOAD_PHOTO: 'upload_photo',
         SAVE_PROFILE: 'save_profile',
         SIGNOUT: 'signout'
     }
@@ -27,6 +28,17 @@
         methods: {
             onEmit (event) {
                 switch (event.type) {
+                    // Subir foto de perfil
+                    case this.event.UPLOAD_PHOTO:
+                        this.$store.dispatch('profile/uploadPhoto', event)
+                            .then(() => {
+                                // Datos guardados
+                                // TODO: Terminar spin o loading
+                            })
+                            // TODO: falta implementar popup.
+                            .catch(e => console.log(e))
+                        break
+
                     // Guardar datos
                     case this.event.SAVE_PROFILE:
                         this.$store.dispatch('profile/saveProfile', event)
