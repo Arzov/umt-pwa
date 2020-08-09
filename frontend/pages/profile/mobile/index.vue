@@ -4,11 +4,36 @@
 
         <div class="content">
             <a-row type="flex" justify="start" align="middle" class="profile-row">
-                <profile-image :src="userData.picture" type="border-cold bkg-black" />
+                <!-- TODO: Dejar avatar en un componente -->
+                <div>
+                    <vue-avatar
+                        ref="vueavatar"
+                        :image="userData.picture"
+                        :width="100"
+                        :height="100"
+                        :border="10"
+                        :border-radius="200"
+                        :rotation="parseFloat(rotation)"
+                        :scale="parseFloat(scale)"
+                        @vue-avatar-editor:image-ready="onImageReady"
+                    />
+                    <br>
+                    <input
+                        v-model="scale"
+                        type="range"
+                        min="1"
+                        max="3"
+                        step="0.02"
+                    >
+                    <button @click="rotate" />
+                    <br>
+                    <button @click="uploadPhoto">
+                        Subir foto
+                    </button>
+                </div>
                 <h3 class="user-name">
                     {{ userData.firstName }} {{ userData.lastName }}
                 </h3>
-                <input type="file" accept="image/x-png,image/gif,image/jpeg" @change="uploadPhoto">
             </a-row>
 
             <a-form :form="formProfile" @submit="saveProfile($event)">
@@ -60,6 +85,7 @@
 </template>
 
 <script>
+    import { VueAvatar } from 'vue-avatar-editor-improved'
     import decorator from '@/static/decorator'
     import ProfileImage from '@/components/profileImage'
     import BirthdateInput from '@/components/birthdateInput'
@@ -69,7 +95,7 @@
 
     export default {
         name: 'ProfileMobile',
-        components: { ProfileImage, BirthdateInput, GenderInput, MatchFilterInput, AgeFilterInput },
+        components: { VueAvatar, ProfileImage, BirthdateInput, GenderInput, MatchFilterInput, AgeFilterInput },
         props: {
             event: {
                 type: Object,
@@ -85,7 +111,9 @@
                 decorator,
                 formProfile: this.$form.createForm(this),
                 genderDecorator: decorator.gender(),
-                genderFilterDecorator: decorator.gender('genderFilter')
+                genderFilterDecorator: decorator.gender('genderFilter'),
+                rotation: 0,
+                scale: 1
             }
         },
         computed: {
@@ -126,7 +154,7 @@
             },
             uploadPhoto (event) {
                 const params = {
-                    file: event.target.files[0],
+                    file: this.$refs.vueavatar.getImageScaled().toDataURL(),
                     type: this.event.UPLOAD_PHOTO
                 }
                 this.$emit('emit', params)
@@ -136,6 +164,15 @@
                     type: this.event.SIGNOUT
                 }
                 this.$emit('emit', params)
+            },
+            onImageReady: function onImageReady () {
+                this.scale = 1
+                this.rotation = 0
+            },
+            rotate () {
+                // Evitar suma grandes numeros si el usuario aprieta muchas veces
+                if (this.rotation == 270) this.rotation = 0
+                else this.rotation += 90
             }
         }
     }

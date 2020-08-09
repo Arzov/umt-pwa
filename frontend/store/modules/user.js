@@ -43,6 +43,8 @@ const actions = {
                     picture: result.data.getUser.picture
                 }
 
+                // TODO: Si picture == email+profile.png entonces usar this.$AWS.Storage.get() para traer la url de la imagen
+
                 context.commit('setState', { params })
 
                 // Usar API de Umatch

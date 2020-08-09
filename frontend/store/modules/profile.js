@@ -1,13 +1,29 @@
+import { dataURItoBlob } from '@/utils/inputUtils'
+
 const actions = {
     uploadPhoto (ctx, data) {
         return new Promise(async (resolve, reject) => {
-            await this.$AWS.Storage.put('example.png', data.file, { contentType: 'image/png' })
-                .then((key) => {
-                    console.log(key)
+            let file = dataURItoBlob(data.file, 'image/png')
+
+            await this.$AWS.Storage.put(ctx.rootState.user.email + '+profile.png', file, { contentType: 'image/png' })
+                .then(async (key) => {
+                    await this.$AWS.Storage.get(key.key)
+                        .then((imgURL) => {
+                            // TODO: Crear Lambda para actualizar foto (solo pasar string email+profile.png)
+
+                            // Actualizar foto de perfil
+                            const params = {
+                                picture: imgURL
+                            }
+
+                            ctx.commit('user/setState', { params }, { root: true })
+
+                            resolve()
+                        })
+                        .catch(e => reject(e))
 
                     resolve()
                 })
-                // eslint-disable-next-line no-console
                 .catch(e => reject(e))
         })
     },
